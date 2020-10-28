@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_01_6589_5401
 {
-    class Bus
+    class Bus:IComparable<Bus>
     {
         static private Random rand = new Random();
 
@@ -151,6 +151,10 @@ namespace dotNET5781_01_6589_5401
             KmSinceTreated += km;
         }
 
-
-     }
+        int CompareTo(Bus b)
+        {
+            return (this.Id.CompareTo(b.Id));
+        }
+    
+    }
 }
