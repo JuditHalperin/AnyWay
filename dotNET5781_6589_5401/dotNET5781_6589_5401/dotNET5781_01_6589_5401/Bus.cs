@@ -60,6 +60,16 @@ namespace dotNET5781_01_6589_5401
             private set { kmSinceFueling = value; }
         }
 
+        public Bus(DateTime date, string id,out string msg) // constructor
+        {
+            DateOfBegining = date;
+            DateOfLastTreat = date;
+            this.checkId(id,out msg);
+            TotalKm = 0;
+            KmSinceFueled = 0;
+            KmSinceTreated = 0;
+        }
+
         private bool checkId(string value, out string msg)
         {
 
@@ -108,16 +118,6 @@ namespace dotNET5781_01_6589_5401
             return true;
         }
 
-        public Bus(DateTime date, string id,out string msg) // constructor
-        {
-            DateOfBegining = date;
-            DateOfLastTreat = date;
-            this.checkId(id,out msg);
-            TotalKm = 0;
-            KmSinceFueled = 0;
-            KmSinceTreated = 0;
-        }
-
         public void drive() // if possible - drive the bus
         {
             string msg;
@@ -160,12 +160,29 @@ namespace dotNET5781_01_6589_5401
             return true;
 
         }
-
-        private void updateKm(float km) // update the km fields after drive
+        /// <summary>
+        /// update the km fields after drive
+        /// </summary>
+        /// <param name="km"><additinal km that the bus drive>
+        private void updateKm(float km)
         {
             TotalKm += km;
             KmSinceFueled += km;
             KmSinceTreated += km;
+        }
+        /// <summary>
+        /// reset the km since last fuel.
+        /// </summary>
+        public void fuel()
+        {
+            KmSinceFueled = 0;
+        }
+        /// <summary>
+        /// reset the km since last treat.
+        /// </summary>
+        public void treat()
+        {
+            KmSinceTreated = 0;
         }
 
     }
