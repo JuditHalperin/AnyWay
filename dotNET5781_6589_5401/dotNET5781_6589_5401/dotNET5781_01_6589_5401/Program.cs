@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_01_6589_5401
 {
-    enum options { exit, addBus, chooseBus, fuelingOrTreating, kmSinceTreating }
+    enum options { exit, addBus, driveBus, fuelingOrTreating, kmSinceTreating }
     class Program
     {
+        static List<Bus> buses = new List<Bus>();
         static void printMenu() // print menu to user
         {
             Console.WriteLine("Hi! \n");
@@ -19,10 +20,27 @@ namespace dotNET5781_01_6589_5401
             Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat. \n");
             Console.WriteLine("Enter 0 to exit. \n");
         }
+        static Bus findBusInList(string id) // find bus in list by its id
+        {
+
+        }
+        static void addBus(DateTime date, string id) // add bus to list
+        {
+            if(findBusInList(id) !=)
+            {
+                Bus bus = new Bus(date, id);
+                buses.Add(bus);
+                Console.WriteLine();
+            }
+            else
+                Console.WriteLine();
+        }
+        static void driveBus(string id) // if possible - drive a bus
+        {
+            findBusInLis(id).drive();
+        }
         static void Main(string[] args)
         {
-            List<Bus> buses = new List<Bus>();
-
             printMenu();
 
             string id;
@@ -49,10 +67,18 @@ namespace dotNET5781_01_6589_5401
                         y = Console.Read();                        
                         DateTime date = new DateTime(y, m, d);
 
-                        Bus bus = new Bus(date, id);
-                        buses.Add(bus);
+                        addBus(date, id);
+                        break;
+
+                    case options.driveBus:
+
+                        Console.WriteLine("Enter id: ");
+                        id = Console.ReadLine();
+
+                        driveBus(id);
 
                         break;
+
                 }
 
 
