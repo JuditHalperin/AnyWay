@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,38 +16,6 @@ namespace dotNET5781_01_6589_5401
         public string Id
         {
             get { return id; }
-            private set
-            {
-                if (value.Length < 7 || value.Length > 8) // wrong length
-                    return; // exeption...
-
-                int num;
-                bool flag = int.TryParse(value, out num);
-                if (!flag) // convert failed
-                    return;
-
-                if (num < 1000000 || num > 100000000)  // not all digits
-                    return;
-
-                string tmp = Convert.ToString(num);
-
-                if (dateOfBegining.Year < 2018 && tmp.Length == 7) // 7 digits
-                {
-                    tmp = tmp.Insert(2, "-");
-                    tmp = tmp.Insert(6, "-");
-                }
-
-                else if (dateOfBegining.Year > 2018 && tmp.Length == 8) // 8 digits
-                {
-                    tmp = tmp.Insert(3, "-");
-                    tmp = tmp.Insert(6, "-");
-                }
-
-                else // length does not fit the year
-                    return;
-
-                id = tmp;
-            }
         }
 
         private DateTime dateOfBegining;
@@ -91,11 +60,59 @@ namespace dotNET5781_01_6589_5401
             private set { kmSinceFueling = value; }
         }
 
-        public Bus(DateTime date, string id) // constructor
+        private bool checkId(string value, out string msg)
+        {
+
+            if (value.Length < 7 || value.Length > 8) // wrong length
+            {
+                msg = "the id is bigger or smaller then what is needed";
+                return false; // exeption...
+            }
+
+            int num;
+            bool flag = int.TryParse(value, out num);
+            if (!flag) // convert failed
+            {
+                msg = "the id was not number";
+                return false;
+            }
+
+            if (num < 1000000 || num > 100000000)  // not all digits
+            {
+                msg = "the id was not just from digits";
+                return false;
+            }
+
+            string tmp = Convert.ToString(num);
+
+            if (dateOfBegining.Year < 2018 && tmp.Length == 7) // 7 digits
+            {
+                tmp = tmp.Insert(2, "-");
+                tmp = tmp.Insert(6, "-");
+            }
+
+            else if (dateOfBegining.Year > 2018 && tmp.Length == 8) // 8 digits
+            {
+                tmp = tmp.Insert(3, "-");
+                tmp = tmp.Insert(6, "-");
+            }
+
+            else // length does not fit the year
+            {
+                msg = "length does not fit the year";
+                return false;
+            }
+
+            id = tmp;
+            msg = "The bus was successfully inserted!";
+            return true;
+        }
+
+        public Bus(DateTime date, string id,out string msg) // constructor
         {
             DateOfBegining = date;
             DateOfLastTreat = date;
-            Id = id;
+            this.checkId(id,out msg);
             TotalKm = 0;
             KmSinceFueled = 0;
             KmSinceTreated = 0;
@@ -133,7 +150,7 @@ namespace dotNET5781_01_6589_5401
                 return false;
             }
 
-            if(KmSinceFueled + km > 1200)
+            if (KmSinceFueled + km > 1200)
             {
                 msg = "the bus needs to get fueled";
                 return false;
@@ -150,6 +167,6 @@ namespace dotNET5781_01_6589_5401
             KmSinceFueled += km;
             KmSinceTreated += km;
         }
-    
+
     }
 }
