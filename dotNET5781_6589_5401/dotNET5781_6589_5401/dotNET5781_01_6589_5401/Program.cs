@@ -8,6 +8,7 @@ namespace dotNET5781_01_6589_5401
 {
     class Program
     {
+        enum b{ addBus,chooseBus, fuelingOrTreating, kmSinceTreating, exit}
         static void Main(string[] args)
         {
             // תאריך בודק תקינות?
@@ -21,10 +22,11 @@ namespace dotNET5781_01_6589_5401
             DateTime d = new DateTime(2015, 7, 8);
             string i = "123456a";
 
-            Bus bus = new Bus(d, i);
+            //Bus bus = new Bus(d, i);
 
-            Console.WriteLine(bus.Id);
-            Console.WriteLine(bus.DateOfBegining);
+            //Console.WriteLine(bus.Id);
+            //Console.WriteLine(bus.DateOfBegining);
+            List<Bus>;
             Console.ReadKey();
         }
     }
