@@ -53,7 +53,14 @@ namespace dotNET5781_01_6589_5401
         public DateTime DateOfBegining
         {
             get { return dateOfBegining; }
-            private set { dateOfBegining = value; }
+            private set
+            {
+                if (value <= DateTime.Now)
+                    dateOfBegining = value;
+
+                else
+                    Console.WriteLine("Invalid date");
+            }
         }
 
         private DateTime dateOfLastTreat;
@@ -87,6 +94,7 @@ namespace dotNET5781_01_6589_5401
         public Bus(DateTime date, string id) // constructor
         {
             DateOfBegining = date;
+            DateOfLastTreat = date;
             Id = id;
             TotalKm = 0;
             KmSinceFueled = 0;
@@ -105,7 +113,7 @@ namespace dotNET5781_01_6589_5401
                 Console.WriteLine("The bus cannot drive: " + msg);
         }
 
-        public float kmOfDrive() // random length of drive
+        private float kmOfDrive() // random length of drive
         {
             return rand.Next(0, 1200);
         }
@@ -136,7 +144,7 @@ namespace dotNET5781_01_6589_5401
 
         }
 
-        public void updateKm(float km) // update the km fields after drive
+        private void updateKm(float km) // update the km fields after drive
         {
             TotalKm += km;
             KmSinceFueled += km;
@@ -144,6 +152,5 @@ namespace dotNET5781_01_6589_5401
         }
 
 
-    
-    }
+     }
 }

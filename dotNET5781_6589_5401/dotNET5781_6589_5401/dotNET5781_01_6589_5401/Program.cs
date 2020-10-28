@@ -8,26 +8,27 @@ namespace dotNET5781_01_6589_5401
 {
     class Program
     {
-        enum b{ addBus,chooseBus, fuelingOrTreating, kmSinceTreating, exit}
+        static void printMenu() // print menu to user
+        {
+            Console.WriteLine("Hi! \n");
+            Console.WriteLine("Enter 1 to add a new bus. \n");
+            Console.WriteLine("Enter 2 to choose a bus to drive. \n");
+            Console.WriteLine("Enter 3 to treat a bus or fuel it. \n");
+            Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat. \n");
+            Console.WriteLine("Enter 0 to exit. \n");
+        }
+        enum options { exit, addBus, chooseBus, fuelingOrTreating, kmSinceTreating }
         static void Main(string[] args)
         {
-            // תאריך בודק תקינות?
-            // לבנות בנאי ריק לאוטובוס?
-            // אם נוצר אוטוטבוס שגוי?
-
-            // חלק פונקציות כפרטיות
-            // תאריך לא גדול מ NOW
-            // לאתחל DateOfLastTreat
-
-            DateTime d = new DateTime(2015, 7, 8);
-            string i = "123456a";
-
-            //Bus bus = new Bus(d, i);
-
-            //Console.WriteLine(bus.Id);
-            //Console.WriteLine(bus.DateOfBegining);
             List<Bus>;
+
+            printMenu();
+
+            int choise;
+
             Console.ReadKey();
         }
     }
+
+}
 }
