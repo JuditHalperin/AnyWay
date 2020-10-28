@@ -22,29 +22,51 @@ namespace dotNET5781_01_6589_5401
         }
         static Bus findBusInList(string id) // find bus in list by its id
         {
+            foreach (Bus bus in buses)
+                if (bus.Id == id)
+                    return bus;
 
+            return null;
         }
         static void addBus(DateTime date, string id) // add bus to list
         {
-            if(findBusInList(id) !=)
-            {
-                Bus bus = new Bus(date, id);
-                buses.Add(bus);
-                Console.WriteLine();
-            }
-            else
-                Console.WriteLine();
+            string msg;
+
+            Bus bus = new Bus(date, id, out msg);
+
+            if (msg == "The bus was successfully inserted!")
+                if (findBusInList(bus.Id) != null)
+                {
+                    buses.Add(bus);
+
+                }
+                else
+                    msg = "this id already exists";
+
+            Console.WriteLine(msg);
         }
         static void driveBus(string id) // if possible - drive a bus
         {
-            findBusInLis(id).drive();
+            if (id.Length == 7) // 7 chars
+            {
+                id = id.Insert(2, "-");
+                id = id.Insert(6, "-");
+            }
+
+            else if (id.Length == 8) // 8 chars
+            {
+                id = id.Insert(3, "-");
+                id = id.Insert(6, "-");
+            }
+
+            findBusInList(id).drive();
         }
         static void Main(string[] args)
         {
             printMenu();
 
             string id;
-            int d, m, y;
+            int d, m, y, request;
             options choise = (options)Console.Read();
 
             while (choise != options.exit)
@@ -78,6 +100,36 @@ namespace dotNET5781_01_6589_5401
                         driveBus(id);
 
                         break;
+
+                    case fuelingOrTreating:
+
+                        Console.WriteLine("Enter id: ");
+                        id = Console.ReadLine();
+
+                        Bus bus = new Bus(findBusInList(id));
+
+                        if(bus != null)
+                        {
+                            Console.WriteLine("Enter 1 to fuel the bus and 2 to treat the bus: ");
+                            request = Console.Read();
+                            switch (request)
+                            {
+                                case 1:
+                                    bus.fuel();
+                                    break;
+
+                                case 2:
+                                    bus.treat();
+                                    break;
+
+                                default:
+                                    Console.WriteLine("Invalid choise");
+                                    break;
+                            
+                            }
+
+                        }
+                        
 
                 }
 
