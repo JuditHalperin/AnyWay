@@ -93,7 +93,7 @@ namespace dotNET5781_01_6589_5401
             KmSinceTreated = 0;
         }
 
-        public void drive() // if possible - drive a bus
+        public void drive() // if possible - drive the bus
         {
             string msg;
             float km = kmOfDrive();
@@ -104,6 +104,7 @@ namespace dotNET5781_01_6589_5401
             else
                 Console.WriteLine("The bus cannot drive: " + msg);
         }
+
         public float kmOfDrive() // random length of drive
         {
             return rand.Next(0, 1200);
