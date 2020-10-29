@@ -61,12 +61,12 @@ namespace dotNET5781_01_6589_5401
         }
 
         /// <summary>
-        /// 
+        /// constructor
         /// </summary>
-        /// <param name="date"></param>
-        /// <param name="id"></param>
-        /// <param name="msg"></param>
-        public Bus(DateTime date, string id,out string msg) // constructor
+        /// <param name="date">date of beginning work</param>
+        /// <param name="id">license number</param>
+        /// <param name="msg">return massage if the process was completed successfully or not</param>
+        public Bus(DateTime date, string id,out string msg)
         {
             DateOfBegining = date;
             DateOfLastTreat = date;
@@ -77,11 +77,11 @@ namespace dotNET5781_01_6589_5401
         }
 
         /// <summary>
-        /// 
+        /// chack if the string value is valid and match to the format.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <param name="value">id</param>
+        /// <param name="msg">return match massage</param>
+        /// <returns>return if id was matched</returns>
         private bool checkId(string value, out string msg)
         {
 
@@ -131,9 +131,9 @@ namespace dotNET5781_01_6589_5401
         }
 
         /// <summary>
-        /// 
+        ///  if possible - drive the bus
         /// </summary>
-        public void drive() // if possible - drive the bus
+        public void drive()
         {
             string msg;
             float km = kmOfDrive();
@@ -142,7 +142,7 @@ namespace dotNET5781_01_6589_5401
             if (possible)
             {
                 updateKm(km);
-                Console.WriteLine("good drive!\n duration of the driving is {0}km.\n",km);
+                Console.WriteLine("good drive!\nduration of the driving is {0}km.\n",km);
             }
 
             else
@@ -150,18 +150,18 @@ namespace dotNET5781_01_6589_5401
         }
 
         /// <summary>
-        /// 
+        /// random length of drive
         /// </summary>
-        /// <returns></returns>
-        private float kmOfDrive() { return rand.Next(1201); } // random length of drive
-        
+        /// <returns>random length of drive between 0 to 800</returns> 
+        private float kmOfDrive() { return rand.Next(800); }
+
         /// <summary>
-        /// 
+        /// test if the bus can drive
         /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="km"></param>
-        /// <returns></returns>
-        public bool isValid(out string msg, float km = 0) // test if the bus can drive
+        /// <param name="msg">return if sucsses or not in massage</param>
+        /// <param name="km">to this drive</param>
+        /// <returns>return if sucsses or not</returns>
+        public bool isValid(out string msg, float km = 0) 
         {
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
             if (timeSinceLastTreat.TotalDays > 365)
@@ -190,7 +190,7 @@ namespace dotNET5781_01_6589_5401
         /// <summary>
         /// update the km fields after drive
         /// </summary>
-        /// <param name="km"><additinal km that the bus drive>
+        /// <param name="km">additinal km that the bus drive</param>
         private void updateKm(float km)
         {
             TotalKm += km;
