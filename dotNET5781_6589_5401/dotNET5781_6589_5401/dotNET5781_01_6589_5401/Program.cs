@@ -136,6 +136,8 @@ namespace dotNET5781_01_6589_5401
                             }
 
                         }
+                        else
+                            Console.WriteLine("sorry, the bus isn't exist!");
 
                         break;
 
