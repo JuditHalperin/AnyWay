@@ -59,7 +59,11 @@ namespace dotNET5781_01_6589_5401
                 id = id.Insert(6, "-");
             }
 
-            findBusInList(id).drive();
+            Bus bus=findBusInList(id);
+            if (bus != null)
+                bus.drive();
+            else
+                Console.WriteLine("Sorry.\nthe bus is not exist!\n");
         }
         static void Main(string[] args)
         {
