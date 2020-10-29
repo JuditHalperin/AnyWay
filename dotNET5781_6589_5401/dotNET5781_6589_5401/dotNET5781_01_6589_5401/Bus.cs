@@ -70,7 +70,7 @@ namespace dotNET5781_01_6589_5401
         {
             DateOfBegining = date;
             DateOfLastTreat = date;
-            this.checkId(id,out msg);
+            checkId(id,out msg);
             TotalKm = 0;
             KmSinceFueled = 0;
             KmSinceTreated = 0;
@@ -87,21 +87,21 @@ namespace dotNET5781_01_6589_5401
 
             if (value.Length < 7 || value.Length > 8) // wrong length
             {
-                msg = "the id is bigger or smaller then what is needed";
-                return false; // exeption...
+                msg = "Wrong length of ID number.";
+                return false;
             }
 
             int num;
             bool flag = int.TryParse(value, out num);
             if (!flag) // convert failed
             {
-                msg = "the id was not number";
+                msg = "ID number should be a number.";
                 return false;
             }
 
-            if (num < 1000000 || num > 100000000)  // not all digits
+            if (num < 1000000 || num > 100000000) // not all digits
             {
-                msg = "the id was not just from digits";
+                msg = "ID number should be consisted of digits only.";
                 return false;
             }
 
@@ -121,7 +121,7 @@ namespace dotNET5781_01_6589_5401
 
             else // length does not fit the year
             {
-                msg = "length does not fit the year";
+                msg = "Length does not fit the year.";
                 return false;
             }
 
@@ -142,7 +142,7 @@ namespace dotNET5781_01_6589_5401
             if (possible)
             {
                 updateKm(km);
-                Console.WriteLine("good drive!\nduration of the driving is {0}km.\n",km);
+                Console.WriteLine("Good drive!\nduration of the driving is {0}km.\n",km);
             }
 
             else
@@ -153,7 +153,7 @@ namespace dotNET5781_01_6589_5401
         /// random length of drive
         /// </summary>
         /// <returns>random length of drive between 0 to 800</returns> 
-        private float kmOfDrive() { return rand.Next(800); }
+        private float kmOfDrive() { return rand.Next(10, 800); }
 
         /// <summary>
         /// test if the bus can drive
