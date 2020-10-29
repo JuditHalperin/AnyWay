@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+Asnat Kahane 211825401
+Judit Halperin 324216589
+ 
+Exercise 1
+29/10/20
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
