@@ -22,6 +22,19 @@ namespace dotNET5781_01_6589_5401
         }
         static Bus findBusInList(string id) // find bus in list by its id
         {
+            if (id.Length == 7) // 7 chars
+            {
+                id = id.Insert(2, "-");
+                id = id.Insert(6, "-");
+            }
+
+            else if (id.Length == 8) // 8 chars
+            {
+                id = id.Insert(3, "-");
+                id = id.Insert(6, "-");
+            }
+            else
+                return null;
             foreach (Bus bus in buses)
                 if (bus.Id == id)
                     return bus;
@@ -47,17 +60,6 @@ namespace dotNET5781_01_6589_5401
         }
         static void driveBus(string id) // if possible - drive a bus
         {
-            if (id.Length == 7) // 7 chars
-            {
-                id = id.Insert(2, "-");
-                id = id.Insert(6, "-");
-            }
-
-            else if (id.Length == 8) // 8 chars
-            {
-                id = id.Insert(3, "-");
-                id = id.Insert(6, "-");
-            }
 
             Bus bus=findBusInList(id);
             if (bus != null)
