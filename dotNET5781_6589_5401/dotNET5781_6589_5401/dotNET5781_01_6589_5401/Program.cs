@@ -35,7 +35,7 @@ namespace dotNET5781_01_6589_5401
             Bus bus = new Bus(date, id, out msg);
 
             if (msg == "The bus was successfully inserted!")
-                if (findBusInList(bus.Id) != null)
+                if (findBusInList(bus.Id) == null)
                 {
                     buses.Add(bus);
 
