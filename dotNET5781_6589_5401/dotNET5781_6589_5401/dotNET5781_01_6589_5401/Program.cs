@@ -23,7 +23,7 @@ namespace dotNET5781_01_6589_5401
         static List<Bus> buses = new List<Bus>();
 
         /// <summary>
-        /// show menu of options to user
+        /// show the menu of options to user
         /// </summary>
         static void printMenu()
         {
