@@ -4,6 +4,7 @@ Judit Halperin 324216589
  
 Exercise 1
 29/10/20
+This program implements the class Bus. The user can drive, fuel or teart a bus.
  */
 
 using System;
@@ -28,10 +29,11 @@ namespace dotNET5781_01_6589_5401
         {
             Console.WriteLine("Hi!");
             Console.WriteLine("Enter 1 to add a new bus.");
-            Console.WriteLine("Enter 2 to choose a bus to drive.");
-            Console.WriteLine("Enter 3 to treat a bus or fuel it.");
+            Console.WriteLine("Enter 2 to drive a bus.");
+            Console.WriteLine("Enter 3 to treat or fuel a bus.");
             Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat.");
             Console.WriteLine("Enter 0 to exit. \n");
+            Console.WriteLine("What would you like to do now?");
         }
 
         /// <summary>
@@ -40,18 +42,35 @@ namespace dotNET5781_01_6589_5401
         /// <returns>chosen option</returns>
         static options readInput()
         {
-            Console.WriteLine("What would you like to do now?");
-
             int input;
             bool flag = int.TryParse(Console.ReadLine(), out input);
 
-            if (flag)
+            if (flag && input >= 0 && input <= 4)
                 return (options)input;
 
             else
             {
                 Console.WriteLine("Invalid choise.");
                 return readInput();
+            }
+        }
+
+        /// <summary>
+        /// read number of option in order to choose fueling or treating
+        /// </summary>
+        /// <returns></returns>
+        static int readInputInCaseOfFuelOrTreat()
+        {
+            int input;
+            bool flag = int.TryParse(Console.ReadLine(), out input);
+
+            if (flag && (input == 1 || input == 2))
+                return input;
+
+            else
+            {
+                Console.WriteLine("Invalid choise.");
+                return readInputInCaseOfFuelOrTreat();
             }
         }
 
@@ -108,7 +127,7 @@ namespace dotNET5781_01_6589_5401
                 else
                     msg = "ID already exists.";
 
-            Console.WriteLine(msg + '\n');
+            Console.WriteLine(msg);
         }
 
         /// <summary>
@@ -147,15 +166,15 @@ namespace dotNET5781_01_6589_5401
                         id = Console.ReadLine();
 
                         Console.WriteLine("Enter date of begining.");
-                        Console.Write("Day: ");
+                        Console.Write("\t Day: ");
                         d = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Month: ");
+                        Console.Write("\t Month: ");
                         m = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Year: ");
+                        Console.Write("\t Year: ");
                         y = Convert.ToInt32(Console.ReadLine());
-                        if (d < 1 || d > 30 || m > 12 || m < 1)
+                        if (d < 1 || d > 30 || m > 12 || m < 1 || y < 0 || y > DateTime.Now.Year)
                         {
-                            Console.WriteLine("numbers isn't valid");
+                            Console.WriteLine("Invalid date.");
                             break;
                         }   
                         DateTime date = new DateTime(y, m, d);
@@ -181,7 +200,8 @@ namespace dotNET5781_01_6589_5401
                         if (bus != null)
                         {
                             Console.Write("Enter 1 to fuel the bus and 2 to treat the bus: ");
-                            request = Convert.ToInt32(Console.ReadLine());
+                            request = readInputInCaseOfFuelOrTreat();
+
                             switch (request)
                             {
                                 case 1:
@@ -197,9 +217,7 @@ namespace dotNET5781_01_6589_5401
                                 default:
                                     Console.WriteLine("Invalid choise.");
                                     break;
-
                             }
-
                         }
 
                         else
@@ -209,12 +227,18 @@ namespace dotNET5781_01_6589_5401
 
                     case options.kmSinceTreating:
 
-                        Console.WriteLine("id:          km since last treat:");
-                        Console.WriteLine("---------------------------------");
+                        if(buses.Count != 0)
+                        {
+                            Console.WriteLine("ID:              Km since last treat:");
+                            Console.WriteLine("---------------------------------");
 
-                        foreach (Bus tmpBus in buses)
-                            Console.WriteLine("{0:11} \t\t {1:5}", tmpBus.Id, Convert.ToString(tmpBus.KmSinceTreated));
+                            foreach (Bus tmpBus in buses)
+                                Console.WriteLine("{0:11} \t {1:5}", tmpBus.Id, Convert.ToString(tmpBus.KmSinceTreated));
+                        }
 
+                        else
+                            Console.WriteLine("No buses added.");
+                       
                         break;
                         
                     default:
@@ -223,6 +247,7 @@ namespace dotNET5781_01_6589_5401
                         break;
                 }
 
+                Console.WriteLine("\nWhat would you like to do now?");
                 choise = readInput();
 
             }
@@ -235,122 +260,58 @@ namespace dotNET5781_01_6589_5401
 }
 
 /*
-Hi!
+
+ Hi!
 Enter 1 to add a new bus.
-Enter 2 to choose a bus to drive.
-Enter 3 to treat a bus or fuel it.
+Enter 2 to drive a bus.
+Enter 3 to treat or fuel a bus.
 Enter 4 to check how much km all buses drived since their last treat.
 Enter 0 to exit.
 
 What would you like to do now?
 1
-Enter id: 12345678
+Enter id: 1234567
 Enter date of begining.
-Day: 35
-Month: 12
-Year: 1200
-numbers isn't valid
-What would you like to do now?
-1
-Enter id: 12345678
-Enter date of begining.
-Day: 25
-Month: 12
-Year: 2019
+         Day: 19
+         Month: 7
+         Year: 2001
 The bus was successfully inserted!
 
 What would you like to do now?
 1
-Enter id: 1472583
-Enter date of begining.
-Day: 1
-Month: 3
-Year: 2017
-The bus was successfully inserted!
-
-What would you like to do now?
-1
-Enter id: 8528520
-Enter date of begining.
-Day: 12
-Month: 12
-Year: 2012
-The bus was successfully inserted!
-
-What would you like to do now?
-3
-Enter id: 8528520
-Enter 1 to fuel the bus and 2 to treat the bus: 2
-The treatment was completed successfully.
-What would you like to do now?
-3
-Enter id: 1472583
-Enter 1 to fuel the bus and 2 to treat the bus: 2
-The treatment was completed successfully.
-What would you like to do now?
-2
 Enter id: 12345678
-good drive!
-duration of the driving is 0km.
+Enter date of begining.
+         Day: 1
+         Month: 2
+         Year: 2020
+The bus was successfully inserted!
 
 What would you like to do now?
 2
 Enter id: 12345678
-good drive!
-duration of the driving is 581km.
+Have a plasent journey! Length of driving is 646 km.
 
-What would you like to do now?
-2
-Enter id: 1472583
-good drive!
-duration of the driving is 388km.
-
-What would you like to do now?
-2
-Enter id: 8528520
-good drive!
-duration of the driving is 648km.
-
-What would you like to do now?
-2
-Enter id: 98765432
-Bus does not exist.
-What would you like to do now?
-4
-id:          km since last treat:
----------------------------------
-123 - 45 - 678               581
-14 - 725 - 83                388
-85 - 285 - 20                648
-What would you like to do now?
-2
-Enter id: 8528520
-good drive!
-duration of the driving is 478km.
-
-What would you like to do now?
-2
-Enter id: 8528520
-The bus cannot drive: the bus needs to get fueled
 What would you like to do now?
 3
-Enter id: 8528520
+Enter id: 12345678
 Enter 1 to fuel the bus and 2 to treat the bus: 1
 Refueling was completed successfully.
+
 What would you like to do now?
-2
-Enter id: 8528520
-good drive!
-duration of the driving is 775km.
+3
+Enter id: 1234567
+Enter 1 to fuel the bus and 2 to treat the bus: 2
+The treatment was completed successfully.
 
 What would you like to do now?
 4
-id:          km since last treat:
+ID:              Km since last treat:
 ---------------------------------
-123 - 45 - 678               581
-14 - 725 - 83                388
-85 - 285 - 20                1901
+12-345-67        0
+123-45-678       646
+
 What would you like to do now?
 0
 Bye bye!
-*/
+
+ */
