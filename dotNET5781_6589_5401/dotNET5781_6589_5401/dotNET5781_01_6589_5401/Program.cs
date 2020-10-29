@@ -166,22 +166,22 @@ namespace dotNET5781_01_6589_5401
 
                         if (bus != null)
                         {
-                            Console.WriteLine("Enter 1 to fuel the bus and 2 to treat the bus: ");
+                            Console.Write("Enter 1 to fuel the bus and 2 to treat the bus: ");
                             request = Convert.ToInt32(Console.ReadLine());
                             switch (request)
                             {
                                 case 1:
                                     bus.fuel();
-                                    Console.WriteLine("Refueling was completed successfully");
+                                    Console.WriteLine("Refueling was completed successfully.");
                                     break;
 
                                 case 2:
                                     bus.treat();
-                                    Console.WriteLine("The treatment was completed successfully");
+                                    Console.WriteLine("The treatment was completed successfully.");
                                     break;
 
                                 default:
-                                    Console.WriteLine("Invalid choise");
+                                    Console.WriteLine("Invalid choise.");
                                     break;
 
                             }
