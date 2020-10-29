@@ -145,6 +145,11 @@ namespace dotNET5781_01_6589_5401
                         m = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Year: ");
                         y = Convert.ToInt32(Console.ReadLine());
+                        if (d < 1 || d > 30 || m > 12 || m < 1)
+                        {
+                            Console.WriteLine("numbers isn't valid");
+                            break;
+                        }   
                         DateTime date = new DateTime(y, m, d);
 
                         addBus(date, id);
