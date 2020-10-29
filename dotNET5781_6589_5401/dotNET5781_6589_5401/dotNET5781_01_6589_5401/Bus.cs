@@ -142,7 +142,7 @@ namespace dotNET5781_01_6589_5401
             if (possible)
             {
                 updateKm(km);
-                Console.WriteLine("good drive!\n duration of the driving is {0}km.\n",km);
+                Console.WriteLine("good drive!\nduration of the driving is {0}km.\n",km);
             }
 
             else
