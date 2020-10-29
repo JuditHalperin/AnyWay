@@ -20,15 +20,17 @@ namespace dotNET5781_01_6589_5401
             Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat.");
             Console.WriteLine("Enter 0 to exit. \n");
         }
-        static options readInput() // read a number
-        {
-            Console.WriteLine("What do you want to do now?");
-            string input = Console.ReadLine();
-
-            int intTemp = Convert.ToInt32(Console.ReadLine());
-            options choise = (options)intTemp;
-        }
         static Bus findBusInList(string id) // find bus in list by its id
+        {
+           
+            foreach (Bus bus in buses)
+                if (bus.Id == id)
+                    return bus;
+
+            return null;
+        }
+
+        static string editFormatId(string id)
         {
             if (id.Length == 7) // 7 chars
             {
@@ -43,11 +45,7 @@ namespace dotNET5781_01_6589_5401
             }
             else
                 return null;
-            foreach (Bus bus in buses)
-                if (bus.Id == id)
-                    return bus;
-
-            return null;
+            return id;
         }
         static void addBus(DateTime date, string id) // add bus to list
         {
@@ -69,7 +67,7 @@ namespace dotNET5781_01_6589_5401
         static void driveBus(string id) // if possible - drive a bus
         {
 
-            Bus bus=findBusInList(id);
+            Bus bus=findBusInList(editFormatId(id));
             if (bus != null)
                 bus.drive();
             else
@@ -82,7 +80,9 @@ namespace dotNET5781_01_6589_5401
             string id;
             int d, m, y, request;
 
-            options choise = readInput();
+            Console.WriteLine("What do you want to do now?");
+            int intTemp = Convert.ToInt32(Console.ReadLine());
+            options choise = (options)intTemp;
 
             while (choise != options.exit)
             {
@@ -120,8 +120,8 @@ namespace dotNET5781_01_6589_5401
 
                         Console.WriteLine("Enter id: ");
                         id = Console.ReadLine();
-
-                        Bus bus = findBusInList(id);
+                        
+                        Bus bus = findBusInList(editFormatId(id));
 
                         if (bus != null)
                         {
@@ -165,7 +165,9 @@ namespace dotNET5781_01_6589_5401
                         break;
                 }
 
-                choise = readInput();
+                Console.WriteLine("What do you want to do now?");
+                intTemp = Convert.ToInt32(Console.ReadLine());
+                choise = (options)intTemp;
 
             }
 
