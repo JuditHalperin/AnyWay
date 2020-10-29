@@ -81,7 +81,7 @@ namespace dotNET5781_01_6589_5401
 
                     case options.addBus:
 
-                        Console.WriteLine("Enter id: ");
+                        Console.WriteLine("Enter id:");
                         id = Console.ReadLine();
 
                         Console.WriteLine("Enter date of begining:");
