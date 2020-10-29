@@ -43,8 +43,6 @@ namespace dotNET5781_01_6589_5401
                 id = id.Insert(3, "-");
                 id = id.Insert(6, "-");
             }
-            else
-                return null;
             return id;
         }
         static void addBus(DateTime date, string id) // add bus to list
