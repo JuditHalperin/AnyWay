@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -199,7 +200,7 @@ namespace dotNET5781_01_6589_5401
                         Console.WriteLine("---------------------------------");
 
                         foreach (Bus tmpBus in buses)
-                            Console.WriteLine("{0:11} \t\t {1:5}", tmpBus.Id, tmpBus.KmSinceTreated);
+                            Console.WriteLine("{0:11} \t\t {1:5}", tmpBus.Id, Convert.ToString(tmpBus.KmSinceTreated));
 
                         break;
                         
