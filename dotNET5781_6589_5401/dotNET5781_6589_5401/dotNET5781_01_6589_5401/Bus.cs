@@ -46,11 +46,11 @@ namespace dotNET5781_01_6589_5401
             private set { totalKm = value; }
         }
 
-        private float kmSinceFueling;
+        private float kmSinceFueled;
         public float KmSinceFueled
         {
-            get { return kmSinceFueling; }
-            private set { kmSinceFueling = value; }
+            get { return kmSinceFueled; }
+            private set { kmSinceFueled = value; }
         }
 
         private float kmSinceTreated;
@@ -194,8 +194,8 @@ namespace dotNET5781_01_6589_5401
         private void updateKm(float km)
         {
             TotalKm=TotalKm + km;
-            KmSinceFueled=KmSinceFueled + km;
-            KmSinceTreated=KmSinceTreated + km;
+            kmSinceFueled=KmSinceFueled + km;
+            kmSinceTreated=KmSinceTreated + km;
         }
 
         /// <summary>
