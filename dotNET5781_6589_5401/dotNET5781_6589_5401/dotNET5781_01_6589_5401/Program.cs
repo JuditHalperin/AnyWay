@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_01_6589_5401
 {
-    enum options { exit, addBus, driveBus, fuelingOrTreating, kmSinceTreating }
+    enum options { exit, addBus, driveBus, fuelOrTreat, kmSinceTreating }
     class Program
     {
         static List<Bus> buses = new List<Bus>();
-        static void printMenu() // print menu to user
+
+        /// <summary>
+        /// show menu of options to user
+        /// </summary>
+        static void printMenu()
         {
             Console.WriteLine("Hi!");
             Console.WriteLine("Enter 1 to add a new bus.");
@@ -20,21 +24,35 @@ namespace dotNET5781_01_6589_5401
             Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat.");
             Console.WriteLine("Enter 0 to exit. \n");
         }
-        static options readInput() // read a number of option
+
+        /// <summary>
+        /// read number of option
+        /// </summary>
+        /// <returns>chosen option</returns>
+        static options readInput()
         {
             Console.WriteLine("What would you like to do now?");
-            int input = Convert.ToInt32(Console.ReadLine());
-            if (input <= 4 && input >= 0)
+
+            int input;
+            bool flag = int.TryParse(Console.ReadLine(), out input);
+
+            if (flag)
                 return (options)input;
+
             else
             {
                 Console.WriteLine("Invalid choise.");
                 return readInput();
             }
         }
-        static Bus findBusInList(string id) // find bus in list by its id
+
+        /// <summary>
+        /// find bus in the list by looking for its id
+        /// </summary>
+        /// <param name="id">bus ID</param>
+        /// <returns>correct bus or null</returns>
+        static Bus findBusInList(string id)
         {
-           
             foreach (Bus bus in buses)
                 if (bus.Id == id)
                     return bus;
@@ -42,6 +60,11 @@ namespace dotNET5781_01_6589_5401
             return null;
         }
 
+        /// <summary>
+        /// create an ID format by adding '-' to the string 
+        /// </summary>
+        /// <param name="id">bus ID</param>
+        /// <returns>correct ID format</returns>
         static string editFormatId(string id)
         {
             if (id.Length == 7) // 7 chars
@@ -55,9 +78,16 @@ namespace dotNET5781_01_6589_5401
                 id = id.Insert(3, "-");
                 id = id.Insert(6, "-");
             }
+
             return id;
         }
-        static void addBus(DateTime date, string id) // add bus to list
+
+        /// <summary>
+        /// add a new bus to the list
+        /// </summary>
+        /// <param name="date">bus's date of begining</param>
+        /// <param name="id">bus ID</param>
+        static void addBus(DateTime date, string id)
         {
             string msg;
 
@@ -67,19 +97,26 @@ namespace dotNET5781_01_6589_5401
                 if (findBusInList(bus.Id) == null)
                     buses.Add(bus);
                 else
-                    msg = "this id already exists";
+                    msg = "ID already exists.";
 
             Console.WriteLine(msg + '\n');
         }
-        static void driveBus(string id) // if possible - drive a bus
-        {
 
-            Bus bus=findBusInList(editFormatId(id));
+        /// <summary>
+        /// drive a bus from the list
+        /// </summary>
+        /// <param name="id">bus ID</param>
+        static void driveBus(string id)
+        {
+            Bus bus = findBusInList(editFormatId(id));
+
             if (bus != null)
                 bus.drive();
+
             else
-                Console.WriteLine("Sorry.\nthe bus is not exist!\n");
+                Console.WriteLine("Bus does not exist.");
         }
+
         static void Main(string[] args)
         {
             string id;
@@ -97,15 +134,15 @@ namespace dotNET5781_01_6589_5401
 
                     case options.addBus:
 
-                        Console.WriteLine("Enter id:");
+                        Console.Write("Enter id: ");
                         id = Console.ReadLine();
 
-                        Console.WriteLine("Enter date of begining:");
-                        Console.WriteLine("Day: ");
+                        Console.WriteLine("Enter date of begining.");
+                        Console.Write("Day: ");
                         d = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Month: ");
+                        Console.Write("Month: ");
                         m = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Year: ");
+                        Console.Write("Year: ");
                         y = Convert.ToInt32(Console.ReadLine());
                         DateTime date = new DateTime(y, m, d);
 
@@ -114,44 +151,45 @@ namespace dotNET5781_01_6589_5401
 
                     case options.driveBus:
 
-                        Console.WriteLine("Enter id: ");
+                        Console.Write("Enter id: ");
                         id = Console.ReadLine();
 
                         driveBus(id);
                         break;
 
-                    case options.fuelingOrTreating:
+                    case options.fuelOrTreat:
 
-                        Console.WriteLine("Enter id: ");
+                        Console.Write("Enter id: ");
                         id = Console.ReadLine();
                         
                         Bus bus = findBusInList(editFormatId(id));
 
                         if (bus != null)
                         {
-                            Console.WriteLine("Enter 1 to fuel the bus and 2 to treat the bus: ");
+                            Console.Write("Enter 1 to fuel the bus and 2 to treat the bus: ");
                             request = Convert.ToInt32(Console.ReadLine());
                             switch (request)
                             {
                                 case 1:
                                     bus.fuel();
-                                    Console.WriteLine("Refueling was completed successfully");
+                                    Console.WriteLine("Refueling was completed successfully.");
                                     break;
 
                                 case 2:
                                     bus.treat();
-                                    Console.WriteLine("The treatment was completed successfully");
+                                    Console.WriteLine("The treatment was completed successfully.");
                                     break;
 
                                 default:
-                                    Console.WriteLine("Invalid choise");
+                                    Console.WriteLine("Invalid choise.");
                                     break;
 
                             }
 
                         }
+
                         else
-                            Console.WriteLine("sorry, the bus isn't exist!");
+                            Console.WriteLine("Bus does not exist.");
 
                         break;
 
@@ -164,10 +202,10 @@ namespace dotNET5781_01_6589_5401
                             Console.WriteLine("{0:11} \t\t {1:5}", tmpBus.Id, tmpBus.KmSinceTreated);
 
                         break;
-
+                        
                     default:
 
-                        Console.WriteLine("Invalid number.");
+                        Console.WriteLine("Invalid choise.");
                         break;
                 }
 
