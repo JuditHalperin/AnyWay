@@ -193,9 +193,9 @@ namespace dotNET5781_01_6589_5401
         /// <param name="km">additinal km that the bus drive</param>
         private void updateKm(float km)
         {
-            TotalKm += km;
-            KmSinceFueled += km;
-            KmSinceTreated += km;
+            TotalKm=TotalKm + km;
+            KmSinceFueled=KmSinceFueled + km;
+            KmSinceTreated=KmSinceTreated + km;
         }
 
         /// <summary>
