@@ -145,6 +145,11 @@ namespace dotNET5781_01_6589_5401
                         m = Convert.ToInt32(Console.ReadLine());
                         Console.Write("Year: ");
                         y = Convert.ToInt32(Console.ReadLine());
+                        if (d < 1 || d > 30 || m > 12 || m < 1)
+                        {
+                            Console.WriteLine("numbers isn't valid");
+                            break;
+                        }   
                         DateTime date = new DateTime(y, m, d);
 
                         addBus(date, id);
@@ -220,3 +225,122 @@ namespace dotNET5781_01_6589_5401
     }
 
 }
+
+/*Hi!
+Enter 1 to add a new bus.
+Enter 2 to choose a bus to drive.
+Enter 3 to treat a bus or fuel it.
+Enter 4 to check how much km all buses drived since their last treat.
+Enter 0 to exit.
+
+What would you like to do now?
+1
+Enter id: 12345678
+Enter date of begining.
+Day: 35
+Month: 12
+Year: 1200
+numbers isn't valid
+What would you like to do now?
+1
+Enter id: 12345678
+Enter date of begining.
+Day: 25
+Month: 12
+Year: 2019
+The bus was successfully inserted!
+
+What would you like to do now?
+1
+Enter id: 1472583
+Enter date of begining.
+Day: 1
+Month: 3
+Year: 2017
+The bus was successfully inserted!
+
+What would you like to do now?
+1
+Enter id: 8528520
+Enter date of begining.
+Day: 12
+Month: 12
+Year: 2012
+The bus was successfully inserted!
+
+What would you like to do now?
+3
+Enter id: 8528520
+Enter 1 to fuel the bus and 2 to treat the bus: 2
+The treatment was completed successfully.
+What would you like to do now?
+3
+Enter id: 1472583
+Enter 1 to fuel the bus and 2 to treat the bus: 2
+The treatment was completed successfully.
+What would you like to do now?
+2
+Enter id: 12345678
+good drive!
+duration of the driving is 0km.
+
+What would you like to do now?
+2
+Enter id: 12345678
+good drive!
+duration of the driving is 581km.
+
+What would you like to do now?
+2
+Enter id: 1472583
+good drive!
+duration of the driving is 388km.
+
+What would you like to do now?
+2
+Enter id: 8528520
+good drive!
+duration of the driving is 648km.
+
+What would you like to do now?
+2
+Enter id: 98765432
+Bus does not exist.
+What would you like to do now?
+4
+id:          km since last treat:
+---------------------------------
+123 - 45 - 678               581
+14 - 725 - 83                388
+85 - 285 - 20                648
+What would you like to do now?
+2
+Enter id: 8528520
+good drive!
+duration of the driving is 478km.
+
+What would you like to do now?
+2
+Enter id: 8528520
+The bus cannot drive: the bus needs to get fueled
+What would you like to do now?
+3
+Enter id: 8528520
+Enter 1 to fuel the bus and 2 to treat the bus: 1
+Refueling was completed successfully.
+What would you like to do now?
+2
+Enter id: 8528520
+good drive!
+duration of the driving is 775km.
+
+What would you like to do now?
+4
+id:          km since last treat:
+---------------------------------
+123 - 45 - 678               581
+14 - 725 - 83                388
+85 - 285 - 20                1901
+What would you like to do now?
+0
+Bye bye!*/
