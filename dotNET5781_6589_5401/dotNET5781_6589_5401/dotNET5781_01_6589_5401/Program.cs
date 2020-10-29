@@ -40,37 +40,18 @@ namespace dotNET5781_01_6589_5401
         /// read number of option
         /// </summary>
         /// <returns>chosen option</returns>
-        static options readInput()
+        static options readInput(int min = 0, int max = 4)
         {
             int input;
             bool flag = int.TryParse(Console.ReadLine(), out input);
 
-            if (flag && input >= 0 && input <= 4)
+            if (flag && input >= min && input <= max)
                 return (options)input;
 
             else
             {
                 Console.WriteLine("Invalid choise.");
-                return readInput();
-            }
-        }
-
-        /// <summary>
-        /// read number of option in order to choose fueling or treating
-        /// </summary>
-        /// <returns></returns>
-        static int readInputInCaseOfFuelOrTreat()
-        {
-            int input;
-            bool flag = int.TryParse(Console.ReadLine(), out input);
-
-            if (flag && (input == 1 || input == 2))
-                return input;
-
-            else
-            {
-                Console.WriteLine("Invalid choise.");
-                return readInputInCaseOfFuelOrTreat();
+                return readInput(min, max);
             }
         }
 
@@ -200,7 +181,7 @@ namespace dotNET5781_01_6589_5401
                         if (bus != null)
                         {
                             Console.Write("Enter 1 to fuel the bus and 2 to treat the bus: ");
-                            request = readInputInCaseOfFuelOrTreat();
+                            request = (int)readInput(1,2);
 
                             switch (request)
                             {
