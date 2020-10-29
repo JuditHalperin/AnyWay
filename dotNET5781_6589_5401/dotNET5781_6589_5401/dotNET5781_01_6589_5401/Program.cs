@@ -234,7 +234,8 @@ namespace dotNET5781_01_6589_5401
 
 }
 
-/*Hi!
+/*
+Hi!
 Enter 1 to add a new bus.
 Enter 2 to choose a bus to drive.
 Enter 3 to treat a bus or fuel it.
@@ -351,4 +352,5 @@ id:          km since last treat:
 85 - 285 - 20                1901
 What would you like to do now?
 0
-Bye bye!*/
+Bye bye!
+*/
