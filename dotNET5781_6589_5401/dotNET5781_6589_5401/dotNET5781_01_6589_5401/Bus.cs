@@ -187,6 +187,7 @@ namespace dotNET5781_01_6589_5401
         public void treat()
         {
             KmSinceTreated = 0;
+            DateOfLastTreat = DateTime.Now;
         }
 
     }
