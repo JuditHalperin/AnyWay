@@ -26,9 +26,11 @@ namespace dotNET5781_01_6589_5401
             int input = Convert.ToInt32(Console.ReadLine());
             if (input <= 4 && input >= 0)
                 return (options)input;
-            else            
+            else
+            {
                 Console.WriteLine("Invalid choise.");
-
+                return readInput();
+            }
         }
         static Bus findBusInList(string id) // find bus in list by its id
         {
