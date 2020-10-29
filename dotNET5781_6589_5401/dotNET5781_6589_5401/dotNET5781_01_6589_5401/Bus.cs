@@ -56,8 +56,8 @@ namespace dotNET5781_01_6589_5401
         private float kmSinceTreated;
         public float KmSinceTreated
         {
-            get { return kmSinceFueling; }
-            private set { kmSinceFueling = value; }
+            get { return kmSinceTreated; }
+            private set { kmSinceTreated = value; }
         }
 
         /// <summary>
