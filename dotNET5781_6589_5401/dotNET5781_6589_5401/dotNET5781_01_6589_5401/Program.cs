@@ -13,11 +13,11 @@ namespace dotNET5781_01_6589_5401
         static List<Bus> buses = new List<Bus>();
         static void printMenu() // print menu to user
         {
-            Console.WriteLine("Hi! \n");
-            Console.WriteLine("Enter 1 to add a new bus. \n");
-            Console.WriteLine("Enter 2 to choose a bus to drive. \n");
-            Console.WriteLine("Enter 3 to treat a bus or fuel it. \n");
-            Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat. \n");
+            Console.WriteLine("Hi!");
+            Console.WriteLine("Enter 1 to add a new bus.");
+            Console.WriteLine("Enter 2 to choose a bus to drive.");
+            Console.WriteLine("Enter 3 to treat a bus or fuel it.");
+            Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat.");
             Console.WriteLine("Enter 0 to exit. \n");
         }
         static Bus findBusInList(string id) // find bus in list by its id
@@ -67,9 +67,13 @@ namespace dotNET5781_01_6589_5401
 
             string id;
             int d, m, y, request;
-            options choise = (options)Console.Read();
+
+            Console.WriteLine("What do you want to do now?");
+            int intTemp = Convert.ToInt32(Console.ReadLine());
+            options choise = (options)intTemp;
 
             while (choise != options.exit)
+            {
                 switch (choise)
                 {
                     case options.exit:
@@ -82,11 +86,11 @@ namespace dotNET5781_01_6589_5401
 
                         Console.WriteLine("Enter date of begining: \n");
                         Console.WriteLine("Day: ");
-                        d = Console.Read();
-                        Console.WriteLine("Month: "); 
-                        m = Console.Read();
+                        d = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Month: ");
+                        m = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Year: ");
-                        y = Console.Read();                        
+                        y = Convert.ToInt32(Console.ReadLine());
                         DateTime date = new DateTime(y, m, d);
 
                         addBus(date, id);
@@ -98,17 +102,16 @@ namespace dotNET5781_01_6589_5401
                         id = Console.ReadLine();
 
                         driveBus(id);
-
                         break;
 
-                    case fuelingOrTreating:
+                    case options.fuelingOrTreating:
 
                         Console.WriteLine("Enter id: ");
                         id = Console.ReadLine();
 
-                        Bus bus = new Bus(findBusInList(id));
+                        Bus bus = findBusInList(id);
 
-                        if(bus != null)
+                        if (bus != null)
                         {
                             Console.WriteLine("Enter 1 to fuel the bus and 2 to treat the bus: ");
                             request = Console.Read();
@@ -125,16 +128,36 @@ namespace dotNET5781_01_6589_5401
                                 default:
                                     Console.WriteLine("Invalid choise");
                                     break;
-                            
+
                             }
 
                         }
-                        
 
+                        break;
+
+                    case options.kmSinceTreating:
+
+                        Console.WriteLine("id:          km since last treat:");
+                        Console.WriteLine("---------------------------------");
+
+                        foreach (Bus tmpBus in buses)
+                            Console.WriteLine("{0:11} \t\t {1:5}", tmpBus.Id, tmpBus.KmSinceTreated);
+
+                        break;
+
+                    default:
+
+                        Console.WriteLine("Invalid number.");
+                        break;
                 }
 
+                Console.WriteLine("What do you want to do now?");
+                intTemp = Convert.ToInt32(Console.ReadLine());
+                choise = (options)intTemp;
 
+            }
 
+            Console.WriteLine("Bye bye!");
             Console.ReadKey();
         }
     }

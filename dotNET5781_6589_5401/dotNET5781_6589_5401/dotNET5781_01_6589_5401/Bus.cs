@@ -10,7 +10,7 @@ namespace dotNET5781_01_6589_5401
 {
     class Bus
     {
-        static private Random rand = new Random();
+        static private Random rand = new Random(DateTime.Now.Millisecond);
 
         private string id;
         public string Id
