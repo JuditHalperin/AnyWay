@@ -43,7 +43,7 @@ namespace dotNET5781_01_6589_5401
                 else
                     msg = "this id already exists";
 
-            Console.WriteLine(msg);
+            Console.WriteLine(msg + '\n');
         }
         static void driveBus(string id) // if possible - drive a bus
         {
@@ -84,7 +84,7 @@ namespace dotNET5781_01_6589_5401
                         Console.WriteLine("Enter id: ");
                         id = Console.ReadLine();
 
-                        Console.WriteLine("Enter date of begining: \n");
+                        Console.WriteLine("Enter date of begining:");
                         Console.WriteLine("Day: ");
                         d = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Month: ");
