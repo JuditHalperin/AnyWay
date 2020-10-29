@@ -125,7 +125,11 @@ namespace dotNET5781_01_6589_5401
             bool possible = isValid(out msg, km);
 
             if (possible)
+            {
                 updateKm(km);
+                Console.WriteLine("good drive!\n duration of the driving is {0}km.\n",km);
+            }
+
             else
                 Console.WriteLine("The bus cannot drive: " + msg);
         }
