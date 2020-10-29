@@ -20,6 +20,16 @@ namespace dotNET5781_01_6589_5401
             Console.WriteLine("Enter 4 to check how much km all buses drived since their last treat.");
             Console.WriteLine("Enter 0 to exit. \n");
         }
+        static options readInput() // read a number of option
+        {
+            Console.WriteLine("What would you like to do now?");
+            int input = Convert.ToInt32(Console.ReadLine());
+            if (input <= 4 && input >= 0)
+                return (options)input;
+            else            
+                Console.WriteLine("Invalid choise.");
+
+        }
         static Bus findBusInList(string id) // find bus in list by its id
         {
            
@@ -53,10 +63,7 @@ namespace dotNET5781_01_6589_5401
 
             if (msg == "The bus was successfully inserted!")
                 if (findBusInList(bus.Id) == null)
-                {
                     buses.Add(bus);
-
-                }
                 else
                     msg = "this id already exists";
 
@@ -73,14 +80,11 @@ namespace dotNET5781_01_6589_5401
         }
         static void Main(string[] args)
         {
-            printMenu();
-
             string id;
             int d, m, y, request;
 
-            Console.WriteLine("What do you want to do now?");
-            int intTemp = Convert.ToInt32(Console.ReadLine());
-            options choise = (options)intTemp;
+            printMenu();
+            options choise = readInput();
 
             while (choise != options.exit)
             {
@@ -163,9 +167,7 @@ namespace dotNET5781_01_6589_5401
                         break;
                 }
 
-                Console.WriteLine("What do you want to do now?");
-                intTemp = Convert.ToInt32(Console.ReadLine());
-                choise = (options)intTemp;
+                choise = readInput();
 
             }
 
