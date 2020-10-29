@@ -60,6 +60,12 @@ namespace dotNET5781_01_6589_5401
             private set { kmSinceFueling = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="id"></param>
+        /// <param name="msg"></param>
         public Bus(DateTime date, string id,out string msg) // constructor
         {
             DateOfBegining = date;
@@ -70,6 +76,12 @@ namespace dotNET5781_01_6589_5401
             KmSinceTreated = 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         private bool checkId(string value, out string msg)
         {
 
@@ -118,6 +130,9 @@ namespace dotNET5781_01_6589_5401
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void drive() // if possible - drive the bus
         {
             string msg;
@@ -134,11 +149,18 @@ namespace dotNET5781_01_6589_5401
                 Console.WriteLine("The bus cannot drive: " + msg);
         }
 
-        private float kmOfDrive() // random length of drive
-        {
-            return rand.Next(0, 1200);
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private float kmOfDrive() { return rand.Next(1201); } // random length of drive
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="km"></param>
+        /// <returns></returns>
         public bool isValid(out string msg, float km = 0) // test if the bus can drive
         {
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
@@ -164,6 +186,7 @@ namespace dotNET5781_01_6589_5401
             return true;
 
         }
+
         /// <summary>
         /// update the km fields after drive
         /// </summary>
@@ -174,6 +197,7 @@ namespace dotNET5781_01_6589_5401
             KmSinceFueled += km;
             KmSinceTreated += km;
         }
+
         /// <summary>
         /// reset the km since last fuel.
         /// </summary>
@@ -181,6 +205,7 @@ namespace dotNET5781_01_6589_5401
         {
             KmSinceFueled = 0;
         }
+
         /// <summary>
         /// reset the km since last treat.
         /// </summary>
