@@ -46,6 +46,11 @@ namespace dotNET5781_02_6589_5401
             set { region = value; }
         }
 
+        public BusLine(int line, Regions region, List<BusLineStation> path)
+        {
+
+        }
+
         public override string ToString()
         {
             return base.ToString();

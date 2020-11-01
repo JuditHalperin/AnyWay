@@ -22,5 +22,6 @@ namespace dotNET5781_02_6589_5401
             set { minutesSinceLastStation = value; }
         }
 
+        public BusLineStation(string id) : base(id) { }
     }
 }
