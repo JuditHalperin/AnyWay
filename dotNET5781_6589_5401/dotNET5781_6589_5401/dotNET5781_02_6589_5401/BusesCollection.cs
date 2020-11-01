@@ -8,6 +8,6 @@ namespace dotNET5781_02_6589_5401
 {
     class BusesCollection
     {
-
+        list<BusLine> buses;
     }
 }

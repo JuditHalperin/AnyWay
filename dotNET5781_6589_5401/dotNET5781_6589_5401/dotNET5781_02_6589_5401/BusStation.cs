@@ -32,7 +32,10 @@ namespace dotNET5781_02_6589_5401
             set { longitude = value; }
         }
 
-        public BusStation(string id, )
+        public BusStation(string id)
+        {
+
+        }
 
         public override string ToString()
         {
