@@ -114,11 +114,11 @@ namespace dotNET5781_02_6589_5401
 
         }
         /// <summary>
-        /// create new BusLine with new list with the station from the: firstStationID until the: lastStationID.
+        /// create new BusLine with new list with the stations from the: firstStationID until the: lastStationID.
         /// </summary>
-        /// <param name="firstStationID">the station from it return the station of the bus</param>
+        /// <param name="firstStationID">the station from it return the stations of the bus</param>
         /// <param name="lastStationID">the last station. if this station not exist will be return list of station until the end station in the path.</param>
-        /// <returns>bus with station from first until the last....</returns>
+        /// <returns>bus with stations from first until the last....</returns>
         public BusLine subPath(string firstStationID, string lastStationID)
         {
             List<BusLineStation> subPathBetweenTwoStations=new List<BusLineStation>();
