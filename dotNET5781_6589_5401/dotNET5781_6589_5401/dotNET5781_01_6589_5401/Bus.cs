@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+Asnat Kahane 211825401
+Judit Halperin 324216589
+ 
+Exercise 1
+29/10/20
+This program implements the class Bus. The user can drive, fuel or teart a bus.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -22,14 +31,7 @@ namespace dotNET5781_01_6589_5401
         public DateTime DateOfBegining
         {
             get { return dateOfBegining; }
-            private set
-            {
-                if (value <= DateTime.Now)
-                    dateOfBegining = value;
-
-                else
-                    Console.WriteLine("Invalid date");
-            }
+            private set { dateOfBegining = value; }
         }
 
         private DateTime dateOfLastTreat;
@@ -121,7 +123,7 @@ namespace dotNET5781_01_6589_5401
 
             else // length does not fit the year
             {
-                msg = "Length does not fit the year.";
+                msg = "Length ID number does not fit the year.";
                 return false;
             }
 
@@ -142,7 +144,7 @@ namespace dotNET5781_01_6589_5401
             if (possible)
             {
                 updateKm(km);
-                Console.WriteLine("Good drive!\nduration of the driving is {0}km.\n",km);
+                Console.WriteLine("Have a plasent journey! Length of driving is {0} km.", km);
             }
 
             else
@@ -166,23 +168,23 @@ namespace dotNET5781_01_6589_5401
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
             if (timeSinceLastTreat.TotalDays > 365)
             {
-                msg = "the bus needs a traet because the last one was a year ago";
+                msg = "the bus needs a treat because it has not been treated for a year.";
                 return false;
             }
 
             if (KmSinceTreated + km > 20000)
             {
-                msg = "the bus needs a traet because it drived more than 20,000 km";
+                msg = "the bus needs a traet because it has drived more than 20,000 km.";
                 return false;
             }
 
             if (KmSinceFueled + km > 1200)
             {
-                msg = "the bus needs to get fueled";
+                msg = "the bus needs to get fueled.";
                 return false;
             }
 
-            msg = "everything's alright";
+            msg = "Everything is alright.";
             return true;
 
         }
