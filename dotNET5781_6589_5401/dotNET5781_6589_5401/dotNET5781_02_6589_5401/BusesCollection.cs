@@ -17,7 +17,7 @@ namespace dotNET5781_02_6589_5401
         /// <param name="line">the bus number</param>
         /// <param name="region">area in Israel the bus travel in</param>
         /// <param name="path">path of stations the bus drive to</param>
-        public void addLine(int line, Regions region, List<BusLineStation> path)
+        public void addLine(int line, int region, List<BusLineStation> path)
         {
             int counter = 0;
             BusLine sameLine = null;
@@ -73,7 +73,7 @@ namespace dotNET5781_02_6589_5401
             List<BusLine> busesStopAtStation = null;
 
             foreach (BusLine item in buses)
-                if (item.includesStation(stationID))
+                if (item.stopsAtStation(stationID))
                     busesStopAtStation.Add(item);
 
             if (busesStopAtStation.Count == 0)
@@ -91,7 +91,8 @@ namespace dotNET5781_02_6589_5401
             if (buses.Count == 0)
                 throw ;
             
-            return buses.Sort();
+            buses.Sort();
+            return buses;
         }
 
         /// <summary>
