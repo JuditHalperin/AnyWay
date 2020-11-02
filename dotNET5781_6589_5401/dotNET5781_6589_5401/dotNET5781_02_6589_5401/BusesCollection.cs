@@ -36,7 +36,7 @@ namespace dotNET5781_02_6589_5401
             }
 
             else // this line already exists twice, or once - but the first and last stations are not exchanged
-                throw;           
+                throw new BusesOrStationsExceptions("This line already exists twice, or once - but the first and last stations are not exchanged.");           
         }
 
         /// <summary>
@@ -124,8 +124,8 @@ namespace dotNET5781_02_6589_5401
                 yield return item;
         }
 
-        //private object current;
-        //public object Current
+        //private BusLine current;
+        //public BusLine Current
         //{
         //    get { return current; }
         //    set { current = value; }
