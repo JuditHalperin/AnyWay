@@ -119,7 +119,7 @@ namespace dotNET5781_02_6589_5401
         /// </summary>
         /// <param name="stationID">number of station to check</param>
         /// <returns>true if the station is exist</returns>
-        private bool includesStation(string stationID)
+        public bool stopsAtStation(string stationID)
         {
             foreach (BusLineStation station in path)
             {
