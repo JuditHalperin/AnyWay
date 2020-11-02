@@ -16,9 +16,9 @@ namespace dotNET5781_02_6589_5401
             get { return id; }
             set
             {
-                int number = int.Parse(value); // optional exeption
+                int number = int.Parse(value); // format exception
                 if (number <= 0 || number > 999999)
-                    throw;
+                    throw new BusesOrStationsExceptions("Invalid ID station.");
                 id = value;
             }
         }

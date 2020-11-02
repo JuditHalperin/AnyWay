@@ -15,7 +15,7 @@ namespace dotNET5781_02_6589_5401
             set
             {
                 if (value < 0) // invalid distance
-                    throw;
+                    throw new BusesOrStationsExceptions("Invalid length between stations.");
 
                 metersFromLastStation = value;
             }
@@ -28,7 +28,7 @@ namespace dotNET5781_02_6589_5401
             set
             {
                 if (value < 0) // invalid time
-                    throw;
+                    throw new BusesOrStationsExceptions("Invalid time between stations.");
 
                 minutesSinceLastStation = value;
             }
