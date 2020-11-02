@@ -213,7 +213,10 @@ namespace dotNET5781_02_6589_5401
             BusLine busOfSubPath = new BusLine(0, (int)Region, subPathBetweenTwoStations);
             return busOfSubPath;
         }//לזרוק חריגות. גם אם אין את האחרונה?
-
+        /// <summary>
+        /// calculate time of drive
+        /// </summary>
+        /// <returns>time of drive</returns>
         private int durationDrive()
         {
             int minutes=0;
