@@ -91,8 +91,10 @@ namespace dotNET5781_02_6589_5401
         /// <param name="index">index indicates where to place the station in the list (if index>size ->end of the list.)</param>
         public void addStation(string stationID, int index)//צריך לקבל תחנה כי לא מכיר תחנות אחרות...
         {
-            if(index>=0 && index<path.Count())
+            if (index >= 0 && index < path.Count())
                 //path.Insert(index,)
+            else
+                //path.Add()
         }
         /// <summary>
         /// delete station from the path. if the station not exist in the path-> throw exception.
@@ -107,15 +109,24 @@ namespace dotNET5781_02_6589_5401
                     break;
                 i++;
             }
-            if(i<path.Count())
+            if (i < path.Count())
                 path.Remove(path[i]);
             //else:exception
 
         }
-
+        /// <summary>
+        /// chack if the station is exist in the path of the bus.
+        /// </summary>
+        /// <param name="stationID">number of station to check</param>
+        /// <returns>true if the station is exist</returns>
         private bool includesStation(string stationID)
         {
-
+            foreach (BusLineStation station in path)
+            {
+                if (stationID == station.ID)
+                    return true;
+            }
+            return false;
         }
 
         public double distanceBetweenTwoStations(string FirstID, string SecondID)
@@ -123,8 +134,27 @@ namespace dotNET5781_02_6589_5401
 
         }
 
-        public int MinutesBetweenTwoStations(string FirstID, string SecondID)
+        public int MinutesBetweenTwoStations(string FirstID, string SecondID)//יש חשיבות לסדר התחנות?
         {
+            int fir = -1;
+            int sec = -1;
+            int i = 0;
+            int minutes = 0;
+            foreach(BusLineStation station in path)
+            {
+                if (FirstID == station.ID)
+                    fir = i;
+                if (fir > i)
+                    minutes += station.MinutesSinceLastStation;
+                if (SecondID == station.ID)
+                {
+                    break;
+                }
+                i++;
+            }
+            if (fir == -1 || sec == -1)
+                throw;
+            return minutes;
 
         }
         /// <summary>
@@ -135,7 +165,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>bus with stations from first until the last....</returns>
         public BusLine subPath(string firstStationID, string lastStationID)
         {
-            List<BusLineStation> subPathBetweenTwoStations=new List<BusLineStation>();
+            List<BusLineStation> subPathBetweenTwoStations = new List<BusLineStation>();
             bool flag = false;
             foreach (BusLineStation station in path)
             {
@@ -154,9 +184,23 @@ namespace dotNET5781_02_6589_5401
             return busOfSubPath;
         }//לזרוק חריגות. גם אם אין את האחרונה?
 
+        private int durationDrive()
+        {
+            int minutes=0;
+            foreach (BusLineStation station in path)
+            {
+                minutes += station.MinutesSinceLastStation;
+            }
+            return minutes;
+        }
+        /// <summary>
+        /// Compares the travel time of two lines
+        /// </summary>
+        /// <param name="secondBus">line o comparetion</param>
+        /// <returns>how is bigger.</returns>
         public int CompareTo(BusLine secondBus)
         {
-
+           return durationDrive().CompareTo(secondBus.durationDrive());
         }
     }
 }
