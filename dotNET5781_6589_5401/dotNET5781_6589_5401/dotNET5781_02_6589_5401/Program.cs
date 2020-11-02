@@ -37,30 +37,31 @@ namespace dotNET5781_02_6589_5401
         {
             Console.WriteLine("What would you like to do now?");
 
-            string input = Console.ReadLine();
-            int num = int.Parse(input); // exeption: input is not int
-            if (num < 0 || num > 8) // exeption: input is not between 0-8
+            int input = int.Parse(Console.ReadLine()); // exeption: input is not int
+            if (input < 0 || input > 8) // exeption: input is not between 0-8
                 throw;
 
-            return (Options)num;
+            return (Options)input;
         }
 
         enum Options { addBus, addStationToBus, removeBus, removeStationFromBus, findLinesAtStation, linesToDestiny, printBuses, printStationsAndLinesStopAtThem, exit }
        
         static void Main(string[] args)
         {
+            // BusLineStation - method create path
             // stations!
             // catch all posibily exeptions
             // if user can create stations - need to check if id exists
             // messages to user
-            // stopsAtStation - public
             // not neccery sort before print?
             // use index?? use collection??
             // print: what about double??
 
             BusesCollection buses = new BusesCollection();
-
             initializeBusesCollection(buses);
+
+            int busID;
+            string stationID;
 
             printMenu();
             Options choise = readInput();
@@ -75,12 +76,24 @@ namespace dotNET5781_02_6589_5401
                     case Options.addStationToBus:
                         break;
 
-                    case Options.removeBus:
-                        break;
+                    case Options.removeBus: {
+                            Console.Write("Enter bus line number: ");
+                            busID = int.Parse(Console.ReadLine()); // exeption if input is not int
+                            
+                            buses.deleteLine(busID);
+                            
+                            break;
+                        }
+                    case Options.removeStationFromBus: {
+                            Console.Write("Enter bus line number: ");
+                            busID = int.Parse(Console.ReadLine()); // exeption if input is not int
+                            Console.Write("Enter station number: ");
+                            stationID = Console.ReadLine();
 
-                    case Options.removeStationFromBus:
-                        break;
+                            buses[busID].deleteStation(stationID);
 
+                            break;
+                        }
                     case Options.findLinesAtStation:
                         break;
 
@@ -94,8 +107,7 @@ namespace dotNET5781_02_6589_5401
                     case Options.printStationsAndLinesStopAtThem:
                         break;
 
-                    case Options.exit:
-                        break;
+                    case Options.exit: break;
                 }
 
                 choise = readInput();
