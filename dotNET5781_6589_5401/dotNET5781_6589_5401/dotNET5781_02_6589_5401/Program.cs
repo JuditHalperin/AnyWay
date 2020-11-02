@@ -48,14 +48,13 @@ namespace dotNET5781_02_6589_5401
        
         static void Main(string[] args)
         {
-            // BusLineStation - method create path
+            // two identical lines???
+            // BusLineStation - method create path??
             // stations!
             // catch all posibily exeptions
             // if user can create stations - need to check if id exists
-            // messages to user
             // not neccery sort before print?
             // use index?? use collection??
-            // print: what about double??
 
             BusesCollection buses = new BusesCollection();
             initializeBusesCollection(buses);

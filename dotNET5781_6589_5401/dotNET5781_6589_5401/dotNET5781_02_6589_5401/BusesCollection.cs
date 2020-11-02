@@ -55,7 +55,7 @@ namespace dotNET5781_02_6589_5401
                 }
 
             if (counter == 0)
-                throw;
+                throw new BusesOrStationsExceptions("The bus does not exist.");
 
             if(counter == 1)
                 Console.WriteLine("One bus line was removed successfully.");
@@ -77,7 +77,7 @@ namespace dotNET5781_02_6589_5401
                     busesStopAtStation.Add(item);
 
             if (busesStopAtStation.Count == 0)
-                throw;
+                throw new BusesOrStationsExceptions($"No buses stop at station {stationID}.");
 
             return busesStopAtStation;
         }
@@ -89,7 +89,7 @@ namespace dotNET5781_02_6589_5401
         public List<BusLine> sortBusesByDuration()
         {
             if (buses.Count == 0)
-                throw ;
+                throw new BusesOrStationsExceptions("No buses exist.");
             
             buses.Sort();
             return buses;
@@ -108,7 +108,7 @@ namespace dotNET5781_02_6589_5401
                     if (item.Line == line)
                         return item;
 
-                throw; // does not exist
+                throw new BusesOrStationsExceptions($"Bus line {line} does not exist.");
             }
         }
 
