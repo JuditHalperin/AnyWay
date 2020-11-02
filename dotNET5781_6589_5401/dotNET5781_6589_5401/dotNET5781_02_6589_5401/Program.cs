@@ -42,7 +42,7 @@ namespace dotNET5781_02_6589_5401
             // includesStation - public
             // not neccery sort before print
             // use index?? use collection??
-            // print: what about double?
+            // print: what about double??
 
             BusesCollection buses = new BusesCollection();
 
