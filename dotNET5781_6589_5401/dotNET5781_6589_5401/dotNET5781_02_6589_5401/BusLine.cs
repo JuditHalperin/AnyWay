@@ -139,7 +139,7 @@ namespace dotNET5781_02_6589_5401
             int fir = -1;
             int sec = -1;
             int i = 0;
-            int minutes = 0;
+            int minutes=0;
             foreach(BusLineStation station in path)
             {
                 if (FirstID == station.ID)
