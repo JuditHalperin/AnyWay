@@ -8,20 +8,37 @@ namespace dotNET5781_02_6589_5401
 {
     class BusLineStation : BusStation
     {
-        private double distanceFromLastStation;
-        public double DistanceFromLastStation
+        private double metersFromLastStation;
+        public double MetersFromLastStation
         {
-            get { return distanceFromLastStation; }
-            set { distanceFromLastStation = value; }
+            get { return metersFromLastStation; }
+            set
+            {
+                if (value < 0) // invalid distance
+                    throw;
+
+                metersFromLastStation = value;
+            }
         }
 
         private int minutesSinceLastStation;
         public int MinutesSinceLastStation
         {
             get { return minutesSinceLastStation; }
-            set { minutesSinceLastStation = value; }
+            set
+            {
+                if (value < 0) // invalid time
+                    throw;
+
+                minutesSinceLastStation = value;
+            }
         }
 
+        /// <summary>
+        /// constructor
+        /// (use the base class contructor, and initialize its two attributes by defualt)
+        /// </summary>
+        /// <param name="id">station ID</param>
         public BusLineStation(string id) : base(id) { }
     }
 }
