@@ -128,7 +128,12 @@ namespace dotNET5781_02_6589_5401
             }
             return false;
         }
-
+        /// <summary>
+        /// Calculate travel distance between two stations
+        /// </summary>
+        /// <param name="FirstID">start station to calculate</param>
+        /// <param name="SecondID">end</param>
+        /// <returns>the travel distance between two stations</returns>
         public double distanceBetweenTwoStations(string FirstID, string SecondID)
         {
             int fir = -1;
@@ -143,6 +148,7 @@ namespace dotNET5781_02_6589_5401
                     meters += station.MetersFromLastStation;
                 if (SecondID == station.ID)
                 {
+                    sec = i;
                     break;
                 }
                 i++;
@@ -151,7 +157,12 @@ namespace dotNET5781_02_6589_5401
                 throw;
             return meters;
         }
-
+        /// <summary>
+        /// Calculate travel time between two stations
+        /// </summary>
+        /// <param name="FirstID">start station to calculate</param>
+        /// <param name="SecondID">end</param>
+        /// <returns>the travel time between two stations</returns>
         public int MinutesBetweenTwoStations(string FirstID, string SecondID)//יש חשיבות לסדר התחנות?
         {
             int fir = -1;
@@ -166,6 +177,7 @@ namespace dotNET5781_02_6589_5401
                     minutes += station.MinutesSinceLastStation;
                 if (SecondID == station.ID)
                 {
+                    sec = i;
                     break;
                 }
                 i++;
