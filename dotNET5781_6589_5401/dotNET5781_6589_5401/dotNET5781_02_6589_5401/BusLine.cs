@@ -131,7 +131,25 @@ namespace dotNET5781_02_6589_5401
 
         public double distanceBetweenTwoStations(string FirstID, string SecondID)
         {
-
+            int fir = -1;
+            int sec = -1;
+            int i = 0;
+            double meters = 0;
+            foreach (BusLineStation station in path)
+            {
+                if (FirstID == station.ID)
+                    fir = i;
+                if (fir > i)
+                    meters += station.MetersFromLastStation;
+                if (SecondID == station.ID)
+                {
+                    break;
+                }
+                i++;
+            }
+            if (fir == -1 || sec == -1)
+                throw;
+            return meters;
         }
 
         public int MinutesBetweenTwoStations(string FirstID, string SecondID)//יש חשיבות לסדר התחנות?
@@ -139,7 +157,7 @@ namespace dotNET5781_02_6589_5401
             int fir = -1;
             int sec = -1;
             int i = 0;
-            int minutes = 0;
+            int minutes=0;
             foreach(BusLineStation station in path)
             {
                 if (FirstID == station.ID)
