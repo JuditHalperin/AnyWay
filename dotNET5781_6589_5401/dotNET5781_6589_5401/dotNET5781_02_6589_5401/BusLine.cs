@@ -89,13 +89,27 @@ namespace dotNET5781_02_6589_5401
         /// </summary>
         /// <param name="stationID">get id of exist station</param>
         /// <param name="index">index indicates where to place the station in the list (if index>size ->end of the list.)</param>
-        public void addStation(string stationID, int index)
+        public void addStation(string stationID, int index)//צריך לקבל תחנה כי לא מכיר תחנות אחרות...
         {
-
+            if(index>=0 && index<path.Count())
+                //path.Insert(index,)
         }
-
+        /// <summary>
+        /// delete station from the path. if the station not exist in the path-> throw exception.
+        /// </summary>
+        /// <param name="stationID">number of station to delete</param>
         public void deleteStation(string stationID)
         {
+            int i = 0;
+            foreach (BusLineStation station in path)
+            {
+                if (stationID == station.ID)
+                    break;
+                i++;
+            }
+            if(i<path.Count())
+                path.Remove(path[i]);
+            //else:exception
 
         }
 
