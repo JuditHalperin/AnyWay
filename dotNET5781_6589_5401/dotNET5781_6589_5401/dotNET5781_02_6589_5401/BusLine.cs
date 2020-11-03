@@ -89,12 +89,14 @@ namespace dotNET5781_02_6589_5401
         /// </summary>
         /// <param name="stationID">get id of exist station</param>
         /// <param name="index">index indicates where to place the station in the list (if index>size ->end of the list.)</param>
-        public void addStation(string stationID, int index)//צריך לקבל תחנה כי לא מכיר תחנות אחרות...
+        public void addStation(BusLineStation station, int index)
         {
             if (index >= 0 && index < path.Count())
-                //path.Insert(index,)
+                path.Insert(index, station);
+            else if (index > path.Count())
+                path.Add(station);
             else
-                //path.Add()
+                throw new BusesOrStationsExceptions("index is not valid!");
         }
         /// <summary>
         /// delete station from the path. if the station not exist in the path-> throw exception.
@@ -111,7 +113,8 @@ namespace dotNET5781_02_6589_5401
             }
             if (i < path.Count())
                 path.Remove(path[i]);
-            //else:exception
+            else
+                throw new BusesOrStationsExceptions("the station is not exist in this path!");
 
         }
         /// <summary>
@@ -154,7 +157,7 @@ namespace dotNET5781_02_6589_5401
                 i++;
             }
             if (fir == -1 || sec == -1)
-                throw;
+                throw new BusesOrStationsExceptions("one of the station is not exist or the stations not in the true order.");
             return meters;
         }
         /// <summary>
@@ -163,7 +166,7 @@ namespace dotNET5781_02_6589_5401
         /// <param name="FirstID">start station to calculate</param>
         /// <param name="SecondID">end</param>
         /// <returns>the travel time between two stations</returns>
-        public int MinutesBetweenTwoStations(string FirstID, string SecondID)//יש חשיבות לסדר התחנות?
+        public int MinutesBetweenTwoStations(string FirstID, string SecondID)
         {
             int fir = -1;
             int sec = -1;
@@ -183,7 +186,7 @@ namespace dotNET5781_02_6589_5401
                 i++;
             }
             if (fir == -1 || sec == -1)
-                throw;
+                throw new BusesOrStationsExceptions("one of the station is not exist or the stations not in the true order.");
             return minutes;
 
         }
@@ -196,21 +199,23 @@ namespace dotNET5781_02_6589_5401
         public BusLine subPath(string firstStationID, string lastStationID)
         {
             List<BusLineStation> subPathBetweenTwoStations = new List<BusLineStation>();
-            bool flag = false;
+            bool isExistFirst = false;
+            bool isExistLast = false;
             foreach (BusLineStation station in path)
             {
                 if (station.ID == firstStationID)
-                    flag = true;
-                if (flag)
+                    isExistFirst = true;
+                if (isExistFirst)
                     subPathBetweenTwoStations.Add(station);
-                if (station.ID == lastStationID)
+                if (station.ID == lastStationID && isExistFirst == true)
+                {
+                    isExistLast = true;
                     break;
+                }
             }
-            if (flag == false)
-            {
-                return null;//or exception
-            }
-            BusLine busOfSubPath = new BusLine(0, (int)Region, subPathBetweenTwoStations);
+            if (isExistFirst == false || isExistLast == false)
+                throw new BusesOrStationsExceptions("Error!\none or more of the station is not exist or the stations not in the true order.");
+            BusLine busOfSubPath = new BusLine(Line, (int)Region, subPathBetweenTwoStations);
             return busOfSubPath;
         }//לזרוק חריגות. גם אם אין את האחרונה?
         /// <summary>
