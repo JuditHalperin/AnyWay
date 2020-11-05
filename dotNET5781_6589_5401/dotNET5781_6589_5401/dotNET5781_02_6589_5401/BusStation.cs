@@ -10,17 +10,13 @@ namespace dotNET5781_02_6589_5401
     {
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
+        static private int code = 100000;
+
         private string id;
         public string ID
         {
             get { return id; }
-            set
-            {
-                int number = int.Parse(value); // format exception
-                if (number <= 0 || number > 999999)
-                    throw new BusesOrStationsExceptions("Invalid ID station.");
-                id = value;
-            }
+            private set { id = value; }
         }
 
         private double latitude;
@@ -41,10 +37,9 @@ namespace dotNET5781_02_6589_5401
         /// constructor
         /// (random values to latitude and longitude)
         /// </summary>
-        /// <param name="id">station ID</param>
-        public BusStation(string id)
+        public BusStation()
         {
-            ID = id;
+            ID = Convert.ToString(code++);
             Latitude = rand.Next(31000000, 33300000) / 1000000.0; // real number bwtween [31, 33.3] with 6 digits after the point
             Longitude = rand.Next(34300000, 35500000) / 1000000.0; // real number bwtween [34.3, 35.5] with 6 digits after the point
         }

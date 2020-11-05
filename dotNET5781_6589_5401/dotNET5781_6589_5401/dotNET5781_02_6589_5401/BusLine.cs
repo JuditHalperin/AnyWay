@@ -11,6 +11,29 @@ namespace dotNET5781_02_6589_5401
 
     class BusLine : IComparable<BusLine>
     {
+        class BusLineStation : BusStation
+        {
+            private double metersFromLastStation;
+            public double MetersFromLastStation
+            {
+                get { return metersFromLastStation; }
+                set { metersFromLastStation = value; }
+            }
+
+            private int minutesSinceLastStation;
+            public int MinutesSinceLastStation
+            {
+                get { return minutesSinceLastStation; }
+                set { minutesSinceLastStation = value; }
+            }
+
+            /// <summary>
+            /// constructor
+            /// (use the base class contructor, and initialize its two attributes by defualt)
+            /// </summary>
+            public BusLineStation() : base() { }
+        }
+
         private List<BusLineStation> path;
         public List<BusLineStation> Path
         {
