@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,36 +8,19 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_02_6589_5401
 {
-    class BusesCollection : IEnumerable<BusLine>
+    class BusesCollection : IEnumerable
     {
         List<BusLine> buses; // (default constructor of List)
 
         /// <summary>
         /// add a new bus line to the collection
         /// </summary>
-        /// <param name="line">the bus number</param>
-        /// <param name="region">area in Israel the bus travel in</param>
-        /// <param name="path">path of stations the bus drive to</param>
-        public void addLine(int line, int region, List<BusLineStation> path)
+        /// <param name="firstStation">first station in path</param>
+        public void addLine(List<BusStation> path)
         {
-            int counter = 0;
-            BusLine sameLine = null;
-
-            foreach (BusLine item in buses)
-                if (item.Line == line)
-                {
-                    counter++; // count how many lines exist
-                    sameLine = item;
-                }
-
-            if (counter == 0 || (counter == 1 && path.First().ID == sameLine.Path.Last().ID && path.Last().ID == sameLine.Path.First().ID))
-            {
-                buses.Add(new BusLine(line, region, path));
-                Console.WriteLine("The bus was added successfully.");
-            }
-
-            else // this line already exists twice, or once - but the first and last stations are not exchanged
-                throw new BusesOrStationsExceptions("This line already exists twice, or once - but the first and last stations are not exchanged.");           
+            BusLine newBus = new BusLine(path);
+            buses.Add(newBus);
+            Console.WriteLine($"Bus number {newBus.Line} was added successfully.");
         }
 
         /// <summary>
@@ -45,23 +29,16 @@ namespace dotNET5781_02_6589_5401
         /// <param name="line">the bus number</param>
         public void deleteLine(int line)
         {
-            int counter = 0;
-
             foreach (BusLine item in buses)
                 if (item.Line == line)
                 {
-                    counter++;
                     buses.Remove(item);
+                    Console.WriteLine("The bus line was removed successfully.");
+                    return;
                 }
-
-            if (counter == 0)
-                throw new BusesOrStationsExceptions("The bus does not exist.");
-
-            if(counter == 1)
-                Console.WriteLine("One bus line was removed successfully.");
-            else // counter == 2
-                Console.WriteLine("Two bus lines were removed successfully.");
-        }
+            
+            throw new BusesOrStationsExceptions("The bus does not exist.");
+         }
 
         /// <summary>
         /// check which buses in the collection stop at the given station
@@ -118,28 +95,11 @@ namespace dotNET5781_02_6589_5401
         /// return iterator to the collection
         /// </summary>
         /// <returns>iterator to list</returns>
-        public IEnumerator<BusLine> GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
             foreach (BusLine item in buses)
                 yield return item;
         }
-
-        //private BusLine current;
-        //public BusLine Current
-        //{
-        //    get { return current; }
-        //    set { current = value; }
-        //}
-
-        //public bool MoveNext()
-        //{
-        //    return true;
-        //}
-
-        //public void Reset()
-        //{
-
-        //}
-
+      
     }
 }

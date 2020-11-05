@@ -45,6 +45,19 @@ namespace dotNET5781_02_6589_5401
         }
 
         /// <summary>
+        /// "copy" constructor
+        /// </summary>
+        /// <param name="id">station ID</param>
+        /// <param name="lat">longitude</param>
+        /// <param name="lon">latitude</param>
+        protected BusStation(string id, double lat, double lon)
+        {
+            ID = id;
+            Latitude = lat;
+            Longitude = lon;
+        }
+
+        /// <summary>
         /// describe the station's attributes
         /// </summary>
         /// <returns>string of code and location on the globe</returns>

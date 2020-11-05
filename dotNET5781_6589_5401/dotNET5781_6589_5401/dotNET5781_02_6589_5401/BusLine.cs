@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -11,55 +12,50 @@ namespace dotNET5781_02_6589_5401
 
     class BusLine : IComparable<BusLine>
     {
-        class BusLineStation : BusStation
+        static private Random rand = new Random(DateTime.Now.Millisecond);
+
+        private static int code = 1;
+
+        public class BusLineStation : BusStation
         {
             private double metersFromLastStation;
             public double MetersFromLastStation
             {
                 get { return metersFromLastStation; }
-                set { metersFromLastStation = value; }
+                private set { metersFromLastStation = value; }
             }
 
             private int minutesSinceLastStation;
             public int MinutesSinceLastStation
             {
                 get { return minutesSinceLastStation; }
-                set { minutesSinceLastStation = value; }
+                private set { minutesSinceLastStation = value; }
             }
 
             /// <summary>
             /// constructor
             /// (use the base class contructor, and initialize its two attributes by defualt)
             /// </summary>
-            public BusLineStation() : base() { }
+            public BusLineStation(string id, double lat, double lon) : base(id, lat, lon) { }
         }
 
         private List<BusLineStation> path;
-        public List<BusLineStation> Path
-        {
-            get { return path; }
-            set { path = value; }
-        }
 
         private int line;
         public int Line
         {
             get { return line; }
-            set { line = value; }
+            private set { line = value; }
         }
 
-        private BusStation firstStation;
         public BusStation FirstStation
         {
-            get { return firstStation; }
-            set { firstStation = value; }
+            get { return path.First(); }
         }
 
-        private BusStation lastStation;
         public BusStation LastStation
         {
-            get { return firstStation; }
-            set { firstStation = value; }
+            get { return path.Last(); }
         }
 
         private Regions region;
@@ -68,21 +64,32 @@ namespace dotNET5781_02_6589_5401
             get { return region; }
             set { region = value; }
         }
+
         /// <summary>
-        /// constactor
+        /// constructor - gets the first station
         /// </summary>
-        /// <param name="line">number of line</param>
-        /// <param name="region">number that indicate region according to the Enum:"Regions". </param>
-        /// <param name="path">list of the station of th bus</param>
-        public BusLine(int line, int region, List<BusLineStation> path)
+        /// <param name="firstStation">first station in path</param>
+        public BusLine(BusStation firstStation)
         {
-            Line = line;
-            if (region <= 4 && region >= 0)
-                Region = (Regions)region;
-            else
-                Region = (Regions)0;
-            Path = path;
+            Line = code++;
+            Region = (Regions)rand.Next(4);
+            path.Add(new BusLineStation(firstStation.ID, firstStation.Latitude, firstStation.Longitude));
         }
+
+        /// <summary>
+        /// constructor - gets list of stations
+        /// </summary>
+        /// <param name="newPath">path</param>
+        public BusLine(List<BusStation> newPath)
+        {
+            Line = code++;
+            Region = (Regions)rand.Next(4);
+            path.Add(new BusLineStation(newPath[0].ID, newPath[0].Latitude, newPath[0].Longitude));
+
+            for (int i = 1; i <= newPath.Count; i++)
+                addStation(newPath[i], i - 1);
+        }
+
         /// <summary>
         /// ovarride about "ToString".
         /// </summary>
@@ -92,35 +99,54 @@ namespace dotNET5781_02_6589_5401
             string descriptionOfBus;
             descriptionOfBus = "Line:" + line + "\n";
             descriptionOfBus += "Line activity area:" + Region + "\n";
-            descriptionOfBus += "The stations of the Line: (in back and forth)\n";
+            descriptionOfBus += "The stations of the Line: \n";
+
             foreach (BusLineStation station in path)
-            {
                 descriptionOfBus += "->" + station.ID;
-            }
-            string reverse = "\n";
-            descriptionOfBus += "\nThe route is back:\n";
-            foreach (BusLineStation station in path)//to chaining reverse
-            {
-                reverse = station.ID + "->" + reverse;
-            }
-            descriptionOfBus += reverse;
+
             return descriptionOfBus;
         }
 
         /// <summary>
         /// enable to add station to all space in the list.
         /// </summary>
-        /// <param name="stationID">get id of exist station</param>
+        /// <param name="station">get existed station</param>
         /// <param name="index">index indicates where to place the station in the list (if index>size ->end of the list.)</param>
-        public void addStation(BusLineStation station, int index)
+        public void addStation(BusStation station, int index)
         {
-            if (index >= 0 && index < path.Count())
-                path.Insert(index, station);
-            else if (index > path.Count())
-                path.Add(station);
+            BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
+            GeoCoordinate positionNewStation = new GeoCoordinate(newStation.Latitude, newStation.Longitude);
+
+            if (index > path.Count)
+                index = path.Count;
+
+            if (index >= 0)
+            {
+                if (index != 0) // not to the first place
+                {
+                    GeoCoordinate positionPrevStation = new GeoCoordinate(path[index - 1].Latitude, path[index - 1].Longitude);
+                    newStation.MetersFromLastStation = positionNewStation.GetDistanceTo(positionPrevStation);
+                    newStation.MinutesSinceLastStation = (int)(newStation.MetersFromLastStation * 0.01);
+
+                }
+
+                if (index != path.Count) // not to the last place
+                {
+                    GeoCoordinate positionNextStation = new GeoCoordinate(path[index].Latitude, path[index].Longitude);
+                    path[index].MetersFromLastStation = positionNewStation.GetDistanceTo(positionNextStation);
+                    path[index].MinutesSinceLastStation = (int)(path[index].MetersFromLastStation * 0.01);
+
+                    path.Insert(index, newStation);
+                }
+
+                else // add to the end of the list
+                    path.Add(newStation);
+            }
+
             else
                 throw new BusesOrStationsExceptions("index is not valid!");
         }
+
         /// <summary>
         /// delete station from the path. if the station not exist in the path-> throw exception.
         /// </summary>
@@ -134,12 +160,24 @@ namespace dotNET5781_02_6589_5401
                     break;
                 i++;
             }
+
             if (i < path.Count())
+            {
                 path.Remove(path[i]);
+                if (i<path.Count())
+                {
+                    GeoCoordinate positionNextStation = new GeoCoordinate(path[i].Latitude, path[i].Longitude);
+                    GeoCoordinate positionPrevStation = new GeoCoordinate(path[i - 1].Latitude, path[i - 1].Longitude);
+                    path[i].MetersFromLastStation = positionNextStation.GetDistanceTo(positionPrevStation);
+                    path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.01);
+                }
+            }
+
             else
-                throw new BusesOrStationsExceptions("the station is not exist in this path!");
+                throw new BusesOrStationsExceptions("The station is not exist in this path!");
 
         }
+
         /// <summary>
         /// chack if the station is exist in the path of the bus.
         /// </summary>
@@ -154,6 +192,7 @@ namespace dotNET5781_02_6589_5401
             }
             return false;
         }
+
         /// <summary>
         /// Calculate travel distance between two stations
         /// </summary>
@@ -183,6 +222,7 @@ namespace dotNET5781_02_6589_5401
                 throw new BusesOrStationsExceptions("one of the station is not exist or the stations not in the true order.");
             return meters;
         }
+
         /// <summary>
         /// Calculate travel time between two stations
         /// </summary>
@@ -194,8 +234,8 @@ namespace dotNET5781_02_6589_5401
             int fir = -1;
             int sec = -1;
             int i = 0;
-            int minutes=0;
-            foreach(BusLineStation station in path)
+            int minutes = 0;
+            foreach (BusLineStation station in path)
             {
                 if (FirstID == station.ID)
                     fir = i;
@@ -213,6 +253,7 @@ namespace dotNET5781_02_6589_5401
             return minutes;
 
         }
+
         /// <summary>
         /// create new BusLine with new list with the stations from the: firstStationID until the: lastStationID.
         /// </summary>
@@ -221,39 +262,50 @@ namespace dotNET5781_02_6589_5401
         /// <returns>bus with stations from first until the last....</returns>
         public BusLine subPath(string firstStationID, string lastStationID)
         {
-            List<BusLineStation> subPathBetweenTwoStations = new List<BusLineStation>();
-            bool isExistFirst = false;
-            bool isExistLast = false;
+            int firstIndex = -1;
+            int lastIndex = -1;
+            int index = 0;
+
             foreach (BusLineStation station in path)
             {
                 if (station.ID == firstStationID)
-                    isExistFirst = true;
-                if (isExistFirst)
-                    subPathBetweenTwoStations.Add(station);
-                if (station.ID == lastStationID && isExistFirst == true)
+                    firstIndex = index;
+               
+                if (station.ID == lastStationID)
                 {
-                    isExistLast = true;
+                    if (firstIndex != -1)
+                        lastIndex = index;
                     break;
                 }
+
+                index++;
             }
-            if (isExistFirst == false || isExistLast == false)
+            
+            if (lastIndex == -1)
                 throw new BusesOrStationsExceptions("Error!\none or more of the station is not exist or the stations not in the true order.");
-            BusLine busOfSubPath = new BusLine(Line, (int)Region, subPathBetweenTwoStations);
+
+            BusLine busOfSubPath = new BusLine(path[firstIndex]);
+
+            for (int i = firstIndex + 1; i <= lastIndex; i++)
+                busOfSubPath.addStation(path[i], i - firstIndex);
+
             return busOfSubPath;
-        }//לזרוק חריגות. גם אם אין את האחרונה?
+        }
+
         /// <summary>
         /// calculate time of drive
         /// </summary>
         /// <returns>time of drive</returns>
         private int durationDrive()
         {
-            int minutes=0;
+            int minutes = 0;
             foreach (BusLineStation station in path)
             {
                 minutes += station.MinutesSinceLastStation;
             }
             return minutes;
         }
+
         /// <summary>
         /// Compares the travel time of two lines
         /// </summary>
@@ -261,7 +313,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>how is bigger.</returns>
         public int CompareTo(BusLine secondBus)
         {
-           return durationDrive().CompareTo(secondBus.durationDrive());
+            return durationDrive().CompareTo(secondBus.durationDrive());
         }
     }
 }
