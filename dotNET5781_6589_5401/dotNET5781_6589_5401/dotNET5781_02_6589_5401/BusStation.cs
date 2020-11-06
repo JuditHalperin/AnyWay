@@ -10,7 +10,7 @@ namespace dotNET5781_02_6589_5401
     {
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
-        static private int code = 100000;
+        static private int code = 1000;
 
         private string id;
         public string ID

@@ -96,22 +96,21 @@ namespace dotNET5781_02_6589_5401
         /// <returns>string of: number of line, region of the activity of the line and the phat of the line in back and forth.</returns>
         public override string ToString()
         {
-            string descriptionOfBus;
-            descriptionOfBus = "Line:" + line + "\n";
-            descriptionOfBus += "Line activity area:" + Region + "\n";
-            descriptionOfBus += "The stations of the Line: \n";
+            string descriptionOfBus = $"Line: {Line}. Region: {Region}. Stations: ";
 
             foreach (BusLineStation station in path)
-                descriptionOfBus += "->" + station.ID;
+                descriptionOfBus += station.ID + " -> ";
+
+            descriptionOfBus.Remove(descriptionOfBus.Length - 3, 4); // remove the last " -> "
 
             return descriptionOfBus;
         }
 
         /// <summary>
-        /// enable to add station to all space in the list.
+        /// add station to the given index in the list
         /// </summary>
         /// <param name="station">get existed station</param>
-        /// <param name="index">index indicates where to place the station in the list (if index>size ->end of the list.)</param>
+        /// <param name="index">index indicates where to place the station in the list (if index > size -> end of the list)</param>
         public void addStation(BusStation station, int index)
         {
             BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
@@ -140,20 +139,26 @@ namespace dotNET5781_02_6589_5401
                 }
 
                 else // add to the end of the list
+                {
                     path.Add(newStation);
+                    index = path.Count;
+                }
+
+                Console.WriteLine($"Station number {station.ID} was added successfully to index {index} in the path of bus number {Line}.");
             }
 
             else
-                throw new BusesOrStationsExceptions("index is not valid!");
+                throw new BusesOrStationsExceptions("Invalid index.");
         }
 
         /// <summary>
-        /// delete station from the path. if the station not exist in the path-> throw exception.
+        /// delete station from the path. if the station does not exist in the path -> throw exception.
         /// </summary>
         /// <param name="stationID">number of station to delete</param>
         public void deleteStation(string stationID)
         {
             int i = 0;
+
             foreach (BusLineStation station in path)
             {
                 if (stationID == station.ID)
@@ -164,6 +169,7 @@ namespace dotNET5781_02_6589_5401
             if (i < path.Count())
             {
                 path.Remove(path[i]);
+
                 if (i<path.Count())
                 {
                     GeoCoordinate positionNextStation = new GeoCoordinate(path[i].Latitude, path[i].Longitude);
@@ -171,25 +177,26 @@ namespace dotNET5781_02_6589_5401
                     path[i].MetersFromLastStation = positionNextStation.GetDistanceTo(positionPrevStation);
                     path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.01);
                 }
+
+                Console.WriteLine($"Station number {stationID} was removed successfully from the path of bus {Line}.");
             }
 
             else
-                throw new BusesOrStationsExceptions("The station is not exist in this path!");
+                throw new BusesOrStationsExceptions("The station does not exist in this bus path.");
 
         }
 
         /// <summary>
-        /// chack if the station is exist in the path of the bus.
+        /// chack if the station exists in the path of the bus.
         /// </summary>
         /// <param name="stationID">number of station to check</param>
-        /// <returns>true if the station is exist</returns>
+        /// <returns>true if the station exists</returns>
         public bool stopsAtStation(string stationID)
         {
-            foreach (BusLineStation station in path)
-            {
+            foreach (BusLineStation station in path)            
                 if (stationID == station.ID)
                     return true;
-            }
+            
             return false;
         }
 
@@ -205,21 +212,27 @@ namespace dotNET5781_02_6589_5401
             int sec = -1;
             int i = 0;
             double meters = 0;
+
             foreach (BusLineStation station in path)
             {
                 if (FirstID == station.ID)
                     fir = i;
+
                 if (fir > i)
                     meters += station.MetersFromLastStation;
+
                 if (SecondID == station.ID)
                 {
                     sec = i;
                     break;
                 }
+
                 i++;
             }
+
             if (fir == -1 || sec == -1)
                 throw new BusesOrStationsExceptions("one of the station is not exist or the stations not in the true order.");
+            
             return meters;
         }
 
@@ -235,23 +248,28 @@ namespace dotNET5781_02_6589_5401
             int sec = -1;
             int i = 0;
             int minutes = 0;
+
             foreach (BusLineStation station in path)
             {
                 if (FirstID == station.ID)
                     fir = i;
+
                 if (fir > i)
                     minutes += station.MinutesSinceLastStation;
+
                 if (SecondID == station.ID)
                 {
                     sec = i;
                     break;
                 }
+
                 i++;
             }
+
             if (fir == -1 || sec == -1)
                 throw new BusesOrStationsExceptions("one of the station is not exist or the stations not in the true order.");
+            
             return minutes;
-
         }
 
         /// <summary>
@@ -280,9 +298,9 @@ namespace dotNET5781_02_6589_5401
 
                 index++;
             }
-            
+
             if (lastIndex == -1)
-                throw new BusesOrStationsExceptions("Error!\none or more of the station is not exist or the stations not in the true order.");
+                return; // at least one of the station does not exist, or the given order of stations in wrong
 
             BusLine busOfSubPath = new BusLine(path[firstIndex]);
 
@@ -299,18 +317,18 @@ namespace dotNET5781_02_6589_5401
         private int durationDrive()
         {
             int minutes = 0;
+
             foreach (BusLineStation station in path)
-            {
                 minutes += station.MinutesSinceLastStation;
-            }
+          
             return minutes;
         }
 
         /// <summary>
-        /// Compares the travel time of two lines
+        /// compare time of travel of two lines
         /// </summary>
-        /// <param name="secondBus">line o comparetion</param>
-        /// <returns>how is bigger.</returns>
+        /// <param name="secondBus">line compared to current line</param>
+        /// <returns>whether or not this bus drive longer time than the other bus</returns>
         public int CompareTo(BusLine secondBus)
         {
             return durationDrive().CompareTo(secondBus.durationDrive());

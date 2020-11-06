@@ -32,8 +32,8 @@ namespace dotNET5781_02_6589_5401
             for (int i = 0, j = 0; i < 9; i++, j += 4)
                 buses.addLine(stations.GetRange(j, 5));
             buses.addLine(stations.GetRange(30, 10));
-            
-            return buses;    
+
+            return buses;
         }
 
         /// <summary>
@@ -62,117 +62,227 @@ namespace dotNET5781_02_6589_5401
             Console.WriteLine("What would you like to do now?");
 
             int input = int.Parse(Console.ReadLine()); // exception: input is not int
-            
+
             return (Options)input;
         }
-
+    
         enum Options { addBus, addStationToBus, removeBus, removeStationFromBus, findLinesAtStation, linesToDestiny, printBuses, printStationsAndLinesStopAtThem, exit }
-       
+
         static void Main(string[] args)
         {
-            // not neccery sort before print?
-            // use index?? use collection??
+            // constructor...
+            // private at busLineStation
+            // distanceBetweenTwoStations / minutes ever used?
 
             List<BusStation> stations = initializeBusStations();
             BusesCollection buses = initializeBusesCollection(stations);
 
-            bool flag = false;
-            int busLine, numberOfStations;
-            string stationID;
-            List<BusStation> path = null;
+            int busLine, numberOfStations, index;
+            string stationID, targetStationID;
+            bool stationFoundInPath = false, stationFoundInList = false;
+            List<BusStation> path = new List<BusStation>();
+            List<BusLine> lines = new List<BusLine>();
 
             printMenu();
             Options choise = readInput();
 
-            while(choise != Options.exit)
+            while (choise != Options.exit)
             {
                 try
                 {
                     switch (choise)
                     {
-                        case Options.addBus:
-                            {
-                                Console.Write("Enter number of stations: ");
+                        case Options.addBus:  {
+                                Console.Write("Enter number of stations in the path: ");
                                 numberOfStations = int.Parse(Console.ReadLine()); // possible format exception
                                 if (numberOfStations < 2)
                                     throw new BusesOrStationsExceptions("A bus has at least two stations.");
-                                if(numberOfStations > stations.Count)
+                                if (numberOfStations > stations.Count)
                                     throw new BusesOrStationsExceptions($"There are only {stations.Count} existed stations.");
 
-                                for (int i = 1; i <= numberOfStations; i++) 
+                                for (int i = 1; i <= numberOfStations; i++)
                                 {
-                                    Console.Write($"Enter ID of station {i} (6 digits): ");
+                                    Console.Write($"Enter ID of station number {i} (4 digits): ");
                                     stationID = Console.ReadLine();
-                                    foreach (BusStation item in stations)
-                                        if (item.ID == stationID)
+
+                                    foreach (BusStation stationInPath in path) // make sure the path does not include the station yet
+                                        if (stationInPath.ID == stationID) // station already inserted
                                         {
-                                            // לבדוק שתחנה לא הוכנסה כבר
-                                            path.Add(item);
-                                            flag = true;
+                                            stationFoundInPath = true;
+                                            Console.WriteLine("This station already exists in the path.");
+                                            i--;
+                                            break;
                                         }
 
-                                    if(!flag)
+                                    if (!stationFoundInPath)
                                     {
-                                        Console.WriteLine("This station does not exist. Try again: ");
-                                        i--;
+                                        foreach (BusStation stationInList in stations) // make sure the station exists at the stations list
+                                            if (stationInList.ID == stationID) // station exists
+                                            {
+                                                stationFoundInList = true;
+                                                path.Add(stationInList);
+                                                break;
+                                            }
+
+                                        if (!stationFoundInList)
+                                        {
+                                            Console.WriteLine("This station does not exist.");
+                                            i--;
+                                        }
                                     }
+
+
+
                                 }
 
                                 buses.addLine(path);
+
+                                // get ready to the next use:
+                                path.Clear();
+                                stationFoundInPath = false;
+                                stationFoundInList = false;
+
                                 break;
                             }
-                        case Options.addStationToBus:
-                            break;
-
-                        case Options.removeBus:
-                            {
+                        case Options.addStationToBus: {
                                 Console.Write("Enter bus line number: ");
-                                busLine = int.Parse(Console.ReadLine()); // exeption if input is not int
+                                busLine = int.Parse(Console.ReadLine()); // possible format exception
+                                Console.Write("Enter station number (4 digits): ");
+                                stationID = Console.ReadLine();
+                                Console.Write("Enter station index in the bus path: ");
+                                index = int.Parse(Console.ReadLine()); // possible format exception
+
+                                foreach (BusStation item in stations) // find the station
+                                    if(item.ID == stationID)
+                                    {
+                                        buses[busLine].addStation(item, index); // possible exceptions: not existed line / invalid index
+                                        stationFoundInList = true;
+                                        break;
+                                    }
+
+                                if(!stationFoundInList)
+                                    Console.WriteLine("This station does not exist.");
+
+                                stationFoundInList = false; // get ready to the next use
+
+                                break;
+                            }
+                        case Options.removeBus: {
+                                Console.Write("Enter bus line number: ");
+                                busLine = int.Parse(Console.ReadLine()); // possible format exception
 
                                 buses.deleteLine(busLine);
 
                                 break;
                             }
-                        case Options.removeStationFromBus:
-                            {
+                        case Options.removeStationFromBus: {
                                 Console.Write("Enter bus line number: ");
-                                busLine = int.Parse(Console.ReadLine()); // exeption if input is not int
-                                Console.Write("Enter station number: ");
+                                busLine = int.Parse(Console.ReadLine()); // possible format exception
+                                Console.Write("Enter station number (4 digits): ");
                                 stationID = Console.ReadLine();
 
                                 buses[busLine].deleteStation(stationID);
 
                                 break;
                             }
+                        case Options.findLinesAtStation: {
+                                Console.Write("Enter station number (4 digits): ");
+                                stationID = Console.ReadLine();
 
-                        case Options.findLinesAtStation:
-                            break;
+                                foreach (BusStation item in stations) // find the station
+                                    if (item.ID == stationID)
+                                    {
+                                        stationFoundInList = true;
+                                        lines = buses.findLinesThatStopAtStation(stationID);
+                                        break;
+                                    }
 
-                        case Options.linesToDestiny:
-                            break;
+                                if (!stationFoundInList)
+                                    Console.WriteLine("This station does not exist.");
 
-                        case Options.printBuses:
-                            Console.WriteLine(???);
-                            break;
+                                else
+                                {
+                                    if (lines.Count == 0)
+                                        Console.WriteLine($"No buses stop at station number {stationID}.");
 
-                        case Options.printStationsAndLinesStopAtThem:
-                            break;
+                                    else
+                                    {
+                                        foreach (BusLine item in lines)
+                                            Console.WriteLine(item);
 
+                                        lines.Clear(); // get ready to the next use
+                                    }
+
+                                    stationFoundInList = false; // get ready to the next use
+                                }
+                                break;
+                            }
+                        case Options.linesToDestiny: {
+                                Console.Write("Enter source station number (4 digits): ");
+                                stationID = Console.ReadLine();                                
+                                Console.Write("Enter target station number (4 digits): ");
+                                targetStationID = Console.ReadLine();
+
+                                foreach (BusLine bus in buses)
+                                    // פונקצית תת-מסלול מחזיר אוטובוס חדש - נוצר סתם אוטובוס עם קוד
+                                    // לא הגיוני!
+                                    lines.Add(bus.subPath(stationID, targetStationID));
+                                
+                                if (lines.Count == 0)
+                                    Console.WriteLine($"No buses drive from station {stationID} to station {targetStationID}.");
+
+                                else // sort and print
+                                {
+                                    lines.Sort(); // BusLine is comparable
+
+                                    foreach (BusLine item in lines)
+                                        Console.WriteLine($"Line: {item.Line}.");
+                                }
+
+                                lines.Clear(); // get ready to the next use
+                                
+                                break;
+                            }
+                        case Options.printBuses: {
+                                if(buses.isEmpty())
+                                    throw new BusesOrStationsExceptions("No buses exist.");
+                               
+                                foreach (BusLine item in buses)
+                                    Console.WriteLine(item);
+
+                                break;
+                            }
+                        case Options.printStationsAndLinesStopAtThem: {
+                                foreach (BusStation station in stations)
+                                {
+                                    lines = buses.findLinesThatStopAtStation(station.ID);
+
+                                    Console.Write($"Station {station.ID}: ");
+                                    if(lines.Count == 0)
+                                        Console.Write("No buses.");
+                                    else foreach(BusLine bus in lines)
+                                            Console.Write(bus.Line + ' ');
+                                    Console.WriteLine();
+
+                                    lines.Clear(); // get ready to the next time
+                                }
+
+                                break;
+                            }
                         case Options.exit: break;
-
-                        default:
-                            Console.WriteLine("Invalid choise.");
-                            break;
+                        default: Console.WriteLine("Invalid choise."); break;
                     }
                 }
-                
-                catch(BusesOrStationsExceptions ex)
+
+                catch (BusesOrStationsExceptions ex)
                 {
                     Console.WriteLine(ex);
                 }
                 catch (FormatException ex)
                 {
+                    // one of them:
                     Console.WriteLine(ex);
+                    Console.WriteLine("FormatException: Invalid input format.");
                 }
 
                 finally
