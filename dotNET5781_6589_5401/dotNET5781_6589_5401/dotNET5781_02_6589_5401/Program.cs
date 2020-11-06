@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+Judit Halperin - 324216589
+Asnat Kahane - 211825401
+
+Exercise 2
+6/11/20
+This program implements the BusStation class, the BusLine class and a collection of buses.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,6 +82,7 @@ namespace dotNET5781_02_6589_5401
             // constructor...
             // private at busLineStation
             // distanceBetweenTwoStations / minutes ever used?
+            // לפחות ב 10 תחנות יעבור יותר מקו אחד?
 
             List<BusStation> stations = initializeBusStations();
             BusesCollection buses = initializeBusesCollection(stations);

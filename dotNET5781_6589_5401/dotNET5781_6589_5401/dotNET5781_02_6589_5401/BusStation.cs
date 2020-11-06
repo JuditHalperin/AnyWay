@@ -20,14 +20,14 @@ namespace dotNET5781_02_6589_5401
         }
 
         private double latitude;
-        public double Latitude // קו רוחב
+        public double Latitude // קו רוחב 
         {
             get { return latitude; }
             set { latitude = value; }
         }
 
         private double longitude;
-        public double Longitude // קו אורך
+        public double Longitude // קו אורך 
         {
             get { return longitude; }
             set { longitude = value; }
@@ -48,13 +48,13 @@ namespace dotNET5781_02_6589_5401
         /// "copy" constructor
         /// </summary>
         /// <param name="id">station ID</param>
-        /// <param name="lat">longitude</param>
-        /// <param name="lon">latitude</param>
-        protected BusStation(string id, double lat, double lon)
+        /// <param name="latitude">latitude</param>
+        /// <param name="longitude">longitude</param>
+        protected BusStation(string id, double latitude, double longitude)
         {
             ID = id;
-            Latitude = lat;
-            Longitude = lon;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         /// <summary>

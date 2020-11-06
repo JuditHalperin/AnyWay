@@ -36,7 +36,7 @@ namespace dotNET5781_02_6589_5401
             /// constructor
             /// (use the base class contructor, and initialize its two attributes by defualt)
             /// </summary>
-            public BusLineStation(string id, double lat, double lon) : base(id, lat, lon) { }
+            public BusLineStation(string id, double latitude, double longitude) : base(id, latitude, longitude) { }
         }
 
         private List<BusLineStation> path;
