@@ -87,7 +87,7 @@ namespace dotNET5781_02_6589_5401
             path.Add(new BusLineStation(newPath[0].ID, newPath[0].Latitude, newPath[0].Longitude));
 
             for (int i = 1; i <= newPath.Count; i++)
-                addStation(newPath[i], i - 1);
+                addStation(newPath[i], i);
         }
 
         /// <summary>
@@ -119,13 +119,14 @@ namespace dotNET5781_02_6589_5401
 
             return descriptionOfBus;
         }
-
+        
         /// <summary>
         /// add station to the given index in the list
         /// </summary>
         /// <param name="station">get existed station</param>
         /// <param name="index">index indicates where to place the station in the list (if index > size -> end of the list)</param>
-        public void addStation(BusStation station, int index)
+        /// <returns>message about success</returns>
+        public string addStation(BusStation station, int index)
         {
             BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
             GeoCoordinate positionNewStation = new GeoCoordinate(newStation.Latitude, newStation.Longitude);
@@ -158,7 +159,7 @@ namespace dotNET5781_02_6589_5401
                     index = path.Count;
                 }
 
-                Console.WriteLine($"Station number {station.ID} was added successfully to index {index} in the path of bus number {Line}.");
+                return $"Station number {station.ID} was added successfully to index {index} in the path of bus number {Line}.";
             }
 
             else
@@ -169,7 +170,8 @@ namespace dotNET5781_02_6589_5401
         /// delete station from the path. if the station does not exist in the path -> throw exception.
         /// </summary>
         /// <param name="stationID">number of station to delete</param>
-        public void deleteStation(string stationID)
+        /// <returns>message about success</returns>
+        public string deleteStation(string stationID)
         {
             int i = 0;
 
@@ -192,12 +194,11 @@ namespace dotNET5781_02_6589_5401
                     path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.01);
                 }
 
-                Console.WriteLine($"Station number {stationID} was removed successfully from the path of bus {Line}.");
+                return $"Station number {stationID} was removed successfully from the path of bus {Line}.";
             }
 
             else
                 throw new BusesOrStationsExceptions("The station does not exist in this bus path.");
-
         }
 
         /// <summary>

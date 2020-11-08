@@ -143,7 +143,7 @@ namespace dotNET5781_02_6589_5401
 
                                 }
 
-                                buses.addLine(path);
+                                Console.WriteLine(buses.addLine(path));
 
                                 // get ready to the next use:
                                 path.Clear();
@@ -163,7 +163,7 @@ namespace dotNET5781_02_6589_5401
                                 foreach (BusStation item in stations) // find the station
                                     if(item.ID == stationID)
                                     {
-                                        buses[busLine].addStation(item, index); // possible exceptions: not existed line / invalid index
+                                        Console.WriteLine(buses[busLine].addStation(item, index)); ; // possible exceptions: not existed line / invalid index
                                         stationFoundInList = true;
                                         break;
                                     }
@@ -179,7 +179,7 @@ namespace dotNET5781_02_6589_5401
                                 Console.Write("Enter bus line number: ");
                                 busLine = int.Parse(Console.ReadLine()); // possible format exception
 
-                                buses.deleteLine(busLine);
+                                Console.WriteLine(buses.deleteLine(busLine));
 
                                 break;
                             }
@@ -189,7 +189,7 @@ namespace dotNET5781_02_6589_5401
                                 Console.Write("Enter station number (4 digits): ");
                                 stationID = Console.ReadLine();
 
-                                buses[busLine].deleteStation(stationID);
+                                Console.WriteLine(buses[busLine].deleteStation(stationID));
 
                                 break;
                             }

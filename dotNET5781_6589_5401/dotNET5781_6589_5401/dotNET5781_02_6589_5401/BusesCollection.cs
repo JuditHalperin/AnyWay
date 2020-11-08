@@ -16,25 +16,26 @@ namespace dotNET5781_02_6589_5401
         /// add a new bus line to the collection
         /// </summary>
         /// <param name="firstStation">first station in path</param>
-        public void addLine(List<BusStation> path)
+        /// <returns>message about success</returns>
+        public string addLine(List<BusStation> path)
         {
             BusLine newBus = new BusLine(path);
             buses.Add(newBus);
-            Console.WriteLine($"Bus number {newBus.Line} was added successfully.");
+            return $"Bus number {newBus.Line} was added successfully.";
         }
-      
+
         /// <summary>
         /// remove a line from the collection
         /// </summary>
         /// <param name="line">the bus number</param>
-        public void deleteLine(int line)
+        /// <returns>message about success</returns>
+        public string deleteLine(int line)
         {
             foreach (BusLine item in buses)
                 if (item.Line == line)
                 {
                     buses.Remove(item);
-                    Console.WriteLine($"Bus number {line} was removed successfully.");
-                    return;
+                    return $"Bus number {line} was removed successfully.";
                 }
             
             throw new BusesOrStationsExceptions($"Bus number {line} does not exist.");
@@ -55,19 +56,16 @@ namespace dotNET5781_02_6589_5401
 
             return busesStopAtStation; // may be empty
         }
-       
-        ///// <summary>
-        ///// sort the collection from the shortest duration bus to the longest one
-        ///// </summary>
-        ///// <returns>sorted list of buses</returns>
-        //public List<BusLine> sortBusesByDuration()
-        //{
-        //    if (buses.Count == 0)
-        //        throw new BusesOrStationsExceptions("No buses exist.");
-            
-        //    buses.Sort();
-        //    return buses;
-        //}
+
+        /// <summary>
+        /// sort the collection from the shortest duration bus to the longest one
+        /// </summary>
+        /// <returns>sorted list of buses</returns>
+        public List<BusLine> sortBusesByDuration()
+        {
+            buses.Sort();
+            return buses;
+        }
 
         /// <summary>
         /// return the bus the is located at the index
