@@ -297,7 +297,7 @@ namespace dotNET5781_02_6589_5401
                 {
                     Console.WriteLine(ex);
                 }
-                catch (FormatException ex)
+                catch (FormatException)
                 {
                     Console.WriteLine("FormatException: Invalid input format.");
                 }
