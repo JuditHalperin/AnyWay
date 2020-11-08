@@ -174,6 +174,9 @@ namespace dotNET5781_02_6589_5401
         /// <returns>message about success</returns>
         public string deleteStation(string stationID)
         {
+            if (path.Count() <= 2)
+                throw new BusesOrStationsExceptions("can't delete the station because there will be less than two stations left for the bus!");
+
             int i = 0;
 
             foreach (BusLineStation station in path)
