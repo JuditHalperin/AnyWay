@@ -237,6 +237,9 @@ namespace dotNET5781_02_6589_5401
                                 Console.Write("Enter target station number (4 digits): ");
                                 targetStationID = Console.ReadLine();
 
+                                if(stationID == targetStationID)                                
+                                    throw new BusesOrStationsExceptions("Source and target stations should be different stations.");
+                                
                                 foreach (BusLine item in buses)
                                 {
                                     bus = item.subPath(stationID, targetStationID);
