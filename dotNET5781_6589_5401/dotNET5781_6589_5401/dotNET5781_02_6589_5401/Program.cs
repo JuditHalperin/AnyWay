@@ -145,8 +145,10 @@ namespace dotNET5781_02_6589_5401
                                             Console.WriteLine("This station does not exist.");
                                             i--;
                                         }
-                                    }
 
+                                    }
+                                    stationFoundInPath = false;
+                                    stationFoundInList = false;
                                 }
 
                                 Console.WriteLine(buses.addLine(path));
