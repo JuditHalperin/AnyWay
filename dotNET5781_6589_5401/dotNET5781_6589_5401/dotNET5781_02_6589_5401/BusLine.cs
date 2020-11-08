@@ -130,7 +130,11 @@ namespace dotNET5781_02_6589_5401
         {
             BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
             GeoCoordinate positionNewStation = new GeoCoordinate(newStation.Latitude, newStation.Longitude);
-
+            foreach (BusLineStation item in path)
+            {
+                if (station.ID == item.ID)
+                    throw new BusesOrStationsExceptions("The station already exists in the path.");
+            }
             if (index > path.Count)
                 index = path.Count;
 
