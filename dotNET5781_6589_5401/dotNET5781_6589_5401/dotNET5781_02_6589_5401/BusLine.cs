@@ -161,9 +161,9 @@ namespace dotNET5781_02_6589_5401
                 else // add to the end of the list
                 {
                     path.Add(newStation);
-                    index = path.Count;
+                    index = path.Count - 1;
                 }
-
+                
                 return $"Station number {station.ID} was added successfully to index {index + 1} in the path of bus number {Line}.";
             }
 
