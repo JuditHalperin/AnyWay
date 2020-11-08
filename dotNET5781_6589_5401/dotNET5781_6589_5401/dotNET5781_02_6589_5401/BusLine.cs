@@ -115,7 +115,7 @@ namespace dotNET5781_02_6589_5401
             foreach (BusLineStation station in path)
                 descriptionOfBus += station.ID + " -> ";
 
-            descriptionOfBus.Remove(descriptionOfBus.Length - 4, 4); // remove the last " -> "
+            descriptionOfBus = descriptionOfBus.Remove(descriptionOfBus.Length - 4, 4); // remove the last " -> "
 
             return descriptionOfBus;
         }
