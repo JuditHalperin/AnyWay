@@ -272,8 +272,8 @@ namespace dotNET5781_02_6589_5401
                                     Console.Write($"Station {station.ID}: ");
                                     if(lines.Count == 0)
                                         Console.Write("No buses.");
-                                    else foreach(BusLine bus in lines)
-                                            Console.Write(bus.Line + ' ');
+                                    else foreach(BusLine item in lines)
+                                            Console.Write(item.Line + ' ');
                                     Console.WriteLine();
 
                                     lines.Clear(); // get ready to the next time

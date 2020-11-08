@@ -39,7 +39,7 @@ namespace dotNET5781_02_6589_5401
             public BusLineStation(string id, double latitude, double longitude) : base(id, latitude, longitude) { }
         }
 
-        private List<BusLineStation> path;
+        private List<BusLineStation> path = new List<BusLineStation>();
 
         private int line;
         public int Line

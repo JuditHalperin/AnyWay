@@ -10,7 +10,7 @@ namespace dotNET5781_02_6589_5401
 {
     class BusesCollection : IEnumerable
     {
-        private List<BusLine> buses; // (default constructor of List)
+        private List<BusLine> buses = new List<BusLine>(); // (default constructor of List)
 
         /// <summary>
         /// add a new bus line to the collection
