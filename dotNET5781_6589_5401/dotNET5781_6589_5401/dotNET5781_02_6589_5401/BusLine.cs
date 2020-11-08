@@ -15,21 +15,21 @@ namespace dotNET5781_02_6589_5401
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
         private static int code = 1;
-
+         
         public class BusLineStation : BusStation
         {
             private double metersFromLastStation;
             public double MetersFromLastStation
             {
                 get { return metersFromLastStation; }
-                private set { metersFromLastStation = value; }
+                internal set { metersFromLastStation = value; }
             }
 
             private int minutesSinceLastStation;
             public int MinutesSinceLastStation
             {
                 get { return minutesSinceLastStation; }
-                private set { minutesSinceLastStation = value; }
+                internal set { minutesSinceLastStation = value; }
             }
 
             /// <summary>
@@ -88,6 +88,20 @@ namespace dotNET5781_02_6589_5401
 
             for (int i = 1; i <= newPath.Count; i++)
                 addStation(newPath[i], i - 1);
+        }
+
+        /// <summary>
+        /// constructor of a bus with sub-path
+        /// it is not a real bus in the collection!
+        /// its line number is the origin number * -1
+        /// </summary>
+        /// <param name="firstStation">first station of the sub-path</param>
+        /// <param name="line">number of origin line</param>
+        private BusLine(BusStation firstStation, int line)
+        {
+            Line = -1 * line; // negative line indicates a sub-line
+            Region = (Regions)rand.Next(4);
+            path.Add(new BusLineStation(firstStation.ID, firstStation.Latitude, firstStation.Longitude));
         }
 
         /// <summary>
@@ -300,9 +314,9 @@ namespace dotNET5781_02_6589_5401
             }
 
             if (lastIndex == -1)
-                return; // at least one of the station does not exist, or the given order of stations in wrong
+                return null; // at least one of the station does not exist, or the given order of stations in wrong
 
-            BusLine busOfSubPath = new BusLine(path[firstIndex]);
+            BusLine busOfSubPath = new BusLine(path[firstIndex], Line);
 
             for (int i = firstIndex + 1; i <= lastIndex; i++)
                 busOfSubPath.addStation(path[i], i - firstIndex);

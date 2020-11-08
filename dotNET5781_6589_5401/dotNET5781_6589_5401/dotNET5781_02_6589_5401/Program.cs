@@ -80,9 +80,6 @@ namespace dotNET5781_02_6589_5401
         static void Main(string[] args)
         {
             // constructor...
-            // private at busLineStation
-            // distanceBetweenTwoStations / minutes ever used?
-            // לפחות ב 10 תחנות יעבור יותר מקו אחד?
 
             List<BusStation> stations = initializeBusStations();
             BusesCollection buses = initializeBusesCollection(stations);
@@ -90,6 +87,7 @@ namespace dotNET5781_02_6589_5401
             int busLine, numberOfStations, index;
             string stationID, targetStationID;
             bool stationFoundInPath = false, stationFoundInList = false;
+            BusLine bus = null;
             List<BusStation> path = new List<BusStation>();
             List<BusLine> lines = new List<BusLine>();
 
@@ -233,11 +231,13 @@ namespace dotNET5781_02_6589_5401
                                 Console.Write("Enter target station number (4 digits): ");
                                 targetStationID = Console.ReadLine();
 
-                                foreach (BusLine bus in buses)
-                                    // פונקצית תת-מסלול מחזיר אוטובוס חדש - נוצר סתם אוטובוס עם קוד
-                                    // לא הגיוני!
-                                    lines.Add(bus.subPath(stationID, targetStationID));
-                                
+                                foreach (BusLine item in buses)
+                                {
+                                    bus = item.subPath(stationID, targetStationID);
+                                    if(bus != null)
+                                        lines.Add(bus);
+                                }
+
                                 if (lines.Count == 0)
                                     Console.WriteLine($"No buses drive from station {stationID} to station {targetStationID}.");
 
@@ -249,7 +249,9 @@ namespace dotNET5781_02_6589_5401
                                         Console.WriteLine($"Line: {item.Line}.");
                                 }
 
-                                lines.Clear(); // get ready to the next use
+                                // get ready to the next use:
+                                bus = null;
+                                lines.Clear();
                                 
                                 break;
                             }
