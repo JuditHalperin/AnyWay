@@ -65,14 +65,22 @@ namespace dotNET5781_02_6589_5401
         /// <summary>
         /// read a choise
         /// </summary>
-        /// <returns>choise</returns>
+        /// <returns>choise / try to read again</returns>
         static Options readInput()
         {
             Console.WriteLine("\nWhat would you like to do now?");
 
-            int input = int.Parse(Console.ReadLine()); // exception: input is not int
+            int input;
+            bool flag = int.TryParse(Console.ReadLine(), out input);
 
-            return (Options)input;
+            if (flag) // valid
+                return (Options)input;
+
+            else // invalid
+            {
+                Console.WriteLine("Invalid choise.");
+                return readInput();
+            }
         }
     
         enum Options { addBus, addStationToBus, removeBus, removeStationFromBus, findLinesAtStation, linesToDestiny, printBuses, printStationsAndLinesStopAtThem, exit }
