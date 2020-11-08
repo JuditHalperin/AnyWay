@@ -68,7 +68,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>choise</returns>
         static Options readInput()
         {
-            Console.WriteLine("What would you like to do now?");
+            Console.WriteLine("\nWhat would you like to do now?");
 
             int input = int.Parse(Console.ReadLine()); // exception: input is not int
 

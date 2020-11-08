@@ -87,7 +87,7 @@ namespace dotNET5781_02_6589_5401
             path.Add(new BusLineStation(newPath[0].ID, newPath[0].Latitude, newPath[0].Longitude));
 
             for (int i = 1; i <= newPath.Count(); i++)
-                addStation(newPath[i-1], i);
+                addStation(newPath[i - 1], i);
         }
 
         /// <summary>
