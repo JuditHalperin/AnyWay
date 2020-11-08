@@ -191,18 +191,20 @@ namespace dotNET5781_02_6589_5401
             {
                 path.Remove(path[i]);
 
-                if (i<path.Count() && i>0)
+                if (i < path.Count() && i > 0)
                 {
                     GeoCoordinate positionNextStation = new GeoCoordinate(path[i].Latitude, path[i].Longitude);
                     GeoCoordinate positionPrevStation = new GeoCoordinate(path[i - 1].Latitude, path[i - 1].Longitude);
                     path[i].MetersFromLastStation = positionNextStation.GetDistanceTo(positionPrevStation);
                     path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.01);
                 }
+
                 if (i == 0)
                 {
                     path[i].MetersFromLastStation = 0;
                     path[i].MinutesSinceLastStation = 0;
                 }
+
                 return $"Station number {stationID} was removed successfully from the path of bus {Line}.";
             }
 
