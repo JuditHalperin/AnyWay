@@ -72,7 +72,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>string of code and location on the globe</returns>
         public override string ToString()
         {
-            return $"Station: {ID} ({Latitude}°N {Longitude}°E)";
+            return $"{ID} ({Latitude}°N, {Longitude}°E)";
         }
     }
 }

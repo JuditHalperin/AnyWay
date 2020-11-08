@@ -185,7 +185,7 @@ namespace dotNET5781_02_6589_5401
         public string deleteStation(string stationID)
         {
             if (path.Count() <= 2)
-                throw new BusesOrStationsExceptions("can't delete the station because there will be less than two stations left for the bus!");
+                throw new BusesOrStationsExceptions("It is impossible to remove a station if there are only two stations in the path.");
 
             int i = 0;
 
@@ -214,7 +214,7 @@ namespace dotNET5781_02_6589_5401
                     path[i].MinutesSinceLastStation = 0;
                 }
 
-                return $"Station number {stationID} was removed successfully from the path of bus {Line}.";
+                return $"Station number {stationID} was removed successfully from the path of bus number {Line}.";
             }
 
             else
