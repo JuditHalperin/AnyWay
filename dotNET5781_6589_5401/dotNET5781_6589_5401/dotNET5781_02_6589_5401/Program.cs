@@ -147,16 +147,15 @@ namespace dotNET5781_02_6589_5401
                                         }
 
                                     }
+
+                                    // get ready to the next use:
                                     stationFoundInPath = false;
                                     stationFoundInList = false;
                                 }
 
                                 Console.WriteLine(buses.addLine(path));
 
-                                // get ready to the next use:
-                                path.Clear();
-                                stationFoundInPath = false;
-                                stationFoundInList = false;
+                                path.Clear(); // get ready to the next use
 
                                 break;
                             }
@@ -298,10 +297,8 @@ namespace dotNET5781_02_6589_5401
                 {
                     Console.WriteLine(ex);
                 }
-                catch (FormatException ex)
+                catch (FormatException)
                 {
-                    // one of them:
-                    Console.WriteLine(ex);
                     Console.WriteLine("FormatException: Invalid input format.");
                 }
 
