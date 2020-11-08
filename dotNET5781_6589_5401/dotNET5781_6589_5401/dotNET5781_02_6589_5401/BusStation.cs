@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+Judit Halperin - 324216589
+Asnat Kahane - 211825401
+
+Exercise 2
+8/11/20
+This program implements the BusStation class, the BusLine class and a collection of buses.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,7 +72,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>string of code and location on the globe</returns>
         public override string ToString()
         {
-            return $"Bus Station Code: {ID}, {Latitude}°N {Longitude}°E";
+            return $"Station: {ID} ({Latitude}°N {Longitude}°E)";
         }
     }
 }

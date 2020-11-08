@@ -3,7 +3,7 @@ Judit Halperin - 324216589
 Asnat Kahane - 211825401
 
 Exercise 2
-6/11/20
+8/11/20
 This program implements the BusStation class, the BusLine class and a collection of buses.
 */
 
@@ -220,9 +220,10 @@ namespace dotNET5781_02_6589_5401
 
                                     else
                                     {
-                                        foreach (BusLine item in lines)
-                                            Console.WriteLine(item);
-
+                                        Console.WriteLine($"Buses that stop at station number {stationID}:");
+                                        foreach (BusLine item in lines)                                        
+                                            Console.WriteLine($"\t{item}");
+                                        
                                         lines.Clear(); // get ready to the next use
                                     }
 
@@ -250,8 +251,9 @@ namespace dotNET5781_02_6589_5401
                                 {
                                     lines.Sort(); // BusLine is comparable
 
+                                    Console.WriteLine($"Buses that drive from station {stationID} to station {targetStationID} - sorted by journey duration:");
                                     foreach (BusLine item in lines)
-                                        Console.WriteLine($"Line: {-1*item.Line}.");
+                                        Console.WriteLine($"\tLine: {-1 * item.Line}.");
                                 }
 
                                 // get ready to the next use:
@@ -263,10 +265,12 @@ namespace dotNET5781_02_6589_5401
                         case Options.printBuses: {
                                 if(buses.isEmpty())
                                     throw new BusesOrStationsExceptions("No buses exist.");
-                               
-                                foreach (BusLine item in buses)
-                                    Console.WriteLine(item);
 
+                                Console.WriteLine("Buses in the collection:");
+
+                                foreach (BusLine item in buses)                              
+                                    Console.WriteLine($"\t{item}");
+                               
                                 break;
                             }
                         case Options.printStationsAndLinesStopAtThem: {
@@ -274,11 +278,15 @@ namespace dotNET5781_02_6589_5401
                                 {
                                     lines = buses.findLinesThatStopAtStation(station.ID);
 
-                                    Console.Write($"Station {station.ID}: ");
+                                    Console.Write(station);
+                                    Console.Write("\t Buses at stations: ");
+
                                     if (lines.Count == 0)
-                                        Console.Write("No buses.");
+                                        Console.Write("No buses");
+
                                     else foreach (BusLine item in lines)
                                             Console.Write($"{item.Line} ");
+
                                     Console.WriteLine();
 
                                     lines.Clear(); // get ready to the next time

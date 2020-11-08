@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+Judit Halperin - 324216589
+Asnat Kahane - 211825401
+
+Exercise 2
+8/11/20
+This program implements the BusStation class, the BusLine class and a collection of buses.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

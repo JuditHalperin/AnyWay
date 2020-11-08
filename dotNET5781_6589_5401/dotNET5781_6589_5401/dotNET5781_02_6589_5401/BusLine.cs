@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+Judit Halperin - 324216589
+Asnat Kahane - 211825401
+
+Exercise 2
+8/11/20
+This program implements the BusStation class, the BusLine class and a collection of buses.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
@@ -106,7 +115,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>string of: number of line, region of the activity of the line and the phat of the line in back and forth.</returns>
         public override string ToString()
         {
-            string descriptionOfBus = $"Line: {Line}. Region: {Region}. Stations: ";
+            string descriptionOfBus = $"Line: {Line}.    Region: {Region}.    Stations: ";
 
             foreach (BusLineStation station in path)
                 descriptionOfBus += station.ID + " -> ";
@@ -125,19 +134,20 @@ namespace dotNET5781_02_6589_5401
         public string addStation(BusStation station, int index)
         {
             index -= 1;
+
             BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
             GeoCoordinate positionNewStation = new GeoCoordinate(newStation.Latitude, newStation.Longitude);
-            foreach (BusLineStation item in path)
-            {
+            
+            foreach (BusLineStation item in path)            
                 if (station.ID == item.ID)
                     throw new BusesOrStationsExceptions("The station already exists in the path.");
-            }
+           
             if (index > path.Count)
                 index = path.Count;
 
             if (index >= 0)
             {
-                if (index != 0) // not to the first place
+                if (index != 0) // not about to be inserted to the first place
                 {
                     GeoCoordinate positionPrevStation = new GeoCoordinate(path[index - 1].Latitude, path[index - 1].Longitude);
                     newStation.MetersFromLastStation = positionNewStation.GetDistanceTo(positionPrevStation);
@@ -145,7 +155,7 @@ namespace dotNET5781_02_6589_5401
 
                 }
 
-                if (index != path.Count) // not to the last place
+                if (index != path.Count) // not about to be inserted to the last place
                 {
                     GeoCoordinate positionNextStation = new GeoCoordinate(path[index].Latitude, path[index].Longitude);
                     path[index].MetersFromLastStation = positionNewStation.GetDistanceTo(positionNextStation);
