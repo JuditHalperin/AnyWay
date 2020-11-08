@@ -57,7 +57,7 @@ namespace dotNET5781_02_6589_5401
             Console.WriteLine("Enter 3 to remove a station to a bus.");
             Console.WriteLine("Enter 4 to find which buses stop at a specific station.");
             Console.WriteLine("Enter 5 to find which buses you can take from one station to another, sorted by journey duration.");
-            Console.WriteLine("Enter 6 to print all existed buses, sorted by journey duration.");
+            Console.WriteLine("Enter 6 to print all existed buses.");
             Console.WriteLine("Enter 7 to print all existed stations and the buses that stop at them.");
             Console.WriteLine("Enter 8 to exit.");
         }
