@@ -246,7 +246,7 @@ namespace dotNET5781_02_6589_5401
                                     lines.Sort(); // BusLine is comparable
 
                                     foreach (BusLine item in lines)
-                                        Console.WriteLine($"Line: {item.Line}.");
+                                        Console.WriteLine($"Line: {-1*item.Line}.");
                                 }
 
                                 // get ready to the next use:
