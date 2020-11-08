@@ -273,7 +273,7 @@ namespace dotNET5781_02_6589_5401
                                     if(lines.Count == 0)
                                         Console.Write("No buses.");
                                     else foreach(BusLine item in lines)
-                                            Console.Write(item.Line + ' ');
+                                            Console.Write(Convert.ToString(item.Line) + ' ');
                                     Console.WriteLine();
 
                                     lines.Clear(); // get ready to the next time
