@@ -128,6 +128,7 @@ namespace dotNET5781_02_6589_5401
         /// <returns>message about success</returns>
         public string addStation(BusStation station, int index)
         {
+            index -= 1;
             BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
             GeoCoordinate positionNewStation = new GeoCoordinate(newStation.Latitude, newStation.Longitude);
             foreach (BusLineStation item in path)
@@ -163,7 +164,7 @@ namespace dotNET5781_02_6589_5401
                     index = path.Count;
                 }
 
-                return $"Station number {station.ID} was added successfully to index {index} in the path of bus number {Line}.";
+                return $"Station number {station.ID} was added successfully to index {index + 1} in the path of bus number {Line}.";
             }
 
             else
