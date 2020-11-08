@@ -80,12 +80,8 @@ namespace dotNET5781_02_6589_5401
         /// constructor - gets list of stations
         /// </summary>
         /// <param name="newPath">path</param>
-        public BusLine(List<BusStation> newPath)
-        {
-            Line = code++;
-            Region = (Regions)rand.Next(4);
-            path.Add(new BusLineStation(newPath[0].ID, newPath[0].Latitude, newPath[0].Longitude));
-
+        public BusLine(List<BusStation> newPath) : this(newPath[0]) // call the first constructor
+        {           
             for (int i = 1; i < newPath.Count(); i++)
                 addStation(newPath[i], i + 1);
         }

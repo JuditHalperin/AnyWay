@@ -86,12 +86,7 @@ namespace dotNET5781_02_6589_5401
         enum Options { addBus, addStationToBus, removeBus, removeStationFromBus, findLinesAtStation, linesToDestiny, printBuses, printStationsAndLinesStopAtThem, exit }
 
         static void Main(string[] args)
-        {
-            // constructor...
-
-            List<BusStation> stations = initializeBusStations();
-            BusesCollection buses = initializeBusesCollection(stations);
-
+        {           
             int busLine, numberOfStations, index;
             string stationID, targetStationID;
             bool stationFoundInPath = false, stationFoundInList = false;
@@ -99,7 +94,10 @@ namespace dotNET5781_02_6589_5401
             List<BusStation> path = new List<BusStation>();
             List<BusLine> lines = new List<BusLine>();
 
+            List<BusStation> stations = initializeBusStations();
+            BusesCollection buses = initializeBusesCollection(stations);
             printMenu();
+
             Options choise = readInput();
 
             while (choise != Options.exit)
