@@ -17,8 +17,8 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_01_6589_5401
 {
-    enum options { exit, addBus, driveBus, fuelOrTreat, kmSinceTreating }
-    class Program
+    public enum options { exit, addBus, driveBus, fuelOrTreat, kmSinceTreating }
+    public class Program
     {
         static List<Bus> buses = new List<Bus>();
 

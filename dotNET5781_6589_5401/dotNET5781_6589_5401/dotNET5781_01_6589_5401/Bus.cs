@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_01_6589_5401
 {
-    class Bus
+    public class Bus
     {
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
