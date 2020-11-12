@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 namespace dotNET5781_02_6589_5401
 {
     [Serializable]
-    class BusesOrStationsExceptions : Exception
+    public class BusesOrStationsExceptions : Exception
     {
         // constructors:
         public BusesOrStationsExceptions() : base() { }

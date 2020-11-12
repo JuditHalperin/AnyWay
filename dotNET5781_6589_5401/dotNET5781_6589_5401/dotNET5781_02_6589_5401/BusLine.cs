@@ -17,9 +17,9 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_02_6589_5401
 {
-    enum Regions { General, North, South, Center, Jerusalem }
+    public enum Regions { General, North, South, Center, Jerusalem }
 
-    class BusLine : IComparable<BusLine>
+    public class BusLine : IComparable<BusLine>
     {
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
@@ -49,6 +49,10 @@ namespace dotNET5781_02_6589_5401
         }
 
         private List<BusLineStation> path = new List<BusLineStation>();
+        public List<BusLineStation> Path
+        {
+            get { return path; }
+        }
 
         private int line;
         public int Line

@@ -15,13 +15,13 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_02_6589_5401
 {
-    class Program
+    public class Program
     {
         /// <summary>
         /// create 40 bus stations
         /// </summary>
         /// <returns>list of stations</returns>
-        static List<BusStation> initializeBusStations()
+        static public List<BusStation> initializeBusStations()
         {
             List<BusStation> stations = new List<BusStation>();
 
@@ -34,7 +34,7 @@ namespace dotNET5781_02_6589_5401
         /// <summary>
         /// create ten bus lines and add them to the collection
         /// </summary>
-        static BusesCollection initializeBusesCollection(List<BusStation> stations)
+        static public BusesCollection initializeBusesCollection(List<BusStation> stations)
         {
             BusesCollection buses = new BusesCollection();
 
