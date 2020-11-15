@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03A_6589_5401"
         mc:Ignorable="d"
-        Title="Buses" Height="500" Width="800" Icon="busIcon.ico">
+        Title="BusYuAs" Height="500" Width="800" Icon="busIcon.ico">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
