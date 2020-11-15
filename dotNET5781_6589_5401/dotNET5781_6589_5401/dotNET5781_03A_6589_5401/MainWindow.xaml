@@ -23,7 +23,7 @@
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Bus Line Number:" VerticalAlignment="Center" FontFamily="Segoe Print" FontSize="20"/>
             <TextBlock Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Area:" VerticalAlignment="Center" FontFamily="Segoe Print" FontSize="20"/>
         </Grid>
-        <ListBox Name="IbBusLineStations" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="160" Margin="63,49,0,0" Grid.Row="1" FontFamily="Segoe Print" VerticalAlignment="Top" Width="300" Foreground="#FF0F1BA6"/>
-        <Image Source="busPic.jpg" Margin="86,70,-256.4,122.4" Grid.Row="1" RenderTransformOrigin="0.574,2.059" />
+        <ListBox Name="IbBusLineStations" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="160" Margin="63,49,0,0" Grid.Row="1" FontFamily="Segoe Print" VerticalAlignment="Top" Width="400" Foreground="#FF0F1BA6"/>
+        <Image Source="busPic.jpg" Margin="158,142,-328.4,50.4" Grid.Row="1" RenderTransformOrigin="0.574,2.059" />
     </Grid>
 </Window>

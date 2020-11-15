@@ -46,6 +46,15 @@ namespace dotNET5781_02_6589_5401
             /// (use the base class contructor, and initialize its two attributes by defualt)
             /// </summary>
             public BusLineStation(string id, double latitude, double longitude) : base(id, latitude, longitude) { }
+
+            /// <summary>
+            /// describe the station's attributes
+            /// </summary>
+            /// <returns>string of code and location on the globe</returns>
+            public override string ToString()
+            {
+                return $"{ base.ToString(),-40}{MinutesSinceLastStation / 60:00}:{MinutesSinceLastStation % 60:00}:00.";
+            }
         }
 
         private List<BusLineStation> path = new List<BusLineStation>();
