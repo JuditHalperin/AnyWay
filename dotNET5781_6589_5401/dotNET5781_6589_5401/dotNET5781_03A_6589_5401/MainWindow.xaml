@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03A_6589_5401"
         mc:Ignorable="d"
-        Title="Buses" Height="640" Width="800">
+        Title="Buses" Height="500" Width="800" Icon="busIcon.ico">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -19,10 +19,11 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ComboBox Name="cbBusLines" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="23" Width="120" FontFamily="Segoe Print" SelectionChanged="cbBusLines_SelectionChanged"/>
-            <TextBox Name="tbArea" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Height="23" Width="120" Text="{Binding Path=Area}" TextWrapping="Wrap" FontFamily="Segoe Print"/>
+            <TextBox Name="tbArea" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Height="23" Width="120" Text="{Binding Path=Region}" TextWrapping="Wrap" FontFamily="Segoe Print"/>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Bus Line Number:" VerticalAlignment="Center" FontFamily="Segoe Print" FontSize="20"/>
             <TextBlock Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Area:" VerticalAlignment="Center" FontFamily="Segoe Print" FontSize="20"/>
         </Grid>
-        <ListBox Name="IbBusLineStations" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="160" Margin="5.8,39,0,0" Grid.Row="1" FontFamily="Segoe Print" VerticalAlignment="Top" Width="300" Grid.Column="2"/>
+        <ListBox Name="IbBusLineStations" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="160" Margin="63,49,0,0" Grid.Row="1" FontFamily="Segoe Print" VerticalAlignment="Top" Width="300" Foreground="#FF0F1BA6"/>
+        <Image Source="busPic.jpg" Margin="86,70,-256.4,122.4" Grid.Row="1" RenderTransformOrigin="0.574,2.059" />
     </Grid>
 </Window>
