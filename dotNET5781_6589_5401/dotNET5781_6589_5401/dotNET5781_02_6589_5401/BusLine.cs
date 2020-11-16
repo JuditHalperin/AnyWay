@@ -164,7 +164,7 @@ namespace dotNET5781_02_6589_5401
                 {
                     GeoCoordinate positionPrevStation = new GeoCoordinate(path[index - 1].Latitude, path[index - 1].Longitude);
                     newStation.MetersFromLastStation = positionNewStation.GetDistanceTo(positionPrevStation);
-                    newStation.MinutesSinceLastStation = (int)(newStation.MetersFromLastStation * 0.01);
+                    newStation.MinutesSinceLastStation = (int)(newStation.MetersFromLastStation * 0.001);
 
                 }
 
@@ -172,7 +172,7 @@ namespace dotNET5781_02_6589_5401
                 {
                     GeoCoordinate positionNextStation = new GeoCoordinate(path[index].Latitude, path[index].Longitude);
                     path[index].MetersFromLastStation = positionNewStation.GetDistanceTo(positionNextStation);
-                    path[index].MinutesSinceLastStation = (int)(path[index].MetersFromLastStation * 0.01);
+                    path[index].MinutesSinceLastStation = (int)(path[index].MetersFromLastStation * 0.001);
 
                     path.Insert(index, newStation);
                 }
@@ -218,7 +218,7 @@ namespace dotNET5781_02_6589_5401
                     GeoCoordinate positionNextStation = new GeoCoordinate(path[i].Latitude, path[i].Longitude);
                     GeoCoordinate positionPrevStation = new GeoCoordinate(path[i - 1].Latitude, path[i - 1].Longitude);
                     path[i].MetersFromLastStation = positionNextStation.GetDistanceTo(positionPrevStation);
-                    path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.01);
+                    path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.001);
                 }
 
                 if (i == 0)
