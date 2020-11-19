@@ -25,8 +25,15 @@ namespace dotNET5781_02_6589_5401
 
         private static int code = 1;
          
-        public class BusLineStation : BusStation
+        public class BusLineStation
         {
+            private string id;
+            public string ID
+            {
+                get { return id; }
+                set { id = value; }
+            }
+
             private double metersFromLastStation;
             public double MetersFromLastStation
             {
@@ -43,9 +50,11 @@ namespace dotNET5781_02_6589_5401
 
             /// <summary>
             /// constructor
-            /// (use the base class contructor, and initialize its two attributes by defualt)
             /// </summary>
-            public BusLineStation(string id, double latitude, double longitude) : base(id, latitude, longitude) { }
+            public BusLineStation(string id)
+            {
+                ID = id;
+            }
 
             /// <summary>
             /// describe the station's attributes
@@ -53,7 +62,7 @@ namespace dotNET5781_02_6589_5401
             /// <returns>string of code and location on the globe</returns>
             public override string ToString()
             {
-                return $"{ base.ToString(),-40}{MinutesSinceLastStation / 60:00}:{MinutesSinceLastStation % 60:00}:00.";
+                return $"{ StationsCollection.getStation(ID),-40}{MinutesSinceLastStation / 60:00}:{MinutesSinceLastStation % 60:00}:00.";
             }
         }
 
@@ -70,14 +79,14 @@ namespace dotNET5781_02_6589_5401
             private set { line = value; }
         }
 
-        public BusStation FirstStation
+        public string FirstStation
         {
-            get { return path.First(); }
+            get { return path.First().ID; }
         }
 
-        public BusStation LastStation
+        public string LastStation
         {
-            get { return path.Last(); }
+            get { return path.Last().ID; }
         }
 
         private Regions region;
@@ -95,7 +104,7 @@ namespace dotNET5781_02_6589_5401
         {
             Line = code++;
             Region = (Regions)rand.Next(4);
-            path.Add(new BusLineStation(firstStation.ID, firstStation.Latitude, firstStation.Longitude));
+            path.Add(new BusLineStation(firstStation.ID));
         }
 
         /// <summary>
@@ -115,11 +124,11 @@ namespace dotNET5781_02_6589_5401
         /// </summary>
         /// <param name="firstStation">first station of the sub-path</param>
         /// <param name="line">number of origin line</param>
-        private BusLine(BusStation firstStation, int line)
+        private BusLine(BusLineStation firstStation, int line)
         {
             Line = -1 * line; // negative line indicates a sub-line
-            Region = (Regions)rand.Next(4);
-            path.Add(new BusLineStation(firstStation.ID, firstStation.Latitude, firstStation.Longitude));
+            Region = Regions.General;
+            path.Add(new BusLineStation(firstStation.ID));
         }
 
         /// <summary>
@@ -148,8 +157,7 @@ namespace dotNET5781_02_6589_5401
         {
             index -= 1;
 
-            BusLineStation newStation = new BusLineStation(station.ID, station.Latitude, station.Longitude);
-            GeoCoordinate positionNewStation = new GeoCoordinate(newStation.Latitude, newStation.Longitude);
+            BusLineStation newStation = new BusLineStation(station.ID);
             
             foreach (BusLineStation item in path)            
                 if (station.ID == item.ID)
@@ -162,16 +170,13 @@ namespace dotNET5781_02_6589_5401
             {
                 if (index != 0) // not about to be inserted to the first place
                 {
-                    GeoCoordinate positionPrevStation = new GeoCoordinate(path[index - 1].Latitude, path[index - 1].Longitude);
-                    newStation.MetersFromLastStation = positionNewStation.GetDistanceTo(positionPrevStation);
+                    newStation.MetersFromLastStation = station.distanceBetweenStations(StationsCollection.getStation(path[index - 1].ID));
                     newStation.MinutesSinceLastStation = (int)(newStation.MetersFromLastStation * 0.001);
-
                 }
 
                 if (index != path.Count) // not about to be inserted to the last place
                 {
-                    GeoCoordinate positionNextStation = new GeoCoordinate(path[index].Latitude, path[index].Longitude);
-                    path[index].MetersFromLastStation = positionNewStation.GetDistanceTo(positionNextStation);
+                    path[index].MetersFromLastStation = station.distanceBetweenStations(StationsCollection.getStation(path[index].ID));
                     path[index].MinutesSinceLastStation = (int)(path[index].MetersFromLastStation * 0.001);
 
                     path.Insert(index, newStation);
@@ -215,9 +220,7 @@ namespace dotNET5781_02_6589_5401
 
                 if (i < path.Count() && i > 0)
                 {
-                    GeoCoordinate positionNextStation = new GeoCoordinate(path[i].Latitude, path[i].Longitude);
-                    GeoCoordinate positionPrevStation = new GeoCoordinate(path[i - 1].Latitude, path[i - 1].Longitude);
-                    path[i].MetersFromLastStation = positionNextStation.GetDistanceTo(positionPrevStation);
+                    path[i].MetersFromLastStation = StationsCollection.getStation(path[i].ID).distanceBetweenStations(StationsCollection.getStation(path[i-1].ID));
                     path[i].MinutesSinceLastStation = (int)(path[i].MetersFromLastStation * 0.001);
                 }
 
@@ -353,7 +356,7 @@ namespace dotNET5781_02_6589_5401
             BusLine busOfSubPath = new BusLine(path[firstIndex], Line);
 
             for (int i = firstIndex + 1; i <= lastIndex; i++)
-                busOfSubPath.addStation(path[i], i - firstIndex);
+                busOfSubPath.path.Add(path[i]);
 
             return busOfSubPath;
         }

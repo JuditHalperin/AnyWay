@@ -17,30 +17,17 @@ namespace dotNET5781_02_6589_5401
 {
     public class Program
     {
-        /// <summary>
-        /// create 40 bus stations
-        /// </summary>
-        /// <returns>list of stations</returns>
-        static public List<BusStation> initializeBusStations()
-        {
-            List<BusStation> stations = new List<BusStation>();
-
-            for (int i = 0; i < 40; i++)
-                stations.Add(new BusStation());
-
-            return stations;
-        }
+        public StationsCollection stationsCollection = new StationsCollection();
 
         /// <summary>
         /// create ten bus lines and add them to the collection
         /// </summary>
-        static public BusesCollection initializeBusesCollection(List<BusStation> stations)
+        static public BusesCollection initializeBusesCollection()
         {
             BusesCollection buses = new BusesCollection();
-
             for (int i = 0, j = 0; i < 9; i++, j += 4)
-                buses.addLine(stations.GetRange(j, 5));
-            buses.addLine(stations.GetRange(30, 10));
+                buses.addLine(StationsCollection.stations.GetRange(j, 5));
+            buses.addLine(StationsCollection.stations.GetRange(30, 10));
 
             return buses;
         }
@@ -94,8 +81,7 @@ namespace dotNET5781_02_6589_5401
             List<BusStation> path = new List<BusStation>();
             List<BusLine> lines = new List<BusLine>();
 
-            List<BusStation> stations = initializeBusStations();
-            BusesCollection buses = initializeBusesCollection(stations);
+            BusesCollection buses = initializeBusesCollection();
             printMenu();
 
             Options choise = readInput();
@@ -111,8 +97,8 @@ namespace dotNET5781_02_6589_5401
                                 numberOfStations = int.Parse(Console.ReadLine()); // possible format exception
                                 if (numberOfStations < 2)
                                     throw new BusesOrStationsExceptions("A bus has at least two stations.");
-                                if (numberOfStations > stations.Count)
-                                    throw new BusesOrStationsExceptions($"There are only {stations.Count} existed stations.");
+                                if (numberOfStations > StationsCollection.stations.Count)
+                                    throw new BusesOrStationsExceptions($"There are only {StationsCollection.stations.Count} existed stations.");
 
                                 for (int i = 1; i <= numberOfStations; i++)
                                 {
@@ -130,7 +116,7 @@ namespace dotNET5781_02_6589_5401
 
                                     if (!stationFoundInPath)
                                     {
-                                        foreach (BusStation stationInList in stations) // make sure the station exists at the stations list
+                                        foreach (BusStation stationInList in StationsCollection.stations) // make sure the station exists at the stations list
                                             if (stationInList.ID == stationID) // station exists
                                             {
                                                 stationFoundInList = true;
@@ -165,7 +151,7 @@ namespace dotNET5781_02_6589_5401
                                 Console.Write("Enter station index in the bus path: ");
                                 index = int.Parse(Console.ReadLine()); // possible format exception
 
-                                foreach (BusStation item in stations) // find the station
+                                foreach (BusStation item in StationsCollection.stations) // find the station
                                     if(item.ID == stationID)
                                     {
                                         Console.WriteLine(buses[busLine].addStation(item, index)); ; // possible exceptions: not existed line / invalid index
@@ -202,7 +188,7 @@ namespace dotNET5781_02_6589_5401
                                 Console.Write("Enter station number (4 digits): ");
                                 stationID = Console.ReadLine();
 
-                                foreach (BusStation item in stations) // find the station
+                                foreach (BusStation item in StationsCollection.stations) // find the station
                                     if (item.ID == stationID)
                                     {
                                         stationFoundInList = true;
@@ -278,7 +264,7 @@ namespace dotNET5781_02_6589_5401
                             }
                         case Options.printStationsAndLinesStopAtThem: {
                                 Console.WriteLine("Station:\t\t\t\tBuses at station:");
-                                foreach (BusStation station in stations)
+                                foreach (BusStation station in StationsCollection.stations)
                                 {
                                     lines = buses.findLinesThatStopAtStation(station.ID);
 

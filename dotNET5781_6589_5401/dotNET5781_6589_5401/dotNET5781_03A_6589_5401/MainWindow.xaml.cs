@@ -31,7 +31,6 @@ namespace dotNET5781_03A_6589_5401
     public partial class MainWindow : Window
     {
         private BusLine currentDisplayBusLine;
-        private List<BusStation> stations;
         private BusesCollection buses;
 
         /// <summary>
@@ -39,8 +38,7 @@ namespace dotNET5781_03A_6589_5401
         /// </summary>
         public MainWindow()
         {
-            stations = Program.initializeBusStations();
-            buses = Program.initializeBusesCollection(stations);
+            buses = Program.initializeBusesCollection();
 
             InitializeComponent();
 

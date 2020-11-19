@@ -8,6 +8,7 @@ This program implements the BusStation class, the BusLine class and a collection
 */
 
 using System;
+using System.Device.Location;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,18 +53,17 @@ namespace dotNET5781_02_6589_5401
             Latitude = rand.Next(31000000, 33300000) / 1000000.0; // real number bwtween [31, 33.3] with 6 digits after the point
             Longitude = rand.Next(34300000, 35500000) / 1000000.0; // real number bwtween [34.3, 35.5] with 6 digits after the point
         }
-
+     
         /// <summary>
-        /// "copy" constructor
+        /// calculates the distance between two stations
         /// </summary>
-        /// <param name="id">station ID</param>
-        /// <param name="latitude">latitude</param>
-        /// <param name="longitude">longitude</param>
-        protected BusStation(string id, double latitude, double longitude)
-        {
-            ID = id;
-            Latitude = latitude;
-            Longitude = longitude;
+        /// <param name="second">second station</param>
+        /// <returns>meters between two stations</returns>
+        public double distanceBetweenStations(BusStation second)
+        {            
+            GeoCoordinate positionThisStation = new GeoCoordinate(Latitude, Longitude);
+            GeoCoordinate positionSecondStation = new GeoCoordinate(second.Latitude, second.Longitude);
+            return positionThisStation.GetDistanceTo(positionSecondStation);
         }
 
         /// <summary>
