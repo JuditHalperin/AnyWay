@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace dotNET5781_02_6589_5401
 {
-    public class StationsCollection
+    /// <summary>
+    /// collection of stations
+    /// static class - initializes the stations once, and has no objects
+    /// </summary>
+    static public class StationsCollection
     {
         static public List<BusStation> stations;
 
