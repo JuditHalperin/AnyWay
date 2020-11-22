@@ -17,7 +17,7 @@ namespace dotNET5781_02_6589_5401
 {
     public class Program
     {
-        public StationsCollection stationsCollection = new StationsCollection();
+        //public StationsCollection stationsCollection = new StationsCollection();
 
         /// <summary>
         /// create ten bus lines and add them to the collection
