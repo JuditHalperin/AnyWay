@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using dotNET5781_01_6589_5401
+
+// exceptions: bus + format "ID number should be a number."
 
 namespace dotNET5781_03B_6589_5401
 {
@@ -21,11 +22,14 @@ namespace dotNET5781_03B_6589_5401
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
-
+            InitializeBuses();
 
         }
+
+        
     }
 }

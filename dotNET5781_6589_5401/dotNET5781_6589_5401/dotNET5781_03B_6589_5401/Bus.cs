@@ -1,23 +1,14 @@
-﻿/*
-Asnat Kahane 211825401
-Judit Halperin 324216589
- 
-Exercise 1
-29/10/20
-This program implements the class Bus. The user can drive, fuel or teart a bus.
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace dotNET5781_01_6589_5401
+namespace dotNET5781_03B_6589_5401
 {
-    public class Bus
+    enum State { canDrive, cannotDrive, driving, isFueled, isTreated}
+    class Bus //: INotifyPropertyChanged
     {
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
@@ -62,51 +53,56 @@ namespace dotNET5781_01_6589_5401
             private set { kmSinceTreated = value; }
         }
 
+        private State busState;
+        public State BusState
+        {
+            get { return busState; }
+            private set { busState = value; }
+        }
+
         /// <summary>
         /// constructor
         /// </summary>
-        /// <param name="date">date of beginning work</param>
+        /// <param name="dateBegining">date of beginning work</param>
+        /// <param name="dateTreating">date of the last treat</param>
         /// <param name="id">license number</param>
-        /// <param name="msg">return massage if the process was completed successfully or not</param>
-        public Bus(DateTime date, string id, out string msg)
+        /// <param name="totalKm">total km since begining</param>
+        /// <param name="kmSinceFueled">total km since the bus got fueled</param>
+        /// <param name="kmSinceTreated">total km since the bus was treated</param>
+        public Bus(DateTime dateBegining, DateTime dateTreating, string id, float totalKm, float kmSinceFueled, float kmSinceTreated)
         {
-            DateOfBegining = date;            
-            DateOfLastTreat = date;
-            checkId(id, out msg);
-            TotalKm = 0;
-            KmSinceFueled = 0;
-            KmSinceTreated = 0;
+            DateOfBegining = dateBegining;
+            DateOfLastTreat = dateTreating;
+            if (dateBegining > dateTreating)
+                throw new BasicBusExceptions("Invalid dates.");
+
+            TotalKm = totalKm;
+            KmSinceFueled = kmSinceFueled;
+            KmSinceTreated = kmSinceTreated;
+            if(totalKm < kmSinceFueled || totalKm < kmSinceTreated)
+                throw new BasicBusExceptions("Invalid km.");
+
+            checkId(id);
+
+            BusState = getState();
         }
-           
+
         /// <summary>
         /// chack if the string value is valid and match to the format.
         /// </summary>
         /// <param name="value">id</param>
-        /// <param name="msg">return match massage</param>
-        /// <returns>return if id was matched</returns>
-        private bool checkId(string value, out string msg)
+        /// <returns>check if the ID is valid</returns>
+        private void checkId(string value)
         {
 
             if (value.Length < 7 || value.Length > 8) // wrong length
-            {
-                msg = "Wrong length of ID number.";
-                return false;
-            }
-
-            int num;
-            bool flag = int.TryParse(value, out num);
-            if (!flag) // convert failed
-            {
-                msg = "ID number should be a number.";
-                return false;
-            }
+                throw new BasicBusExceptions("Wrong length of ID number.");
+            
+            int num = int.Parse(value);
 
             if (num < 1000000 || num > 100000000) // not all digits
-            {
-                msg = "ID number should be consisted of digits only.";
-                return false;
-            }
-
+                throw new BasicBusExceptions("ID number should be consisted of digits only.");
+                
             string tmp = Convert.ToString(num);
 
             if (dateOfBegining.Year < 2018 && tmp.Length == 7) // 7 digits
@@ -122,14 +118,9 @@ namespace dotNET5781_01_6589_5401
             }
 
             else // length does not fit the year
-            {
-                msg = "Length ID number does not fit the year.";
-                return false;
-            }
-
+                throw new BasicBusExceptions("Length ID number does not fit the year.");
+                
             id = tmp;
-            msg = "The bus was successfully inserted!";
-            return true;
         }
 
         /// <summary>
@@ -160,33 +151,13 @@ namespace dotNET5781_01_6589_5401
         /// <summary>
         /// test if the bus can drive
         /// </summary>
-        /// <param name="msg">return if sucsses or not in massage</param>
-        /// <param name="km">to this drive</param>
-        /// <returns>return if sucsses or not</returns>
-        public bool isValid(out string msg, float km = 0) 
+        /// <returns>return state</returns>
+        public State getState()
         {
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
-            if (timeSinceLastTreat.TotalDays > 365)
-            {
-                msg = "the bus needs a treat because it has not been treated for a year.";
-                return false;
-            }
-
-            if (KmSinceTreated + km > 20000)
-            {
-                msg = "the bus needs a traet because it has drived more than 20,000 km.";
-                return false;
-            }
-
-            if (KmSinceFueled + km > 1200)
-            {
-                msg = "the bus needs to get fueled.";
-                return false;
-            }
-
-            msg = "Everything is alright.";
-            return true;
-
+            if (timeSinceLastTreat.TotalDays > 365 || KmSinceTreated > 20000 || KmSinceFueled > 1200)
+                return State.cannotDrive;
+            return State.canDrive;       
         }
 
         /// <summary>
@@ -195,9 +166,9 @@ namespace dotNET5781_01_6589_5401
         /// <param name="km">additinal km that the bus drive</param>
         private void updateKm(float km)
         {
-            TotalKm=TotalKm + km;
-            kmSinceFueled=KmSinceFueled + km;
-            kmSinceTreated=KmSinceTreated + km;
+            TotalKm = TotalKm + km;
+            kmSinceFueled = KmSinceFueled + km;
+            kmSinceTreated = KmSinceTreated + km;
         }
 
         /// <summary>
@@ -216,6 +187,5 @@ namespace dotNET5781_01_6589_5401
             KmSinceTreated = 0;
             DateOfLastTreat = DateTime.Now;
         }
-
     }
 }
