@@ -68,11 +68,11 @@ namespace dotNET5781_01_6589_5401
         /// <param name="date">date of beginning work</param>
         /// <param name="id">license number</param>
         /// <param name="msg">return massage if the process was completed successfully or not</param>
-        public Bus(DateTime date, string id,out string msg)
+        public Bus(DateTime date, string id, out string msg)
         {
             DateOfBegining = date;
             DateOfLastTreat = date;
-            checkId(id,out msg);
+            checkId(id, out msg);
             TotalKm = 0;
             KmSinceFueled = 0;
             KmSinceTreated = 0;
