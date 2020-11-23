@@ -75,8 +75,15 @@ namespace dotNET5781_03B_6589_5401
             DateOfLastTreat = dateTreating;
             if (dateBegining > dateTreating)
                 throw new BasicBusExceptions("Invalid dates.");
+            if (DateOfLastTreat > DateTime.Now)
+            {
+                DateOfLastTreat = DateTime.Now;
+                if (DateOfBegining > DateTime.Now)//just if date of last treat is bigger then now date of beginig can too.
+                    DateOfBegining = DateTime.Now;
+            }
+            
 
-            TotalKm = totalKm;
+                TotalKm = totalKm;
             KmSinceFueled = kmSinceFueled;
             KmSinceTreated = kmSinceTreated;
             if(totalKm < kmSinceFueled || totalKm < kmSinceTreated)
@@ -158,6 +165,38 @@ namespace dotNET5781_03B_6589_5401
             if (timeSinceLastTreat.TotalDays > 365 || KmSinceTreated > 20000 || KmSinceFueled > 1200)
                 return State.cannotDrive;
             return State.canDrive;       
+        }
+
+        /// <summary>
+        /// test if the bus can drive
+        /// </summary>
+        /// <param name="msg">return if sucsses or not in massage</param>
+        /// <param name="km">to this drive</param>
+        /// <returns>return if sucsses or not</returns>
+        public bool isValid(out string msg, float km = 0)
+        {
+            TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
+            if (timeSinceLastTreat.TotalDays > 365)
+            {
+                msg = "the bus needs a treat because it has not been treated for a year.";
+                return false;
+            }
+
+            if (KmSinceTreated + km > 20000)
+            {
+                msg = "the bus needs a traet because it has drived more than 20,000 km.";
+                return false;
+            }
+
+            if (KmSinceFueled + km > 1200)
+            {
+                msg = "the bus needs to get fueled.";
+                return false;
+            }
+
+            msg = "Everything is alright.";
+            return true;
+
         }
 
         /// <summary>
