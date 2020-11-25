@@ -10,29 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-// exceptions: bus + format "ID number should be a number."
 
 namespace dotNET5781_03B_6589_5401
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddBus.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {       
-        public MainWindow()
+    public partial class AddBus : Window
+    {
+        public AddBus()
         {
             InitializeComponent();
-
-            BusesList.ItemsSource = Buses.buses;
         }
 
-        private void AddBusButton_Click(object sender, RoutedEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            AddBus window = new AddBus();
-            window.ShowDialog();
+            DateTime date = Convert.ToDateTime(BeginingDate.SelectedDate);
+            Buses.buses.Add(new Bus(date, date, ID.Text, Convert.ToInt32(TotalKm.Text)));
+            // exceptions
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
