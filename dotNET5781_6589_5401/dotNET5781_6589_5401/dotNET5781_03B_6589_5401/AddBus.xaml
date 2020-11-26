@@ -20,7 +20,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="ID number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="ID" Grid.Row="1" Width="100" Height="25" VerticalAlignment="Top"/>
+            <TextBox x:Name="ID" MaxLength="8" Grid.Row="1" Width="100" Height="25" VerticalAlignment="Top"/>
             <Label Content="* 7 digits for buses before 2018, 8 digits for buses after 2018" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="6"/>
             <Label Content="Total km of drive:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="TotalKm" Grid.Row="3" Width="100" Height="25" VerticalAlignment="Top"/>

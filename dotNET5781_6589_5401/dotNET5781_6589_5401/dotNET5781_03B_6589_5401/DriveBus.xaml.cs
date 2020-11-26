@@ -23,5 +23,10 @@ namespace dotNET5781_03B_6589_5401
         {
             InitializeComponent();
         }
+
+        private void Length_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
