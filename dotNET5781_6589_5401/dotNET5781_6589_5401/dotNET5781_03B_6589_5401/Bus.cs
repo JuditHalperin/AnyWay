@@ -177,7 +177,7 @@ namespace dotNET5781_03B_6589_5401
             }
 
             else
-                throw new BasicBusExceptions("The bus cannot drive: " + msg);
+                throw new BasicBusExceptions("The bus cannot drive!\n" + msg);
         }
 
         
@@ -193,19 +193,19 @@ namespace dotNET5781_03B_6589_5401
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
             if (timeSinceLastTreat.TotalDays > 365)
             {
-                msg = "the bus needs a treat because it has not been treated for a year.";
+                msg = "It needs a treat because it has not been treated for a year.";
                 return false;
             }
 
             if (KmSinceTreated + km > 20000)
             {
-                msg = "the bus needs a traet because it has drived or would drive now more than 20,000 km.";
+                msg = "It needs a traet because it has drived or would drive now more than 20,000 km.";
                 return false;
             }
 
             if (KmSinceFueled + km > 1200)
             {
-                msg = $"the bus needs to get fueled before driving {km} km.";
+                msg = $"It needs to get fueled before driving {km} km.";
                 return false;
             }
 
