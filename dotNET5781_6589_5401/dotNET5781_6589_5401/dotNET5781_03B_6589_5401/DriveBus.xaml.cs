@@ -59,9 +59,16 @@ namespace dotNET5781_03B_6589_5401
         }
         private void fff(object sender, KeyEventArgs e)
         {
-            double km=Convert.ToDouble(Length.Text);
-            MessageBox.Show("suc");
-            Close();
+
+            try
+            {
+                double km = Convert.ToDouble(Length.Text);
+                Close();
+            }
+            catch(FormatException)
+            {
+                MessageBox.Show("invalid length");
+            }
         }
 
 
