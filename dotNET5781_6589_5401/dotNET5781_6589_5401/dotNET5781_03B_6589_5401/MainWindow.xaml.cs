@@ -66,7 +66,8 @@ namespace dotNET5781_03B_6589_5401
 
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            ShowBusDetails window = new ShowBusDetails();
+            window.ShowDialog();
         }
     }
     public class StateToBool_Drive : IValueConverter
