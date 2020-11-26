@@ -74,7 +74,7 @@ namespace dotNET5781_03B_6589_5401
         }
     }
 
-    public class StateToBool_Fuel : IValueConverter
+    public class KmToBool_Fuel : IValueConverter
     {
         public object Convert(
           object value,
@@ -82,8 +82,8 @@ namespace dotNET5781_03B_6589_5401
           object parameter,
           CultureInfo culture)
         {
-            State stateValue = (State)value;
-            if (stateValue == State.canDrive)
+            float stateValue = (float)value;
+            if (stateValue > 0)
                 return true;
 
             else
