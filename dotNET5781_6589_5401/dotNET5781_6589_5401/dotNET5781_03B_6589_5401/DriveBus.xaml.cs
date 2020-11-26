@@ -10,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace dotNET5781_03B_6589_5401
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DriveBus.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DriveBus : Window
     {
-        public MainWindow()
+        public DriveBus()
         {
             InitializeComponent();
-
-            BusesList.ItemsSource = Buses.buses;
-
-        }
-
-        private void AddBusButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddBus window = new AddBus();
-            window.ShowDialog();
         }
     }
 }

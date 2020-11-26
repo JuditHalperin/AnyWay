@@ -22,14 +22,28 @@ namespace dotNET5781_03B_6589_5401
         public AddBus()
         {
             InitializeComponent();
+
+            BeginingDate.DisplayDateEnd = DateTime.Now;
+            BeginingDate.SelectedDate = DateTime.Now;
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime date = Convert.ToDateTime(BeginingDate.SelectedDate);
-            Buses.buses.Add(new Bus(date, date, ID.Text, Convert.ToInt32(TotalKm.Text)));
-            // exceptions
-            Close();
+            try
+            {
+                Buses.addBus(new Bus(date, date, ID.Text, Convert.ToInt32(TotalKm.Text)));
+                Close();
+            }
+
+            catch (BasicBusExceptions exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid format");
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

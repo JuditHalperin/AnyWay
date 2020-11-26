@@ -19,38 +19,72 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         static Buses()
         {
-            for (int i = 0; i < 7; i++)
-                buses.Add(new Bus(
-                    new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
-                    new DateTime(rand.Next(2018, DateTime.Now.Year), rand.Next(1, 12), rand.Next(1, 28)),
-                    Convert.ToString(rand.Next(1000000, 9999999)),
-                    rand.Next(20000, 50000),
-                    rand.Next(0, 1200),
-                    rand.Next(0, 20000)));
+            try
+            {
+                for (int i = 0; i < 7; i++)
+                    addBus(new Bus(
+                        new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
+                        new DateTime(rand.Next(2018, DateTime.Now.Year), rand.Next(1, 12), rand.Next(1, 28)),
+                        Convert.ToString(rand.Next(1000000, 9999999)),
+                        rand.Next(20000, 50000),
+                        rand.Next(0, 1200),
+                        rand.Next(0, 20000)));
 
-            buses.Add(new Bus(
-                    new DateTime(2019, 7, 8),
-                    new DateTime(2020, 8, 5),
-                    Convert.ToString(rand.Next(10000000, 99999999)),
-                    rand.Next(20000, 50000),
-                    rand.Next(1000, 1200),
-                    rand.Next(0, 20000)));
+                addBus(new Bus(
+                        new DateTime(2019, 7, 8),
+                        new DateTime(2020, 8, 5),
+                        Convert.ToString(rand.Next(10000000, 99999999)),
+                        rand.Next(20000, 50000),
+                        rand.Next(1000, 1200),
+                        rand.Next(0, 20000)));
 
-            buses.Add(new Bus(
-                    new DateTime(2020, 1, 1),
-                    new DateTime(2020, 7, 19),
-                    Convert.ToString(rand.Next(10000000, 99999999)),
-                    rand.Next(20000, 50000),
-                    rand.Next(0, 1200),
-                    rand.Next(19500, 19900)));
+                addBus(new Bus(
+                        new DateTime(2020, 1, 1),
+                        new DateTime(2020, 7, 19),
+                        Convert.ToString(rand.Next(10000000, 99999999)),
+                        rand.Next(20000, 50000),
+                        rand.Next(0, 1200),
+                        rand.Next(19500, 19900)));
 
-            buses.Add(new Bus(
-                    new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
-                    new DateTime(DateTime.Now.Year - 1, rand.Next(1, DateTime.Now.Month), 1),
-                    Convert.ToString(rand.Next(1000000, 9999999)),
-                    rand.Next(20000, 50000),
-                    rand.Next(0, 1200),
-                    rand.Next(0, 20000)));
+                addBus(new Bus(
+                        new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
+                        new DateTime(DateTime.Now.Year - 1, rand.Next(1, DateTime.Now.Month), 1),
+                        Convert.ToString(rand.Next(1000000, 9999999)),
+                        rand.Next(20000, 50000),
+                        rand.Next(0, 1200),
+                        rand.Next(0, 20000)));
+            }
+
+            catch (BasicBusExceptions) // in case that the random ID number already exists in the collection
+            {
+                ;
+            }
+        }
+
+        /// <summary>
+        /// add a new bus to the collection
+        /// check first that its ID does not exist
+        /// </summary>
+        /// <param name="newBus">new bus</param>
+        static public void addBus(Bus newBus)
+        {
+            if (!containsBus(newBus.Id))
+                buses.Add(newBus);
+            else
+                throw new BasicBusExceptions("This ID already exists.");
+        }
+
+        /// <summary>
+        /// test if the given ID number exists in the collection or not
+        /// </summary>
+        /// <param name="id">ID number</param>
+        /// <returns>ID exists in the collection or not</returns>
+        static private bool containsBus(string id)
+        {
+            foreach (Bus bus in buses)
+                if (bus.Id == id)
+                    return true;
+            return false;
         }
 
     }

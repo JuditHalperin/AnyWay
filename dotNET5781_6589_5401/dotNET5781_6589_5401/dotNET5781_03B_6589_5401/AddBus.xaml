@@ -28,6 +28,6 @@
             <Button x:Name="CancelButton" Content="Cancel" Grid.Row="4" Height="20" Width="60" Margin="111,10,25,14" Click="CancelButton_Click"/>
         </Grid>
         <Label Content="Activitity begining date:" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Calendar x:Name="BeginingDate" Grid.Column="1" HorizontalAlignment="Center" Margin="9.2,35,9.6,12"/>
+        <Calendar x:Name="BeginingDate" Grid.Column="1" HorizontalAlignment="Center" SelectionMode="SingleDate" DisplayDateStart="01.01.1990" Margin="9.2,35,9.6,12"/>
     </Grid>
 </Window>

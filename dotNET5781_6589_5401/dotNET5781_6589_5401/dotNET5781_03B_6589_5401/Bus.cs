@@ -18,12 +18,7 @@ namespace dotNET5781_03B_6589_5401
         private string id; public string Id
         {
             get { return id; }
-            set
-            { 
-                id = value;
-                if(PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Id"));
-            }
+            set { id = value; }
         }
         private DateTime dateOfBegining; public DateTime DateOfBegining
         {
@@ -33,27 +28,52 @@ namespace dotNET5781_03B_6589_5401
         private DateTime dateOfLastTreat; public DateTime DateOfLastTreat
         {
             get { return dateOfLastTreat; }
-            private set { dateOfLastTreat = value; }
+            private set
+            {
+                dateOfLastTreat = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("DateOfLastTreat"));
+            }
         }
         private float totalKm; public float TotalKm
         {
             get { return totalKm; }
-            private set { totalKm = value; }
+            private set
+            {
+                totalKm = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("TotalKm"));
+            }
         }
         private float kmSinceFueled; public float KmSinceFueled
         {
             get { return kmSinceFueled; }
-            private set { kmSinceFueled = value; }
+            private set
+            {
+                kmSinceFueled = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("KmSinceFueled"));
+            }
         }
         private float kmSinceTreated; public float KmSinceTreated
         {
             get { return kmSinceTreated; }
-            private set { kmSinceTreated = value; }
+            private set
+            {
+                kmSinceTreated = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("KmSinceTreated"));
+            }
         }
         private State status; public State Status
         {
             get { return status; }
-            private set { status = value; }
+            private set
+            {
+                status = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Status"));
+            }
         }
 
         #endregion
@@ -77,7 +97,9 @@ namespace dotNET5781_03B_6589_5401
 
             DateOfBegining = dateBegining;
             DateOfLastTreat = dateTreating;
-                        
+
+            if (totalKm < 0)
+                throw new BasicBusExceptions("Negative length is invalid.");
             if (totalKm < kmSinceFueled)
                 kmSinceFueled = 0;
             if (totalKm < kmSinceTreated)
@@ -86,7 +108,7 @@ namespace dotNET5781_03B_6589_5401
             TotalKm = totalKm;
             KmSinceFueled = kmSinceFueled;
             KmSinceTreated = kmSinceTreated;
-            
+
             Id = setId(id);
             Status = setState();
         }
@@ -163,7 +185,7 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         /// <returns>random length of drive between 0 to 800</returns> 
         private float kmOfDrive() { return rand.Next(10, 800); }
-        
+
         /// <summary>
         /// test if the bus can drive
         /// </summary>
