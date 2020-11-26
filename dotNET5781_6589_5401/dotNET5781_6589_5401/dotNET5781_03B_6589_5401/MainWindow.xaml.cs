@@ -72,7 +72,7 @@ namespace dotNET5781_03B_6589_5401
             Bus bust = (Bus)BusesList.SelectedItem;
 
             ShowBusDetails window = new ShowBusDetails();
-            window.bus = bust;
+            window.update( bust);
             window.ShowDialog();
         }
     }
