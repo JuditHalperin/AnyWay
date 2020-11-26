@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace dotNET5781_03B_6589_5401
             InitializeComponent();
 
             BusesList.ItemsSource = Buses.buses;
-
         }
 
         private void AddBusButton_Click(object sender, RoutedEventArgs e)
@@ -34,6 +34,17 @@ namespace dotNET5781_03B_6589_5401
             window.ShowDialog();
         }
 
+        private void DriveButton_Click(object sender, RoutedEventArgs e)
+        {
+            DriveBus window = new DriveBus();
+            window.ShowDialog();
+
+        }
+
+        private void FuelButton_Click(object sender, RoutedEventArgs e)
+        {
+            (BusesList.SelectedItems as Bus).fuel();
+        }
 
     }
 }

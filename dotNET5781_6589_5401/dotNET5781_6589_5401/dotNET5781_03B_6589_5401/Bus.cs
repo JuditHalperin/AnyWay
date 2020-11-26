@@ -233,6 +233,8 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         public void fuel()
         {
+            Status = State.gettingFueled;
+            //
             KmSinceFueled = 0;
         }
 
