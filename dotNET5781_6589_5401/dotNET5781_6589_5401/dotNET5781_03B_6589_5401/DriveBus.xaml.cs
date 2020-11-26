@@ -75,5 +75,11 @@ namespace dotNET5781_03B_6589_5401
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Length.Text = "";
+            Close();
+        }
     }
 }
