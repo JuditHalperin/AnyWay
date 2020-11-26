@@ -82,8 +82,8 @@ namespace dotNET5781_03B_6589_5401
           object parameter,
           CultureInfo culture)
         {
-            float stateValue = (float)value;
-            if (stateValue > 0)
+            float floatValue = (float)value;
+            if (floatValue > 0)
                 return true;
 
             else
