@@ -19,5 +19,10 @@ namespace dotNET5781_03B_6589_5401
             window.ShowDialog();
             
         }
+
+        private void FuelButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
