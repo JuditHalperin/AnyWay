@@ -48,7 +48,33 @@ namespace dotNET5781_03B_6589_5401
 
 
     }
-    public class StateToBool : IValueConverter
+    public class StateToBool_Drive : IValueConverter
+    {
+        public object Convert(
+          object value,
+          Type targetType,
+          object parameter,
+          CultureInfo culture)
+        {
+            State stateValue = (State)value;
+            if (stateValue == State.canDrive)
+                return true;
+
+            else
+                return false;
+        }
+
+        public object ConvertBack(
+          object value,
+          Type targetType,
+          object parameter,
+          CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class StateToBool_Fuel : IValueConverter
     {
         public object Convert(
           object value,
