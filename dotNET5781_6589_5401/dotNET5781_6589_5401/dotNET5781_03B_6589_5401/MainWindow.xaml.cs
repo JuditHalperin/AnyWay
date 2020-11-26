@@ -46,7 +46,10 @@ namespace dotNET5781_03B_6589_5401
             (BusesList.SelectedItems as Bus).fuel();
         }
 
-
+        private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("sss");
+        }
     }
     public class StateToBool_Drive : IValueConverter
     {
