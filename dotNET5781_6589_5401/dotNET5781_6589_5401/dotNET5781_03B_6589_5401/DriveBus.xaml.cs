@@ -36,18 +36,23 @@ namespace dotNET5781_03B_6589_5401
                 try
                 {
                     double km = Convert.ToDouble(Length.Text);
+                    if (km <= 0)
+                        throw new BasicBusExceptions("Negative length is invalid.");
+                    
                     Close();
-                    //updateDrive(sender,e,km);
+
                     Buses.Km = (float)km;
                     e.Handled = true;
                     return;
                 }
+                catch (BasicBusExceptions ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 catch (FormatException)
                 {
-                    MessageBox.Show("invalid length");
-                }
-                
-
+                    MessageBox.Show("Invalid length.");
+                }                
             }
 
             //allow list of system keys (add other key here if you want to allow)
@@ -70,12 +75,5 @@ namespace dotNET5781_03B_6589_5401
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-        private void updateDrive(object sender, KeyEventArgs e,double km)
-        {
-            
-
-        }
-
-
     }
 }

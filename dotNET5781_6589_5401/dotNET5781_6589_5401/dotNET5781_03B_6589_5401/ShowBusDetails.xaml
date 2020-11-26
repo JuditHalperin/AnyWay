@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="ShowBusDetails" Height="250" Width="500">
-    <Grid>
+        Title="ShowBusDetails" Height="250" Width="600">
+    <Grid x:Name="Details">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -23,13 +23,21 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="ID number:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-            <Label Content="Activity begining date:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-            <Label Content="Total km of drive:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
-            <Label Content="Last treat date:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
-            <Label Content="Km of drive since the last treat:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
-            <Label Content="Km of drive since the last fueling:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2"/>
-            
+
+            <Label Content="ID number:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Activity begining date:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Total km of drive:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Last treat date:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Km of drive since the last treat:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Km of drive since the last fueling:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
+
+            <Label Content="{Binding Path=Id}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="{Binding Path=DateOfBegining}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+            <Label Content="{Binding Path=TotalKm}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <Label Content="{Binding Path=DateOfLastTreat}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="{Binding Path=KmSinceTreated}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+            <Label Content="{Binding Path=KmSinceFueled}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
+
         </Grid>
         <Grid x:Name="DownGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>

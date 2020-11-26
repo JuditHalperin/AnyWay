@@ -39,14 +39,17 @@ namespace dotNET5781_03B_6589_5401
         {
             DriveBus window = new DriveBus();
             window.ShowDialog();
+
             Button driving = (Button)sender;
             if (driving.DataContext is Bus)
             {
                 Bus bus = (Bus)driving.DataContext;
+
                 try
                 {
                     bus.drive(Buses.Km);
                 }
+
                 catch(BasicBusExceptions ex)
                 {
                     MessageBox.Show(ex.Message);
