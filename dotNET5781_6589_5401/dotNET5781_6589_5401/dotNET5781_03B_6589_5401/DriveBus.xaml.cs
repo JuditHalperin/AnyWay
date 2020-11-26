@@ -33,8 +33,21 @@ namespace dotNET5781_03B_6589_5401
             //allow get out of the text box
             if (e.Key == Key.Return || e.Key == Key.Enter || e.Key == Key.Tab)
             {
-                fff(sender, e);
-                return;
+                try
+                {
+                    double km = Convert.ToDouble(Length.Text);
+                    Close();
+                    //updateDrive(sender,e,km);
+                    Buses.Km = (float)km;
+                    e.Handled = true;
+                    return;
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("invalid length");
+                }
+                
+
             }
 
             //allow list of system keys (add other key here if you want to allow)
@@ -57,18 +70,10 @@ namespace dotNET5781_03B_6589_5401
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-        private void fff(object sender, KeyEventArgs e)
+        private void updateDrive(object sender, KeyEventArgs e,double km)
         {
+            
 
-            try
-            {
-                double km = Convert.ToDouble(Length.Text);
-                Close();
-            }
-            catch(FormatException)
-            {
-                MessageBox.Show("invalid length");
-            }
         }
 
 

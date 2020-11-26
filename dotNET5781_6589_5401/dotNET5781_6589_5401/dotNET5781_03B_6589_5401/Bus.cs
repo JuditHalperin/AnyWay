@@ -164,27 +164,23 @@ namespace dotNET5781_03B_6589_5401
         /// <summary>
         ///  if possible - drive the bus
         /// </summary>
-        public void drive()
+        public void drive(float km)
         {
             string msg;
-            float km = kmOfDrive();
             bool possible = isValid(out msg, km);
 
             if (possible)
             {
                 updateKm(km);
-                Console.WriteLine("Have a plasent journey! Length of driving is {0} km.", km);
+                Status = State.driving;
+                //threading
             }
 
             else
-                Console.WriteLine("The bus cannot drive: " + msg);
+                throw new BasicBusExceptions("The bus cannot drive!\n" + msg);
         }
 
-        /// <summary>
-        /// random length of drive
-        /// </summary>
-        /// <returns>random length of drive between 0 to 800</returns> 
-        private float kmOfDrive() { return rand.Next(10, 800); }
+        
 
         /// <summary>
         /// test if the bus can drive
@@ -197,19 +193,19 @@ namespace dotNET5781_03B_6589_5401
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
             if (timeSinceLastTreat.TotalDays > 365)
             {
-                msg = "the bus needs a treat because it has not been treated for a year.";
+                msg = "It needs a treat because it has not been treated for a year.";
                 return false;
             }
 
             if (KmSinceTreated + km > 20000)
             {
-                msg = "the bus needs a traet because it has drived or would drive now more than 20,000 km.";
+                msg = "It needs a traet because it has drived or would drive now more than 20,000 km.";
                 return false;
             }
 
             if (KmSinceFueled + km > 1200)
             {
-                msg = $"the bus needs to get fueled before driving {km} km.";
+                msg = $"It needs to get fueled before driving {km} km.";
                 return false;
             }
 
