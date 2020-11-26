@@ -7,8 +7,8 @@
         <DataTemplate x:Key="busInlistBoxTemplate">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding}" Height="20" Width="90" HorizontalAlignment="Left"/>
-                <Button x:Name="DriveButton" Content="Drive" Height="20" Width="60" HorizontalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool}}" Click="DriveButton_Click"/>
-                <Button x:Name="FuelButton" Content="Fuel" Height="20" Width="60" HorizontalAlignment="Right" Click="FuelButton_Click" />
+                <Button x:Name="DriveButton" Content="Drive" Height="20" Width="60" HorizontalAlignment="Center" Click="DriveButton_Click"/>
+                <Button x:Name="FuelButton" Content="Fuel" Height="20" Width="60" HorizontalAlignment="Right" Click="FuelButton_Click"/>
             </StackPanel>
         </DataTemplate>
     </Application.Resources>
