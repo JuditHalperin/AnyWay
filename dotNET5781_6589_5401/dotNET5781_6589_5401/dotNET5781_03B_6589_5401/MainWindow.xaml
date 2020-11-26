@@ -13,7 +13,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding}" Height="20" Width="90" HorizontalAlignment="Left"/>
                 <Button x:Name="DriveButton" Content="Drive" Height="20" Width="60" HorizontalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
-                <Button x:Name="FuelButton" Content="Fuel" Height="20" Width="60" HorizontalAlignment="Right" IsEnabled="{Binding Path=Status, Converter={StaticResource FloatToBool_Fuel}}" Click="FuelButton_Click"/>
+                <Button x:Name="FuelButton" Content="Fuel" Height="20" Width="60" HorizontalAlignment="Right" IsEnabled="{Binding Path=KmSinceFueled, Converter={StaticResource FloatToBool_Fuel}}" Click="FuelButton_Click"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
