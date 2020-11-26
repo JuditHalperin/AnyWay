@@ -38,17 +38,16 @@ namespace dotNET5781_03B_6589_5401
         {
             DriveBus window = new DriveBus();
             window.ShowDialog();
-
         }
 
         private void FuelButton_Click(object sender, RoutedEventArgs e)
         {
-            (BusesList.SelectedItems as Bus).fuel();
+            
         }
 
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("sss");
+
         }
     }
     public class StateToBool_Drive : IValueConverter
@@ -86,7 +85,7 @@ namespace dotNET5781_03B_6589_5401
           CultureInfo culture)
         {
             float floatValue = (float)value;
-            if (floatValue > 0)
+            if (floatValue > 800)
                 return true;
 
             else
