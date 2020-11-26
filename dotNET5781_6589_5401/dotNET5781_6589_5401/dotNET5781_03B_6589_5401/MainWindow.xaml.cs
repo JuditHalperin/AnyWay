@@ -45,12 +45,9 @@ namespace dotNET5781_03B_6589_5401
             Button fueling = (Button)sender;
             if (fueling.DataContext is Bus)
             {
-
                 Bus bus = (Bus)fueling.DataContext;
                 bus.fuel();
-
             }
-
         }
 
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
