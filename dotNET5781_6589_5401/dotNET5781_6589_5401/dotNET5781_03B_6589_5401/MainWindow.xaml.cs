@@ -43,7 +43,8 @@ namespace dotNET5781_03B_6589_5401
 
         private void FuelButton_Click(object sender, RoutedEventArgs e)
         {
-            (BusesList.SelectedItems as Bus).fuel();
+            
+            
         }
 
 
