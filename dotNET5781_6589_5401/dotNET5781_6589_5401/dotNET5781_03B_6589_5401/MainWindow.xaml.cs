@@ -24,7 +24,6 @@ namespace dotNET5781_03B_6589_5401
         public MainWindow()
         {
             InitializeComponent();
-
             BusesList.ItemsSource = Buses.buses;
         }
 
@@ -32,7 +31,6 @@ namespace dotNET5781_03B_6589_5401
         {
             AddBus window = new AddBus();
             window.ShowDialog();
-
         }
 
         private void DriveButton_Click(object sender, RoutedEventArgs e)

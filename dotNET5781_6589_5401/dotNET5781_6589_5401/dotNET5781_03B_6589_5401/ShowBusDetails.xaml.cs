@@ -25,5 +25,25 @@ namespace dotNET5781_03B_6589_5401
 
             Details.DataContext = Buses.buses;
         }
+
+        private void TreatButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FuelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button fueling = (Button)sender;
+            if (fueling.DataContext is Bus)
+            {
+                Bus bus = (Bus)fueling.DataContext;
+                bus.fuel();
+            }
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
