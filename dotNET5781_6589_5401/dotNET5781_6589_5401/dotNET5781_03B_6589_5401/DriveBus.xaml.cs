@@ -60,7 +60,7 @@ namespace dotNET5781_03B_6589_5401
         private void fff(object sender, KeyEventArgs e)
         {
             double km=Convert.ToDouble(Length.Text);
-            MessageBox.Show("suu");
+            MessageBox.Show("suc");
             Close();
         }
 
