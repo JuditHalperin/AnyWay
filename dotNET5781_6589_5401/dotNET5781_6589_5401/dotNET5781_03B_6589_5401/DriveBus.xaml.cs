@@ -31,17 +31,16 @@ namespace dotNET5781_03B_6589_5401
             if (e == null) return;
 
             //allow get out of the text box
-            if (e.Key == Key.Return || e.Key == Key.Tab)
-                return;
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Return || e.Key == Key.Enter || e.Key == Key.Tab)
             {
                 Close();
+                return;
             }
 
             //allow list of system keys (add other key here if you want to allow)
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
             e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-            || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
+           || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
                 return;
 
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
