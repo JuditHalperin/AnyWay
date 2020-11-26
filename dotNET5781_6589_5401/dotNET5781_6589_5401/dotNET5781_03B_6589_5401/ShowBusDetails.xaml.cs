@@ -21,9 +21,10 @@ namespace dotNET5781_03B_6589_5401
     {
         public ShowBusDetails()
         {
+            
             InitializeComponent();
 
-            Details.DataContext = Buses.buses;
+            Details.DataContext = bus;
         }
 
         private void TreatButton_Click(object sender, RoutedEventArgs e)
