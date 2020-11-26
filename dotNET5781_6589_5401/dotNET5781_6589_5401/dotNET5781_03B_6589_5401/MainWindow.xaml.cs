@@ -74,7 +74,7 @@ namespace dotNET5781_03B_6589_5401
         }
     }
 
-    public class KmToBool_Fuel : IValueConverter
+    public class FloatToBool_Fuel : IValueConverter
     {
         public object Convert(
           object value,
