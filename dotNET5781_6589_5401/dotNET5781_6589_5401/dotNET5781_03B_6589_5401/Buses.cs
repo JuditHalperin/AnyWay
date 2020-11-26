@@ -12,7 +12,7 @@ namespace dotNET5781_03B_6589_5401
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
         static public ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-        static public float Km=0;
+        static public float Km=0;//for updates. there is another way?
         /// <summary>
         /// static constructor
         /// initialize 10 buses randomaly
