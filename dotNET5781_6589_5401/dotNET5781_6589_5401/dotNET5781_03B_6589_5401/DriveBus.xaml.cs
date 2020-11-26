@@ -33,7 +33,7 @@ namespace dotNET5781_03B_6589_5401
             //allow get out of the text box
             if (e.Key == Key.Return || e.Key == Key.Enter || e.Key == Key.Tab)
             {
-                Close();
+                fff(sender, e);
                 return;
             }
 
@@ -56,6 +56,12 @@ namespace dotNET5781_03B_6589_5401
             //forbid letters and signs (#,$, %, ...)
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
+        }
+        private void fff(object sender, KeyEventArgs e)
+        {
+            double km=Convert.ToDouble(Length.Text);
+            MessageBox.Show("suu");
+            Close();
         }
 
 
