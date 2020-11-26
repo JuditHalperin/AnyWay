@@ -15,7 +15,8 @@ namespace dotNET5781_03B_6589_5401
     {
         private void DriveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            DriveBus window = new DriveBus();
+            window.ShowDialog();
         }
     }
 }

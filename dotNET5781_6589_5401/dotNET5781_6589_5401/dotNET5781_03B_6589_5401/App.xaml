@@ -7,7 +7,7 @@
         <DataTemplate x:Key="busInlistBoxTemplate">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding}" Height="20" Width="90" HorizontalAlignment="Left"/>
-                <Button x:Name="DriveButton" Content="Drive" Height="20" Width="60" HorizontalAlignment="Right"  IsEnabled="{Binding Path=Status}" Click="DriveButton_Click"/>
+                <Button x:Name="DriveButton" Content="Drive" Height="20" Width="60" HorizontalAlignment="Right" IsEnabled="{Binding Path=Status}" Click="DriveButton_Click"/>
             </StackPanel>
         </DataTemplate>
     </Application.Resources>
