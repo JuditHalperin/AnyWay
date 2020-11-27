@@ -39,7 +39,7 @@ namespace dotNET5781_03B_6589_5401
             window.ShowDialog();
 
             Button driving = (Button)sender;
-            if (driving.DataContext is Bus)
+            if (driving.DataContext is Bus && Buses.Km != 0)
             {
                 Bus bus = (Bus)driving.DataContext;
 
