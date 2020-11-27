@@ -30,19 +30,20 @@ namespace dotNET5781_03B_6589_5401
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime date = Convert.ToDateTime(BeginingDate.SelectedDate);
+            
             try
             {
                 Buses.addBus(new Bus(date, date, ID.Text, Convert.ToInt32(TotalKm.Text)));
                 Close();
             }
 
-            catch (BasicBusExceptions exc)
+            catch (BasicBusExceptions ex)
             {
-                MessageBox.Show(exc.Message);
+                MessageBox.Show(ex.Message);
             }
             catch (FormatException)
             {
-                MessageBox.Show("Invalid format");
+                MessageBox.Show("Invalid format.");
             }
         }
 

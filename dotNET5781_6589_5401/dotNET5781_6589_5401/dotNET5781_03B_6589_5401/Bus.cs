@@ -167,28 +167,27 @@ namespace dotNET5781_03B_6589_5401
         public void drive(float km)
         {
             string msg;
-            bool possible = isValid(out msg, km);
+            bool possible = isAbleToDriveSpecificLength(out msg, km);
 
             if (possible)
             {
-                updateKm(km);
                 Status = State.driving;
-                //threading
+                // threading
+                updateKm(km);
+                setState();
             }
 
             else
-                throw new BasicBusExceptions("The bus cannot drive!\n" + msg);
+                throw new BasicBusExceptions("The bus cannot drive.\n" + msg);
         }
-
         
-
         /// <summary>
-        /// test if the bus can drive
+        /// test if the bus can drive the given length
         /// </summary>
         /// <param name="msg">reason for not being able to drive</param>
         /// <param name="km">length of drive</param>
-        /// <returns>can drive or not</returns>
-        private bool isValid(out string msg, float km = 0)
+        /// <returns>can drive this length or not</returns>
+        private bool isAbleToDriveSpecificLength(out string msg, float km = 0)
         {
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
             if (timeSinceLastTreat.TotalDays > 365)
@@ -199,7 +198,7 @@ namespace dotNET5781_03B_6589_5401
 
             if (KmSinceTreated + km > 20000)
             {
-                msg = "It needs a traet because it has drived or would drive now more than 20,000 km.";
+                msg = $"It needs a traet before driving {km} km.";
                 return false;
             }
 
@@ -214,9 +213,9 @@ namespace dotNET5781_03B_6589_5401
         }
 
         /// <summary>
-        /// update the km fields after drive
+        /// update the km fields after a drive
         /// </summary>
-        /// <param name="km">additinal km that the bus drive</param>
+        /// <param name="km">additional km that the bus has drived</param>
         private void updateKm(float km)
         {
             TotalKm = TotalKm + km;
@@ -225,32 +224,36 @@ namespace dotNET5781_03B_6589_5401
         }
 
         /// <summary>
-        /// reset the km since last fuel.
+        /// fuel the bus
+        /// ? seconds for each fuel
         /// </summary>
         public void fuel()
         {
             Status = State.gettingFueled;
             //
             KmSinceFueled = 0;
+            setState();
         }
 
         /// <summary>
-        /// reset the km since last treat.
+        /// treat the bus
+        /// ? seconds for each treat
         /// </summary>
         public void treat()
         {
+            Status = State.gettingTreated;
+            //
             KmSinceTreated = 0;
             DateOfLastTreat = DateTime.Now;
+            setState();
         }
 
         /// <summary>
-        /// override "ToString"
+        /// print the ID number of the bus
+        /// override of "ToString"
         /// </summary>
         /// <returns>ID number</returns>
-        public override string ToString()
-        {
-            return Id;
-        }
-
+        public override string ToString() { return Id; }
+       
     }
 }
