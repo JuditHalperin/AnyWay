@@ -21,20 +21,25 @@ namespace dotNET5781_03B_6589_5401
     {
         public ShowBusDetails()
         {
-            
             InitializeComponent();
-
-            Details.DataContext = bus;
+            //Details.DataContext = bus;
         }
-        public Bus bus { get; set; }
-        public void update(Bus temp)
+
+        //public Bus bus { get; set; }
+
+        public void update(Bus selectedBus)
         {
-            Details.DataContext = temp;
+            Details.DataContext = selectedBus;
         }
 
         private void TreatButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Button treat = (Button)sender;
+            if (treat.DataContext is Bus)
+            {
+                Bus bus = (Bus)treat.DataContext;
+                bus.treat();
+            }
         }
 
         private void FuelButton_Click(object sender, RoutedEventArgs e)
