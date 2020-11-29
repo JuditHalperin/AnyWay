@@ -124,5 +124,8 @@
   <ItemGroup>
     <Resource Include="bus.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bus.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
