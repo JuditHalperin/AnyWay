@@ -7,7 +7,7 @@
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Background" Value="#FFD6F0F9"/>
         </Style>
     </Application.Resources>
 </Application>
