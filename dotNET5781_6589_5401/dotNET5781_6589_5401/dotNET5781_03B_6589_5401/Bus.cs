@@ -102,7 +102,7 @@ namespace dotNET5781_03B_6589_5401
         public Bus(DateTime dateBegining, DateTime dateTreating, string id, float totalKm, float kmSinceFueled = 0, float kmSinceTreated = 0)
         {
             if (dateTreating > DateTime.Now)
-                dateTreating = DateTime.Now;
+                dateTreating = DateTime.Now.Date;
             if (dateBegining > dateTreating)
                 dateBegining = dateTreating;
 

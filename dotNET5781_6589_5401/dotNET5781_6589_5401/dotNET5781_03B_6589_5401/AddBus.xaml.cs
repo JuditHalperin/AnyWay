@@ -23,8 +23,8 @@ namespace dotNET5781_03B_6589_5401
         {
             InitializeComponent();
 
-            BeginingDate.DisplayDateEnd = DateTime.Now;
-            BeginingDate.SelectedDate = DateTime.Now;
+            BeginingDate.DisplayDateEnd = DateTime.Now.Date;
+            BeginingDate.SelectedDate = DateTime.Now.Date;
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
@@ -33,7 +33,7 @@ namespace dotNET5781_03B_6589_5401
             
             try
             {
-                Buses.addBus(new Bus(date, date, ID.Text, Convert.ToInt32(TotalKm.Text)));
+                Buses.addBus(new Bus(date.Date, date.Date, ID.Text, Convert.ToInt32(TotalKm.Text)));
                 Close();
             }
 
