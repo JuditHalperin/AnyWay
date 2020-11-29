@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
+
 namespace dotNET5781_03B_6589_5401
 {
     public enum State { canDrive, cannotDrive, driving, gettingFueled, gettingTreated }
@@ -252,14 +253,18 @@ namespace dotNET5781_03B_6589_5401
         public void treat()
         {
             Status = State.gettingTreated;
+
             //
+
             KmSinceTreated = 0;
             DateOfLastTreat = DateTime.Now.Date;
+
             if (kmSinceFueled >= 1100)
                 kmSinceFueled = 0;
+
             setState();
         }
-
+        
         /// <summary>
         /// print the ID number of the bus
         /// override of "ToString"

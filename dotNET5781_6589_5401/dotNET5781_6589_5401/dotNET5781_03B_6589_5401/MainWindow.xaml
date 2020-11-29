@@ -11,13 +11,13 @@
         <DataTemplate x:Key="busInlistBoxTemplate">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding}" Height="20" Width="90" HorizontalAlignment="Left"/>
-                <Button x:Name="DriveButton" Content="Drive" Height="20" Width="60" HorizontalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
-                <Button x:Name="FuelButton" Content="Fuel" Height="20" Width="60" HorizontalAlignment="Right" Click="FuelButton_Click" IsEnabled="{Binding Path=CanGetFueled}"/>
+                <Button x:Name="DriveButton" Content="Drive" Style="{StaticResource ButtonStyle}" Height="20" Width="60" HorizontalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
+                <Button x:Name="FuelButton" Content="Fuel" Style="{StaticResource ButtonStyle}" Height="20" Width="60" HorizontalAlignment="Right" Click="FuelButton_Click" IsEnabled="{Binding Path=CanGetFueled}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <ListBox x:Name="BusesList" ItemsSource="{Binding}" ItemTemplate="{StaticResource busInlistBoxTemplate}" HorizontalAlignment="Left" Height="257" Margin="120,55,0,0" VerticalAlignment="Top" Width="251" MouseDoubleClick="BusesList_MouseDoubleClick"/>
-        <Button x:Name="AddBusButton" Content="Add bus" HorizontalAlignment="Left" Margin="120,342,0,0" VerticalAlignment="Top" Width="100" Click="AddBusButton_Click"/>
+        <Button x:Name="AddBusButton" Content="Add bus" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="120,342,0,0" VerticalAlignment="Top" Width="100" Click="AddBusButton_Click"/>
     </Grid>
 </Window>

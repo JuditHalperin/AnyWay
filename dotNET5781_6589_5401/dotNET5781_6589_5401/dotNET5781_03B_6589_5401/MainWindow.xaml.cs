@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+
 
 namespace dotNET5781_03B_6589_5401
 {
@@ -24,8 +26,30 @@ namespace dotNET5781_03B_6589_5401
         public MainWindow()
         {
             InitializeComponent();
+
             BusesList.ItemsSource = Buses.buses;
+
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += startTimer;
+            worker.ProgressChanged += showTimer;
+            //worker.RunWorkerCompleted += setState;
+
         }
+       
+        private void startTimer(object sender, DoWorkEventArgs e)
+        {
+            
+        }
+
+        private void showTimer(object sender, ProgressChangedEventArgs e)
+        {
+            
+        }
+
+        //private void setState(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    ;
+        //}
 
         private void AddBusButton_Click(object sender, RoutedEventArgs e)
         {

@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="LightBlue"/>
+        </Style>
     </Application.Resources>
 </Application>
