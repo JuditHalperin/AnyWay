@@ -76,6 +76,16 @@ namespace dotNET5781_03B_6589_5401
             }
         }
 
+        public bool CanGetFueled
+        {
+            get { return KmSinceFueled > 800 && (Status == State.canDrive || Status == State.cannotDrive); }
+        }
+
+        public bool CanGetTreated
+        {
+            get { return (KmSinceTreated > 19500 || (DateTime.Now - DateOfLastTreat).TotalDays > 350) && (Status == State.canDrive || Status == State.cannotDrive); }
+        }
+
         #endregion
 
         /// <summary>
@@ -244,7 +254,9 @@ namespace dotNET5781_03B_6589_5401
             Status = State.gettingTreated;
             //
             KmSinceTreated = 0;
-            DateOfLastTreat = DateTime.Now;
+            DateOfLastTreat = DateTime.Now.Date;
+            if (kmSinceFueled >= 1100)
+                kmSinceFueled = 0;
             setState();
         }
 

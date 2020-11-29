@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Length of drive (km):" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="Length" Grid.Column="1" Width="60" MaxLength="4" HorizontalAlignment="Left" VerticalAlignment="Center" PreviewKeyDown="Length_OnlyNumbers_PreviewKeyDown"/>
+        <TextBox x:Name="Length" Grid.Column="1" Width="60" MaxLength="3" HorizontalAlignment="Left" VerticalAlignment="Center" PreviewKeyDown="Length_OnlyNumbers_PreviewKeyDown"/>
         <Button x:Name="CancelButton" Content="Cancel" Margin="86.2,173,41.6,21" Grid.Column="1" Click="CancelButton_Click" />
     </Grid>
 </Window>

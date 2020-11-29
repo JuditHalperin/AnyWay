@@ -73,6 +73,7 @@ namespace dotNET5781_03B_6589_5401
             window.ShowDialog();
         }
     }
+
     public class StateToBool_Drive : IValueConverter
     {
         public object Convert(
@@ -83,32 +84,6 @@ namespace dotNET5781_03B_6589_5401
         {
             State stateValue = (State)value;
             if (stateValue == State.canDrive)
-                return true;
-
-            else
-                return false;
-        }
-
-        public object ConvertBack(
-          object value,
-          Type targetType,
-          object parameter,
-          CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class FloatToBool_Fuel : IValueConverter
-    {
-        public object Convert(
-          object value,
-          Type targetType,
-          object parameter,
-          CultureInfo culture)
-        {
-            float floatValue = (float)value;
-            if (floatValue > 800)
                 return true;
 
             else
