@@ -14,7 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
-
+using System.Diagnostics;
+using System.Threading;
 
 namespace dotNET5781_03B_6589_5401
 {
@@ -32,25 +33,30 @@ namespace dotNET5781_03B_6589_5401
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += startTimer;
             worker.ProgressChanged += showTimer;
-            //worker.RunWorkerCompleted += setState;
-
         }
        
         private void startTimer(object sender, DoWorkEventArgs e)
         {
-            
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            for (int i = 0; i < (int)e.Argument; i++) 
+            {
+                worker.ReportProgress((int)timer.ElapsedMilliseconds / 1000);
+                Thread.Sleep(1000);
+            }
+
         }
 
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
-            
+            int progress = e.ProgressPercentage * 12;
+            ProgressLabel.content = $"{progress / 60}:{progress % 60}:00";
+            // ליצור תווית עם נראות ולסדר פורמט הדפסה
         }
-
-        //private void setState(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    ;
-        //}
-
+       
         private void AddBusButton_Click(object sender, RoutedEventArgs e)
         {
             AddBus window = new AddBus();
@@ -59,24 +65,10 @@ namespace dotNET5781_03B_6589_5401
 
         private void DriveButton_Click(object sender, RoutedEventArgs e)
         {
-            DriveBus window = new DriveBus();
-            window.ShowDialog();
-
             Button driving = (Button)sender;
-            if (driving.DataContext is Bus && Buses.Km != 0)
-            {
-                Bus bus = (Bus)driving.DataContext;
-
-                try
-                {
-                    bus.drive(Buses.Km);
-                }
-
-                catch(BasicBusExceptions ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
+            DriveBus window = new DriveBus();
+            window.update((Bus)driving.DataContext);
+            window.ShowDialog();            
         }
 
         private void FuelButton_Click(object sender, RoutedEventArgs e)

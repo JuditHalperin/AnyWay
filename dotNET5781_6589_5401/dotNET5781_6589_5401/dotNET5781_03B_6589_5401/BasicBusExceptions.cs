@@ -20,6 +20,6 @@ namespace dotNET5781_03B_6589_5401
         /// print the exception
         /// </summary>
         /// <returns>name of exception + specific massage</returns>
-        override public string ToString() { return "BasicBusExceptions: " + Message; }
+        override public string ToString() { return Message; }
     }
 }

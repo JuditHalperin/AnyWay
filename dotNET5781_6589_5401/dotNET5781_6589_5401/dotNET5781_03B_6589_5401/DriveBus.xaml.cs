@@ -24,6 +24,11 @@ namespace dotNET5781_03B_6589_5401
             InitializeComponent();
         }
 
+        public void update(Bus selectedBus)
+        {
+            Drive.DataContext = selectedBus;
+        }
+
         private void Length_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -40,9 +45,10 @@ namespace dotNET5781_03B_6589_5401
                         throw new BasicBusExceptions("Negative length is invalid.");
                     
                     Close();
-
-                    Buses.Km = (float)km;
                     e.Handled = true;
+
+                    (Drive.DataContext as Bus).drive((float)km);
+
                     return;
                 }
                 catch (BasicBusExceptions ex)

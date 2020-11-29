@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
         Title="DriveBus" Height="250" Width="400">
-    <Grid>
+    <Grid x:Name="Drive">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

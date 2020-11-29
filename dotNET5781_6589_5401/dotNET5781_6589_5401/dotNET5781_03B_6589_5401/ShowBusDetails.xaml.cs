@@ -22,10 +22,7 @@ namespace dotNET5781_03B_6589_5401
         public ShowBusDetails()
         {
             InitializeComponent();
-            //Details.DataContext = bus;
         }
-
-        //public Bus bus { get; set; }
 
         public void update(Bus selectedBus)
         {

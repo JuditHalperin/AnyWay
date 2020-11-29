@@ -32,5 +32,17 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="SelectionBrush" Value="#FF1D1D7D"/>
         </Style>
+        <Style x:Key="FuelButton" TargetType="Button">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition  />
+                        <Condition Property=""/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
