@@ -24,19 +24,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="ID number:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Activity date begining:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Total km of drive:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Last treat date:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Km of drive since the last treat:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Km of drive since the last fueling:" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
+            <Label Content="ID number:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Activity date begining:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Total km of drive:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Last treat date:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Km of drive since the last treat:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Km of drive since the last fueling:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
 
-            <Label Content="{Binding Path=Id}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-            <Label Content="{Binding Path=DateOfBegining}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
-            <Label Content="{Binding Path=TotalKm}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
-            <Label Content="{Binding Path=DateOfLastTreat}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
-            <Label Content="{Binding Path=KmSinceTreated}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
-            <Label Content="{Binding Path=KmSinceFueled}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
+            <Label Content="{Binding Path=Id}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="{Binding Path=DateOfBegining}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+            <Label Content="{Binding Path=TotalKm}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+            <Label Content="{Binding Path=DateOfLastTreat}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="{Binding Path=KmSinceTreated}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+            <Label Content="{Binding Path=KmSinceFueled}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"/>
         </Grid>
         <Grid x:Name="DownGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
