@@ -47,7 +47,6 @@ namespace dotNET5781_03B_6589_5401
                 worker.ReportProgress((int)timer.ElapsedMilliseconds / 1000);
                 Thread.Sleep(1000);
             }
-
         }
 
         private void showTimer(object sender, ProgressChangedEventArgs e)
@@ -56,10 +55,12 @@ namespace dotNET5781_03B_6589_5401
             //ProgressLabel.content = $"{progress / 60}:{progress % 60}:00";
             // ליצור תווית עם נראות ולסדר פורמט הדפסה
         }
-       
-        private void AddBusButton_Click(object sender, RoutedEventArgs e)
+        
+        private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            AddBus window = new AddBus();
+            Bus selectedBus = (Bus)BusesList.SelectedItem;
+            ShowBusDetails window = new ShowBusDetails();
+            window.update(selectedBus);
             window.ShowDialog();
         }
 
@@ -81,12 +82,20 @@ namespace dotNET5781_03B_6589_5401
             }
         }
 
-        private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void AddBusButton_Click(object sender, RoutedEventArgs e)
         {
-            Bus selectedBus = (Bus)BusesList.SelectedItem;
-            ShowBusDetails window = new ShowBusDetails();
-            window.update(selectedBus);
+            AddBus window = new AddBus();
             window.ShowDialog();
+        }
+
+        private void RemoveBusButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 
