@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Add Bus" Height="250" Width="400">
+        Title="Add Bus" Height="250" Width="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,15 +19,15 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="ID number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="License plate:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="ID" Style="{StaticResource TextBoxStyle}" MaxLength="8" Grid.Row="1" Width="100" Height="25" VerticalAlignment="Top"/>
             <Label Content="* 7 digits for buses before 2018, 8 digits for buses after 2018" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="6" Foreground="#FFC59D04"/>
-            <Label Content="Total km of drive:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Total distance of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="TotalKm" Style="{StaticResource TextBoxStyle}" Grid.Row="3" Width="100" Height="25" VerticalAlignment="Top"/>
-            <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Row="4" Margin="25,10,111,14" Click="OkButton_Click"/>
-            <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Margin="111,10,25,14" Click="CancelButton_Click"/>
+            <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="128,10,33.6,14" Click="OkButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="37,10,124.6,14" Click="CancelButton_Click"/>
         </Grid>
-        <Label Content="Activitity begining date:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="Activity beginning date:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Calendar x:Name="BeginingDate" Grid.Column="0" HorizontalAlignment="Center" SelectionMode="SingleDate" DisplayDateStart="01.01.1990" Margin="9.2,35,9.6,12" FontFamily="Comic Sans MS" >
             <Calendar.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

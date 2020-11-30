@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Bus Details" Height="250" Width="600">
+        Title="Bus Details" Height="250" Width="750">
     <Grid x:Name="Details">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -24,12 +24,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="ID number:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Activity date begining:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Total km of drive:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Last treat date:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Km of drive since the last treat:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
-            <Label Content="Km of drive since the last fueling:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
+            <Label Content="License plate:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Activity beginning date:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Total distance of drive (km):" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Last service date:" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Distance since the last service (km):" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="10" FontWeight="Bold"/>
+            <Label Content="Distance since the last refueling (km):" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontSize="10" FontWeight="Bold"/>
 
             <Label Content="{Binding Path=Id}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
             <Label Content="{Binding Path=DateOfBegining}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
@@ -44,9 +44,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="TreatButton" Content="Treat" Style="{StaticResource ButtonStyle}" Grid.Column="0" Height="20" Width="40" Click="TreatButton_Click" IsEnabled="{Binding Path=CanGetTreated}"/>
-            <Button x:Name="FuelButton" Content="Fuel" Style="{StaticResource ButtonStyle}" Grid.Column="1" Height="20" Width="40" Click="FuelButton_Click" IsEnabled="{Binding Path=CanGetFueled}"/>
-            <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="2" Height="20" Width="40" Click="OkButton_Click"/>
+            <Button x:Name="TreatButton" Content="Service" Style="{StaticResource ButtonStyle}" Grid.Column="0" Height="20" Width="50" Click="TreatButton_Click" IsEnabled="{Binding Path=CanGetTreated}"/>
+            <Button x:Name="FuelButton" Content="Fuel" Style="{StaticResource ButtonStyle}" Grid.Column="1" Height="20" Width="50" Click="FuelButton_Click" IsEnabled="{Binding Path=CanGetFueled}"/>
+            <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="2" Height="20" Width="50" Click="OkButton_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -10,7 +10,7 @@
         <local:StateToBool_Drive x:Key="StateToBool_Drive"/>
         <DataTemplate x:Key="busInlistBoxTemplate">
             <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="IdTextBlock" Text="{Binding}" Height="20" Width="110"/>
+                <TextBlock x:Name="IdTextBlock" Text="{Binding}" Height="20" Width="120"/>
                 <Label x:Name="StatusLabel" Content="{Binding Path=Status}" Style="{StaticResource LabelDataStyle}" Height="30" Width="110" Foreground="#FF021B6E" />
                 <Label x:Name="TimerLabel" Style="{StaticResource LabelDataStyle}" Height="30" Width="110"/>
                 <Button x:Name="DriveButton" Content="Drive" Style="{StaticResource ButtonStyle}" Height="20" Width="60" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
@@ -20,12 +20,12 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox x:Name="BusesList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource busInlistBoxTemplate}" HorizontalAlignment="Left" Height="333" Margin="40,55,0,0" Width="517" MouseDoubleClick="BusesList_MouseDoubleClick"/>
+        <ListBox x:Name="BusesList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource busInlistBoxTemplate}" HorizontalAlignment="Left" Margin="40,71,0,32" Width="517" MouseDoubleClick="BusesList_MouseDoubleClick"/>
         <Button x:Name="AddBusButton" Content="Add bus" Style="{StaticResource ButtonStyle}" Height="30" Margin="630,75,80,320" Click="AddBusButton_Click"/>
         <Button x:Name="RemoveBusButton" Content="Remove bus" Style="{StaticResource ButtonStyle}" Height="30" Margin="630,125,80,265" Click="RemoveBusButton_Click"/>
         <Button x:Name="ExitButton" Content="Exit" Style="{StaticResource ButtonStyle}" Height="30" Margin="630,175,79.680,220" Click="ExitButton_Click"/>
-        <Label Content="ID number" Style="{StaticResource LabelTitleStyle}" Width="110" Height="30" Margin="42,36,661.6,354"/>
-        <Label Content="Status" Style="{StaticResource LabelTitleStyle}" Width="110" Height="30" Margin="158,36,525.6,354"/>
+        <Label Content="License plate" Style="{StaticResource LabelTitleStyle}" Width="120" Height="30" Margin="40,36,633.6,354"/>
+        <Label Content="Status" Style="{StaticResource LabelTitleStyle}" Width="110" Height="30" Margin="166,36,517.6,354"/>
         <Label Content="BlaBla" Style="{StaticResource LabelTitleStyle}" Width="110" Height="30" Margin="374,38,309.6,352"/>
         <Image Source="bus.jpg" Width="135" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,31.6,32"/>
     </Grid>
