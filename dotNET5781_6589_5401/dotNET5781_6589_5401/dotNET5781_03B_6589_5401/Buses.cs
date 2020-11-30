@@ -71,7 +71,7 @@ namespace dotNET5781_03B_6589_5401
             if (!containsBus(newBus.Id))
                 buses.Add(newBus);
             else
-                throw new BasicBusExceptions("This ID already exists.");
+                throw new BasicBusExceptions("This license plate number already exists.");
         }
 
         /// <summary>

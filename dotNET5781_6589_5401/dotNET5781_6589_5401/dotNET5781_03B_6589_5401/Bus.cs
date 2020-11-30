@@ -110,7 +110,7 @@ namespace dotNET5781_03B_6589_5401
             DateOfLastTreat = dateTreating;
 
             if (totalKm < 0)
-                throw new BasicBusExceptions("Negative length is invalid.");
+                throw new BasicBusExceptions("Negative distance of drive is invalid.");
             if (totalKm < kmSinceFueled)
                 kmSinceFueled = 0;
             if (totalKm < kmSinceTreated)
@@ -133,13 +133,10 @@ namespace dotNET5781_03B_6589_5401
         private string setId(string value)
         {
             if (value.Length < 7 || value.Length > 8) // wrong length
-                throw new BasicBusExceptions("Wrong length of ID number.");
+                throw new BasicBusExceptions("Wrong length of license plate number.");
 
             int num = int.Parse(value);
-
-            if (num < 1000000 || num > 100000000) // not all digits
-                throw new BasicBusExceptions("ID number should be consisted of digits only.");
-
+            
             string tmp = Convert.ToString(num);
 
             if (dateOfBegining.Year < 2018 && tmp.Length == 7) // 7 digits
@@ -155,7 +152,7 @@ namespace dotNET5781_03B_6589_5401
             }
 
             else // length does not fit the year
-                throw new BasicBusExceptions("Length ID number does not fit the year.");
+                throw new BasicBusExceptions("Length of license plate number does not fit the year.");
 
             return tmp;
         }
@@ -173,7 +170,7 @@ namespace dotNET5781_03B_6589_5401
         }
 
         /// <summary>
-        ///  if possible - drive the bus
+        ///  drive the bus
         /// </summary>
         public void drive(float km)
         {
@@ -203,19 +200,19 @@ namespace dotNET5781_03B_6589_5401
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
             if (timeSinceLastTreat.TotalDays > 365)
             {
-                msg = "It needs a treat because it has not been treated for a year.";
+                msg = "It needs to be serviced because it has not been serviced for a year.";
                 return false;
             }
 
             if (KmSinceTreated + km > 20000)
             {
-                msg = $"It needs a traet before driving {km} km.";
+                msg = $"It needs to be serviced before driving {km} km.";
                 return false;
             }
 
             if (KmSinceFueled + km > 1200)
             {
-                msg = $"It needs to get fueled before driving {km} km.";
+                msg = $"It needs to be fueled before driving {km} km.";
                 return false;
             }
 
