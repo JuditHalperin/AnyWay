@@ -53,7 +53,7 @@ namespace dotNET5781_03B_6589_5401
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             int progress = e.ProgressPercentage * 12;
-            ProgressLabel.content = $"{progress / 60}:{progress % 60}:00";
+            //ProgressLabel.content = $"{progress / 60}:{progress % 60}:00";
             // ליצור תווית עם נראות ולסדר פורמט הדפסה
         }
        

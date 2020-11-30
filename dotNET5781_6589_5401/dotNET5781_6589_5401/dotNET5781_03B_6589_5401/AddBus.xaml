@@ -28,7 +28,7 @@
             <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Margin="111,10,25,14" Click="CancelButton_Click"/>
         </Grid>
         <Label Content="Activitity begining date:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Calendar x:Name="BeginingDate" Grid.Column="1" HorizontalAlignment="Center" SelectionMode="SingleDate" DisplayDateStart="01.01.1990" Margin="9.2,35,9.6,12" FontFamily="Comic Sans MS">
+        <Calendar x:Name="BeginingDate" Grid.Column="1" HorizontalAlignment="Center" SelectionMode="SingleDate" DisplayDateStart="01.01.1990" Margin="9.2,35,9.6,12" FontFamily="Comic Sans MS" >
             <Calendar.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFE4EAF0" Offset="0"/>

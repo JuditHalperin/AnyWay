@@ -37,8 +37,8 @@
             <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition  />
-                        <Condition Property=""/>
+                        <Condition/>
+                        <Condition/>
                     </MultiTrigger.Conditions>
                     <Setter Property="IsEnabled" Value="True"/>
                 </MultiTrigger>
