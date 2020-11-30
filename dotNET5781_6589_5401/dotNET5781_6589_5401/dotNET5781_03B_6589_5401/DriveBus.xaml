@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="DriveBus" Height="250" Width="400">
+        Title="Drive Bus" Height="250" Width="400">
     <Grid x:Name="Drive">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Length of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="Length" Style="{StaticResource TextBoxStyle}" Grid.Column="1" Width="60" MaxLength="3" HorizontalAlignment="Left" VerticalAlignment="Center" PreviewKeyDown="Length_OnlyNumbers_PreviewKeyDown"/>
+        <TextBox x:Name="Length" Style="{StaticResource TextBoxStyle}" Grid.Column="1" Width="40" MaxLength="3" HorizontalAlignment="Left" VerticalAlignment="Center" PreviewKeyDown="Length_OnlyNumbers_PreviewKeyDown"/>
         <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Margin="86.2,173,41.6,21" Grid.Column="1" Click="CancelButton_Click" />
     </Grid>
 </Window>
