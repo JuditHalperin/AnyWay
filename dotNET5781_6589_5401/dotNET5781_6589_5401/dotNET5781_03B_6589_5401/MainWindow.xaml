@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Buses Collection" Height="450" Width="800">
+        Title="Buses Collection" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:StateToBool_Drive x:Key="StateToBool_Drive"/>
         <DataTemplate x:Key="busInlistBoxTemplate">

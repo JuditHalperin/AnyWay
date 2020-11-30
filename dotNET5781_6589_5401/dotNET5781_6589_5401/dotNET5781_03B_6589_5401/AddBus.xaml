@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Add Bus" Height="250" Width="450">
+        Title="Add Bus" Height="250" Width="450" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -23,7 +23,7 @@
             <TextBox x:Name="ID" Style="{StaticResource TextBoxStyle}" MaxLength="8" Grid.Row="1" Width="100" Height="25" VerticalAlignment="Top"/>
             <Label Content="* 7 digits for buses before 2018, 8 digits for buses after 2018" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="6" Foreground="#FFC59D04"/>
             <Label Content="Total distance of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="TotalKm" Style="{StaticResource TextBoxStyle}" Grid.Row="3" Width="100" Height="25" VerticalAlignment="Top"/>
+            <TextBox x:Name="TotalKm" Style="{StaticResource TextBoxStyle}" Grid.Row="3" MaxLength="7" Width="100" Height="25" VerticalAlignment="Top"/>
             <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="128,10,33.6,14" Click="OkButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="37,10,124.6,14" Click="CancelButton_Click"/>
         </Grid>
