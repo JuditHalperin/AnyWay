@@ -9,24 +9,57 @@
     <Window.Resources>
         <local:StateToBool_Drive x:Key="StateToBool_Drive"/>
         <DataTemplate x:Key="busInlistBoxTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="IdTextBlock" Text="{Binding}" Height="20" Width="120"/>
-                <Label x:Name="StatusLabel" Content="{Binding Path=Status}" Style="{StaticResource LabelDataStyle}" Height="30" Width="110" Foreground="#FF021B6E" />
-                <Label x:Name="TimerLabel" Style="{StaticResource LabelDataStyle}" Height="30" Width="110"/>
-                <Button x:Name="DriveButton" Content="Drive" Style="{StaticResource ButtonStyle}" Height="20" Width="60" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
-                <Label Width="20"/>
-                <Button x:Name="FuelButton" Content="Fuel" Style="{StaticResource ButtonStyle}" Height="20" Width="60" Click="FuelButton_Click" IsEnabled="{Binding Path=CanGetFueled}"/>
-            </StackPanel>
+            <Grid x:Name="BusFromListBox" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="IdTextBlock" Grid.Column="0" Text="{Binding}" Height="30" Width="120" HorizontalAlignment="Left"/>
+                <Label x:Name="StatusLabel" Grid.Column="1" Content="{Binding Path=Status}" Style="{StaticResource LabelDataStyle}" Height="30" Width="120" HorizontalAlignment="Left" Foreground="#FF021B6E" />
+                <Label x:Name="TimerLabel" Grid.Column="2" Style="{StaticResource LabelDataStyle}" Height="30" Width="120" HorizontalAlignment="Left"/>
+                <Button x:Name="DriveButton" Grid.Column="3" Content="Drive" Style="{StaticResource ButtonStyle}" Height="20" Width="70" HorizontalAlignment="Left" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
+                <Button x:Name="FuelButton" Grid.Column="4" Content="Fuel" Style="{StaticResource ButtonStyle}" Height="20" Width="70" HorizontalAlignment="Left" IsEnabled="{Binding Path=CanGetFueled}" Click="FuelButton_Click"/>
+            </Grid>
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ListBox x:Name="BusesList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource busInlistBoxTemplate}" HorizontalAlignment="Left" Margin="40,71,0,32" Width="517" MouseDoubleClick="BusesList_MouseDoubleClick"/>
-        <Button x:Name="AddBusButton" Content="Add bus" Style="{StaticResource ButtonStyle}" Height="30" Margin="630,75,80,320" Click="AddBusButton_Click"/>
-        <Button x:Name="RemoveBusButton" Content="Remove bus" Style="{StaticResource ButtonStyle}" Height="30" Margin="630,125,80,265" Click="RemoveBusButton_Click"/>
-        <Button x:Name="ExitButton" Content="Exit" Style="{StaticResource ButtonStyle}" Height="30" Margin="630,175,79.680,220" Click="ExitButton_Click"/>
-        <Label Content="License plate" Style="{StaticResource LabelTitleStyle}" Width="120" Height="30" Margin="40,36,633.6,354"/>
-        <Label Content="Status" Style="{StaticResource LabelTitleStyle}" Width="110" Height="30" Margin="166,36,517.6,354"/>
-        <Label Content="BlaBla" Style="{StaticResource LabelTitleStyle}" Width="110" Height="30" Margin="374,38,309.6,352"/>
-        <Image Source="bus.jpg" Width="135" Height="130" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,31.6,32"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="UpGrid" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="License plate" Grid.Column="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30"/>
+            <Label Content="Status" Grid.Column="1" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" Height="30"/>
+            <Label Content="BlaBla" Grid.Column="2" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" Height="30"/>
+        </Grid>
+        <Grid x:Name="DownGrid" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="LeftGrid" Grid.Column="0">
+                <ListBox x:Name="BusesList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource busInlistBoxTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="BusesList_MouseDoubleClick"/>
+            </Grid>
+            <Grid x:Name="RightGrid" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="AddBusButton" Content="Add bus" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="AddBusButton_Click"/>
+                <Button x:Name="RemoveBusButton" Content="Remove bus" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="RemoveBusButton_Click"/>
+                <Button x:Name="ExitButton" Content="Exit" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="ExitButton_Click"/>
+                <Image Source="bus.jpg" Grid.Row="3" Width="137" Height="122" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
