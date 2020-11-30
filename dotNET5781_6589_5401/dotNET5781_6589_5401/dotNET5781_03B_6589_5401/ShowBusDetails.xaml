@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="TreatButton" Content="Service" Style="{StaticResource ButtonStyle}" Grid.Column="0" Height="20" Width="50" Click="TreatButton_Click" IsEnabled="{Binding Path=CanGetTreated}"/>
-            <Button x:Name="FuelButton" Content="Fuel" Style="{StaticResource ButtonStyle}" Grid.Column="1" Height="20" Width="50" Click="FuelButton_Click" IsEnabled="{Binding Path=CanGetFueled}"/>
+            <Button x:Name="FuelButton" Content="Fuel" Style="{StaticResource FuelButton}" Grid.Column="1" Height="20" Width="50" Click="FuelButton_Click"/>
             <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="2" Height="20" Width="50" Click="OkButton_Click"/>
         </Grid>
     </Grid>

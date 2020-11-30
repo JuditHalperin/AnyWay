@@ -24,17 +24,22 @@ namespace dotNET5781_03B_6589_5401
     /// </summary>
     public partial class MainWindow : Window
     {
+        public BackgroundWorker worker;
+
         public MainWindow()
         {
             InitializeComponent();
 
             BusesList.ItemsSource = Buses.buses;
 
-            BackgroundWorker worker = new BackgroundWorker();
+            worker = new BackgroundWorker();
+
             worker.DoWork += startTimer;
             worker.ProgressChanged += showTimer;
+            worker.WorkerReportsProgress = true;
         }
-       
+
+
         private void startTimer(object sender, DoWorkEventArgs e)
         {
             Stopwatch timer = new Stopwatch();
@@ -42,18 +47,19 @@ namespace dotNET5781_03B_6589_5401
 
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            for (int i = 0; i < (int)e.Argument; i++) 
+            for (int i = 1; i < (int)e.Argument; i++) 
             {
-                worker.ReportProgress((int)timer.ElapsedMilliseconds / 1000);
                 Thread.Sleep(1000);
+                worker.ReportProgress(i);
             }
         }
 
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             int progress = e.ProgressPercentage * 12;
-            //ProgressLabel.content = $"{progress / 60}:{progress % 60}:00";
-            // ליצור תווית עם נראות ולסדר פורמט הדפסה
+            
+            //TimerLabel.content = $"{progress / 60 : 00}:{progress % 60 : 00}:00";
+            // ליצור תווית עם נראות
         }
         
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -113,6 +119,43 @@ namespace dotNET5781_03B_6589_5401
 
             else
                 return false;
+        }
+
+        public object ConvertBack(
+          object value,
+          Type targetType,
+          object parameter,
+          CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class StatusToText_Status : IValueConverter
+    {
+        public object Convert(
+          object value,
+          Type targetType,
+          object parameter,
+          CultureInfo culture)
+        {
+            State stateValue = (State)value;
+
+            switch(stateValue)
+            {
+                case State.canDrive:
+                    return "Can Drive";
+                case State.cannotDrive:
+                    return "Cannot Drive";
+                case State.gettingFueled:
+                    return "Being fueled";
+                case State.gettingTreated:
+                    return "Being serviced";
+                case State.driving:
+                    return "Driving";
+                default:
+                    return null;
+            }
         }
 
         public object ConvertBack(

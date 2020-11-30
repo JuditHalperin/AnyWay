@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <local:FloatToBool_Fuel x:Key="FloatToBool_Fuel"/>
+        <local:StateToBool_Fuel x:Key="StateToBool_Fuel"/>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="12"/>
@@ -34,14 +36,19 @@
         </Style>
         <Style x:Key="FuelButton" TargetType="Button">
             <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="#FFD6F0F9"/>
+            <Setter Property="Foreground" Value="#FF070720"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Style.Triggers>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition/>
-                        <Condition/>
-                    </MultiTrigger.Conditions>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Value="True" Binding="{Binding Path=KmSinceFueled, Converter={StaticResource FloatToBool_Fuel}}"/>
+                        <Condition Value="True" Binding="{Binding Path=Status, Converter={StaticResource StateToBool_Fuel}}"/>
+                    </MultiDataTrigger.Conditions>
                     <Setter Property="IsEnabled" Value="True"/>
-                </MultiTrigger>
+                </MultiDataTrigger>
             </Style.Triggers>
         </Style>
     </Application.Resources>

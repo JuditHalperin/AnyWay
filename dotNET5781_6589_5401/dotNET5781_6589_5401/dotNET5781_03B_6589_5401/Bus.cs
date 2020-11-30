@@ -76,17 +76,7 @@ namespace dotNET5781_03B_6589_5401
                     PropertyChanged(this, new PropertyChangedEventArgs("Status"));
             }
         }
-
-        public bool CanGetFueled
-        {
-            get { return KmSinceFueled > 800 && (Status == State.canDrive || Status == State.cannotDrive); }
-        }
-
-        public bool CanGetTreated
-        {
-            get { return (KmSinceTreated > 19500 || (DateTime.Now - DateOfLastTreat).TotalDays > 350) && (Status == State.canDrive || Status == State.cannotDrive); }
-        }
-
+        
         #endregion
 
         /// <summary>
@@ -164,7 +154,7 @@ namespace dotNET5781_03B_6589_5401
         public State setState()
         {
             TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
-            if (timeSinceLastTreat.TotalDays > 365 || KmSinceTreated > 20000 || KmSinceFueled > 1200)
+            if (timeSinceLastTreat.TotalDays >= 365 || KmSinceTreated >= 20000 || KmSinceFueled >= 1200)
                 return State.cannotDrive;
             return State.canDrive;
         }
@@ -180,9 +170,11 @@ namespace dotNET5781_03B_6589_5401
             if (possible)
             {
                 Status = State.driving;
-                // threading
+
+                new MainWindow().worker.RunWorkerAsync(144);
+
                 updateKm(km);
-                setState();
+                Status = setState();
             }
 
             else
@@ -240,7 +232,7 @@ namespace dotNET5781_03B_6589_5401
             Status = State.gettingFueled;
             //
             KmSinceFueled = 0;
-            setState();
+            Status = setState();
         }
 
         /// <summary>
@@ -259,9 +251,9 @@ namespace dotNET5781_03B_6589_5401
             if (kmSinceFueled >= 1100)
                 kmSinceFueled = 0;
 
-            setState();
+            Status = setState();
         }
-        
+
         /// <summary>
         /// print the ID number of the bus
         /// override of "ToString"
