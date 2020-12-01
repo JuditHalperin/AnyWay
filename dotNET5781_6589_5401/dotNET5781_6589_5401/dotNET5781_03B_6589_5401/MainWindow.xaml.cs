@@ -39,7 +39,6 @@ namespace dotNET5781_03B_6589_5401
             worker.WorkerReportsProgress = true;
         }
 
-
         private void startTimer(object sender, DoWorkEventArgs e)
         {
             Stopwatch timer = new Stopwatch();
@@ -47,7 +46,7 @@ namespace dotNET5781_03B_6589_5401
 
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            for (int i = 1; i < (int)e.Argument; i++) 
+            for (int i = 1; i < (int)e.Argument; i++)
             {
                 Thread.Sleep(1000);
                 worker.ReportProgress(i);
@@ -57,11 +56,11 @@ namespace dotNET5781_03B_6589_5401
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             int progress = e.ProgressPercentage * 12;
-            
+
             //TimerLabel.content = $"{progress / 60 : 00}:{progress % 60 : 00}:00";
             // ליצור תווית עם נראות
         }
-        
+
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Bus selectedBus = (Bus)BusesList.SelectedItem;
@@ -75,7 +74,7 @@ namespace dotNET5781_03B_6589_5401
             Button driving = (Button)sender;
             DriveBus window = new DriveBus();
             window.update((Bus)driving.DataContext);
-            window.ShowDialog();            
+            window.ShowDialog();
         }
 
         private void FuelButton_Click(object sender, RoutedEventArgs e)
@@ -107,11 +106,7 @@ namespace dotNET5781_03B_6589_5401
 
     public class StateToBool_Drive : IValueConverter
     {
-        public object Convert(
-          object value,
-          Type targetType,
-          object parameter,
-          CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             State stateValue = (State)value;
             if (stateValue == State.canDrive)
@@ -121,11 +116,7 @@ namespace dotNET5781_03B_6589_5401
                 return false;
         }
 
-        public object ConvertBack(
-          object value,
-          Type targetType,
-          object parameter,
-          CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
@@ -133,15 +124,11 @@ namespace dotNET5781_03B_6589_5401
 
     public class StatusToText_Status : IValueConverter
     {
-        public object Convert(
-          object value,
-          Type targetType,
-          object parameter,
-          CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             State stateValue = (State)value;
 
-            switch(stateValue)
+            switch (stateValue)
             {
                 case State.canDrive:
                     return "Can Drive";
@@ -158,11 +145,7 @@ namespace dotNET5781_03B_6589_5401
             }
         }
 
-        public object ConvertBack(
-          object value,
-          Type targetType,
-          object parameter,
-          CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
