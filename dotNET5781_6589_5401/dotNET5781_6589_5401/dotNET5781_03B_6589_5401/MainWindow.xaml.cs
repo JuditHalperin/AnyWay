@@ -36,6 +36,7 @@ namespace dotNET5781_03B_6589_5401
 
             worker.DoWork += startTimer;
             worker.ProgressChanged += showTimer;
+            worker.RunWorkerCompleted += updateBusProperties;
             worker.WorkerReportsProgress = true;
         }
 
@@ -43,10 +44,10 @@ namespace dotNET5781_03B_6589_5401
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-
+          
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            for (int i = 1; i < (int)e.Argument; i++)
+            for (int i = 1; i < (int)((List<object>)e.Argument).First(); i++)
             {
                 Thread.Sleep(1000);
                 worker.ReportProgress(i);
@@ -56,9 +57,14 @@ namespace dotNET5781_03B_6589_5401
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             int progress = e.ProgressPercentage * 12;
-
+            
             //TimerLabel.content = $"{progress / 60 : 00}:{progress % 60 : 00}:00";
             // ליצור תווית עם נראות
+        }
+
+        private void updateBusProperties(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
         }
 
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

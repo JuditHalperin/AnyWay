@@ -76,7 +76,39 @@ namespace dotNET5781_03B_6589_5401
                     PropertyChanged(this, new PropertyChangedEventArgs("Status"));
             }
         }
-        
+
+        private bool canBeFueled; public bool CanBeFueled
+        {
+            get { return canBeFueled; }
+            private set
+            {
+                canBeFueled = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("CanBeFueled"));
+            }
+        }
+
+        private bool canBeServiced; public bool CanBeServiced
+        {
+            get { return canBeServiced; }
+            private set
+            {
+                canBeServiced = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("CanBeServiced"));
+            }
+        }
+        private string time; public string Time
+        {
+            get { return time; }
+            private set
+            {
+                time = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Time"));
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -112,6 +144,9 @@ namespace dotNET5781_03B_6589_5401
 
             Id = setId(id);
             Status = setState();
+
+            setCanBeFueled();
+            setCanBeServiced();
         }
 
         /// <summary>
@@ -160,6 +195,28 @@ namespace dotNET5781_03B_6589_5401
         }
 
         /// <summary>
+        /// check if the bus can be fueled
+        /// </summary>
+        public void setCanBeFueled()
+        {
+            if (kmSinceFueled > 800 && (Status == State.canDrive || Status == State.cannotDrive))
+                CanBeFueled = true;
+            else
+                CanBeFueled = false;
+        }
+
+        /// <summary>
+        /// check if the bus can be serviced
+        /// </summary>
+        public void setCanBeServiced()
+        {
+            if ((kmSinceTreated > 19500 || (DateTime.Now - DateOfLastTreat).TotalDays > 350) &&  (Status == State.canDrive || Status == State.cannotDrive))
+                CanBeServiced = true;
+            else
+                CanBeServiced = false;
+        }
+
+        /// <summary>
         ///  drive the bus
         /// </summary>
         public void drive(float km)
@@ -171,10 +228,15 @@ namespace dotNET5781_03B_6589_5401
             {
                 Status = State.driving;
 
-                new MainWindow().worker.RunWorkerAsync(144);
+                List<object> parameters = new List<object>();
+                parameters.Add(144);
+                parameters.Add(this);
+                new MainWindow().worker.RunWorkerAsync(parameters);
 
                 updateKm(km);
                 Status = setState();
+                setCanBeFueled();
+                setCanBeServiced();
             }
 
             else
@@ -233,6 +295,7 @@ namespace dotNET5781_03B_6589_5401
             //
             KmSinceFueled = 0;
             Status = setState();
+            setCanBeFueled();
         }
 
         /// <summary>
@@ -252,6 +315,7 @@ namespace dotNET5781_03B_6589_5401
                 kmSinceFueled = 0;
 
             Status = setState();
+            setCanBeServiced();
         }
 
         /// <summary>
