@@ -19,7 +19,7 @@ namespace dotNET5781_03B_6589_5401
         private string id; public string Id
         {
             get { return id; }
-            set { id = value; }
+            private set { id = value; }
         }
         private DateTime dateOfBegining; public DateTime DateOfBegining
         {
@@ -280,7 +280,7 @@ namespace dotNET5781_03B_6589_5401
         /// <summary>
         /// update the km fields after a drive
         /// </summary>
-        /// <param name="km">additional km that the bus has drived</param>
+        /// <param name="km">additional km the bus has drived</param>
         public void updateKm(float km)
         {
             TotalKm = TotalKm + km;
