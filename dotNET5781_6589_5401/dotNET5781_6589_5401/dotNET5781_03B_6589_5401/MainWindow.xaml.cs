@@ -42,34 +42,51 @@ namespace dotNET5781_03B_6589_5401
 
         private void startTimer(object sender, DoWorkEventArgs e)
         {
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-          
             BackgroundWorker worker = sender as BackgroundWorker;
+
             e.Result = e.Argument;
+
+            Bus bus = (Bus)((List<object>)e.Argument)[1];
+
+            bus.Time = "00:00:00";
 
             for (int i = 1; i < (int)((List<object>)e.Argument).First(); i++)
             {
                 Thread.Sleep(1000);
-                worker.ReportProgress(i);
+                worker.ReportProgress(i, e.Argument);
             }
         }
 
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             int progress = e.ProgressPercentage * 12;
-            
-            //TimerLabel.content = $"{progress / 60 : 00}:{progress % 60 : 00}:00";
-            // ליצור תווית עם נראות
+            Bus bus = (Bus)((List<object>)e.UserState)[1];
+            bus.Time = $"{progress / 60: 00}:{progress % 60: 00}:00";
         }
 
         private void updateBusProperties(object sender, RunWorkerCompletedEventArgs e)
         {
-            Bus bus=(Bus)((List<object>)e.Result)[1];
-            bus.updateKm((float)((List<object>)e.Result)[2]);
+            Bus bus = (Bus)((List<object>)e.Result)[1];
+
+            float km = (float)((List<object>)e.Result)[2];
+
+            if (km > 0) // drive the give distance
+                bus.updateKm(km);
+            else if (km == -1) // means refueling
+                bus.KmSinceFueled = 0;
+            else // means service
+            {
+                bus.KmSinceTreated = 0;
+                bus.DateOfLastTreat = DateTime.Now.Date;
+
+                if (bus.KmSinceFueled >= 1200)
+                    bus.KmSinceFueled = 0;
+            }
+
             bus.Status = bus.setState();
             bus.setCanBeFueled();
             bus.setCanBeServiced();
+            bus.Time = "";
         }
 
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

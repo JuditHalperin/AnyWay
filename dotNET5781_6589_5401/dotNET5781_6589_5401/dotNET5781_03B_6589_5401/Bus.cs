@@ -29,7 +29,7 @@ namespace dotNET5781_03B_6589_5401
         private DateTime dateOfLastTreat; public DateTime DateOfLastTreat
         {
             get { return dateOfLastTreat; }
-            private set
+            set
             {
                 dateOfLastTreat = value;
                 if (PropertyChanged != null)
@@ -49,7 +49,7 @@ namespace dotNET5781_03B_6589_5401
         private float kmSinceFueled; public float KmSinceFueled
         {
             get { return kmSinceFueled; }
-            private set
+            set
             {
                 kmSinceFueled = value;
                 if (PropertyChanged != null)
@@ -59,7 +59,7 @@ namespace dotNET5781_03B_6589_5401
         private float kmSinceTreated; public float KmSinceTreated
         {
             get { return kmSinceTreated; }
-            private set
+            set
             {
                 kmSinceTreated = value;
                 if (PropertyChanged != null)
@@ -101,7 +101,7 @@ namespace dotNET5781_03B_6589_5401
         private string time; public string Time
         {
             get { return time; }
-            private set
+            set
             {
                 time = value;
                 if (PropertyChanged != null)
@@ -147,6 +147,8 @@ namespace dotNET5781_03B_6589_5401
 
             setCanBeFueled();
             setCanBeServiced();
+
+            Time = "";
         }
 
         /// <summary>
@@ -161,7 +163,7 @@ namespace dotNET5781_03B_6589_5401
                 throw new BasicBusExceptions("Wrong length of license plate number.");
 
             int num = int.Parse(value);
-            
+
             string tmp = Convert.ToString(num);
 
             if (dateOfBegining.Year < 2018 && tmp.Length == 7) // 7 digits
@@ -210,7 +212,7 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         public void setCanBeServiced()
         {
-            if ((kmSinceTreated > 19500 || (DateTime.Now - DateOfLastTreat).TotalDays > 350) &&  (Status == State.canDrive || Status == State.cannotDrive))
+            if ((kmSinceTreated > 19500 || (DateTime.Now - DateOfLastTreat).TotalDays > 350) && (Status == State.canDrive || Status == State.cannotDrive))
                 CanBeServiced = true;
             else
                 CanBeServiced = false;
@@ -218,6 +220,7 @@ namespace dotNET5781_03B_6589_5401
 
         /// <summary>
         ///  drive the bus
+        ///  drive of 1 real hour = 6 unreal seconds
         /// </summary>
         public void drive(float km)
         {
@@ -227,20 +230,20 @@ namespace dotNET5781_03B_6589_5401
             if (possible)
             {
                 Status = State.driving;
-                float timeOfDrive = km/(rand.Next(20, 51));
+
+                float timeOfDrive = km / rand.Next(20, 51);
                 List<object> parameters = new List<object>();
-                parameters.Add((int)timeOfDrive*6);//one real hour = 6 unreal seconds
+                parameters.Add((int)timeOfDrive * 6);
                 parameters.Add(this);
                 parameters.Add(km);
+
                 new MainWindow().worker.RunWorkerAsync(parameters);
-
-
             }
 
             else
                 throw new BasicBusExceptions("The bus cannot drive.\n" + msg);
         }
-        
+
         /// <summary>
         /// test if the bus can drive the given length
         /// </summary>
@@ -285,35 +288,36 @@ namespace dotNET5781_03B_6589_5401
 
         /// <summary>
         /// fuel the bus
-        /// ? seconds for each fuel
+        /// each refueling takes 2 real hours = 12 unreal seconds
         /// </summary>
         public void fuel()
         {
             Status = State.gettingFueled;
-            //
+
+            List<object> parameters = new List<object>();
+            parameters.Add(12);
+            parameters.Add(this);
+            parameters.Add(-1.0); // mark refueling
+
+            new MainWindow().worker.RunWorkerAsync(parameters);
+
             KmSinceFueled = 0;
-            Status = setState();
-            setCanBeFueled();
         }
 
         /// <summary>
         /// treat the bus
-        /// ? seconds for each treat
+        /// each service takes 24 real hours = 144 unreal seconds 
         /// </summary>
         public void treat()
         {
             Status = State.gettingTreated;
 
-            //
+            List<object> parameters = new List<object>();
+            parameters.Add(144);
+            parameters.Add(this);
+            parameters.Add(-2.0); // mark service
 
-            KmSinceTreated = 0;
-            DateOfLastTreat = DateTime.Now.Date;
-
-            if (kmSinceFueled >= 1100)
-                kmSinceFueled = 0;
-
-            Status = setState();
-            setCanBeServiced();
+            new MainWindow().worker.RunWorkerAsync(parameters);
         }
 
         /// <summary>
@@ -322,6 +326,6 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         /// <returns>ID number</returns>
         public override string ToString() { return Id; }
-       
+
     }
 }

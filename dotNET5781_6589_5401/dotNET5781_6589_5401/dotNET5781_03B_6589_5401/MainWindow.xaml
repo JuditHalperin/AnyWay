@@ -20,7 +20,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="IdTextBlock" Grid.Column="0" Text="{Binding}" Height="30" Width="120" HorizontalAlignment="Left"/>
                 <Label x:Name="StatusLabel" Grid.Column="1" Content="{Binding Path=Status, Converter={StaticResource StatusToText_Status}}" Style="{StaticResource LabelDataStyle}" Height="30" Width="120" HorizontalAlignment="Left" Foreground="#FF021B6E" />
-                <Label x:Name="TimerLabel" Grid.Column="2" Style="{StaticResource LabelDataStyle}" Height="30" Width="120" HorizontalAlignment="Left"/>
+                <Label x:Name="TimerLabel" Grid.Column="2" Style="{StaticResource LabelDataStyle}" Content="{Binding Path=Time}" Height="30" Width="120" HorizontalAlignment="Left"/>
                 <Button x:Name="DriveButton" Grid.Column="3" Content="Drive" Style="{StaticResource ButtonStyle}" Height="20" Width="70" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
                 <Button x:Name="FuelButton" Grid.Column="4" Content="Fuel" Style="{StaticResource ButtonStyle}" Height="20" Width="70" Click="FuelButton_Click" IsEnabled="{Binding Path=CanBeFueled, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
