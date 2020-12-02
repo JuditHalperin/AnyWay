@@ -41,9 +41,10 @@ namespace dotNET5781_03B_6589_5401
                 try
                 {
                     double km = Convert.ToDouble(Length.Text);
-                    if (km <= 0)
+                    if (km < 0)
                         throw new BasicBusExceptions("Negative distance of drive is invalid.");
-                    
+                    if (km == 0)
+                        throw new BasicBusExceptions("0 isn't distance.");
                     Close();
                     e.Handled = true;
 
