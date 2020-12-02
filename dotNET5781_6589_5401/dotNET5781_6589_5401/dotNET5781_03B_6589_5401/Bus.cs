@@ -230,6 +230,8 @@ namespace dotNET5781_03B_6589_5401
             if (possible)
             {
                 Status = State.driving;
+                setCanBeServiced();
+                setCanBeFueled();
 
                 float timeOfDrive = km / rand.Next(20, 51);
                 List<object> parameters = new List<object>();
@@ -293,6 +295,8 @@ namespace dotNET5781_03B_6589_5401
         public void fuel()
         {
             Status = State.gettingFueled;
+            setCanBeServiced();
+            setCanBeFueled();
 
             List<object> parameters = new List<object>();
             parameters.Add(12);
@@ -311,6 +315,8 @@ namespace dotNET5781_03B_6589_5401
         public void treat()
         {
             Status = State.gettingTreated;
+            setCanBeServiced();
+            setCanBeFueled();
 
             List<object> parameters = new List<object>();
             parameters.Add(144);
