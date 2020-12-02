@@ -301,7 +301,7 @@ namespace dotNET5781_03B_6589_5401
             List<object> parameters = new List<object>();
             parameters.Add(12);
             parameters.Add(this);
-            parameters.Add(-1.0); // mark refueling
+            parameters.Add((float)-1); // mark refueling
 
             new MainWindow().worker.RunWorkerAsync(parameters);
 
@@ -321,7 +321,7 @@ namespace dotNET5781_03B_6589_5401
             List<object> parameters = new List<object>();
             parameters.Add(144);
             parameters.Add(this);
-            parameters.Add(-2.0); // mark service
+            parameters.Add((float)-2); // mark service
 
             new MainWindow().worker.RunWorkerAsync(parameters);
         }
