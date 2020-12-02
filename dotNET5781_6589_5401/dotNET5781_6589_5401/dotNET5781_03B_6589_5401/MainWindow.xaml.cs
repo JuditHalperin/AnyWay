@@ -59,7 +59,7 @@ namespace dotNET5781_03B_6589_5401
 
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
-            int progress = e.ProgressPercentage * 12;
+            int progress = e.ProgressPercentage * 10; // 1 unreal second = 10 real minutes     
             Bus bus = (Bus)((List<object>)e.UserState)[1];
             bus.Time = $"{progress / 60: 00}:{progress % 60: 00}:00";
         }
