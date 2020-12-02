@@ -69,7 +69,7 @@ namespace dotNET5781_03B_6589_5401
         private State status; public State Status
         {
             get { return status; }
-            private set
+            set
             {
                 status = value;
                 if (PropertyChanged != null)
@@ -227,16 +227,14 @@ namespace dotNET5781_03B_6589_5401
             if (possible)
             {
                 Status = State.driving;
-
+                float timeOfDrive = km/(rand.Next(20, 51));
                 List<object> parameters = new List<object>();
-                parameters.Add(144);
+                parameters.Add((int)timeOfDrive*6);//one real hour = 6 unreal seconds
                 parameters.Add(this);
+                parameters.Add(km);
                 new MainWindow().worker.RunWorkerAsync(parameters);
 
-                updateKm(km);
-                Status = setState();
-                setCanBeFueled();
-                setCanBeServiced();
+
             }
 
             else
@@ -278,7 +276,7 @@ namespace dotNET5781_03B_6589_5401
         /// update the km fields after a drive
         /// </summary>
         /// <param name="km">additional km that the bus has drived</param>
-        private void updateKm(float km)
+        public void updateKm(float km)
         {
             TotalKm = TotalKm + km;
             kmSinceFueled = KmSinceFueled + km;

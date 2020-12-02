@@ -46,6 +46,7 @@ namespace dotNET5781_03B_6589_5401
             timer.Start();
           
             BackgroundWorker worker = sender as BackgroundWorker;
+            e.Result = e.Argument;
 
             for (int i = 1; i < (int)((List<object>)e.Argument).First(); i++)
             {
@@ -64,7 +65,11 @@ namespace dotNET5781_03B_6589_5401
 
         private void updateBusProperties(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            Bus bus=(Bus)((List<object>)e.Result)[1];
+            bus.updateKm((float)((List<object>)e.Result)[2]);
+            bus.Status = bus.setState();
+            bus.setCanBeFueled();
+            bus.setCanBeServiced();
         }
 
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
