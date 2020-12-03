@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Remove Bus" Height="150" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Remove Bus" Height="150" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="Drive">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
