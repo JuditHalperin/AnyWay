@@ -13,12 +13,19 @@ namespace dotNET5781_03B_6589_5401
 
         static public ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
 
-        static private bool IsNotEmpty;
+        static private bool isNotEmpty;
 
-        static public bool MyProperty
+        static public bool IsNotEmpty
         {
-            get { return myVar; }
-            private set { myVar = value; }
+            get { return isNotEmpty; }
+            private set { isNotEmpty = value; }
+        }
+        static public void setIsNotEmpty()
+        {
+            if (buses.Count() == 0)
+                IsNotEmpty = false;
+            else
+                IsNotEmpty = true;
         }
 
 
@@ -61,12 +68,16 @@ namespace dotNET5781_03B_6589_5401
                         Convert.ToString(rand.Next(1000000, 9999999)),
                         rand.Next(20000, 50000),
                         rand.Next(0, 1200),
-                        rand.Next(0, 20000)));
+                        rand.Next(0, 20000)));                
             }
 
             catch (BasicBusExceptions) // in case that the random ID number already exists in the collection
             {
                 ;
+            }
+            finally
+            {
+                setIsNotEmpty();
             }
         }
 
@@ -78,7 +89,10 @@ namespace dotNET5781_03B_6589_5401
         static public void addBus(Bus newBus)
         {
             if (!containsBus(newBus.Id))
+            {
                 buses.Add(newBus);
+                setIsNotEmpty();
+            }
             else
                 throw new BasicBusExceptions("This license plate number already exists.");
         }
@@ -102,6 +116,7 @@ namespace dotNET5781_03B_6589_5401
                 if (bus.Id == id)
                 {
                     buses.Remove(bus);
+                    setIsNotEmpty();
                     return;
                 }
 
