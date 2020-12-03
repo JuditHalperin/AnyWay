@@ -18,32 +18,27 @@ namespace dotNET5781_03B_6589_5401
 
     }
 
-    public class FloatToBool_Fuel : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            float floatValue = (float)value;
-
-            if (floatValue > 800)
-                return true;
-            return false;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class StateToBool_Fuel : IValueConverter
+    public class StatusToText_Status : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             State stateValue = (State)value;
 
-            if (stateValue == State.canDrive || stateValue == State.cannotDrive)
-                return true;
-            return false;
+            switch (stateValue)
+            {
+                case State.canDrive:
+                    return "Can Drive";
+                case State.cannotDrive:
+                    return "Cannot Drive";
+                case State.gettingFueled:
+                    return "Being fueled";
+                case State.gettingTreated:
+                    return "Being serviced";
+                case State.driving:
+                    return "Driving";
+                default:
+                    return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
