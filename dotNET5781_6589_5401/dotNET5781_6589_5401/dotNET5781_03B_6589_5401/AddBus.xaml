@@ -20,10 +20,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="License plate:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="ID" Style="{StaticResource TextBoxStyle}" MaxLength="8" Grid.Row="1" Width="100" Height="25" VerticalAlignment="Top"/>
+            <TextBox x:Name="ID" Style="{StaticResource TextBoxStyle}" MaxLength="8" Grid.Row="1" Width="100" Height="25" VerticalAlignment="Top" PreviewKeyDown="OnlyNumbers_PreviewKeyDown"/>
             <Label Content="* 7 digits for buses before 2018, 8 digits for buses after 2018" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="6" Foreground="#FFC59D04"/>
             <Label Content="Total distance of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="TotalKm" Style="{StaticResource TextBoxStyle}" Grid.Row="3" MaxLength="7" Width="100" Height="25" VerticalAlignment="Top"/>
+            <TextBox x:Name="TotalKm" Style="{StaticResource TextBoxStyle}" Grid.Row="3" MaxLength="7" Width="100" Height="25" VerticalAlignment="Top" PreviewKeyDown="OnlyNumbers_PreviewKeyDown"/>
             <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="128,10,33.6,14" Click="OkButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="37,10,124.6,14" Click="CancelButton_Click"/>
         </Grid>
