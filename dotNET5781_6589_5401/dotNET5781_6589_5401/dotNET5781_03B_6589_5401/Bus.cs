@@ -201,7 +201,7 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         public void setCanBeFueled()
         {
-            if (kmSinceFueled > 800 && (Status == State.canDrive || Status == State.cannotDrive))
+            if (kmSinceFueled >= 800 && (Status == State.canDrive || Status == State.cannotDrive))
                 CanBeFueled = true;
             else
                 CanBeFueled = false;
@@ -212,7 +212,7 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         public void setCanBeServiced()
         {
-            if ((kmSinceTreated > 19500 || (DateTime.Now - DateOfLastTreat).TotalDays > 350) && (Status == State.canDrive || Status == State.cannotDrive))
+            if ((kmSinceTreated >= 19500 || (DateTime.Now - DateOfLastTreat).TotalDays >= 350) && (Status == State.canDrive || Status == State.cannotDrive))
                 CanBeServiced = true;
             else
                 CanBeServiced = false;
