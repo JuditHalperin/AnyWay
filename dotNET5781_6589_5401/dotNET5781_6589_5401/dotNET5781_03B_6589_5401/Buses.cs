@@ -37,7 +37,7 @@ namespace dotNET5781_03B_6589_5401
         {
             try
             {
-                addBus(new Bus(
+                /*addBus(new Bus(
                         new DateTime(2019, 7, 8),
                         new DateTime(2020, 8, 5),
                         Convert.ToString(rand.Next(10000000, 20000000)),
@@ -68,7 +68,7 @@ namespace dotNET5781_03B_6589_5401
                         Convert.ToString(rand.Next(1000000, 9999999)),
                         rand.Next(20000, 50000),
                         rand.Next(0, 1200),
-                        rand.Next(0, 20000)));                
+                        rand.Next(0, 20000))); */               
             }
 
             catch (BasicBusExceptions) // in case that the random ID number already exists in the collection
