@@ -11,23 +11,7 @@ namespace dotNET5781_03B_6589_5401
     {
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
-        static public ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-
-        static private bool isNotEmpty;
-
-        static public bool IsNotEmpty
-        {
-            get { return isNotEmpty; }
-            private set { isNotEmpty = value; }
-        }
-        static public void setIsNotEmpty()
-        {
-            if (buses.Count() == 0)
-                IsNotEmpty = false;
-            else
-                IsNotEmpty = true;
-        }
-
+        static public ObservableCollection<Bus> buses = new ObservableCollection<Bus>();       
 
         /// <summary>
         /// static constructor
@@ -74,11 +58,7 @@ namespace dotNET5781_03B_6589_5401
             catch (BasicBusExceptions) // in case that the random ID number already exists in the collection
             {
                 ;
-            }
-            finally
-            {
-                setIsNotEmpty();
-            }
+            }           
         }
 
         /// <summary>
@@ -88,11 +68,8 @@ namespace dotNET5781_03B_6589_5401
         /// <param name="newBus">new bus</param>
         static public void addBus(Bus newBus)
         {
-            if (!containsBus(newBus.Id))
-            {
+            if (!containsBus(newBus.Id))           
                 buses.Add(newBus);
-                setIsNotEmpty();
-            }
             else
                 throw new BasicBusExceptions("This license plate number already exists.");
         }
@@ -110,19 +87,21 @@ namespace dotNET5781_03B_6589_5401
             return false;
         }
 
+        /// <summary>
+        /// remove a bus from the buses collection
+        /// </summary>
+        /// <param name="id">ID number</param>
         static public void removeBus(string id)
         {
             foreach (Bus bus in buses)
                 if (bus.Id == id)
                 {
                     buses.Remove(bus);
-                    setIsNotEmpty();
                     return;
                 }
 
             throw new BasicBusExceptions("The bus does not exsit.");
         }
-
 
     }
 }
