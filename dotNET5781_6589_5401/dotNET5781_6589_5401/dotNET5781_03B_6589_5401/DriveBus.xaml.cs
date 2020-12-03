@@ -23,12 +23,20 @@ namespace dotNET5781_03B_6589_5401
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// To get bus for drive.
+        /// </summary>
+        /// <param name="selectedBus">bus for drive</param>
         public void update(Bus selectedBus)
         {
             Drive.DataContext = selectedBus;
         }
-
+        /// <summary>
+        /// Check input from the user any letter that he insert. enable just digit or edit. 
+        /// If it is get enter: that equal to OK- performe the drive.
+        /// </summary>
+        /// <param name="sender">The box that write into it.</param>
+        /// <param name="e">Letter that inserted</param>
         private void Length_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -82,7 +90,11 @@ namespace dotNET5781_03B_6589_5401
             e.Handled = true; // ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-
+        /// <summary>
+        /// Button for close the window with out do activity.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Length.Text = "";
