@@ -57,7 +57,8 @@ namespace dotNET5781_03B_6589_5401
                 Thread.Sleep(1000);
                 worker.ReportProgress(i, e.Argument);
             }
-            Thread.Sleep(900);//Split the last second in order to the user could see the time:"00:00:00"... 
+
+            Thread.Sleep(900); // Split the last second in order to the user could see the time:"00:00:00"... 
             worker.ReportProgress(0, e.Argument);
             Thread.Sleep(100);
         }

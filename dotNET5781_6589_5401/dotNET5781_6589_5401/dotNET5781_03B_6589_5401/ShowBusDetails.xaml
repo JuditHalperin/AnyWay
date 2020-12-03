@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Bus Details" Height="350" Width="750" WindowStartupLocation="CenterScreen">
+        Title="Bus Details" Height="350" Width="750" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:StatusToText_Status x:Key="StatusToText_Status"/>
     </Window.Resources>
