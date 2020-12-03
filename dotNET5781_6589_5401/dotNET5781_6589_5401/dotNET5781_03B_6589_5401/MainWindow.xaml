@@ -9,6 +9,7 @@
     <Window.Resources>
         <local:StateToBool_Drive x:Key="StateToBool_Drive"/>
         <local:StatusToText_Status x:Key="StatusToText_Status"/>
+        <local:intToBool_remove x:Key="intToBool_remove"/>
         <DataTemplate x:Key="busInlistBoxTemplate">
             <Grid x:Name="BusFromListBox">
                 <Grid.ColumnDefinitions>
@@ -57,7 +58,7 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="AddBusButton" Content="Add bus" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="AddBusButton_Click"/>
-                <Button x:Name="RemoveBusButton" Content="Remove bus" IsEnabled="{Binding Path=IsNotEmpty, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="RemoveBusButton_Click"/>
+                <Button x:Name="RemoveBusButton" Content="Remove bus" IsEnabled="{Binding Path=Count, Converter={StaticResource intToBool_remove}, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="RemoveBusButton_Click"/>
                 <Button x:Name="ExitButton" Content="Exit" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Height="25" Width="80" Click="ExitButton_Click"/>
                 <Image Source="bus.jpg" Grid.Row="3" Width="124" Height="109" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>

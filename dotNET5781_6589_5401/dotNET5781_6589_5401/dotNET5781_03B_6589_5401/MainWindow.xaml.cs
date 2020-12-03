@@ -186,4 +186,22 @@ namespace dotNET5781_03B_6589_5401
         }
     }
 
+    
+ public class intToBool_remove : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int intValue = (int)value;
+
+            if (intValue == 0)
+                return false;
+            return true;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
