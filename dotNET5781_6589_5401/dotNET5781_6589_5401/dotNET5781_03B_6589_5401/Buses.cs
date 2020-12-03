@@ -13,6 +13,15 @@ namespace dotNET5781_03B_6589_5401
 
         static public ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
 
+        static private bool IsNotEmpty;
+
+        static public bool MyProperty
+        {
+            get { return myVar; }
+            private set { myVar = value; }
+        }
+
+
         /// <summary>
         /// static constructor
         /// initialize 10 buses randomaly
@@ -97,6 +106,7 @@ namespace dotNET5781_03B_6589_5401
                 }
             throw new BasicBusExceptions("The bus does not exsit.");
         }
+
 
     }
 }
