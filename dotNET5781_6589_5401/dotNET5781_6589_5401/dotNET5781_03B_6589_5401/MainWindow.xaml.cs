@@ -47,14 +47,18 @@ namespace dotNET5781_03B_6589_5401
             e.Result = e.Argument;
 
             Bus bus = (Bus)((List<object>)e.Argument)[1];
+            int time = (int)((List<object>)e.Argument).First();
 
-            bus.Time = "00:00:00";
+            bus.Time =  $"{time / 6: 00}:{time % 6: 00}:00";//*10/60=/6
 
-            for (int i = 1; i < (int)((List<object>)e.Argument).First(); i++)
+            for (int i = time-1 ; i > 0; i--)
             {
                 Thread.Sleep(1000);
                 worker.ReportProgress(i, e.Argument);
             }
+            Thread.Sleep(900);//Split the last second in order to the user could see the time:"00:00:00"... 
+            worker.ReportProgress(0, e.Argument);
+            Thread.Sleep(100);
         }
 
         private void showTimer(object sender, ProgressChangedEventArgs e)
