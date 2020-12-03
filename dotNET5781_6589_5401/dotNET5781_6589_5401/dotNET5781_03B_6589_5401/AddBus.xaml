@@ -24,8 +24,8 @@
             <Label Content="* 7 digits for buses before 2018, 8 digits for buses after 2018" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="6" Foreground="#FFC59D04"/>
             <Label Content="Total distance of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="TotalKm" Style="{StaticResource TextBoxStyle}" Grid.Row="3" MaxLength="7" Width="100" Height="25" VerticalAlignment="Top" PreviewKeyDown="OnlyNumbers_PreviewKeyDown"/>
-            <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="128,10,33.6,14" Click="OkButton_Click"/>
-            <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="37,10,124.6,14" Click="CancelButton_Click"/>
+            <Button x:Name="OkButton" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="128,10,33.6,14" VerticalAlignment="Center" Click="OkButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Row="4" Width="60" Margin="37,10,124.6,14" HorizontalAlignment="Left" Click="CancelButton_Click"/>
         </Grid>
         <Label Content="Activity beginning date:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Calendar x:Name="BeginingDate" Grid.Column="0" HorizontalAlignment="Center" SelectionMode="SingleDate" DisplayDateStart="01.01.1990" Margin="9.2,35,9.6,12" FontFamily="Comic Sans MS" >

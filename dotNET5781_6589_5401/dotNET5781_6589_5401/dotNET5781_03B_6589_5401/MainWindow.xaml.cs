@@ -50,7 +50,7 @@ namespace dotNET5781_03B_6589_5401
             Bus bus = (Bus)((List<object>)e.Argument)[1];
             int time = (int)((List<object>)e.Argument).First();
 
-            bus.Time =  $"{time / 6: 00}:{time % 6: 00}:00";//*10/60=/6
+            bus.Time =  $"{time / 6:00}:{time % 6:00}:00"; // *10/60=/6
 
             for (int i = time-1 ; i > 0; i--)
             {
@@ -66,7 +66,7 @@ namespace dotNET5781_03B_6589_5401
         {
             int progress = e.ProgressPercentage * 10; // 1 unreal second = 10 real minutes     
             Bus bus = (Bus)((List<object>)e.UserState)[1];
-            bus.Time = $"{progress / 60: 00}:{progress % 60: 00}:00";
+            bus.Time = $"{progress / 60:00}:{progress % 60:00}:00";
         }
 
         private void updateBusProperties(object sender, RunWorkerCompletedEventArgs e)
@@ -157,37 +157,7 @@ namespace dotNET5781_03B_6589_5401
         }
     }
 
-    public class StatusToText_Status : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            State stateValue = (State)value;
-
-            switch (stateValue)
-            {
-                case State.canDrive:
-                    return "Can Drive";
-                case State.cannotDrive:
-                    return "Cannot Drive";
-                case State.gettingFueled:
-                    return "Being fueled";
-                case State.gettingTreated:
-                    return "Being serviced";
-                case State.driving:
-                    return "Driving";
-                default:
-                    return null;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    
- public class intToBool_remove : IValueConverter
+    public class intToBool_remove : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
