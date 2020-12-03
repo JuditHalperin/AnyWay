@@ -45,21 +45,21 @@ namespace dotNET5781_03B_6589_5401
                         rand.Next(1000, 1200),
                         rand.Next(0, 20000)));
 
-                addBus(new Bus(
-                        new DateTime(2020, 1, 1),
-                        new DateTime(2020, 7, 19),
-                        Convert.ToString(rand.Next(30000000, 40000000)),
-                        rand.Next(20000, 50000),
-                        rand.Next(0, 1200),
-                        rand.Next(19500, 19900)));
+                //addBus(new Bus(
+                //        new DateTime(2020, 1, 1),
+                //        new DateTime(2020, 7, 19),
+                //        Convert.ToString(rand.Next(30000000, 40000000)),
+                //        rand.Next(20000, 50000),
+                //        rand.Next(0, 1200),
+                //        rand.Next(19500, 19900)));
 
-                addBus(new Bus(
-                        new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
-                        new DateTime(DateTime.Now.Year - 1, rand.Next(1, DateTime.Now.Month), 1),
-                        Convert.ToString(rand.Next(5000000, 6000000)),
-                        rand.Next(20000, 50000),
-                        rand.Next(0, 1200),
-                        rand.Next(0, 20000)));
+                //addBus(new Bus(
+                //        new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
+                //        new DateTime(DateTime.Now.Year - 1, rand.Next(1, DateTime.Now.Month), 1),
+                //        Convert.ToString(rand.Next(5000000, 6000000)),
+                //        rand.Next(20000, 50000),
+                //        rand.Next(0, 1200),
+                //        rand.Next(0, 20000)));
 
                 for (int i = 0; i < 7; i++)
                     addBus(new Bus(
@@ -68,7 +68,7 @@ namespace dotNET5781_03B_6589_5401
                         Convert.ToString(rand.Next(1000000, 9999999)),
                         rand.Next(20000, 50000),
                         rand.Next(0, 1200),
-                        rand.Next(0, 20000))); */               
+                        rand.Next(0, 20000)));                
             }
 
             catch (BasicBusExceptions) // in case that the random ID number already exists in the collection

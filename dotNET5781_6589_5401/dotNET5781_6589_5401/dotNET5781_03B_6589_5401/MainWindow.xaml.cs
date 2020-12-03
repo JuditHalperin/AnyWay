@@ -31,6 +31,7 @@ namespace dotNET5781_03B_6589_5401
             InitializeComponent();
 
             BusesList.ItemsSource = Buses.buses;
+            RemoveBusButton.DataContext = Buses.buses;
 
             worker = new BackgroundWorker();
 
