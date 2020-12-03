@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
         mc:Ignorable="d"
-        Title="Drive Bus" Height="250" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Drive Bus" Height="150" Width="300" WindowStartupLocation="CenterScreen">
     <Grid x:Name="Drive">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="Length of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="Length" Style="{StaticResource TextBoxStyle}" Grid.Column="1" Width="40" MaxLength="3" HorizontalAlignment="Left" VerticalAlignment="Center" PreviewKeyDown="Length_OnlyNumbers_PreviewKeyDown"/>
-        <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource ButtonStyle}" Margin="86.2,173,41.6,21" Grid.Column="1" Click="CancelButton_Click" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Length of drive (km):" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="Length" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="40" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" PreviewKeyDown="Length_OnlyNumbers_PreviewKeyDown"/>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Grid.Row="2" Click="CancelButton_Click" />
     </Grid>
 </Window>

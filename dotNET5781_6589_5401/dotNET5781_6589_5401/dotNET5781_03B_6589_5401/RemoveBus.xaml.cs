@@ -15,57 +15,35 @@ using System.Windows.Shapes;
 namespace dotNET5781_03B_6589_5401
 {
     /// <summary>
-    /// Interaction logic for DriveBus.xaml
+    /// Interaction logic for RemoveBus.xaml
     /// </summary>
-    public partial class DriveBus : Window
+    public partial class RemoveBus : Window
     {
-        public DriveBus()
+        public RemoveBus()
         {
             InitializeComponent();
         }
 
-        public void update(Bus selectedBus)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            Drive.DataContext = selectedBus;
+            LicensePlate.Text = "";
+            Close();
         }
 
-        private void Length_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void LicensePlate_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
             if (text == null) return;
             if (e == null) return;
 
-            // close the window when Enter is clicked
-            if (e.Key == Key.Return || e.Key == Key.Enter)
-            {
-                try
-                {
-                    double km = Convert.ToDouble(Length.Text);
-
-                    if (km <= 0)
-                        throw new BasicBusExceptions("Distance of drive should be positive.");
-                    
-                    Close();
-                    e.Handled = true;
-
-                    (Drive.DataContext as Bus).drive((float)km);
-
-                    return;
-                }
-                catch (BasicBusExceptions ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Invalid distance of drive.");
-                }                
-            }
-
+            // alloe Enter and Tab keys
+            if (e.Key == Key.Return || e.Key == Key.Enter || e.Key == Key.Tab)
+                return;
+          
             // allow list of system keys (add other key here if you want to allow)
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
             e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-           || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.Tab)
+           || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
                 return;
 
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
@@ -83,10 +61,9 @@ namespace dotNET5781_03B_6589_5401
             return;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            Length.Text = "";
-            Close();
+
         }
     }
 }
