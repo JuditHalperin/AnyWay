@@ -24,6 +24,11 @@ namespace dotNET5781_03B_6589_5401
             InitializeComponent();
         }
 
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             LicensePlate.Text = "";
@@ -60,10 +65,6 @@ namespace dotNET5781_03B_6589_5401
             e.Handled = true; // ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
-
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }
