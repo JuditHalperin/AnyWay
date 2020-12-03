@@ -26,6 +26,39 @@ namespace dotNET5781_03B_6589_5401
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string value = LicensePlate.Text;
+
+                if (value.Length < 7 || value.Length > 8) // wrong length
+                    throw new BasicBusExceptions("Wrong length of license plate number.");
+
+                int num = int.Parse(value);
+
+                if (value.Length == 7) // 7 digits
+                {
+                    value = value.Insert(2, "-");
+                    value = value.Insert(6, "-");
+                }
+
+                else if (value.Length == 8) // 8 digits
+                {
+                    value = value.Insert(3, "-");
+                    value = value.Insert(6, "-");
+                }
+
+                Close();
+
+                Buses.removeBus(value);
+            }
+            catch (BasicBusExceptions ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid license plate number.");
+            }
 
         }
 

@@ -95,6 +95,7 @@ namespace dotNET5781_03B_6589_5401
                     buses.Remove(bus);
                     return;
                 }
+
             throw new BasicBusExceptions("The bus does not exsit.");
         }
 
