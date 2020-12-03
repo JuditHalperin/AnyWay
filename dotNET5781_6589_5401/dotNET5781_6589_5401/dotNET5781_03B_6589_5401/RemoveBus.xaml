@@ -1,0 +1,26 @@
+﻿<Window x:Class="dotNET5781_03B_6589_5401.RemoveBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotNET5781_03B_6589_5401"
+        mc:Ignorable="d"
+        Title="Remove Bus" Height="150" Width="300" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="Drive">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="DownGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="OkButton" Content="Ok" Width="40" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Click="OkButton_Click"/>
+            <Button x:Name="CancelButton" Content="Cancel" Width="40" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Click="CancelButton_Click"/>
+        </Grid>
+        <Label Content="License plate:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="LicensePlate" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="85" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top" PreviewKeyDown="LicensePlate_OnlyNumbers_PreviewKeyDown"/>
+    </Grid>
+</Window>

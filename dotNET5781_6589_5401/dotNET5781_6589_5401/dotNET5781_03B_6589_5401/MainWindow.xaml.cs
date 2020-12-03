@@ -123,7 +123,8 @@ namespace dotNET5781_03B_6589_5401
 
         private void RemoveBusButton_Click(object sender, RoutedEventArgs e)
         {
-
+            RemoveBus window = new RemoveBus();
+            window.ShowDialog();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
