@@ -12,7 +12,7 @@ namespace dotNET5781_03B_6589_5401
         static private Random rand = new Random(DateTime.Now.Millisecond);
 
         static public ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-        
+
         /// <summary>
         /// static constructor
         /// initialize 10 buses randomaly
@@ -86,6 +86,17 @@ namespace dotNET5781_03B_6589_5401
                     return true;
             return false;
         }
-        
+
+        static public void removeBus(string id)
+        {
+            foreach (Bus bus in buses)
+                if (bus.Id == id)
+                {
+                    buses.Remove(bus);
+                    return;
+                }
+            throw new BasicBusExceptions("The bus does not exsit.");
+        }
+
     }
 }
