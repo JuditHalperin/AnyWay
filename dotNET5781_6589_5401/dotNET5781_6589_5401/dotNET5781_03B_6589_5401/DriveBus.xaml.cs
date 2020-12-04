@@ -19,10 +19,14 @@ namespace dotNET5781_03B_6589_5401
     /// </summary>
     public partial class DriveBus : Window
     {
+        /// <summary>
+        /// constructor
+        /// </summary>
         public DriveBus()
         {
             InitializeComponent();
         }
+      
         /// <summary>
         /// To get bus for drive.
         /// </summary>
@@ -31,6 +35,7 @@ namespace dotNET5781_03B_6589_5401
         {
             Drive.DataContext = selectedBus;
         }
+    
         /// <summary>
         /// Check input from the user any letter that he insert. enable just digit or edit. 
         /// If it is get enter: that equal to OK- performe the drive.
@@ -90,6 +95,7 @@ namespace dotNET5781_03B_6589_5401
             e.Handled = true; // ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
+  
         /// <summary>
         /// Button for close the window with out do activity.
         /// </summary>

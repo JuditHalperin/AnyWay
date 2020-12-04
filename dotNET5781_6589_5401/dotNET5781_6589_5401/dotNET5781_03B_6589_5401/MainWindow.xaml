@@ -19,11 +19,11 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="IdTextBlock" Grid.Column="0" Text="{Binding}" Height="30" HorizontalAlignment="Center"/>
-                <Label x:Name="StatusLabel" Grid.Column="1" Content="{Binding Path=Status, Converter={StaticResource StatusToText_Status}}" Style="{StaticResource LabelDataStyle}" Height="30" HorizontalAlignment="Center" Foreground="#FF021B6E" />
-                <Label x:Name="TimerLabel" Grid.Column="2" Style="{StaticResource LabelDataStyle}" Content="{Binding Path=Time}" Height="30" HorizontalAlignment="Center"/>
-                <Button x:Name="DriveButton" Grid.Column="3" Content="Drive" Style="{StaticResource ButtonStyle}" Height="20" HorizontalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
-                <Button x:Name="FuelButton" Grid.Column="4" Content="Fuel" Style="{StaticResource ButtonStyle}" Height="20" HorizontalAlignment="Center" Click="FuelButton_Click" IsEnabled="{Binding Path=CanBeFueled, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock x:Name="IdTextBlock" Height="30" Width="130" Grid.Column="0" Text="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="StatusLabel" Height="30" Width="130" Grid.Column="1" Content="{Binding Path=Status, Converter={StaticResource StatusToText_Status}}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF021B6E" />
+                <Label x:Name="TimerLabel" Height="30" Width="130" Grid.Column="2" Style="{StaticResource LabelDataStyle}" Content="{Binding Path=Time}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button x:Name="DriveButton" Width="80" Grid.Column="3" Content="Drive" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
+                <Button x:Name="FuelButton" Width="80" Grid.Column="4" Content="Fuel" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding Path=CanBeFueled, UpdateSourceTrigger=PropertyChanged}" Click="FuelButton_Click"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -35,8 +35,7 @@
         <Grid x:Name="UpGrid" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Label Content="License plate" Grid.Column="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30"/>
             <Label Content="Status" Grid.Column="1" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110" Height="30"/>

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+Judit Halperin - 324216589
+Asnat Kahane - 211825401
+
+Exercise 3B
+03/12/20
+This program present the buses collection,
+allowing to add bus, remove bus, drive, refuel or service a bus.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -26,6 +36,9 @@ namespace dotNET5781_03B_6589_5401
     {
         public BackgroundWorker worker;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -40,6 +53,7 @@ namespace dotNET5781_03B_6589_5401
             worker.RunWorkerCompleted += updateBusProperties;
             worker.WorkerReportsProgress = true;
         }
+
         /// <summary>
         /// Do work- drive/fuel/service(=treat)
         /// </summary>
@@ -65,10 +79,11 @@ namespace dotNET5781_03B_6589_5401
                 worker.ReportProgress(i, e.Argument);
             }
 
-            Thread.Sleep(900); // Split the last second in order to the user could see the time:"00:00:00"... 
+            Thread.Sleep(900); // Split the last second in order to the user could see the time: "00:00:00" 
             worker.ReportProgress(0, e.Argument);
             Thread.Sleep(100);
         }
+
         /// <summary>
         /// Change the time remianed for the runing.
         /// </summary>
@@ -84,6 +99,7 @@ namespace dotNET5781_03B_6589_5401
             Bus bus = (Bus)((List<object>)e.UserState)[1];
             bus.Time = $"{progress / 60:00}:{progress % 60:00}:00";
         }
+
         /// <summary>
         /// In the end of the thread. Update fields of the bus.
         /// </summary>
@@ -116,6 +132,7 @@ namespace dotNET5781_03B_6589_5401
             bus.setCanBeServiced();
             bus.Time = "";
         }
+        
         /// <summary>
         /// Double click an bus in the list.
         /// </summary>
@@ -128,6 +145,7 @@ namespace dotNET5781_03B_6589_5401
             window.update(selectedBus);
             window.ShowDialog();
         }
+        
         /// <summary>
         /// Button for drive bus. Open new window and send to it the bus that binding to the button.
         /// </summary>
@@ -140,6 +158,7 @@ namespace dotNET5781_03B_6589_5401
             window.update((Bus)driving.DataContext);
             window.ShowDialog();
         }
+       
         /// <summary>
         /// Button for fuel bus. summon the function that do it.
         /// </summary>
@@ -154,6 +173,7 @@ namespace dotNET5781_03B_6589_5401
                 bus.fuel();
             }
         }
+     
         /// <summary>
         /// Button for add bus. Open new window for insert data about the new bus.
         /// </summary>
@@ -164,6 +184,7 @@ namespace dotNET5781_03B_6589_5401
             AddBus window = new AddBus();
             window.ShowDialog();
         }
+    
         /// <summary>
         /// Button for remove bus. open new window that get id of bus.
         /// </summary>
@@ -174,6 +195,7 @@ namespace dotNET5781_03B_6589_5401
             RemoveBus window = new RemoveBus();
             window.ShowDialog();
         }
+   
         /// <summary>
         /// Button that close the progrem
         /// </summary>
@@ -185,6 +207,7 @@ namespace dotNET5781_03B_6589_5401
             return;
         }
     }
+    
     /// <summary>
     /// convert type state to type bool for binding to property with bool value.
     /// </summary>
@@ -205,6 +228,7 @@ namespace dotNET5781_03B_6589_5401
             throw new NotImplementedException();
         }
     }
+  
     /// <summary>
     /// convert type int to type bool for binding to property with bool value.
     /// </summary>
