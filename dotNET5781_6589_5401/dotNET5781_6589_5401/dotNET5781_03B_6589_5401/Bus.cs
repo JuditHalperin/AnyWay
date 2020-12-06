@@ -304,8 +304,6 @@ namespace dotNET5781_03B_6589_5401
             parameters.Add((float)-1); // mark refueling
 
             new MainWindow().worker.RunWorkerAsync(parameters);
-
-            KmSinceFueled = 0;
         }
 
         /// <summary>
