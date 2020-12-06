@@ -19,11 +19,20 @@ namespace dotNET5781_03B_6589_5401
     /// </summary>
     public partial class RemoveBus : Window
     {
+        /// <summary>
+        /// constructor
+        /// </summary>
         public RemoveBus()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// event: clicking 'Ok' button
+        /// remove the bus with the given license plate number, or throw an exception
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -59,15 +68,25 @@ namespace dotNET5781_03B_6589_5401
             {
                 MessageBox.Show("Invalid license plate number.");
             }
-
         }
 
+        /// <summary>
+        /// event: clicking 'Cancel' button
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             LicensePlate.Text = "";
             Close();
         }
 
+        /// <summary>
+        /// event: after each character is typed, read it only if it is a digit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LicensePlate_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -97,7 +116,6 @@ namespace dotNET5781_03B_6589_5401
             // forbid letters and signs (#,$, %, ...)
             e.Handled = true; // ignore this key. mark event as handled, will not be routed to other controls
             return;
-        }
-        
+        }        
     }
 }

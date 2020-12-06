@@ -19,6 +19,9 @@ namespace dotNET5781_03B_6589_5401
     /// </summary>
     public partial class AddBus : Window
     {
+        /// <summary>
+        /// constructor
+        /// </summary>
         public AddBus()
         {
             InitializeComponent();
@@ -27,6 +30,12 @@ namespace dotNET5781_03B_6589_5401
             BeginingDate.SelectedDate = DateTime.Now.Date;
         }
 
+        /// <summary>
+        /// event: clicking 'Ok' button
+        /// add a new bus and close the window, or throw exceptions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime date = Convert.ToDateTime(BeginingDate.SelectedDate);
@@ -47,11 +56,22 @@ namespace dotNET5781_03B_6589_5401
             }
         }
 
+        /// <summary>
+        /// event: clicking 'Cancel' button
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// event: after each character is typed, read it only if it is a digit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;

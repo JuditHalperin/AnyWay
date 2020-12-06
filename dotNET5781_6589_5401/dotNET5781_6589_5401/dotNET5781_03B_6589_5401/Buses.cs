@@ -102,6 +102,5 @@ namespace dotNET5781_03B_6589_5401
 
             throw new BasicBusExceptions("The bus does not exsit.");
         }
-
     }
 }

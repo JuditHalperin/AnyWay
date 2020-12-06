@@ -18,6 +18,10 @@ namespace dotNET5781_03B_6589_5401
 
     }
 
+    /// <summary>
+    /// convert a status of type 'State' to string
+    /// used to present the buses status on the main window and on the details window
+    /// </summary>
     public class StatusToText_Status : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

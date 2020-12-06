@@ -38,6 +38,8 @@ namespace dotNET5781_03B_6589_5401
 
         /// <summary>
         /// constructor
+        /// initialize data contexts
+        /// initialize the thread
         /// </summary>
         public MainWindow()
         {
@@ -48,7 +50,6 @@ namespace dotNET5781_03B_6589_5401
             NumberOfBuses.DataContext = Buses.buses;
 
             worker = new BackgroundWorker();
-
             worker.DoWork += startTimer;
             worker.ProgressChanged += showTimer;
             worker.RunWorkerCompleted += updateBusProperties;
@@ -56,13 +57,13 @@ namespace dotNET5781_03B_6589_5401
         }
 
         /// <summary>
-        /// Do work- drive/fuel/service(=treat)
+        /// Do work - drive / fuel / service (=treat)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">list of 3 element: 
-        /// 1.time to run 
-        /// 2.bus 
-        /// 3.km to update or negative number for indicate if this fuel or treat</param>
+        /// 1. time to run 
+        /// 2. bus 
+        /// 3. km to update or negative number for indicate if this fuel or treat</param>
         private void startTimer(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -115,7 +116,7 @@ namespace dotNET5781_03B_6589_5401
 
             float km = (float)((List<object>)e.Result)[2];
 
-            if (km > 0) // drive the give distance
+            if (km > 0) // means drivung the given distance
                 bus.updateKm(km);
             else if (km == -1) // means refueling
                 bus.KmSinceFueled = 0;
@@ -124,7 +125,7 @@ namespace dotNET5781_03B_6589_5401
                 bus.KmSinceTreated = 0;
                 bus.DateOfLastTreat = DateTime.Now.Date;
 
-                if (bus.KmSinceFueled >= 1200)
+                if (bus.KmSinceFueled >= 1200) // refuel if needed
                     bus.KmSinceFueled = 0;
             }
 
@@ -135,7 +136,7 @@ namespace dotNET5781_03B_6589_5401
         }
         
         /// <summary>
-        /// Double click an bus in the list.
+        /// Double click on a bus in the list.
         /// </summary>
         /// <param name="sender">The bus that selected.</param>
         /// <param name="e"></param>

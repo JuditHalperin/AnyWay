@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-
 namespace dotNET5781_03B_6589_5401
 {
     public enum State { canDrive, cannotDrive, driving, gettingFueled, gettingTreated }
@@ -76,7 +75,6 @@ namespace dotNET5781_03B_6589_5401
                     PropertyChanged(this, new PropertyChangedEventArgs("Status"));
             }
         }
-
         private bool canBeFueled; public bool CanBeFueled
         {
             get { return canBeFueled; }
@@ -87,7 +85,6 @@ namespace dotNET5781_03B_6589_5401
                     PropertyChanged(this, new PropertyChangedEventArgs("CanBeFueled"));
             }
         }
-
         private bool canBeServiced; public bool CanBeServiced
         {
             get { return canBeServiced; }
@@ -330,6 +327,5 @@ namespace dotNET5781_03B_6589_5401
         /// </summary>
         /// <returns>ID number</returns>
         public override string ToString() { return Id; }
-
     }
 }

@@ -19,10 +19,14 @@ namespace dotNET5781_03B_6589_5401
     /// </summary>
     public partial class ShowBusDetails : Window
     {
+        /// <summary>
+        /// constructor
+        /// </summary>
         public ShowBusDetails()
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// In order to knew which bus to show in the new window.
         /// </summary>
@@ -31,6 +35,7 @@ namespace dotNET5781_03B_6589_5401
         {
             Details.DataContext = selectedBus;
         }
+
         /// <summary>
         /// Click on button for service about the bus.
         /// </summary>
@@ -45,6 +50,7 @@ namespace dotNET5781_03B_6589_5401
                 bus.treat();
             }
         }
+
         /// <summary>
         /// Click on button for fuel bus. summon the function that do it.
         /// </summary>
@@ -59,6 +65,7 @@ namespace dotNET5781_03B_6589_5401
                 bus.fuel();
             }
         }
+       
         /// <summary>
         /// click indicate O.K and close the window.
         /// </summary>

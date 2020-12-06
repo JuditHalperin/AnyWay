@@ -19,7 +19,7 @@ namespace dotNET5781_03B_6589_5401
         /// <summary>
         /// print the exception
         /// </summary>
-        /// <returns>name of exception + specific massage</returns>
+        /// <returns>specific massage</returns>
         override public string ToString() { return Message; }
     }
 }
