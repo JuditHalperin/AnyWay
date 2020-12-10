@@ -116,7 +116,7 @@ namespace dotNET5781_03B_6589_5401
 
             float km = (float)((List<object>)e.Result)[2];
 
-            if (km > 0) // means drivung the given distance
+            if (km > 0) // means driving the given distance
                 bus.updateKm(km);
             else if (km == -1) // means refueling
                 bus.KmSinceFueled = 0;
@@ -217,12 +217,9 @@ namespace dotNET5781_03B_6589_5401
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            State stateValue = (State)value;
-            if (stateValue == State.canDrive)
+            if ((State)value == State.canDrive)
                 return true;
-
-            else
-                return false;
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -238,9 +235,7 @@ namespace dotNET5781_03B_6589_5401
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int intValue = (int)value;
-
-            if (intValue == 0)
+            if ((int)value == 0)
                 return false;
             return true;
         }
