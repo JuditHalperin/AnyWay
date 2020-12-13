@@ -16,8 +16,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="SignInAsPassenger" Content="Passenger" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Click="SignInAsPassenger_Click" FontSize="16"/>
-        <Button x:Name="SignInAsManager" Content="Manager" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Click="SignInAsManager_Click" FontSize="16"/>
-        <Label x:Name="Time" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+        <Button x:Name="SignInAsPassenger" Style="{StaticResource ButtonStyle}" Content="Passenger" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Click="SignInAsPassenger_Click" FontSize="16"/>
+        <Button x:Name="SignInAsManager" Style="{StaticResource ButtonStyle}" Content="Manager" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Click="SignInAsManager_Click" FontSize="16"/>
+        <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Top" HorizontalContentAlignment="Right" FontSize="12"/>
     </Grid>
 </Window>

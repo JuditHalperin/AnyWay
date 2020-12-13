@@ -14,10 +14,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="Username" Content="{Binding Username}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100"/>
-        <Button x:Name="ShowBuses" Content="Buses" Grid.Row="1" Height="30" Width="100" VerticalAlignment="Center" Click="ShowBuses_Click"/>
-        <Button x:Name="ShowLines" Content="Lines" Grid.Row="2" Height="30" Width="100" VerticalAlignment="Center" Click="ShowLines_Click"/>
-        <Button x:Name="ShowStations" Content="Stations" Grid.Row="3" Height="30" Width="100" VerticalAlignment="Center" Click="ShowStations_Click"/>
-        <Label x:Name="SignOut" Content="Sign out" Foreground="Blue" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown"/>
+        <Label x:Name="Username" Content="{Binding Username}" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100"/>
+        <Button x:Name="ShowBuses" Content="Buses" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="30" Width="100" VerticalAlignment="Center" Click="ShowBuses_Click"/>
+        <Button x:Name="ShowLines" Content="Lines" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="30" Width="100" VerticalAlignment="Center" Click="ShowLines_Click"/>
+        <Button x:Name="ShowStations" Content="Stations" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="30" Width="100" VerticalAlignment="Center" Click="ShowStations_Click"/>
+        <Label x:Name="SignOut" Content="Sign out" Style="{StaticResource LabelTitleStyle}" Foreground="Blue" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown"/>
     </Grid>
 </Window>
