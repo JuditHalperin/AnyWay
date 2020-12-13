@@ -26,6 +26,7 @@ namespace temp
 
             NotifyingDateTime o = new NotifyingDateTime();
             time.Content = o.Now;
+            o.worker.RunWorkerAsync();
         }
 
         private void SignInAsPassenger_Click(object sender, RoutedEventArgs e)
