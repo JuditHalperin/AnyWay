@@ -34,10 +34,11 @@ namespace temp
             return false;
         }
 
-        static public void newAccount(string username, string password, bool administrativePrivileges)
+        static public void addUser(string username, string password, bool administrativePrivileges)
         {
-            if (!containUser(username))
-                users.Add(new User(username, password, administrativePrivileges));
+            if (containUser(username))
+                throw new Exception("Username already exists.");
+            users.Add(new User(username, password, administrativePrivileges));
         }
     }
 }
