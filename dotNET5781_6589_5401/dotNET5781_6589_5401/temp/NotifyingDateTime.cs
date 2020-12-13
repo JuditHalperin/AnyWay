@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace temp
 {
@@ -22,19 +23,34 @@ namespace temp
                     PropertyChanged(this, new PropertyChangedEventArgs("Now"));
             }
         }
+        public BackgroundWorker worker;
 
         public NotifyingDateTime()
         {
             now = DateTime.Now;
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(50);
-            timer.Tick += new EventHandler(timer_Tick);
-            timer.Start();
+            worker = new BackgroundWorker();
+            worker.DoWork += startTimer;
+            worker.ProgressChanged += showTimer;
+            worker.WorkerReportsProgress = true;
+            
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void startTimer(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            while (true)
+            {
+                worker.ReportProgress(0);
+                Thread.Sleep(1000);
+            }
+        }
+
+
+        private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             Now = DateTime.Now;
         }
+
     }
 }
