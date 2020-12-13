@@ -24,6 +24,8 @@ namespace temp
         {
             InitializeComponent();
 
+            NotifyingDateTime o = new NotifyingDateTime();
+            time.Content = o.Now;
         }
 
         private void SignInAsPassenger_Click(object sender, RoutedEventArgs e)

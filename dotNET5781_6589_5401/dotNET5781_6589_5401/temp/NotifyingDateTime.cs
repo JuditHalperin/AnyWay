@@ -8,58 +8,33 @@ using System.Windows.Threading;
 
 namespace temp
 {
-        public class NotifyingDateTime : INotifyPropertyChanged
+    public class NotifyingDateTime : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        private DateTime now; public DateTime Now
         {
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private DateTime now;
-
-            public NotifyingDateTime()
-
+            get { return now; }
+            private set
             {
-
-                now = DateTime.Now;
-
-                DispatcherTimer timer = new DispatcherTimer();
-
-                timer.Interval = TimeSpan.FromMilliseconds(100);
-
-                timer.Tick += new EventHandler(timer_Tick);
-
-                timer.Start();
-
+                now = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Now"));
             }
-
-            public DateTime Now
-
-            {
-
-                get { return now; }
-
-                private set
-
-                {
-
-                    now = value;
-
-                    if (PropertyChanged != null)
-
-                        PropertyChanged(this, new PropertyChangedEventArgs("Now"));
-
-                }
-
-            }
-
-            void timer_Tick(object sender, EventArgs e)
-
-            {
-
-                Now = DateTime.Now;
-
-            }
-
         }
 
+        public NotifyingDateTime()
+        {
+            now = DateTime.Now;
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(50);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            Now = DateTime.Now;
+        }
+    }
 }
