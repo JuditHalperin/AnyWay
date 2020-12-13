@@ -58,8 +58,14 @@
     <Compile Include="DrivingBus.cs" />
     <Compile Include="DrivingLine.cs" />
     <Compile Include="DrivingUser.cs" />
+    <Compile Include="ManagerWindow.xaml.cs">
+      <DependentUpon>ManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewAccount.xaml.cs">
       <DependentUpon>NewAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PassengerWindow.xaml.cs">
+      <DependentUpon>PassengerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SignInAsManager.xaml.cs">
       <DependentUpon>SignInAsManager.xaml</DependentUpon>
@@ -79,7 +85,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NewAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PassengerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

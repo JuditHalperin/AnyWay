@@ -41,7 +41,18 @@ namespace temp
                 if (!Users.signIn(Username.Text, Password.Password, administrativePrivileges))
                     throw new Exception("Incorrect username or password.");
 
-                // new window
+                if(administrativePrivileges)
+                {
+                    ManagerWindow window = new ManagerWindow(Username.Text);
+                    window.Show();
+                    Close();
+                }
+                else
+                {
+                    PassengerWindow window = new PassengerWindow(Username.Text);
+                    window.Show();
+                    Close();
+                }
             }
             catch (Exception ex)
             {
