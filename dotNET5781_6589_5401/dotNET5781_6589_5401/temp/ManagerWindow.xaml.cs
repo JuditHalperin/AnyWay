@@ -25,5 +25,26 @@ namespace temp
 
             Username.Content = username;
         }
+
+        private void ShowBuses_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowLines_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowStations_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new MainWindow().Show();
+            Close();
+        }
     }
 }
