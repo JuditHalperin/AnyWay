@@ -22,7 +22,6 @@ namespace temp
         public PassengerWindow(string username)
         {
             InitializeComponent();
-
             Username.Content = username;
         }
     }
