@@ -8,6 +8,7 @@ namespace temp
 {
     class User
     {
+        #region
         private string username; public string Username
         {
             get { return username; }
@@ -23,6 +24,8 @@ namespace temp
             get { return administrativePrivileges; }
             set { administrativePrivileges = value; }
         }
+
+        #endregion
 
         public User(string u, string p, bool a)
         {
