@@ -23,6 +23,7 @@ namespace temp
                     PropertyChanged(this, new PropertyChangedEventArgs("Now"));
             }
         }
+
         public BackgroundWorker worker;
 
         public NotifyingDateTime()
@@ -31,8 +32,7 @@ namespace temp
             worker = new BackgroundWorker();
             worker.DoWork += startTimer;
             worker.ProgressChanged += showTimer;
-            worker.WorkerReportsProgress = true;
-            
+            worker.WorkerReportsProgress = true;            
         }
 
         private void startTimer(object sender, DoWorkEventArgs e)
@@ -46,11 +46,9 @@ namespace temp
             }
         }
 
-
         private void showTimer(object sender, ProgressChangedEventArgs e)
         {
             Now = DateTime.Now;
         }
-
     }
 }

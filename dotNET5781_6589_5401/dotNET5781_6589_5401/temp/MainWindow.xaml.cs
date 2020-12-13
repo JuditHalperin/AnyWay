@@ -31,15 +31,13 @@ namespace temp
 
         private void SignInAsPassenger_Click(object sender, RoutedEventArgs e)
         {
-            SignInAsManager window = new SignInAsManager(false);
-            window.Show();
+            new SignInAsManager(false).Show();
             Close();
         }
 
         private void SignInAsManager_Click(object sender, RoutedEventArgs e)
         {
-            SignInAsManager window = new SignInAsManager(true);
-            window.Show();
+            new SignInAsManager(true).Show();
             Close();
         }
     }
