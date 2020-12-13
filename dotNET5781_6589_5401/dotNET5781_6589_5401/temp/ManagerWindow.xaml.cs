@@ -22,7 +22,6 @@ namespace temp
         public ManagerWindow(string username)
         {
             InitializeComponent();
-
             Username.Content = username;
         }
 
