@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:temp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="300" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="SignInAsPassenger" Content="Passenger" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Click="SignInAsPassenger_Click"/>
-        <Button x:Name="SignInAsManager" Content="Manager" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Click="SignInAsManager_Click"/>
+        <Button x:Name="SignInAsPassenger" Content="Passenger" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Click="SignInAsPassenger_Click" FontSize="16"/>
+        <Button x:Name="SignInAsManager" Content="Manager" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Click="SignInAsManager_Click" FontSize="16"/>
     </Grid>
 </Window>
