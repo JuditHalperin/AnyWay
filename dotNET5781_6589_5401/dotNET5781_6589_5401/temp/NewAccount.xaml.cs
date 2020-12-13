@@ -38,7 +38,7 @@ namespace temp
                 try
                 {
                     Users.addUser(Username.Text, Password.Password, administrativePrivileges);
-                    // next window
+                    new ManagerWindow(Username.Text).Show();
                 }
                 catch (Exception ex)
                 {
@@ -48,15 +48,13 @@ namespace temp
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
-            window.Show();
+            new MainWindow().Show();
             Close();
         }
 
         private void ExistingUser_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            SignInAsManager window = new SignInAsManager(administrativePrivileges);
-            window.Show();
+            new SignInAsManager(administrativePrivileges).Show();
             Close();
         }
 
