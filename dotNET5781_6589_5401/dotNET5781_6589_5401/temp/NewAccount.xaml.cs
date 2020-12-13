@@ -60,13 +60,6 @@ namespace temp
             Close();
         }
 
-        private void Password_LostFocus(object sender, RoutedEventArgs e)
-        {
-            string result = validPassword(Password.Password);
-            if (result != "Valid")
-                MessageBox.Show(result);
-        }
-
         private string validPassword(String password)
         {
             if (password.Length < 6)
