@@ -64,6 +64,7 @@
     <Compile Include="SignInAsManager.xaml.cs">
       <DependentUpon>SignInAsManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TwoFollowingStations.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Users.cs" />
     <Page Include="MainWindow.xaml">
