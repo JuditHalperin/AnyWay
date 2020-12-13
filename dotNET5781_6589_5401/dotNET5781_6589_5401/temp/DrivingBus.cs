@@ -58,10 +58,26 @@ namespace temp
             set { timeInNextStation = value; }
         }
         #endregion
-
-        public DrivingBus()
+        /// <summary>
+        /// constractor
+        /// </summary>
+        /// <param name="licensePlate">License Number (Entity Key - Part 1)</param>
+        /// <param name="drivingBusLine">Line ID in Execution (Entity Key - Part 2)</param>
+        /// <param name="exitTime">Departure time to the formal line (Entity key - part 3)</param>
+        /// <param name="realExitTime">Actual departure time</param>
+        /// <param name="lastIDStation">Last stop number on the line that the bus passed</param>
+        /// <param name="timeInlastStation">Transit time at the last stop mentioned above</param>
+        /// <param name="timeInNextStation">Time to get to the next station</param>
+        public DrivingBus(string licensePlate, int drivingBusLine, DateTime exitTime, DateTime realExitTime, int lastIDStation, DateTime timeInlastStation, DateTime timeInNextStation)
         {
             DrivingBusID = countID++;
+            LicensePlate = licensePlate;
+            DrivingBusLine = drivingBusLine;
+            ExitTime = exitTime;
+            RealExitTime = realExitTime;
+            LastIDStation = lastIDStation;
+            TimeInlastStation = timeInlastStation;
+            TimeInNextStation = timeInNextStation;
         }
     }
 }
