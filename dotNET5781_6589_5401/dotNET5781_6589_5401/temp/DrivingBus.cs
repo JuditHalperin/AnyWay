@@ -16,10 +16,10 @@ namespace temp
             set { drivingBusID = value; }
         }
 
-        private string id; public string ID
+        private string licensePlate; public string LicensePlate
         {
-            get { return id; }
-            set { id = value; }
+            get { return licensePlate; }
+            set { licensePlate = value; }
         }
 
         private int drivingBusLine; public int DrivingBusLine
@@ -58,5 +58,10 @@ namespace temp
             set { timeInNextStation = value; }
         }
         #endregion
+
+        public DrivingBus()
+        {
+            DrivingBusID = countID++;
+        }
     }
 }
