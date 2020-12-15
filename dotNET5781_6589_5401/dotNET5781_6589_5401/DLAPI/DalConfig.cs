@@ -32,6 +32,7 @@ namespace DLAPI
     /// <summary>
     /// Represents errors during DalApi initialization
     /// </summary>
+    
     [Serializable]
     public class DalConfigException : Exception
     {
