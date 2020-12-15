@@ -24,7 +24,7 @@ namespace DL
         public double GetTemparture(int day)
         {
             temperature = rnd.NextDouble() * 50 - 10;
-            temperature += rnd.NextDouble() * 10 - 5;
+            temperature += rnd.NextDouble() * 10 - 5;//122
             return temperature;
         }
 
