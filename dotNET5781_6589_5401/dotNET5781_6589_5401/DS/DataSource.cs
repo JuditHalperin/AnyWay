@@ -15,7 +15,7 @@ namespace DS
 
         static DataSource()
         {
-            //users = new IEnumerable<User>();
+            users = new IEnumerable<User>();
             directions = new List<WindDirection>();//
             directions.Add(new WindDirection());//
         }
