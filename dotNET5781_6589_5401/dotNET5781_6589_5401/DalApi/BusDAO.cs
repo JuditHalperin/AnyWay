@@ -12,7 +12,7 @@ namespace DO
         public DateTime StartOfWork { get; set; }
         public int TotalKms { get; set; }
         public int Fuel { get; set; }
-        public Status Status { get; set; }
+        public State Status { get; set; }
 
         public override string ToString()
         {
