@@ -8,13 +8,13 @@ using System.Runtime.Serialization;
 namespace DO
 {
     [Serializable]
-    public class BusExceptions : Exception
+    public class BusException : Exception
     {
         // constructors:
-        public BusExceptions() : base() { }
-        public BusExceptions(string message) : base(message) { }
-        public BusExceptions(string message, Exception inner) : base(message, inner) { }
-        protected BusExceptions(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        public BusException() : base() { }
+        public BusException(string message) : base(message) { }
+        public BusException(string message, Exception inner) : base(message, inner) { }
+        protected BusException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         /// <summary>
         /// print the exception
