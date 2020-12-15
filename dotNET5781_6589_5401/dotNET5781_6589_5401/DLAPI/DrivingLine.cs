@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    class DrivingLine
+    public class DrivingLine
     {
         public int NumberLine { get; set; }
         public DateTime Start { get; set; }

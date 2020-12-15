@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    class Line
+    public class Line
     {
         private static int serial = 1;
 

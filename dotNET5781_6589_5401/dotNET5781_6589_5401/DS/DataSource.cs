@@ -11,7 +11,7 @@ namespace DS
     public static class DataSource
     {
         public static List<WindDirection> directions;
-
+         
         static DataSource()
         {
             directions = new List<WindDirection>();
