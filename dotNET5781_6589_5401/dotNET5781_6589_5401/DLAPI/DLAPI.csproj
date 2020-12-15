@@ -54,6 +54,7 @@
     <Compile Include="State.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="Tools.cs" />
+    <Compile Include="TwoFollowingStations.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
