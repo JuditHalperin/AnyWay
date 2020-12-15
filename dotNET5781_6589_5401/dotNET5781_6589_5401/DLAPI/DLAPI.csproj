@@ -46,6 +46,7 @@
     <Compile Include="DalFactory.cs" />
     <Compile Include="DO.cs" />
     <Compile Include="DrivingBus.cs" />
+    <Compile Include="DrivingLine.cs" />
     <Compile Include="IClonable.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Line.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Station.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="TwoFollowingStations.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
