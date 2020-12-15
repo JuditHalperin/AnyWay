@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    class Line
+    class LineStation
     {
-        private static int serial = 1;
-
         public int NumberLine { get; set; }
-
-        public Regions Region { get; set; }
-
-        public int FirstStation { get; set; }
-
-        public int LastStation { get; set; }
+        public int ID { get; set; }
+        public int PathIndex { get; set; }
     }
 }
