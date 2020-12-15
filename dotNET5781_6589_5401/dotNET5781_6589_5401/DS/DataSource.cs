@@ -10,12 +10,15 @@ namespace DS
 {
     public static class DataSource
     {
-        public static List<WindDirection> directions;
+        public static List<WindDirection> directions;//
+        public static IEnumerable<User> users;
 
         static DataSource()
         {
-            directions = new List<WindDirection>();
-            directions.Add(new WindDirection());
+            //users = new IEnumerable<User>();
+            directions = new List<WindDirection>();//
+            directions.Add(new WindDirection());//
         }
+
     }
 }
