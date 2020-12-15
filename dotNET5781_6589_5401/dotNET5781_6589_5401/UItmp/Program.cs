@@ -9,7 +9,7 @@ namespace PlConsole
     {
         static IBL bl;
 
-        static void Main(string[] args) // what does it do? now?
+        static void Main(string[] args)
         {
             bl = BlFactory.GetBl();
 
@@ -20,7 +20,7 @@ namespace PlConsole
                 Weather w = bl.GetWeather(d);
                 Console.WriteLine($"{d} days before - Feeling was: {w.Feeling} Celsius degrees");
             }
-
+            Console.ReadLine();
         }
     }
 }
