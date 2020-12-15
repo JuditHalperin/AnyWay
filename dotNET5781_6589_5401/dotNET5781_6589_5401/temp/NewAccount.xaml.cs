@@ -25,6 +25,12 @@ namespace temp
         {
             InitializeComponent();
             administrativePrivileges = a;
+            if (!a)
+            {
+                labelpassword.Visibility = Visibility.Hidden;
+                PasswordM.Visibility = Visibility.Hidden;
+            }
+
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
@@ -33,6 +39,8 @@ namespace temp
 
             if (result != "Valid")
                 MessageBox.Show(result);
+            else if(PasswordM.Password != "123456")
+                MessageBox.Show("password for manage incorrect!");
 
             else
                 try

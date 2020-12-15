@@ -12,10 +12,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="0.75*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="DownGrid" Grid.Row="5">
+        <Grid x:Name="DownGrid" Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -27,6 +28,8 @@
         <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Password:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <PasswordBox x:Name="Password" Grid.Row="3" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelTitleStyle}" Foreground="Blue" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
+        <Label x:Name="labelpassword" Content="Password for manage:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12"/>
+        <PasswordBox x:Name="PasswordM" Grid.Row="4" Width="100" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelTitleStyle}" Foreground="Blue" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
     </Grid>
 </Window>
