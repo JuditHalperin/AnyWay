@@ -7,8 +7,6 @@ using System.Reflection;
 
 namespace DLAPI
 {
-
-
     /// <summary>
     /// Static Factory class for creating Dal tier implementation object according to
     /// configuration in file config.xml
