@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DalXml
+namespace DLAPI
 {
     public class Class1
     {
