@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DLAPI
+namespace APIDL
 {
     /// <summary>
     /// Class for processing config.xml file and getting from there
@@ -32,7 +32,6 @@ namespace DLAPI
     /// <summary>
     /// Represents errors during DalApi initialization
     /// </summary>
-    
     [Serializable]
     public class DalConfigException : Exception
     {

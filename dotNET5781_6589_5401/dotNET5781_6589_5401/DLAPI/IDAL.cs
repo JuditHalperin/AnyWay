@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 
-namespace DLAPI
+namespace APIDL
+
 {
     public interface IDAL
     {

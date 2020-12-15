@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4AF0E49-FB32-42E9-9F61-1A3A0FB5DDC6}</ProjectGuid>
+    <ProjectGuid>{3385C162-7E75-4D37-B66B-61D35C2F42FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DLAPI</RootNamespace>
@@ -44,7 +44,7 @@
     <Compile Include="DalConfig.cs" />
     <Compile Include="DalFactory.cs" />
     <Compile Include="DO.cs" />
-    <Compile Include="ICloneable.cs" />
+    <Compile Include="IClonable.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
