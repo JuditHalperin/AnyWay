@@ -9,7 +9,7 @@ namespace PlConsole
     {
         static IBL bl;
 
-        static void Main(string[] args) // what does it do?
+        static void Main(string[] args) // what does it do? now?
         {
             bl = BlFactory.GetBl();
 
