@@ -8,6 +8,6 @@ namespace DO
 {
     public enum State
     {
-        canDrive, cannotDrive, driving, gettingFueled, gettingTreated
+        canDrive, cannotDrive, driving, gettingFueled, gettingServiced
     }
 }

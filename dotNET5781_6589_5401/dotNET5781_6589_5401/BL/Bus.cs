@@ -111,12 +111,12 @@ namespace BO
         /// constructor
         /// change dates and length if they are wrong
         /// </summary>
-        /// <param name="start">date of beginning</param>
+        /// <param name="start">date of start</param>
         /// <param name="service">date of last service</param>
         /// <param name="licensePlate">license plate number</param>
-        /// <param name="totalKms">total km since begining</param>
-        /// <param name="kmsSinceFuel">total km since the bus got fueled</param>
-        /// <param name="kmsSinceService">total km since the bus was serviced</param>
+        /// <param name="totalKms">total kms since start</param>
+        /// <param name="kmsSinceFuel">total kms since the last fuel</param>
+        /// <param name="kmsSinceService">total kms since the last service</param>
         public Bus(DateTime start, DateTime service, string licensePlate, float totalKms, float kmsSinceFuel = 0, float kmsSinceService = 0)
         {
             if (service > DateTime.Now)
@@ -156,7 +156,7 @@ namespace BO
         private string setLicensePlate(string value)
         {
             if (value.Length < 7 || value.Length > 8) // wrong length
-                throw new BusExceptions("Wrong length of license plate number.");
+                throw new BusException("Wrong length of license plate number.");
 
             int num = int.Parse(value);
 
@@ -175,13 +175,13 @@ namespace BO
             }
 
             else // length does not fit the year
-                throw new BusExceptions("Length of license plate number does not fit the year.");
+                throw new BusException("Length of license plate number does not fit the year.");
 
             return tmp;
         }
 
         /// <summary>
-        /// set the bus status: canDrive, cannotDrive, driving, gettingFueled, gettingTreated
+        /// set the bus status: canDrive, cannotDrive, driving, gettingFueled, gettingServiced
         /// </summary>
         /// <returns>bus status</returns>
         public State setState()
@@ -197,7 +197,7 @@ namespace BO
         /// </summary>
         public void setCanBeFueled()
         {
-            if (kmSinceFueled >= 800 && (Status == State.canDrive || Status == State.cannotDrive))
+            if (KmsSinceFuel >= 800 && (Status == State.canDrive || Status == State.cannotDrive))
                 CanBeFueled = true;
             else
                 CanBeFueled = false;
@@ -208,7 +208,7 @@ namespace BO
         /// </summary>
         public void setCanBeServiced()
         {
-            if ((kmSinceTreated >= 19500 || (DateTime.Now - DateOfLastTreat).TotalDays >= 350) && (Status == State.canDrive || Status == State.cannotDrive))
+            if ((KmsSinceService >= 19500 || (DateTime.Now - LastService).TotalDays >= 350) && (Status == State.canDrive || Status == State.cannotDrive))
                 CanBeServiced = true;
             else
                 CanBeServiced = false;
@@ -235,11 +235,11 @@ namespace BO
                 parameters.Add(this);
                 parameters.Add(km);
 
-                new MainWindow().worker.RunWorkerAsync(parameters);
+                //new MainWindow().worker.RunWorkerAsync(parameters);
             }
 
             else
-                throw new BasicBusExceptions("The bus cannot drive.\n" + msg);
+                throw new BusException("The bus cannot drive.\n" + msg);
         }
 
         /// <summary>
@@ -250,20 +250,20 @@ namespace BO
         /// <returns>can drive this length or not</returns>
         private bool isAbleToDriveSpecificLength(out string msg, float km = 0)
         {
-            TimeSpan timeSinceLastTreat = DateTime.Now - DateOfLastTreat;
+            TimeSpan timeSinceLastTreat = DateTime.Now - LastService;
             if (timeSinceLastTreat.TotalDays > 365)
             {
                 msg = "It needs to be serviced because it has not been serviced for a year.";
                 return false;
             }
 
-            if (KmSinceTreated + km > 20000)
+            if (KmsSinceService + km > 20000)
             {
                 msg = $"It needs to be serviced before driving {km} km.";
                 return false;
             }
 
-            if (KmSinceFueled + km > 1200)
+            if (KmsSinceFuel + km > 1200)
             {
                 msg = $"It needs to be fueled before driving {km} km.";
                 return false;
@@ -274,14 +274,14 @@ namespace BO
         }
 
         /// <summary>
-        /// update the km fields after a drive
+        /// update the km properties after a drive
         /// </summary>
         /// <param name="km">additional km the bus has drived</param>
         public void updateKm(float km)
         {
-            TotalKm = TotalKm + km;
-            kmSinceFueled = KmSinceFueled + km;
-            kmSinceTreated = KmSinceTreated + km;
+            TotalKms += km;
+            KmsSinceFuel += km;
+            KmsSinceService += km;
         }
 
         /// <summary>
@@ -299,16 +299,16 @@ namespace BO
             parameters.Add(this);
             parameters.Add((float)-1); // mark refueling
 
-            new MainWindow().worker.RunWorkerAsync(parameters);
+            //new MainWindow().worker.RunWorkerAsync(parameters);
         }
 
         /// <summary>
-        /// treat the bus
+        /// service the bus
         /// each service takes 24 real hours = 144 unreal seconds 
         /// </summary>
-        public void treat()
+        public void service()
         {
-            Status = State.gettingTreated;
+            Status = State.gettingServiced;
             setCanBeServiced();
             setCanBeFueled();
 
@@ -317,15 +317,14 @@ namespace BO
             parameters.Add(this);
             parameters.Add((float)-2); // mark service
 
-            new MainWindow().worker.RunWorkerAsync(parameters);
+            //new MainWindow().worker.RunWorkerAsync(parameters);
         }
 
         /// <summary>
-        /// print the ID number of the bus
-        /// override of "ToString"
+        /// print the licence plate number of the bus
         /// </summary>
-        /// <returns>ID number</returns>
-        public override string ToString() { return Id; }
+        /// <returns>licence plate number</returns>
+        public override string ToString() { return LicensePlate; }
     }
 
 }
