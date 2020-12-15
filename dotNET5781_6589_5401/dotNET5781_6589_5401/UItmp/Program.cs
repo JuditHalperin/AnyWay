@@ -2,7 +2,6 @@
 using BLAPI;
 using BO;
 
-
 namespace PlConsole
 {
     class Program

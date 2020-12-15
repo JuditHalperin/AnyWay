@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DO;
 namespace DL
 {
-    static class Cloning
+    static class Cloning // one of three
     {
         internal static IClonable Clone(this IClonable original)//דרך שניה - בונוס (יש להשתמש בממשק)
         {
