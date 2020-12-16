@@ -56,5 +56,23 @@ namespace DL
             target.Longitude = original.Longitude;
             return target;
         }
+
+        internal static LineStation Clone(this LineStation original)
+        {
+            LineStation target = new LineStation();
+            target.ID = original.ID;
+            target.NumberLine = original.NumberLine;
+            target.PathIndex = original.PathIndex;
+            return target;
+        }
+
+        internal static LineStation Clone(this LineStation original)
+        {
+            LineStation target = new LineStation();
+            target.ID = original.ID;
+            target.NumberLine = original.NumberLine;
+            target.PathIndex = original.PathIndex;
+            return target;
+        }
     }
 }
