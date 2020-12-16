@@ -8,7 +8,7 @@ namespace DO
 {
     public class Bus
     {
-        public int LicensePlate { get; set; }
+        public string LicensePlate { get; set; }
         public DateTime StartOfWork { get; set; }
         public DateTime LastService { get; set; }
         public int TotalKms { get; set; }

@@ -9,6 +9,17 @@ namespace DLAPI
 {
     public interface IDAL
     {
+        #region users
+
+        void addUser(User user);
+        void removeUser(User user);
+        void updateUser(User user);
+        Bus getUser(string username);
+        IEnumerable<Station> GetUsers();
+        IEnumerable<Station> GetUsers(Predicate<User> condition);
+
+        #endregion
+
         #region buses
 
         void addBus(Bus bus);
@@ -41,18 +52,7 @@ namespace DLAPI
         IEnumerable<Station> GetStations(Predicate<Station> condition);
 
         #endregion
-
-        #region users
-
-        void addUser(User user);
-        void removeUser(User user);
-        void updateUser(User user);
-        Bus getUser(string username);
-        IEnumerable<Station> GetUsers();
-        IEnumerable<Station> GetUsers(Predicate<User> condition);
-
-        #endregion
-
+       
         #region lineStations
 
         void addLineStation(LineStation lineStation);
@@ -63,5 +63,17 @@ namespace DLAPI
         IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
 
         #endregion
+
+        #region followingStations
+
+        void addTwoFollowingStations(TwoFollowingStations lineStation);
+        void removeTwoFollowingStations(TwoFollowingStations lineStation);
+        void updateTwoFollowingStations(TwoFollowingStations lineStation);
+        Bus getTwoFollowingStations(int numberLine, int id);
+        IEnumerable<Station> GetFollowingStations();
+        IEnumerable<Station> GetFollowingStations(Predicate<TwoFollowingStations> condition);
+
+        #endregion
+        
     }
 }
