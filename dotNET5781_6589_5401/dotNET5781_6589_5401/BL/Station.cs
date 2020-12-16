@@ -10,8 +10,6 @@ namespace BO
 {
     public class Station : INotifyPropertyChanged
     {
-        //static private Random rand = new Random(DateTime.Now.Millisecond);
-        //static private int code = 1000;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,22 +64,6 @@ namespace BO
             Name = name;
             Latitude = latitude;
             Longitude = longitude;
-
-            //ID = Convert.ToString(code++);
-            //Latitude = rand.Next(31000000, 33300000) / 1000000.0; // real number bwtween [31, 33.3] with 6 digits after the point
-            //Longitude = rand.Next(34300000, 35500000) / 1000000.0; // real number bwtween [34.3, 35.5] with 6 digits after the point
-        }
-
-        /// <summary>
-        /// calculates the distance between two stations
-        /// </summary>
-        /// <param name="second">second station</param>
-        /// <returns>meters between two stations</returns>
-        public double distanceBetweenStations(Station second)
-        {
-            GeoCoordinate positionThisStation = new GeoCoordinate(Latitude, Longitude);
-            GeoCoordinate positionSecondStation = new GeoCoordinate(second.Latitude, second.Longitude);
-            return positionThisStation.GetDistanceTo(positionSecondStation);
         }
 
         /// <summary>

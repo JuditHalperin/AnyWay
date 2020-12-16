@@ -221,18 +221,18 @@ namespace BL
         #endregion
 
         #region Stations
-        DO.Station convertToStationDO(BO.Station StationB)
+        DO.Station convertToStationDO(BO.Station stationB)
         {
             DO.Station stationD = new DO.Station();
-            stationD.ID = StationB.ID;
-            stationD.Name = StationB.Name;
-            stationD.Latitude = StationB.Latitude;
-            stationD.Longitude = StationB.Longitude;
+            stationD.ID = stationB.ID;
+            stationD.Name = stationB.Name;
+            stationD.Latitude = stationB.Latitude;
+            stationD.Longitude = stationB.Longitude;
             return stationD;
         }
-        BO.Station convertToStationBO(DO.Station lStationD)
+        BO.Station convertToStationBO(DO.Station stationD)
         {
-
+            return new BO.Station(stationD.ID, stationD.Name, stationD.Latitude, stationD.Longitude);
         }
         void addStation(Station station);
         void removeStation(Station station);
