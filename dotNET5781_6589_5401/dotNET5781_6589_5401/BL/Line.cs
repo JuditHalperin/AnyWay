@@ -40,7 +40,16 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("Region"));
             }
         }
-        
+        public int FirstStation
+        {
+            get { return Path.First().ID; }
+        }
+
+        public int LastStation
+        {
+            get { return Path.Last().ID; }
+        }
+
         #endregion
 
         /// <summary>

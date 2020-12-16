@@ -11,13 +11,12 @@ namespace BLAPI
     {
         //Weather GetWeather(int day);
         #region Buses
-
         void addBus(Bus bus);
         void removeBus(Bus bus);
         void updateBus(Bus bus);
         Bus getBus(string licensePlate);
         IEnumerable<Bus> GetBuses();
-        IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
+        //IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
 
         #endregion
 

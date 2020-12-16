@@ -117,7 +117,7 @@ namespace BO
         /// <param name="totalKms">total kms since start</param>
         /// <param name="kmsSinceFuel">total kms since the last fuel</param>
         /// <param name="kmsSinceService">total kms since the last service</param>
-        public Bus(DateTime start, DateTime service, string licensePlate, float totalKms, float kmsSinceFuel = 0, float kmsSinceService = 0)
+        public Bus(DateTime start, DateTime service, string licensePlate, int totalKms, int kmsSinceFuel = 0, int kmsSinceService = 0)
         {
             if (service > DateTime.Now)
                 service = DateTime.Now.Date;
