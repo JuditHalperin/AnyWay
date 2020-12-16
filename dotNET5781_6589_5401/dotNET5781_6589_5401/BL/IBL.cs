@@ -27,7 +27,7 @@ namespace BLAPI
         void updateLine(Line line);
         Line getLine(int serial);
         IEnumerable<Line> GetLines();
-        IEnumerable<Line> GetLines(Predicate<Line> condition);
+        //IEnumerable<Line> GetLines(Predicate<Line> condition);
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace BLAPI
         void updateStation(Station station);
         Station getStation(int id);
         IEnumerable<Station> GetStations();
-        IEnumerable<Station> GetStations(Predicate<Station> condition);
+        //IEnumerable<Station> GetStations(Predicate<Station> condition);
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace BLAPI
         void updateLineStation(LineStation lineStation);
         LineStation getLineStation(int numberLine, int id);
         IEnumerable<Station> GetLineStations();
-        IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
+        //IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
 
         #endregion
 
@@ -59,7 +59,7 @@ namespace BLAPI
         void removeDrivingBus(DrivingBus drivingBus);
         DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
         IEnumerable<Station> GetDrivingBuses();
-        IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
+        //IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace BLAPI
         void removeDrivingLine(DrivingLine drivingLine);
         DrivingLine getDrivingLine(int numberLine, DateTime start);
         IEnumerable<Station> GetDrivingLines();
-        IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
+        //IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
 
         #endregion
     }
