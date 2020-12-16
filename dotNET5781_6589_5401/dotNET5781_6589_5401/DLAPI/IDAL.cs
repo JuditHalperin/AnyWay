@@ -14,9 +14,9 @@ namespace DLAPI
         void addUser(User user);
         void removeUser(User user);
         void updateUser(User user);
-        Bus getUser(string username);
-        IEnumerable<Station> GetUsers();
-        IEnumerable<Station> GetUsers(Predicate<User> condition);
+        User getUser(string username);
+        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetUsers(Predicate<User> condition);
 
         #endregion
 
