@@ -20,6 +20,52 @@ namespace DL
 
         #endregion
 
+        #region buses
+
+        void addBus(Bus bus)
+        {
+
+        }
+        void removeBus(Bus bus)
+        {
+
+        }
+        void updateBus(Bus bus)
+        {
+
+        }
+        Bus getBus(string licensePlate)
+        {
+            IEnumerable<Bus> buses = from bus in DS.DataSource.buses
+                                     where bus.LicensePlate==licensePlate
+                                     select bus;
+            return buses.First();
+        }
+        IEnumerable<Bus> GetBuses()
+        {
+            return DS.DataSource.buses;
+        }
+        IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
+        {
+            IEnumerable<Bus> buses = from bus in DS.DataSource.buses
+                                     where condition(bus)
+                                     select bus;
+            return 
+        }
+
+        #endregion
+
+        #region lines
+
+        void addLine(Line line);
+        void removeLine(Line line);
+        void updateLine(Line line);
+        Bus getLine(int serial);
+        IEnumerable<Line> GetLines();
+        IEnumerable<Line> GetLines(Predicate<object> condition);
+
+        #endregion
+
         //static Random rnd = new Random(DateTime.Now.Millisecond);
         //double temperature;
 
