@@ -22,7 +22,13 @@ namespace DL
         //    //...
         //    return target;
         //}
-
+        
+        //cloning of the object...:
+        /// <summary>
+        /// Cloning Bus
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy bus</returns>
         internal static Bus Clone(this Bus original)
         {
             Bus target = new Bus();
@@ -35,7 +41,11 @@ namespace DL
             target.LastService = original.LastService;
             return target;
         }
-
+        /// <summary>
+        /// Cloning Line
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy line</returns>
         internal static Line Clone(this Line original)
         {
             Line target = new Line();
@@ -46,7 +56,11 @@ namespace DL
             target.Region = original.Region;
             return target;
         }
-
+        /// <summary>
+        /// Cloning Station
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy station</returns>
         internal static Station Clone(this Station original)
         {
             Station target = new Station();
@@ -56,7 +70,11 @@ namespace DL
             target.Longitude = original.Longitude;
             return target;
         }
-
+        /// <summary>
+        /// Cloning LineStation
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy LineStation</returns>
         internal static LineStation Clone(this LineStation original)
         {
             LineStation target = new LineStation();
@@ -65,7 +83,11 @@ namespace DL
             target.PathIndex = original.PathIndex;
             return target;
         }
-
+        /// <summary>
+        /// Cloning DrivingBus
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy DrivingBus</returns>
         internal static DrivingBus Clone(this DrivingBus original)
         {
             DrivingBus target = new DrivingBus();
@@ -79,7 +101,11 @@ namespace DL
             target.NextStationTime = original.NextStationTime;
             return target;
         }
-
+        /// <summary>
+        /// Cloning DrivingLine
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy DrivingLine</returns>
         internal static DrivingLine Clone(this DrivingLine original)
         {
             DrivingLine target = new DrivingLine();
@@ -89,7 +115,11 @@ namespace DL
             target.Frequency = original.Frequency;
             return target;
         }
-
+        /// <summary>
+        /// Cloning TwoFollowingStations
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy TwoFollowingStations</returns>
         internal static TwoFollowingStations Clone(this TwoFollowingStations original)
         {
             TwoFollowingStations target = new TwoFollowingStations();
@@ -99,7 +129,11 @@ namespace DL
             target.TimeBetweenStations = original.TimeBetweenStations;
             return target;
         }
-
+        /// <summary>
+        /// Cloning User
+        /// </summary>
+        /// <param name="original">Copy from this</param>
+        /// <returns>Return the copy User</returns>
         internal static User Clone(this User original)
         {
             User target = new User();
