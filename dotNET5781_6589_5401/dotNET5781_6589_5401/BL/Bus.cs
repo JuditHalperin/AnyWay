@@ -34,7 +34,7 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("LastService"));
             }
         }
-        private float totalKms; public float TotalKms
+        private int totalKms; public int TotalKms
         {
             get { return totalKms; }
             private set
@@ -44,7 +44,7 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("TotalKms"));
             }
         }
-        private float kmsSinceFuel; public float KmsSinceFuel
+        private int kmsSinceFuel; public int KmsSinceFuel
         {
             get { return kmsSinceFuel; }
             set
@@ -54,7 +54,7 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("KmsSinceFuel"));
             }
         }
-        private float kmsSinceService; public float KmsSinceService
+        private int kmsSinceService; public int KmsSinceService
         {
             get { return kmsSinceService; }
             set

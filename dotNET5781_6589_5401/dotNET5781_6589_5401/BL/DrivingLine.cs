@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class DrivingLine
+    public class DrivingLine
     {
         private int numberLine; public int NumberLine
         {
