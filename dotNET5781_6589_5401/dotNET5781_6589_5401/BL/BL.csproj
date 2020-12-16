@@ -59,6 +59,7 @@
     <Compile Include="Station.cs" />
     <Compile Include="StationException.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DalObject\DalObject.csproj">
