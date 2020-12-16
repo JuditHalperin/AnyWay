@@ -9,7 +9,7 @@ namespace DLAPI
 {
     public interface IDAL
     {
-        #region users
+        #region Users
 
         void addUser(User user);
         void removeUser(User user);
@@ -20,7 +20,7 @@ namespace DLAPI
 
         #endregion
 
-        #region buses
+        #region Buses
 
         void addBus(Bus bus);
         void removeBus(Bus bus);
@@ -31,7 +31,7 @@ namespace DLAPI
 
         #endregion
 
-        #region lines
+        #region Lines
 
         void addLine(Line line);
         void removeLine(Line line);
@@ -42,7 +42,7 @@ namespace DLAPI
 
         #endregion
 
-        #region stations
+        #region Stations
 
         void addStation(Station station);
         void removeStation(Station station);
@@ -53,7 +53,7 @@ namespace DLAPI
 
         #endregion
        
-        #region lineStations
+        #region LineStations
 
         void addLineStation(LineStation lineStation);
         void removeLineStation(LineStation lineStation);
@@ -64,7 +64,7 @@ namespace DLAPI
 
         #endregion
 
-        #region followingStations
+        #region FollowingStations
 
         void addTwoFollowingStations(TwoFollowingStations twoFollowingStations);
         void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations);
@@ -75,7 +75,7 @@ namespace DLAPI
 
         #endregion
 
-        #region drivingBuses
+        #region DrivingBuses
 
         void addDrivingBus(DrivingBus drivingBus);
         void removeDrivingBus(DrivingBus drivingBus);
@@ -86,12 +86,12 @@ namespace DLAPI
 
         #endregion
 
-        #region drivingLines
+        #region DrivingLines
 
         void addDrivingLine(DrivingLine drivingLine);
         void removeDrivingLine(DrivingLine drivingLine);
         void updateDrivingLine(DrivingLine drivingLine);
-        Bus getDrivingLine(int thisSerial, string licensePlate, int line, DateTime start);
+        Bus getDrivingLine(int numberLine, DateTime start);
         IEnumerable<Station> GetDrivingLines();
         IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
 
