@@ -123,7 +123,7 @@ namespace BO
                 service = DateTime.Now.Date;
             if (start > service)
                 start = service;
-
+            
             StartOfWork = start;
             LastService = service;
 
