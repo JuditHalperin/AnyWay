@@ -14,9 +14,9 @@ namespace DLAPI
         void addUser(User user);
         void removeUser(User user);
         void updateUser(User user);
-        Bus getUser(string username);
-        IEnumerable<Station> GetUsers();
-        IEnumerable<Station> GetUsers(Predicate<User> condition);
+        User getUser(string username);
+        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetUsers(Predicate<User> condition);
 
         #endregion
 
@@ -59,8 +59,8 @@ namespace DLAPI
         void removeLineStation(LineStation lineStation);
         void updateLineStation(LineStation lineStation);
         LineStation getLineStation(int numberLine, int id);
-        IEnumerable<Station> GetLineStations();
-        IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
+        IEnumerable<LineStation> GetLineStations();
+        IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition);
 
         #endregion
 
@@ -70,8 +70,8 @@ namespace DLAPI
         void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations);
         void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations);
         TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID);
-        IEnumerable<Station> GetFollowingStations();
-        IEnumerable<Station> GetFollowingStations(Predicate<TwoFollowingStations> condition);
+        IEnumerable<TwoFollowingStations> GetFollowingStations();
+        IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition);
 
         #endregion
 
@@ -80,8 +80,8 @@ namespace DLAPI
         void addDrivingBus(DrivingBus drivingBus);
         void removeDrivingBus(DrivingBus drivingBus);
         DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        IEnumerable<Station> GetDrivingBuses();
-        IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
+        IEnumerable<DrivingBus> GetDrivingBuses();
+        IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
 
         #endregion
 
@@ -90,8 +90,8 @@ namespace DLAPI
         void addDrivingLine(DrivingLine drivingLine);
         void removeDrivingLine(DrivingLine drivingLine);
         DrivingLine getDrivingLine(int numberLine, DateTime start);
-        IEnumerable<Station> GetDrivingLines();
-        IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
+        IEnumerable<DrivingLine> GetDrivingLines();
+        IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 
         #endregion
     }
