@@ -58,8 +58,8 @@ namespace BLAPI
         void addDrivingBus(DrivingBus drivingBus);
         void removeDrivingBus(DrivingBus drivingBus);
         DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        IEnumerable<Station> GetDrivingBuses();
-        //IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
+        IEnumerable<DrivingBus> GetDrivingBuses();
+        //IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
 
         #endregion
 

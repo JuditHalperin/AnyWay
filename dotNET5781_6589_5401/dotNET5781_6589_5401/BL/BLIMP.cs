@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 
-namespace BL
+namespace BL//בbo לא צריך מספר רץ...
 {
     public class BLIMP : IBL
     {
@@ -388,11 +388,66 @@ namespace BL
             drivingBusD.NextStationTime = drivingBus.NextStationTime;
             return drivingBusD;
         }
-        void addDrivingBus(DrivingBus drivingBus);
-        void removeDrivingBus(DrivingBus drivingBus);
-        DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        IEnumerable<Station> GetDrivingBuses();
-        IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
+        BO.DrivingBus convertToDrivingBusBO(DO.DrivingBus drivingBus)
+        {
+            BO.DrivingBus drivingBusB = new BO.DrivingBus(drivingBus.LicensePlate, drivingBus.Line, drivingBus.Start);
+            //drivingBusB.ThisSerial = drivingBusD.ThisSerial;
+            //drivingBusB.ActualStart = drivingBus.ActualStart;
+            //drivingBusB.Start = drivingBus.Start;
+            //drivingBusB.PreviousStationID = drivingBus.PreviousStationID;
+            //drivingBusB.PreviousStationTime = drivingBus.PreviousStationTime;
+            //drivingBusB.NextStationTime = drivingBus.NextStationTime;
+            return drivingBusB;
+        }
+        void addDrivingBus(BO.DrivingBus drivingBus)
+        {
+            try
+            {
+                dal.addDrivingBus(convertToDrivingBusDO(drivingBus));
+            }
+            catch(DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        void removeDrivingBus(BO.DrivingBus drivingBus)
+        {
+            try
+            {
+                dal.removeDrivingBus(convertToDrivingBusDO(drivingBus));
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        BO.DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
+        {
+            try
+            {
+                return convertToDrivingBusBO(dal.getDrivingBus(thisSerial, licensePlate, line, start));
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        IEnumerable<BO.DrivingBus> GetDrivingBuses()
+        {
+            try
+            {
+                IEnumerable<DO.DrivingBus> drivingBusesD = dal.GetDrivingBuses();
+                IEnumerable<BO.DrivingBus> drivingBusesB = from drivingBus in drivingBusesD
+                                                           select convertToDrivingBusBO(drivingBus);
+                return drivingBusesB;
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        //IEnumerable<BO.DrivingBus> GetDrivingBuses(Predicate<BO.DrivingBus> condition)
+
 
         #endregion
 
