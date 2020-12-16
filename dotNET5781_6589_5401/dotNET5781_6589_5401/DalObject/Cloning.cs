@@ -104,7 +104,8 @@ namespace DL
         {
             User target = new User();
             target.Username = original.Username;
-
+            target.Password = original.Password;
+            target.IsManager = original.IsManager;
             return target;
         }
     }
