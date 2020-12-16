@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace temp
+namespace BO
 {
-    class User
+    public class User
     {
         #region
         private string username; public string Username

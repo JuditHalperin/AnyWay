@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class Station : INotifyPropertyChanged
+    public class Station : INotifyPropertyChanged
     {
         //static private Random rand = new Random(DateTime.Now.Millisecond);
         //static private int code = 1000;

@@ -9,7 +9,8 @@ namespace DO
     public class DrivingBus
     {
         private static int serial = 1;
-        public int LicensePlate { get; set; }
+        public int ThisSerial { get; set; }
+        public string LicensePlate { get; set; }
         public int Line { get; set; }
         public DateTime Start { get; set; }
         public DateTime ActualStart { get; set; }
