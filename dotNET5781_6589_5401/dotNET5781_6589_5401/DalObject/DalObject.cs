@@ -49,9 +49,17 @@ namespace DL
         }
         Bus getBus(string licensePlate)
         {
-            Bus bus = (from busTemp in DS.DataSource.Buses
-                                     where busTemp.LicensePlate==licensePlate
-                                     select busTemp).First();
+            Bus bus;
+            try
+            {
+                bus = (from busTemp in DS.DataSource.Buses
+                           where busTemp.LicensePlate == licensePlate
+                           select busTemp).First();
+            }
+            catch
+            {
+                throw new BusException("There is not exsits bus with this license.");
+            }
             return bus;
         }
         IEnumerable<Bus> GetBuses()
@@ -97,9 +105,17 @@ namespace DL
         }
         Line getLine(int serial)
         {
-            Line line = (from lineTemp in DS.DataSource.Lines
-                       where lineTemp.ThisSerial == serial
+            Line line;
+            try
+            {
+                line = (from lineTemp in DS.DataSource.Lines//Find the bus for update.
+                         where lineTemp.ThisSerial == serial
                          select lineTemp).First();
+            }
+            catch
+            {
+                throw new LineException("There is not exsits line with this serial.");
+            }
             return line;
         }
         IEnumerable<Line> GetLines()
