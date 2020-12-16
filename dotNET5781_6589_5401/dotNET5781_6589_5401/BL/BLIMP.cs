@@ -130,6 +130,7 @@ namespace BL
         /// <returns>Line of BO</returns>
         BO.Line convertToLineBO(DO.Line lineD)
         {
+            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.NumberLine); 
 
             BO.Line lineB = new BO.Line(lineD.NumberLine,(BO.Regions)lineD.Region,)
         }
