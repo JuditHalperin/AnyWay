@@ -52,6 +52,16 @@ namespace DLAPI
         IEnumerable<Station> GetUsers(Predicate<User> condition);
 
         #endregion
-        
+
+        #region lineStations
+
+        void addLineStation(LineStation lineStation);
+        void removeLineStation(LineStation lineStation);
+        void updateLineStation(LineStation lineStation);
+        Bus getLineStation(int numberLine, int id);
+        IEnumerable<Station> GetLineStations();
+        IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
+
+        #endregion
     }
 }
