@@ -33,17 +33,25 @@ namespace DL
         }
         void updateBus(Bus bus)
         {
-            Bus bust = (Bus)(from busTemp in DS.DataSource.Buses//Find the bus for update.
-                      where busTemp.LicensePlate==bus.LicensePlate
-                      select busTemp);
+            Bus bust;
+            try
+            {
+                bust = (from busTemp in DS.DataSource.Buses//Find the bus for update.
+                                 where busTemp.LicensePlate == bus.LicensePlate
+                                 select busTemp).First();
+            }
+            catch
+            {
+                throw new BusException("There is not exsits bus with same license of the bus for update.");
+            }
             DS.DataSource.Buses.Remove(bust);//Remove the old bus
             DS.DataSource.Buses.Add(bus);//Add the update bus
         }
         Bus getBus(string licensePlate)
         {
-            Bus bus = (Bus)(from busTemp in DS.DataSource.Buses
+            Bus bus = (from busTemp in DS.DataSource.Buses
                                      where busTemp.LicensePlate==licensePlate
-                                     select busTemp);
+                                     select busTemp).First();
             return bus;
         }
         IEnumerable<Bus> GetBuses()
@@ -52,7 +60,7 @@ namespace DL
         }
         IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
-            IEnumerable<Bus> buses = from bus in DS.DataSource.buses
+            IEnumerable<Bus> buses = from bus in DS.DataSource.Buses
                                      where condition(bus)
                                      select bus;
             return buses;
@@ -68,23 +76,42 @@ namespace DL
         }
         void removeLine(Line line)
         {
-
+            if (!DS.DataSource.Lines.Remove(line))
+                throw new LineException("The line is not exsits");
         }
         void updateLine(Line line)
         {
-
+            Line linet;
+            try
+            {
+                linet = (from lineTemp in DS.DataSource.Lines//Find the bus for update.
+                             where lineTemp.ThisSerial == line.ThisSerial
+                             select lineTemp).First();
+            }
+            catch
+            {
+                throw new LineException("There is not exsits line with same serial of the line for update.");
+            }
+            DS.DataSource.Lines.Remove(linet);//Remove the old bus
+            DS.DataSource.Lines.Add(linet);//Add the update bus
         }
-        Bus getLine(int serial)
+        Line getLine(int serial)
         {
-
+            Line line = (from lineTemp in DS.DataSource.Lines
+                       where lineTemp.ThisSerial == serial
+                         select lineTemp).First();
+            return line;
         }
         IEnumerable<Line> GetLines()
         {
-
+            return DS.DataSource.Lines;
         }
-        IEnumerable<Line> GetLines(Predicate<object> condition)
+        IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
-
+            IEnumerable<Line> lines = from line in DS.DataSource.Lines
+                                     where condition(line)
+                                     select line;
+            return lines;
         }
 
         #endregion
