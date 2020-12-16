@@ -6,6 +6,7 @@ using BO;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace BL
 {
@@ -130,16 +131,84 @@ namespace BL
         /// <returns>Line of BO</returns>
         BO.Line convertToLineBO(DO.Line lineD)
         {
-            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.NumberLine); 
-
-            BO.Line lineB = new BO.Line(lineD.NumberLine,(BO.Regions)lineD.Region,)
+            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.NumberLine);
+            stations = stations.OrderBy(station => station.PathIndex);
+            IEnumerable<BO.LineStation> stationsB = from item in stations
+                                                    select convertToLineStationBO(item);
+            TwoFollowingStations followingStations = new TwoFollowingStations();
+            try
+            {
+                for (int i = 0; i < stationsB.Count() - 1; i++)
+                {
+                    followingStations= dal.getTwoFollowingStations(stationsB.ElementAt(i).ID, stationsB.ElementAt(i + 1).ID);
+                    stationsB.ElementAt(i + 1).LengthFromPreviousStations = followingStations.LengthBetweenStations;
+                    stationsB.ElementAt(i + 1).TimeFromPreviousStations = followingStations.TimeBetweenStations;
+                }
+            }
+            catch(DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+                       
+            return new BO.Line(lineD.NumberLine, (BO.Regions)lineD.Region, (ObservableCollection<BO.LineStation>)stationsB);
         }
-        void addLine(Line line);
-        void removeLine(Line line);
-        void updateLine(Line line);
-        Line getLine(int serial);
-        IEnumerable<Line> GetLines();
-        IEnumerable<Line> GetLines(Predicate<Line> condition);
+        void addLine(BO.Line line)
+        {
+            DO.Line lineD = convertToLineDO(line);
+            try
+            {
+                dal.addLine(lineD);
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        void removeLine(BO.Line line)
+        {
+            DO.Line lineD = convertToLineDO(line);
+            try
+            {
+                dal.removeLine(lineD);
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+
+        }
+        void updateLine(BO.Line line)
+        {
+            DO.Line lineD = convertToLineDO(line);
+            try
+            {
+                dal.updateLine(lineD);
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        BO.Line getLine(int serial)
+        {
+            try
+            {
+                return convertToLineBO(dal.getLine(serial));
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        IEnumerable<BO.Line> GetLines()
+        {
+            IEnumerable<DO.Line> linesD = dal.GetLines();
+            IEnumerable<BO.Line> linesB = from line in linesD
+                                         select convertToLineBO(line);
+            return linesB;
+        }
+        //IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
+
 
         #endregion
 
@@ -155,7 +224,18 @@ namespace BL
         #endregion
 
         #region LineStations
-
+        DO.LineStation convertToLineStationBO(BO.LineStation lineStationB)
+        {
+            DO.LineStation lineStationD = new DO.LineStation();
+            lineStationD.ID = lineStationB.ID;
+            lineStationD.NumberLine = lineStationB.NumberLine;
+            lineStationD.PathIndex = lineStationB.PathIndex;
+            return lineStationD;
+        }
+        BO.LineStation convertToLineStationBO(DO.LineStation lineStationD)
+        {
+            return new BO.LineStation(lineStationD.NumberLine, lineStationD.ID, lineStationD.PathIndex);
+        }
         void addLineStation(LineStation lineStation);
         void removeLineStation(LineStation lineStation);
         void updateLineStation(LineStation lineStation);
