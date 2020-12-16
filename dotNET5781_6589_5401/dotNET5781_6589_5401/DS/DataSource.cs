@@ -19,8 +19,6 @@ namespace DS
         public static List<DrivingBus> DrivingBuses;
         public static List<DrivingLine> DrivingLines;
 
-        public static List<WindDirection> directions;//
-
         static DataSource()
         {
             Users = new List<User>();
@@ -32,8 +30,7 @@ namespace DS
             DrivingBuses = new List<DrivingBus>();
             DrivingLines = new List<DrivingLine>();
 
-            directions = new List<WindDirection>();//
-            directions.Add(new WindDirection());//
+            // add to lists
         }
 
     }
