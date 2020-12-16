@@ -234,12 +234,65 @@ namespace BL
         {
             return new BO.Station(stationD.ID, stationD.Name, stationD.Latitude, stationD.Longitude);
         }
-        void addStation(Station station);
-        void removeStation(Station station);
-        void updateStation(Station station);
-        Station getStation(int id);
-        IEnumerable<Station> GetStations();
-        IEnumerable<Station> GetStations(Predicate<Station> condition);
+        void addStation(BO.Station station)
+        {
+            try
+            {
+                dal.addStation(convertToStationDO(station));
+            }
+            catch(DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+        }
+        void removeStation(BO.Station station)
+        {
+            try
+            {
+                dal.removeStation(convertToStationDO(station));
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+        }
+        void updateStation(BO.Station station)
+        {
+            try
+            {
+                dal.updateStation(convertToStationDO(station));
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+        }
+        BO.Station getStation(int id)
+        {
+            try
+            {
+                return convertToStationBO(dal.getStation(id));
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+        }
+        IEnumerable<BO.Station> GetStations()
+        {
+            try
+            {
+                IEnumerable<DO.Station> stationsD = dal.GetStations();
+                IEnumerable<BO.Station> stationsB = from station in stationsD
+                                                 select convertToStationBO(station);
+                return stationsB;
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+        }
+        //IEnumerable<Station> GetStations(Predicate<Station> condition);
 
         #endregion
 
@@ -322,7 +375,19 @@ namespace BL
         #endregion
 
         #region DrivingBuses
-
+        DO.DrivingBus convertToDrivingBusDO(BO.DrivingBus drivingBus)
+        {
+            DO.DrivingBus drivingBusD = new DO.DrivingBus();
+            drivingBusD.ThisSerial = drivingBus.ThisSerial;
+            drivingBusD.Line = drivingBus.Line;
+            drivingBusD.LicensePlate = drivingBus.LicensePlate;
+            drivingBusD.ActualStart = drivingBus.ActualStart;
+            drivingBusD.Start = drivingBus.Start;
+            drivingBusD.PreviousStationID = drivingBus.PreviousStationID;
+            drivingBusD.PreviousStationTime = drivingBus.PreviousStationTime;
+            drivingBusD.NextStationTime = drivingBus.NextStationTime;
+            return drivingBusD;
+        }
         void addDrivingBus(DrivingBus drivingBus);
         void removeDrivingBus(DrivingBus drivingBus);
         DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
