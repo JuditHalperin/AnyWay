@@ -66,12 +66,45 @@ namespace DL
             return target;
         }
 
-        internal static LineStation Clone(this LineStation original)
+        internal static DrivingBus Clone(this DrivingBus original)
         {
-            LineStation target = new LineStation();
-            target.ID = original.ID;
+            DrivingBus target = new DrivingBus();
+            target.ThisSerial = original.ThisSerial;
+            target.Line = original.Line;
+            target.LicensePlate = original.LicensePlate;
+            target.ActualStart = original.ActualStart;
+            target.Start = original.Start;
+            target.PreviousStationID = original.PreviousStationID;
+            target.PreviousStationTime = original.PreviousStationTime;
+            target.NextStationTime = original.NextStationTime;
+            return target;
+        }
+
+        internal static DrivingLine Clone(this DrivingLine original)
+        {
+            DrivingLine target = new DrivingLine();
             target.NumberLine = original.NumberLine;
-            target.PathIndex = original.PathIndex;
+            target.Start = original.Start;
+            target.End = original.End;
+            target.Frequency = original.Frequency;
+            return target;
+        }
+
+        internal static TwoFollowingStations Clone(this TwoFollowingStations original)
+        {
+            TwoFollowingStations target = new TwoFollowingStations();
+            target.FirstStationID = original.FirstStationID;
+            target.SecondStationID = original.SecondStationID;
+            target.LengthBetweenStations = original.LengthBetweenStations;
+            target.TimeBetweenStations = original.TimeBetweenStations;
+            return target;
+        }
+
+        internal static User Clone(this User original)
+        {
+            User target = new User();
+            target.Username = original.Username;
+
             return target;
         }
     }
