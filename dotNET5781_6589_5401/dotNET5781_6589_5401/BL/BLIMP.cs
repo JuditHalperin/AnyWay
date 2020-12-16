@@ -130,7 +130,8 @@ namespace BL
         /// <returns>Line of BO</returns>
         BO.Line convertToLineBO(DO.Line lineD)
         {
-            
+
+            BO.Line lineB = new BO.Line(lineD.NumberLine,(BO.Regions)lineD.Region,)
         }
         void addLine(Line line);
         void removeLine(Line line);
