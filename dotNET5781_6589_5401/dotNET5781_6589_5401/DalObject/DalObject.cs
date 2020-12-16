@@ -24,11 +24,15 @@ namespace DL
 
         void addBus(Bus bus)
         {
-
+            DS.DataSource.buses.Add(bus);
         }
         void removeBus(Bus bus)
         {
-
+            try { DS.DataSource.buses.Remove(bus); }
+            catch
+            {
+                throw new BusException("The bus is not exsits");
+            }            
         }
         void updateBus(Bus bus)
         {
@@ -50,7 +54,7 @@ namespace DL
             IEnumerable<Bus> buses = from bus in DS.DataSource.buses
                                      where condition(bus)
                                      select bus;
-            return 
+            return buses;
         }
 
         #endregion
