@@ -57,6 +57,7 @@
     <Compile Include="Regions.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Station.cs" />
+    <Compile Include="StationException.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="TwoFollowingStations.cs" />
     <Compile Include="User.cs" />
