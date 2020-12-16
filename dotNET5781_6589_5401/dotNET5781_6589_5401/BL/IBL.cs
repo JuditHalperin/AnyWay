@@ -10,6 +10,17 @@ namespace BLAPI
     public interface IBL
     {
         //Weather GetWeather(int day);
+        #region Users
+
+        void addUser(User user);
+        void removeUser(User user);
+        void updateUser(User user);
+        User getUser(string username);
+        IEnumerable<User> GetUsers();
+        //IEnumerable<User> GetUsers(Predicate<User> condition);
+
+        #endregion
+
         #region Buses
         void addBus(Bus bus);
         void removeBus(Bus bus);
@@ -68,8 +79,8 @@ namespace BLAPI
         void addDrivingLine(DrivingLine drivingLine);
         void removeDrivingLine(DrivingLine drivingLine);
         DrivingLine getDrivingLine(int numberLine, DateTime start);
-        IEnumerable<Station> GetDrivingLines();
-        //IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
+        IEnumerable<DrivingLine> GetDrivingLines();
+        //IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 
         #endregion
     }

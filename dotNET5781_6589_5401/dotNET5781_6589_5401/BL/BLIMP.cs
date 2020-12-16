@@ -14,13 +14,88 @@ namespace BL//בbo לא צריך מספר רץ...
     {
         readonly IDAL dal = DalFactory.GetDal();
 
+        #region Users
+        public DO.User convertToUserDO(BO.User user)
+        {
+            DO.User userD = new DO.User();
+            userD.Username = user.Username;
+            userD.Password = user.Password;
+            userD.IsManager = user.IsManager;
+            return userD;
+        }
+        public BO.User convertToUserBO(DO.User user)
+        {
+            return new BO.User(user.Username, user.Password, user.IsManager);
+        }
+        public void addUser(BO.User user)
+        {
+            try
+            {
+                dal.addUser(convertToUserDO(user));
+            }
+            catch (DO.UserException ex)
+            {
+                throw new BO.UserException(ex.Message);
+            }
+        }
+        public void removeUser(BO.User user)
+        {
+            try
+            {
+                dal.removeUser(convertToUserDO(user));
+            }
+            catch (DO.UserException ex)
+            {
+                throw new BO.UserException(ex.Message);
+            }
+        }
+        public void updateUser(BO.User user)
+        {
+            try
+            {
+                dal.updateUser(convertToUserDO(user));
+            }
+            catch (DO.UserException ex)
+            {
+                throw new BO.UserException(ex.Message);
+            }
+        }
+        public BO.User getUser(string username)
+        {
+            try
+            {
+                return convertToUserBO(dal.getUser(username));
+            }
+            catch (DO.UserException ex)
+            {
+                throw new BO.UserException(ex.Message);
+            }
+        }
+        public IEnumerable<BO.User> GetUsers()
+        {
+            try
+            {
+                IEnumerable<DO.User> usersD = dal.GetUsers();
+                IEnumerable<BO.User> usersB = from user in usersD
+                                              select convertToUserBO(user);
+                return usersB;
+            }
+            catch (DO.UserException ex)
+            {
+                throw new BO.UserException(ex.Message);
+            }
+        }
+        //public IEnumerable<User> GetUsers(Predicate<User> condition);
+
+        #endregion
+
         #region Buses
         /// <summary>
         /// Func that convert bus of BO for bus of DO
         /// </summary>
         /// <param name="bus">bus of BO</param>
         /// <returns>bus of DO</returns>
-        DO.Bus convertToBusDO(BO.Bus bus)
+        public DO.Bus convertToBusDO(BO.Bus bus)
         {
             DO.Bus busD = new DO.Bus();
             busD.LicensePlate = bus.LicensePlate;
@@ -37,26 +112,26 @@ namespace BL//בbo לא צריך מספר רץ...
         /// </summary>
         /// <param name="bus">bus of DO</param>
         /// <returns>bus of BO</returns>
-        BO.Bus convertToBusBO(DO.Bus bus)
+        public BO.Bus convertToBusBO(DO.Bus bus)
         {
             BO.Bus busB = new BO.Bus(bus.StartOfWork, bus.LastService, bus.LicensePlate, bus.TotalKms, bus.KmsSinceFuel, bus.KmsSinceService);
             return busB;
         }
-        void addBus(BO.Bus bus)
+        public void addBus(BO.Bus bus)
         {
             DO.Bus busD = convertToBusDO(bus);
             try
             {
                 dal.addBus(busD);
             }
-            catch(DO.BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
         }
-        void removeBus(BO.Bus bus)
+        public void removeBus(BO.Bus bus)
         {
-            DO.Bus busD= convertToBusDO(bus);
+            DO.Bus busD = convertToBusDO(bus);
             try
             {
                 dal.removeBus(busD);
@@ -66,7 +141,7 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.BusException(ex.Message);
             }
         }
-        void updateBus(BO.Bus bus)
+        public void updateBus(BO.Bus bus)
         {
             DO.Bus busD = convertToBusDO(bus);
             try
@@ -78,7 +153,7 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.BusException(ex.Message);
             }
         }
-        BO.Bus getBus(string licensePlate)
+        public BO.Bus getBus(string licensePlate)
         {
             try
             {
@@ -90,7 +165,7 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.BusException(ex.Message);
             }
         }
-        IEnumerable<BO.Bus> GetBuses()
+        public IEnumerable<BO.Bus> GetBuses()
         {
             try
             {
@@ -99,13 +174,13 @@ namespace BL//בbo לא צריך מספר רץ...
                                              select convertToBusBO(bus);
                 return busesB;
             }
-            catch(DO.BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
         }
         //IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
-      
+
 
         #endregion
 
@@ -115,7 +190,7 @@ namespace BL//בbo לא צריך מספר רץ...
         /// </summary>
         /// <param name="bus">Line of BO</param>
         /// <returns>Line of DO</returns>
-        DO.Line convertToLineDO(BO.Line lineB)
+        public DO.Line convertToLineDO(BO.Line lineB)
         {
             DO.Line lineD = new DO.Line();
             lineD.ThisSerial = lineB.ThisSerial;
@@ -130,7 +205,7 @@ namespace BL//בbo לא צריך מספר רץ...
         /// </summary>
         /// <param name="bus">Line of DO</param>
         /// <returns>Line of BO</returns>
-        BO.Line convertToLineBO(DO.Line lineD)
+        public BO.Line convertToLineBO(DO.Line lineD)
         {
             IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.NumberLine);
             stations = stations.OrderBy(station => station.PathIndex);
@@ -141,19 +216,19 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 for (int i = 0; i < stationsB.Count() - 1; i++)
                 {
-                    followingStations= dal.getTwoFollowingStations(stationsB.ElementAt(i).ID, stationsB.ElementAt(i + 1).ID);
+                    followingStations = dal.getTwoFollowingStations(stationsB.ElementAt(i).ID, stationsB.ElementAt(i + 1).ID);
                     stationsB.ElementAt(i + 1).LengthFromPreviousStations = followingStations.LengthBetweenStations;
                     stationsB.ElementAt(i + 1).TimeFromPreviousStations = followingStations.TimeBetweenStations;
                 }
             }
-            catch(DO.StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
-                       
+
             return new BO.Line(lineD.NumberLine, (BO.Regions)lineD.Region, (ObservableCollection<BO.LineStation>)stationsB);
         }
-        void addLine(BO.Line line)
+        public void addLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
             try
@@ -165,7 +240,7 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.LineException(ex.Message);
             }
         }
-        void removeLine(BO.Line line)
+        public void removeLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
             try
@@ -178,7 +253,7 @@ namespace BL//בbo לא צריך מספר רץ...
             }
 
         }
-        void updateLine(BO.Line line)
+        public void updateLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
             try
@@ -190,7 +265,7 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.LineException(ex.Message);
             }
         }
-        BO.Line getLine(int serial)
+        public BO.Line getLine(int serial)
         {
             try
             {
@@ -201,7 +276,7 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.LineException(ex.Message);
             }
         }
-        IEnumerable<BO.Line> GetLines()
+        public IEnumerable<BO.Line> GetLines()
         {
             try
             {
@@ -240,7 +315,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 dal.addStation(convertToStationDO(station));
             }
-            catch(DO.StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -284,7 +359,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 IEnumerable<DO.Station> stationsD = dal.GetStations();
                 IEnumerable<BO.Station> stationsB = from station in stationsD
-                                                 select convertToStationBO(station);
+                                                    select convertToStationBO(station);
                 return stationsB;
             }
             catch (DO.StationException ex)
@@ -362,7 +437,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 IEnumerable<DO.LineStation> lineStationD = dal.GetLineStations();
                 IEnumerable<BO.LineStation> linetationB = from lineStation in lineStationD
-                                              select convertToLineStationBO(lineStation);
+                                                          select convertToLineStationBO(lineStation);
                 return linetationB;
             }
             catch (DO.StationException ex)
@@ -405,7 +480,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 dal.addDrivingBus(convertToDrivingBusDO(drivingBus));
             }
-            catch(DO.BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
@@ -452,12 +527,67 @@ namespace BL//בbo לא צריך מספר רץ...
         #endregion
 
         #region DrivingLines
-
-        void addDrivingLine(DrivingLine drivingLine);
-        void removeDrivingLine(DrivingLine drivingLine);
-        DrivingLine getDrivingLine(int numberLine, DateTime start);
-        IEnumerable<Station> GetDrivingLines();
-        IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
+        DO.DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
+        {
+            DO.DrivingLine drivingLineD = new DO.DrivingLine();
+            drivingLineD.NumberLine = drivingLine.NumberLine;
+            drivingLineD.Start = drivingLine.Start;
+            drivingLineD.End = drivingLine.End;
+            drivingLineD.Frequency = drivingLine.Frequency;
+            return drivingLineD;
+        }
+        BO.DrivingLine convertToDrivingLineBO(DO.DrivingLine drivingLine)
+        {
+            return new BO.DrivingLine(drivingLine.NumberLine, drivingLine.Start, drivingLine.Frequency, drivingLine.End);
+        }
+        void addDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
+        }
+        void removeDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
+        }
+        BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
+        {
+            try
+            {
+                return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
+        }
+        IEnumerable<BO.DrivingLine> GetDrivingLines()
+        {
+            try
+            {
+                IEnumerable<DO.DrivingLine> drivingLinesD = dal.GetDrivingLines();
+                IEnumerable<BO.DrivingLine> drivingLinesB = from drivingLine in drivingLinesD
+                                                            select convertToDrivingLineBO(drivingLine);
+                return drivingLinesB;
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
+        }
+        //IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition);
 
         #endregion
 
@@ -532,3 +662,4 @@ namespace BL//בbo לא צריך מספר רץ...
         //}
 
     }
+}
