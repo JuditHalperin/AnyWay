@@ -66,14 +66,35 @@ namespace DLAPI
 
         #region followingStations
 
-        void addTwoFollowingStations(TwoFollowingStations lineStation);
-        void removeTwoFollowingStations(TwoFollowingStations lineStation);
-        void updateTwoFollowingStations(TwoFollowingStations lineStation);
-        Bus getTwoFollowingStations(int numberLine, int id);
+        void addTwoFollowingStations(TwoFollowingStations twoFollowingStations);
+        void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations);
+        void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations);
+        Bus getTwoFollowingStations(int firstStationID, int secondStationID);
         IEnumerable<Station> GetFollowingStations();
         IEnumerable<Station> GetFollowingStations(Predicate<TwoFollowingStations> condition);
 
         #endregion
-        
+
+        #region drivingBuses
+
+        void addDrivingBus(DrivingBus drivingBus);
+        void removeDrivingBus(DrivingBus drivingBus);
+        void updateDrivingBus(DrivingBus drivingBus);
+        Bus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
+        IEnumerable<Station> GetDrivingBuses();
+        IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
+
+        #endregion
+
+        #region drivingLines
+
+        void addDrivingLine(DrivingLine drivingLine);
+        void removeDrivingLine(DrivingLine drivingLine);
+        void updateDrivingLine(DrivingLine drivingLine);
+        Bus getDrivingLine(int thisSerial, string licensePlate, int line, DateTime start);
+        IEnumerable<Station> GetDrivingLines();
+        IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
+
+        #endregion
     }
 }

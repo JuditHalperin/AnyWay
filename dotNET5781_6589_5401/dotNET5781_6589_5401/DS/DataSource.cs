@@ -10,27 +10,27 @@ namespace DS
 {
     public static class DataSource
     {
-        public static List<User> users;
-        public static List<Bus> buses;
-        public static List<Line> lines;
-        public static List<Station> stations;
-        public static List<LineStation> lineStations;
-        public static List<TwoFollowingStations> followingStations;
-        public static List<DrivingBus> drivingBuses;
-        public static List<DrivingLine> drivingLines;
+        public static List<User> Users;
+        public static List<Bus> Buses;
+        public static List<Line> Lines;
+        public static List<Station> Stations;
+        public static List<LineStation> LineStations;
+        public static List<TwoFollowingStations> FollowingStations;
+        public static List<DrivingBus> DrivingBuses;
+        public static List<DrivingLine> DrivingLines;
 
         public static List<WindDirection> directions;//
 
         static DataSource()
         {
-            users = new List<User>();
-            stations = new List<Station>();
-            lineStations = new List<LineStation>();
-            followingStationsCouples = new List<TwoFollowingStations>();
-            buses = new List<Bus>();
-            drivingBuses = new List<DrivingBus>();
-            lines = new List<Line>();
-            drivingLines = new List<DrivingLine>();
+            Users = new List<User>();
+            Buses = new List<Bus>();
+            Lines = new List<Line>();
+            Stations = new List<Station>();
+            LineStations = new List<LineStation>();
+            FollowingStations = new List<TwoFollowingStations>();
+            DrivingBuses = new List<DrivingBus>();
+            DrivingLines = new List<DrivingLine>();
 
             directions = new List<WindDirection>();//
             directions.Add(new WindDirection());//
