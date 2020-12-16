@@ -13,33 +13,24 @@ namespace BO
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        static private Random rand = new Random(DateTime.Now.Millisecond);
+        //static private Random rand = new Random(DateTime.Now.Millisecond);
 
-        private static int code = 1;
+        private static int serial = 1;
 
-        999#region 
+        #region 
 
-        public ObservableCollection<Station> path = new ObservableCollection<Station>();
-
-        private int numberLine;
-        public int NumberLine
+        public ObservableCollection<LineStation> Path = new ObservableCollection<LineStation>();
+        private int thisSerial; public int ThisSerial
+        {
+            get { return thisSerial; }
+            private set { thisSerial = value; }
+        }
+        private int numberLine; public int NumberLine
         {
             get { return numberLine; }
             private set { numberLine = value; }
         }
-
-        public string FirstStation
-        {
-            get { return path.First().ID; }
-        }
-
-        public string LastStation
-        {
-            get { return path.Last().ID; }
-        }
-
-        private Regions region;
-        public Regions Region
+        private Regions region; public Regions Region
         {
             get { return region; }
             set
@@ -49,28 +40,31 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("Region"));
             }
         }
+        
         #endregion
 
         /// <summary>
         /// constructor - gets the first station
         /// </summary>
         /// <param name="firstStation">first station in path</param>
-        public Line(Station firstStation)
+        public Line(int numberLine, Regions region, Station firstStation)
         {
-            NumberLine = code++;
-            Region = (Regions)rand.Next(4);
-            path.Add(new Station(firstStation));
+            ThisSerial = serial++;
+            NumberLine = numberLine;
+            Region = region;
+
+            //Path.Add(new LineStation(firstStation));
         }
 
         /// <summary>
         /// constructor - gets list of stations
         /// </summary>
         /// <param name="newPath">path</param>
-        public Line(ObservableCollection<Station> newPath) : this(newPath[0]) // call the first constructor
-        {
-            for (int i = 1; i < newPath.Count(); i++)
-                addStation(newPath[i], i + 1);
-        }
+        //public Line(ObservableCollection<LineStation> newPath) : this(newPath[0]) // call the first constructor
+        //{
+        //    for (int i = 1; i < newPath.Count(); i++)
+        //        addStation(newPath[i], i + 1);
+        //}
 
         /// <summary>
         /// constructor of a bus with sub-path
@@ -79,12 +73,12 @@ namespace BO
         /// </summary>
         /// <param name="firstStation">first station of the sub-path</param>
         /// <param name="line">number of origin line</param>
-        private Line(Station firstStation, int line)
-        {
-            NumberLine = -1 * line; // negative line indicates a sub-line
-            Region = Regions.General;
-            path.Add(new Station(firstStation.ID));
-        }
+        //private Line(Station firstStation, int line)
+        //{
+        //    NumberLine = -1 * line; // negative line indicates a sub-line
+        //    Region = Regions.General;
+        //    path.Add(new Station(firstStation.ID));
+        //}
 
         /// <summary>
         /// ovarride about "ToString".
@@ -94,7 +88,7 @@ namespace BO
         {
             string descriptionOfBus = $"Line: {NumberLine}.    Region: {Region}.    Stations: ";
 
-            foreach (BusLineStation station in path)
+            foreach (LineStation station in Path)
                 descriptionOfBus += station.ID + " -> ";
 
             descriptionOfBus = descriptionOfBus.Remove(descriptionOfBus.Length - 4, 4); // remove the last " -> "
@@ -112,9 +106,9 @@ namespace BO
         {
             index -= 1;
 
-            BusLineStation newStation = new BusLineStation(station.ID);
+            LineStation newStation = new LineStation(station.ID);
 
-            foreach (BusLineStation item in path)
+            foreach (LineStation item in path)
                 if (station.ID == item.ID)
                     throw new LineException("The station already exists in the path.");
 
