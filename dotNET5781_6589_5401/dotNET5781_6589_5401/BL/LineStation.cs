@@ -52,13 +52,16 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("TimeFromPreviousStations"));
             }
         }
+
+        #endregion
+
         /// <summary>
-        /// Ctor
+        /// constructor
         /// </summary>
-        /// <param name="number"></param>
-        /// <param name="id"></param>
-        /// <param name="index"></param>
-        public LineStation(int number,int id,int index)
+        /// <param name="number">line number</param>
+        /// <param name="id">station id</param>
+        /// <param name="index">index in the stations path</param>
+        public LineStation(int number, int id, int index)
         {
             numberLine = number;
             ID = id;
@@ -67,6 +70,5 @@ namespace BO
             timeFromPreviousStations = 0;
         }
 
-        #endregion
     }
 }
