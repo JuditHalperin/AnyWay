@@ -17,6 +17,8 @@ namespace BO
 
         private static int code = 1;
 
+        999#region 
+
         public ObservableCollection<Station> path = new ObservableCollection<Station>();
 
         private int numberLine;
@@ -47,6 +49,7 @@ namespace BO
                     PropertyChanged(this, new PropertyChangedEventArgs("Region"));
             }
         }
+        #endregion
 
         /// <summary>
         /// constructor - gets the first station
