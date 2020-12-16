@@ -92,19 +92,20 @@ namespace BL
         }
         IEnumerable<BO.Bus> GetBuses()
         {
-            IEnumerable<DO.Bus> busesD = dal.GetBuses();
-            IEnumerable<BO.Bus> busesB = from bus in busesD
-                                         select convertToBusBO(bus);
-            return busesB;
+            try
+            {
+                IEnumerable<DO.Bus> busesD = dal.GetBuses();
+                IEnumerable<BO.Bus> busesB = from bus in busesD
+                                             select convertToBusBO(bus);
+                return busesB;
+            }
+            catch(DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
         }
         //IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
-        //{
-
-        //    IEnumerable<DO.Bus> busesD = dal.GetBuses();
-        //    IEnumerable<BO.Bus> busesB = from bus in busesD
-        //                                 select convertToBusBO(bus);
-        //    return busesB;
-        //}
+      
 
         #endregion
 
@@ -159,9 +160,9 @@ namespace BL
             {
                 dal.addLine(lineD);
             }
-            catch (DO.BusException ex)
+            catch (DO.LineException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.LineException(ex.Message);
             }
         }
         void removeLine(BO.Line line)
@@ -171,9 +172,9 @@ namespace BL
             {
                 dal.removeLine(lineD);
             }
-            catch (DO.BusException ex)
+            catch (DO.LineException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.LineException(ex.Message);
             }
 
         }
@@ -184,9 +185,9 @@ namespace BL
             {
                 dal.updateLine(lineD);
             }
-            catch (DO.BusException ex)
+            catch (DO.LineException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.LineException(ex.Message);
             }
         }
         BO.Line getLine(int serial)
@@ -195,17 +196,24 @@ namespace BL
             {
                 return convertToLineBO(dal.getLine(serial));
             }
-            catch (DO.BusException ex)
+            catch (DO.LineException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.LineException(ex.Message);
             }
         }
         IEnumerable<BO.Line> GetLines()
         {
-            IEnumerable<DO.Line> linesD = dal.GetLines();
-            IEnumerable<BO.Line> linesB = from line in linesD
-                                         select convertToLineBO(line);
-            return linesB;
+            try
+            {
+                IEnumerable<DO.Line> linesD = dal.GetLines();
+                IEnumerable<BO.Line> linesB = from line in linesD
+                                              select convertToLineBO(line);
+                return linesB;
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
         }
         //IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
 
@@ -224,7 +232,7 @@ namespace BL
         #endregion
 
         #region LineStations
-        DO.LineStation convertToLineStationBO(BO.LineStation lineStationB)
+        DO.LineStation convertToLineStationDO(BO.LineStation lineStationB)
         {
             DO.LineStation lineStationD = new DO.LineStation();
             lineStationD.ID = lineStationB.ID;
@@ -238,23 +246,64 @@ namespace BL
         }
         void addLineStation(BO.LineStation lineStation)
         {
-
+            DO.LineStation lineStationD = convertToLineStationDO(lineStation);
+            try
+            {
+                dal.addLineStation(lineStationD);
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
         }
         void removeLineStation(BO.LineStation lineStation)
         {
-
+            DO.LineStation lineStationD = convertToLineStationDO(lineStation);
+            try
+            {
+                dal.removeLineStation(lineStationD);
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
         }
         void updateLineStation(BO.LineStation lineStation)
         {
-
+            DO.LineStation lineStationD = convertToLineStationDO(lineStation);
+            try
+            {
+                dal.updateLineStation(lineStationD);
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
         }
-        LineStation getLineStation(int numberLine, int id)
+        BO.LineStation getLineStation(int numberLine, int id)
         {
-
+            try
+            {
+                return convertToLineStationBO(getLineStation(numberLine, id));
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
         }
         IEnumerable<BO.LineStation> GetLineStations()
         {
-
+            try
+            {
+                IEnumerable<DO.LineStation> lineStationD = dal.GetLineStations();
+                IEnumerable<BO.LineStation> linetationB = from lineStation in lineStationD
+                                              select convertToLineStationBO(lineStation);
+                return linetationB;
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
         }
         //IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
 
