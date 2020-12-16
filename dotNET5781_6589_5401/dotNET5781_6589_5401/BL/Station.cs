@@ -16,7 +16,7 @@ namespace BO
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region
-        private string id; public string ID
+        private int id; public int ID
         {
             get { return id; }
             private set { id = value; }
@@ -60,7 +60,7 @@ namespace BO
         /// <param name="name">name of station</param>
         /// <param name="latitude">latitude of station</param>
         /// <param name="longitude">longitude of station</param>
-        public Station(string id, string name, double latitude, double longitude)
+        public Station(int id, string name, double latitude, double longitude)
         {
             ID = id;
             Name = name;
