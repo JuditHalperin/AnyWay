@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using DO;
 
 namespace DLAPI
-
 {
     public interface IDAL
     {
@@ -17,7 +16,7 @@ namespace DLAPI
         void updateBus(Bus bus);
         Bus getBus(string licensePlate);
         IEnumerable<Bus> GetBuses();
-        IEnumerable<Bus> GetBuses(Predicate<object> condition);
+        IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
 
         #endregion
 
@@ -28,11 +27,31 @@ namespace DLAPI
         void updateLine(Line line);
         Bus getLine(int serial);
         IEnumerable<Line> GetLines();
-        IEnumerable<Line> GetLines(Predicate<object> condition);
+        IEnumerable<Line> GetLines(Predicate<Line> condition);
 
         #endregion
 
-        //double GetTemparture(int day);
-        //WindDirection GetWindDirection(int day);
+        #region stations
+
+        void addStation(Station station);
+        void removeStation(Station station);
+        void updateStation(Station station);
+        Bus getStation(int id);
+        IEnumerable<Station> GetStations();
+        IEnumerable<Station> GetStations(Predicate<Station> condition);
+
+        #endregion
+
+        #region users
+
+        void addUser(User user);
+        void removeUser(User user);
+        void updateUser(User user);
+        Bus getUser(string username);
+        IEnumerable<Station> GetUsers();
+        IEnumerable<Station> GetUsers(Predicate<User> condition);
+
+        #endregion
+        
     }
 }
