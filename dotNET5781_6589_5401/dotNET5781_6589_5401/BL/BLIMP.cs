@@ -236,12 +236,27 @@ namespace BL
         {
             return new BO.LineStation(lineStationD.NumberLine, lineStationD.ID, lineStationD.PathIndex);
         }
-        void addLineStation(LineStation lineStation);
-        void removeLineStation(LineStation lineStation);
-        void updateLineStation(LineStation lineStation);
-        LineStation getLineStation(int numberLine, int id);
-        IEnumerable<Station> GetLineStations();
-        IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
+        void addLineStation(BO.LineStation lineStation)
+        {
+
+        }
+        void removeLineStation(BO.LineStation lineStation)
+        {
+
+        }
+        void updateLineStation(BO.LineStation lineStation)
+        {
+
+        }
+        LineStation getLineStation(int numberLine, int id)
+        {
+
+        }
+        IEnumerable<BO.LineStation> GetLineStations()
+        {
+
+        }
+        //IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
 
         #endregion
 

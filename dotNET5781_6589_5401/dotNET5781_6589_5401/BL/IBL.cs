@@ -48,7 +48,7 @@ namespace BLAPI
         void removeLineStation(LineStation lineStation);
         void updateLineStation(LineStation lineStation);
         LineStation getLineStation(int numberLine, int id);
-        IEnumerable<Station> GetLineStations();
+        IEnumerable<LineStation> GetLineStations();
         //IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
 
         #endregion
