@@ -28,22 +28,23 @@ namespace DL
         }
         void removeBus(Bus bus)
         {
-            try { DS.DataSource.buses.Remove(bus); }
-            catch
-            {
-                throw new BusException("The bus is not exsits");
-            }            
+            if(!DS.DataSource.buses.Remove(bus))
+                throw new BusException("The bus is not exsits");           
         }
         void updateBus(Bus bus)
         {
-
+            Bus bust = (Bus)(from busTemp in DS.DataSource.buses//Find the bus for update.
+                      where busTemp.LicensePlate==bus.LicensePlate
+                      select busTemp);
+            DS.DataSource.buses.Remove(bust);//Remove the old bus
+            DS.DataSource.buses.Add(bus);//Add the update bus
         }
         Bus getBus(string licensePlate)
         {
-            IEnumerable<Bus> buses = from bus in DS.DataSource.buses
-                                     where bus.LicensePlate==licensePlate
-                                     select bus;
-            return buses.First();
+            Bus bus = (Bus)(from busTemp in DS.DataSource.buses
+                                     where busTemp.LicensePlate==licensePlate
+                                     select busTemp);
+            return bus;
         }
         IEnumerable<Bus> GetBuses()
         {
