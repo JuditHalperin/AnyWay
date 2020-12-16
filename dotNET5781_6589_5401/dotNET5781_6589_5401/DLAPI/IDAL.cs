@@ -36,7 +36,7 @@ namespace DLAPI
         void addLine(Line line);
         void removeLine(Line line);
         void updateLine(Line line);
-        Bus getLine(int serial);
+        Line getLine(int serial);
         IEnumerable<Line> GetLines();
         IEnumerable<Line> GetLines(Predicate<Line> condition);
 
@@ -47,7 +47,7 @@ namespace DLAPI
         void addStation(Station station);
         void removeStation(Station station);
         void updateStation(Station station);
-        Bus getStation(int id);
+        Station getStation(int id);
         IEnumerable<Station> GetStations();
         IEnumerable<Station> GetStations(Predicate<Station> condition);
 
@@ -58,7 +58,7 @@ namespace DLAPI
         void addLineStation(LineStation lineStation);
         void removeLineStation(LineStation lineStation);
         void updateLineStation(LineStation lineStation);
-        Bus getLineStation(int numberLine, int id);
+        LineStation getLineStation(int numberLine, int id);
         IEnumerable<Station> GetLineStations();
         IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
 
@@ -69,7 +69,7 @@ namespace DLAPI
         void addTwoFollowingStations(TwoFollowingStations twoFollowingStations);
         void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations);
         void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations);
-        Bus getTwoFollowingStations(int firstStationID, int secondStationID);
+        TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID);
         IEnumerable<Station> GetFollowingStations();
         IEnumerable<Station> GetFollowingStations(Predicate<TwoFollowingStations> condition);
 
@@ -80,7 +80,7 @@ namespace DLAPI
         void addDrivingBus(DrivingBus drivingBus);
         void removeDrivingBus(DrivingBus drivingBus);
         void updateDrivingBus(DrivingBus drivingBus);
-        Bus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
+        DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
         IEnumerable<Station> GetDrivingBuses();
         IEnumerable<Station> GetDrivingBuses(Predicate<DrivingBus> condition);
 
@@ -91,7 +91,7 @@ namespace DLAPI
         void addDrivingLine(DrivingLine drivingLine);
         void removeDrivingLine(DrivingLine drivingLine);
         void updateDrivingLine(DrivingLine drivingLine);
-        Bus getDrivingLine(int numberLine, DateTime start);
+        DrivingLine getDrivingLine(int numberLine, DateTime start);
         IEnumerable<Station> GetDrivingLines();
         IEnumerable<Station> GetDrivingLines(Predicate<DrivingLine> condition);
 
