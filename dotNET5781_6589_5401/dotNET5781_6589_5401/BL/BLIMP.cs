@@ -246,6 +246,22 @@ namespace BL//בbo לא צריך מספר רץ...
 
             return new BO.Line(lineD.NumberLine, (BO.Regions)lineD.Region, (ObservableCollection<BO.LineStation>)stationsB);
         }
+
+        IEnumerable<DO.TwoFollowingStations> convertLineToFollowingStationDO(BO.Line line)
+        {
+            List<TwoFollowingStations> twoFollowingStations=new List<TwoFollowingStations>();
+            for (int i = 0; i < line.Path.Count() - 1; i++)
+            {
+
+                TwoFollowingStations followingStations = new TwoFollowingStations();
+                followingStations.FirstStationID = line.Path.ElementAt(i).ID;
+                followingStations.SecondStationID = line.Path.ElementAt(i + 1).ID;
+                followingStations.LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations;
+                followingStations.TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations;
+                twoFollowingStations.Add(followingStations);
+            }
+            return twoFollowingStations;
+        }
         public void addLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
@@ -282,6 +298,11 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 throw new BO.LineException(ex.Message);
             }
+            foreach (BO.LineStation lineStation in line.Path)
+            {
+
+            }
+
         }
         public BO.Line getLine(int serial)
         {
@@ -618,75 +639,6 @@ namespace BL//בbo לא צריך מספר רץ...
 
         #endregion
 
-
-        //    static Random rnd = new Random(DateTime.Now.Millisecond);
-
-        //    readonly IDAL dal = DalFactory.GetDal();
-
-        //    public Weather GetWeather(int day)
-        //    {
-        //        Weather w = new Weather();
-        //        double feeling;
-        //        WindDirections dir;
-
-
-        //        feeling = dal.GetTemparture(day);
-        //        dir = dal.GetWindDirection(day).direction;
-
-        //        switch (dir)
-        //        {
-        //            case WindDirections.S:
-        //                feeling += 2;
-        //                break;
-        //            case WindDirections.SSE:
-        //                feeling += 1.5;
-        //                break;
-        //            case WindDirections.SE:
-        //                feeling += 1;
-        //                break;
-        //            case WindDirections.SEE:
-        //                feeling += 0.5;
-        //                break;
-        //            case WindDirections.E:
-        //                feeling -= 0.5;
-        //                break;
-        //            case WindDirections.NEE:
-        //                feeling -= 1;
-        //                break;
-        //            case WindDirections.NE:
-        //                feeling -= 1.5;
-        //                break;
-        //            case WindDirections.NNE:
-        //                feeling -= 2;
-        //                break;
-        //            case WindDirections.N:
-        //                feeling -= 3;
-        //                break;
-        //            case WindDirections.NNW:
-        //                feeling -= 2.5;
-        //                break;
-        //            case WindDirections.NW:
-        //                feeling -= 2;
-        //                break;
-        //            case WindDirections.NWW:
-        //                feeling -= 1.5;
-        //                break;
-        //            case WindDirections.W:
-        //                feeling -= 1;
-        //                break;
-        //            case WindDirections.SWW:
-        //                feeling -= 0;
-        //                break;
-        //            case WindDirections.SW:
-        //                break;
-        //            case WindDirections.SSW:
-        //                feeling += 1;
-        //                break;
-        //        }
-        //        w.Feeling = (int)feeling;
-        //        return w;
-        //    }
-        //}
 
     }
 }
