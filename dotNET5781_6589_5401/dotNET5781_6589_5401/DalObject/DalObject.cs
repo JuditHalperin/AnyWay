@@ -139,7 +139,18 @@ namespace DL
             if (l == null)
                 throw new LineException("The line does not exist.");
             DS.DataSource.Lines.Remove(l); // remove the old line
-            DS.DataSource.Lines.Add(line.Clone()); // add the updated line    
+            DS.DataSource.Lines.Add(line.Clone()); // add the updated line  
+            if(l.NumberLine!=line.NumberLine)
+            {
+                IEnumerable<LineStation> stations = GetLineStations(item => item.NumberLine == l.NumberLine);
+                foreach(LineStation station in stations)
+                {
+                    station.NumberLine = line.NumberLine;
+                    updateLineStation(station);
+                }
+
+
+            }
         }
         public Line getLine(int serial)
         {
