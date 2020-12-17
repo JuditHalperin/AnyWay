@@ -77,13 +77,13 @@ namespace BO
         /// <summary>
         /// copy constructor
         /// </summary>
-        /// <param name="serial"></param>
+        /// <param name="thisSerial"></param>
         /// <param name="numberLine"></param>
         /// <param name="region"></param>
         /// <param name="path"></param>
-        public Line(int serial, int numberLine, Regions region, ObservableCollection<LineStation> path)
+        public Line(int thisSerial, int numberLine, Regions region, ObservableCollection<LineStation> path)
         {
-            ThisSerial = serial;
+            ThisSerial = thisSerial;
             NumberLine = numberLine;
             Region = region;
             Path = path;
