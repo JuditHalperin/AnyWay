@@ -267,7 +267,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 dal.addTwoFollowingStations(followingStations);
             }
-            catch
+            catch(DO.StationException)
             {
                 dal.updateTwoFollowingStations(followingStations);
             }
@@ -293,6 +293,8 @@ namespace BL//בbo לא צריך מספר רץ...
         public void addLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
+            convertLineToFollowingStationDO(line);
+            convertLineToLineStationsDO(line);
             try
             {
                 dal.addLine(lineD);
