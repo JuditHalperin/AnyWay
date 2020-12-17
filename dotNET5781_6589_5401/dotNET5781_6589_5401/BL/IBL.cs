@@ -17,7 +17,7 @@ namespace BLAPI
         void updateUser(User user);
         User getUser(string username);
         IEnumerable<User> GetUsers();
-        //IEnumerable<User> GetUsers(Predicate<User> condition);
+        IEnumerable<User> GetUsers(Predicate<User> condition);
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace BLAPI
         void updateBus(Bus bus);
         Bus getBus(string licensePlate);
         IEnumerable<Bus> GetBuses();
-        //IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
+        IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
 
         #endregion
 

@@ -85,7 +85,16 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.UserException(ex.Message);
             }
         }
-        //public IEnumerable<User> GetUsers(Predicate<User> condition);
+        public IEnumerable<BO.User> GetUsers(Predicate<BO.User> condition)
+        {
+            IEnumerable<BO.User> users = GetUsers();
+            users = from item in users
+                    where condition(item)
+                    select item;
+            if (users.Count() == 0)
+                throw new BO.UserException("No users exist.");
+            return users;
+        }
 
         #endregion
 
@@ -179,7 +188,16 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.BusException(ex.Message);
             }
         }
-        //IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
+        public IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
+        {
+            IEnumerable<BO.Bus> buses = GetBuses();
+            buses = from item in buses
+                    where condition(item)
+                    select item;
+            if (buses.Count() == 0)
+                throw new BO.BusException("No buses exist.");
+            return buses;
+        }
 
 
         #endregion
@@ -290,7 +308,16 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.LineException(ex.Message);
             }
         }
-        //IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
+        public IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
+        {
+            IEnumerable<BO.Line> lines = GetLines();
+            lines = from item in lines
+                    where condition(item)
+                    select item;
+            if (lines.Count() == 0)
+                throw new BO.LineException("No lines exist.");
+            return lines;
+        }
 
 
         #endregion
