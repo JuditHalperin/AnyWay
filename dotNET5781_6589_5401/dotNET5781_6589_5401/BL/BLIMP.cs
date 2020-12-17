@@ -246,10 +246,9 @@ namespace BL//בbo לא צריך מספר רץ...
 
             return new BO.Line(lineD.NumberLine, (BO.Regions)lineD.Region, (ObservableCollection<BO.LineStation>)stationsB);
         }
-
-        IEnumerable<DO.TwoFollowingStations> convertLineToFollowingStationDO(BO.Line line)
+        void convertLineToFollowingStationDO(BO.Line line)
         {
-            List<TwoFollowingStations> twoFollowingStations=new List<TwoFollowingStations>();
+            
             for (int i = 0; i < line.Path.Count() - 1; i++)
             {
 
@@ -258,9 +257,38 @@ namespace BL//בbo לא צריך מספר רץ...
                 followingStations.SecondStationID = line.Path.ElementAt(i + 1).ID;
                 followingStations.LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations;
                 followingStations.TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations;
-                twoFollowingStations.Add(followingStations);
+                addOrUpdateTwoFollowingStations(followingStations);
             }
-            return twoFollowingStations;
+
+        }
+        void addOrUpdateTwoFollowingStations(DO.TwoFollowingStations followingStations)
+        {
+            try
+            {
+                dal.addTwoFollowingStations(followingStations);
+            }
+            catch
+            {
+                dal.updateTwoFollowingStations(followingStations);
+            }
+        }
+        void addOrUpdateLineStation(BO.LineStation station)
+        {
+            try
+            {
+                addLineStation(station);
+            }
+            catch (BO.StationException)
+            {
+                updateLineStation(station);
+            }
+        }
+        void convertLineToLineStationsDO(BO.Line line)
+        {
+            foreach(BO.LineStation station in line.Path)
+            {
+                addOrUpdateLineStation(station);
+            }
         }
         public void addLine(BO.Line line)
         {
@@ -290,6 +318,8 @@ namespace BL//בbo לא צריך מספר רץ...
         public void updateLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
+            convertLineToFollowingStationDO(line);
+            convertLineToLineStationsDO(line);
             try
             {
                 dal.updateLine(lineD);
@@ -298,10 +328,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 throw new BO.LineException(ex.Message);
             }
-            foreach (BO.LineStation lineStation in line.Path)
-            {
-
-            }
+            
 
         }
         public BO.Line getLine(int serial)
