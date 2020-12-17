@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using BO;
+using PO;
 
 namespace PL
 {
@@ -19,17 +22,20 @@ namespace PL
     /// </summary>
     public partial class SignIn : Window
     {
+        static IBL bl;
+
         bool administrativePrivileges;
 
         public SignIn(bool a)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
             administrativePrivileges = a;
         }
 
         private void NewAccount_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new New_account(administrativePrivileges).Show();
+            new NewAccount(administrativePrivileges).Show();
             Close();
         }
 
@@ -37,25 +43,23 @@ namespace PL
         {
             try
             {
-                if (!Users.signIn(Username.Text, Password.Password, administrativePrivileges))
-                    throw new Exception("Incorrect username or password.");
-
+                User user = bl.getUser(Username.Text);
+                if (user.Password != Password.Password || user.IsManager != administrativePrivileges)
+                    throw new InvalidInputException("Incorrect password or administrative privileges.");
                 if (administrativePrivileges)
                 {
-                    ManagerWindow window = new ManagerWindow(Username.Text);
-                    window.Show();
+                    new ManagerWindow(Username.Text).Show();
                     Close();
-                }
-                //else
-                //{
-                //    PassengerWindow window = new PassengerWindow(Username.Text);
-                //    window.Show();
-                //    Close();
-                //}
+                }                
             }
-            catch (Exception ex)
+            catch (UserException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            catch (InvalidInputException ex)
+            {
+                MessageBox.Show(ex.Message);
+
             }
         }
 
