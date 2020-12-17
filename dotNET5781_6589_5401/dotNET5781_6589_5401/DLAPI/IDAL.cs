@@ -96,5 +96,7 @@ namespace DLAPI
         IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 
         #endregion
+
+        string getManagingCode();
     }
 }
