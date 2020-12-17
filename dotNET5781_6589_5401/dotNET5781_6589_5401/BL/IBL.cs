@@ -60,7 +60,7 @@ namespace BLAPI
         void updateLineStation(LineStation lineStation);
         LineStation getLineStation(int numberLine, int id);
         IEnumerable<LineStation> GetLineStations();
-        //IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
+        IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition);
 
         #endregion
 
@@ -70,7 +70,7 @@ namespace BLAPI
         void removeDrivingBus(DrivingBus drivingBus);
         DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
         IEnumerable<DrivingBus> GetDrivingBuses();
-        //IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
+        IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
 
         #endregion
 

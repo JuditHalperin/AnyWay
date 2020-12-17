@@ -87,13 +87,20 @@ namespace BL
         }
         public IEnumerable<BO.User> GetUsers(Predicate<BO.User> condition)
         {
-            IEnumerable<BO.User> users = GetUsers();
-            users = from item in users
-                    where condition(item)
-                    select item;
-            if (users.Count() == 0)
-                throw new BO.UserException("No users exist.");
-            return users;
+            try
+            {
+                IEnumerable<BO.User> users = GetUsers();
+                users = from item in users
+                        where condition(item)
+                        select item;
+                if (users.Count() == 0)
+                    throw new BO.UserException("No users exist.");
+                return users;
+            }
+            catch(BO.UserException ex)
+            {
+                throw new BO.UserException(ex.Message);
+            }
         }
 
         #endregion
@@ -190,13 +197,20 @@ namespace BL
         }
         public IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
         {
-            IEnumerable<BO.Bus> buses = GetBuses();
-            buses = from item in buses
-                    where condition(item)
-                    select item;
-            if (buses.Count() == 0)
-                throw new BO.BusException("No buses exist.");
-            return buses;
+            try
+            {
+                IEnumerable<BO.Bus> buses = GetBuses();
+                buses = from item in buses
+                        where condition(item)
+                        select item;
+                if (buses.Count() == 0)
+                    throw new BO.BusException("No buses exist.");
+                return buses;
+            }
+            catch(BO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
         }
 
 
@@ -360,13 +374,20 @@ namespace BL
         }
         public IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
         {
-            IEnumerable<BO.Line> lines = GetLines();
-            lines = from item in lines
-                    where condition(item)
-                    select item;
-            if (lines.Count() == 0)
-                throw new BO.LineException("No lines exist.");
-            return lines;
+            try
+            {
+                IEnumerable<BO.Line> lines = GetLines();
+                lines = from item in lines
+                        where condition(item)
+                        select item;
+                if (lines.Count() == 0)
+                    throw new BO.LineException("No lines exist.");
+                return lines;
+            }
+            catch(BO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
         }
 
 
@@ -446,12 +467,19 @@ namespace BL
         }
         public IEnumerable<BO.Station> GetStations(Predicate<BO.Station> condition)
         {
-            IEnumerable<BO.Station> stations = GetStations();
-            stations = from item in stations
-                       select item;
-            if (stations.Count() == 0)
-                throw new BO.StationException("No stations exist.");
-            return stations;
+            try
+            {
+                IEnumerable<BO.Station> stations = GetStations();
+                stations = from item in stations
+                           select item;
+                if (stations.Count() == 0)
+                    throw new BO.StationException("No stations exist.");
+                return stations;
+            }
+            catch(BO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
         }
 
         #endregion
@@ -530,7 +558,23 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
-        //IEnumerable<Station> GetLineStations(Predicate<LineStation> condition);
+        public IEnumerable<BO.LineStation> GetLineStations(Predicate<BO.LineStation> condition)
+        {
+            try
+            {
+                IEnumerable<BO.LineStation> lineStations = GetLineStations();
+                lineStations = from item in lineStations
+                               where condition(item)
+                               select item;
+                if (lineStations.Count() == 0)
+                    throw new BO.StationException("No line stations exist.");
+                return lineStations;
+            }
+            catch(BO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+        }
 
         #endregion
 
@@ -606,7 +650,23 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
-        //IEnumerable<BO.DrivingBus> GetDrivingBuses(Predicate<BO.DrivingBus> condition)
+        public IEnumerable<BO.DrivingBus> GetDrivingBuses(Predicate<BO.DrivingBus> condition)
+        {
+            try
+            {
+                IEnumerable<BO.DrivingBus> drivingBuses = GetDrivingBuses();
+                drivingBuses = from item in drivingBuses
+                               where condition(item)
+                               select item;
+                if (drivingBuses.Count() == 0)
+                    throw new BO.BusException("No driving buses exist.");
+                return drivingBuses;
+            }
+            catch(BO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
 
 
         #endregion
@@ -672,7 +732,23 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
-        //IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition);
+        public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
+        {
+            try
+            {
+                IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines();
+                drivingLines = from item in drivingLines
+                               where condition(item)
+                               select item;
+                if (drivingLines.Count() == 0)
+                    throw new BO.LineException("No driving lines exist.");
+                return drivingLines;
+            }
+            catch (BO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
+        }
 
         #endregion
 
