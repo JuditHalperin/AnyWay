@@ -625,6 +625,17 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        public void updateDrivingBus(BO.DrivingBus drivingBus)
+        {
+            try
+            {
+                dal.updateDrivingBus(convertToDrivingBusDO(drivingBus));
+            }
+            catch (DO.BusException ex)
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
         public BO.DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
         {
             try
@@ -701,6 +712,17 @@ namespace BL
             try
             {
                 dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
+            }
+        }
+        public void updateDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.updateDrivingLine(convertToDrivingLineDO(drivingLine));
             }
             catch (DO.LineException ex)
             {
