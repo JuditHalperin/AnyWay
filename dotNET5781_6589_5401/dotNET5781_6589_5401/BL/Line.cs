@@ -44,7 +44,6 @@ namespace BO
         {
             get { return Path.First().ID; }
         }
-
         public int LastStation
         {
             get { return Path.Last().ID; }
@@ -75,6 +74,20 @@ namespace BO
                 Path.Add(newPath[i]);
         }
 
+        /// <summary>
+        /// copy constructor
+        /// </summary>
+        /// <param name="serial"></param>
+        /// <param name="numberLine"></param>
+        /// <param name="region"></param>
+        /// <param name="path"></param>
+        public Line(int serial, int numberLine, Regions region, ObservableCollection<LineStation> path)
+        {
+            ThisSerial = serial;
+            NumberLine = numberLine;
+            Region = region;
+            Path = path;
+        }
 
         /// <summary>
         /// ovarride about "ToString".
