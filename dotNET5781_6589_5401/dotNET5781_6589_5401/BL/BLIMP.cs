@@ -515,6 +515,13 @@ namespace BL
             try
             {
                 dal.removeLineStation(lineStationD);
+                IEnumerable<BO.LineStation> stations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine);
+                stations = stations.OrderBy(station => station.PathIndex);
+                for (int i = lineStation.PathIndex - 1; i < stations.Count(); i++)
+                {
+                    stations.ElementAt(i).PathIndex--;
+                    updateLineStation(stations.ElementAt(i));
+                }
             }
             catch (DO.StationException ex)
             {

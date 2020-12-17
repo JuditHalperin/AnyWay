@@ -229,7 +229,7 @@ namespace DL
         public void removeLineStation(LineStation lineStation)
         {
             if (!DS.DataSource.LineStations.Remove(lineStation))
-                throw new StationException("The line station does not exist.");
+                throw new StationException("The line station does not exist.");            
         }
         public void updateLineStation(LineStation lineStation)
         {
