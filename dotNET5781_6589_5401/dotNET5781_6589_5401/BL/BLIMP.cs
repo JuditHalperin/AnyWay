@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 
-namespace BL//בbo לא צריך מספר רץ...
+namespace BL
 {
     public class BLIMP : IBL
     {
@@ -267,7 +267,7 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 dal.addTwoFollowingStations(followingStations);
             }
-            catch
+            catch(DO.StationException)
             {
                 dal.updateTwoFollowingStations(followingStations);
             }
@@ -293,6 +293,8 @@ namespace BL//בbo לא צריך מספר רץ...
         public void addLine(BO.Line line)
         {
             DO.Line lineD = convertToLineDO(line);
+            convertLineToFollowingStationDO(line);
+            convertLineToLineStationsDO(line);
             try
             {
                 dal.addLine(lineD);
@@ -442,7 +444,15 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.StationException(ex.Message);
             }
         }
-        //IEnumerable<Station> GetStations(Predicate<Station> condition);
+        public IEnumerable<BO.Station> GetStations(Predicate<BO.Station> condition)
+        {
+            IEnumerable<BO.Station> stations = GetStations();
+            stations = from item in stations
+                       select item;
+            if (stations.Count() == 0)
+                throw new BO.StationException("No stations exist.");
+            return stations;
+        }
 
         #endregion
 
