@@ -1,4 +1,7 @@
-filep = open("C:\Users\user\Desktop\\t.txt","r")
+name=input("enter file")
+if len(name)<3:
+    name="C:\Users\user\Desktop\\t.txt"
+filep = open(name,"r")
 s=filep.readlines()
 filep.close()
 j=0
