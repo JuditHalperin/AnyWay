@@ -48,12 +48,12 @@ namespace PL
 
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            new ChangePassword("password", Username.Content).ShowDialog();
         }
 
         private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            new ChangePassword("managing code", Username.Content).ShowDialog();
         }
     }
 

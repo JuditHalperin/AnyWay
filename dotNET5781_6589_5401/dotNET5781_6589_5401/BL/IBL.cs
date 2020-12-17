@@ -9,7 +9,6 @@ namespace BLAPI
 {
     public interface IBL
     {
-        //Weather GetWeather(int day);
         #region Users
 
         void addUser(User user);
@@ -87,8 +86,10 @@ namespace BLAPI
         #endregion
 
         #region ManagingCode
+
         string getManagingCode();
         void updateManagingCode(string code);
+        
         #endregion
     }
 }

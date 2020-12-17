@@ -45,9 +45,9 @@ namespace PL
                 if (bl.getManagingCode() != ManagingCode.Password)
                     throw new InvalidInputException("Incorrect managing code.");
 
-                string result = validPassword(Password.Password);
-                if (result != "Valid")
-                    MessageBox.Show(result);
+                string message = validPassword(Password.Password);
+                if (message != "Valid")
+                    MessageBox.Show(message);
 
                 else
                 {
