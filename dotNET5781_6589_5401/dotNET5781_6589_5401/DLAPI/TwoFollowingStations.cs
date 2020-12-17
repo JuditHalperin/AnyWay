@@ -11,6 +11,10 @@ namespace DO
         public int FirstStationID { get; set; }
         public int SecondStationID { get; set; }
         public double LengthBetweenStations { get; set; } // meters
-        public int TimeBetweenStations { get; set; } // minutes        
+        public int TimeBetweenStations { get; set; } // minutes     
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }
