@@ -773,7 +773,5 @@ namespace BL
         }
 
         #endregion
-
-
     }
 }
