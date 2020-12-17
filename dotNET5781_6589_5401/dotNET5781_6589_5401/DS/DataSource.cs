@@ -31,12 +31,19 @@ namespace DS
             //DrivingBuses = new List<DrivingBus>();
             //DrivingLines = new List<DrivingLine>();
 
-            initializer();
+            initializeUsers();
+            initializeBuses();
+            initializeLines();
+            initializeStations();
+            initializeLineStations();
+            initializeStationsFollowingStations();
+            initializeDrivingBuses();
+            initializeDrivingLines();
         }
 
-        private static void initializer()
+        private static void initializeStations()
         {
-
+            
         }
     }
 }
