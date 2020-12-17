@@ -423,6 +423,11 @@ namespace BL
             try
             {
                 dal.removeStation(convertToStationDO(station));
+                IEnumerable<BO.LineStation> lineStations = GetLineStations(item => item.ID != station.ID);
+                foreach(BO.LineStation lineStation in lineStations)
+                {
+                    removeLineStation(lineStation);
+                }
             }
             catch (DO.StationException ex)
             {
