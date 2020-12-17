@@ -239,7 +239,7 @@ namespace BL
         /// <returns>Line of BO</returns>
         BO.Line convertToLineBO(DO.Line lineD)
         {
-            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.NumberLine);
+            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.ThisSerial);
             stations = stations.OrderBy(station => station.PathIndex);
             IEnumerable<BO.LineStation> stationsB = from item in stations
                                                     select convertToLineStationBO(item);
