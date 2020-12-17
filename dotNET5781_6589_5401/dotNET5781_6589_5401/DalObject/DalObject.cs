@@ -431,6 +431,23 @@ namespace DL
             if (!DS.DataSource.DrivingBuses.Remove(drivingBus))
                 throw new BusException("The driving bus does not exist.");
         }
+        public void updateDrivingBus(DrivingBus drivingBus)
+        {
+            DrivingBus clonedDrivingBus = drivingBus.Clone();
+            DrivingBus drivingBusT;
+            try
+            {
+                drivingBusT = (from item in DS.DataSource.DrivingBuses
+                               where item.ThisSerial == clonedDrivingBus.ThisSerial && item.LicensePlate == clonedDrivingBus.LicensePlate && item.Line == clonedDrivingBus.Line && item.Start == clonedDrivingBus.Start
+                               select item).First();
+            }
+            catch (ArgumentNullException)
+            {
+                throw new BusException("The driving bus does not exist.");
+            }
+            DS.DataSource.DrivingBuses.Remove(drivingBusT); // remove the old driving bus
+            DS.DataSource.DrivingBuses.Add(clonedDrivingBus); // add the updated driving bus  
+        }
         public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
         {
             DrivingBus drivingBus;
@@ -479,6 +496,23 @@ namespace DL
         {
             if (!DS.DataSource.DrivingLines.Remove(drivingLine))
                 throw new LineException("The driving line does not exist.");
+        }
+        public void updateDrivingLine(DrivingLine drivingLine)
+        {
+            DrivingLine clonedDrivingLine = drivingLine.Clone();
+            DrivingLine drivingLineT;
+            try
+            {
+                drivingLineT = (from item in DS.DataSource.DrivingLines
+                                where item.NumberLine == clonedDrivingLine.NumberLine && item.Start == clonedDrivingLine.Start
+                                select item).First();
+            }
+            catch (ArgumentNullException)
+            {
+                throw new LineException("The driving line does not exist.");
+            }
+            DS.DataSource.DrivingLines.Remove(drivingLineT); // remove the old driving line
+            DS.DataSource.DrivingLines.Add(clonedDrivingLine); // add the updated driving line  
         }
         public DrivingLine getDrivingLine(int numberLine, DateTime start)
         {
