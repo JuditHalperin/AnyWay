@@ -10,23 +10,20 @@ namespace DS
 {
     public static class DataSource
     {
-        public static List<User> Users = new List<User>();
-        public static List<Bus> Buses = new List<Bus>();
-        public static List<Line> Lines = new List<Line>();
-        public static List<Station> Stations = new List<Station>();
-        public static List<LineStation> LineStations = new List<LineStation>();
-        public static List<TwoFollowingStations> FollowingStations = new List<TwoFollowingStations>();
-        public static List<DrivingBus> DrivingBuses = new List<DrivingBus>();
-        public static List<DrivingLine> DrivingLines = new List<DrivingLine>();
+        public static List<User> Users;
+        public static List<Bus> Buses;
+        public static List<Line> Lines;
+        public static List<Station> Stations;
+        public static List<LineStation> LineStations;
+		public static List<TwoFollowingStations> FollowingStations;
+        public static List<DrivingBus> DrivingBuses;
+		public static List<DrivingLine> DrivingLines;
         public static string ManagingCode = "123456";
 
         static DataSource()
         {
-            //Users = new List<User>();
-            //Buses = new List<Bus>();
-            //Lines = new List<Line>();
-            Stations = new List<Station>()
-            {
+			Stations = new List<Station>()
+			{
 				new Station
 				{
 					ID = 38831,
@@ -586,25 +583,7 @@ namespace DS
 					Latitude = 31.968049,
 					Longitude = 34.818099
 				},
-			};
-            //LineStations = new List<LineStation>();
-            //FollowingStations = new List<TwoFollowingStations>();
-            //DrivingBuses = new List<DrivingBus>();
-            //DrivingLines = new List<DrivingLine>();
-
-            initializeUsers();
-            initializeBuses();
-            initializeLines();
-            initializeStations();
-            initializeLineStations();
-            initializeStationsFollowingStations();
-            initializeDrivingBuses();
-            initializeDrivingLines();
-        }
-
-        private static void initializeStations()
-        {
-            
-        }
-    }
+			};			
+        }       
+	}
 }
