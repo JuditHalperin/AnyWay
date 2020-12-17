@@ -29,7 +29,7 @@ namespace temp
         static public bool signIn(string username, string password, bool administrativePrivileges)
         {
             foreach (User item in users)
-                if (item.Username == username && item.Password == password && item.AdministrativePrivileges == administrativePrivileges)
+                if (item.Username == username && item.Password == password && item.IsManager == administrativePrivileges)
                     return true;
             return false;
         }

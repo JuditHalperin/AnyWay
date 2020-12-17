@@ -32,5 +32,16 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="SelectionBrush" Value="#FF1D1D7D"/>
         </Style>
+        <Style x:Key="LabelToClickStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF1554D3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
