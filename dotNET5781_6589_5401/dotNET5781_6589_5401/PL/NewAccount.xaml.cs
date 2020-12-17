@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for New_account.xaml
+    /// Interaction logic for NewAccount.xaml
     /// </summary>
-    public partial class New_account : Window
-    {      
+    public partial class NewAccount : Window
+    {
         bool administrativePrivileges;
 
-        public New_account(bool a)
+        public NewAccount(bool a)
         {
             InitializeComponent();
             administrativePrivileges = a;

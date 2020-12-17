@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for Sign_in.xaml
+    /// Interaction logic for SignIn.xaml
     /// </summary>
-    public partial class Sign_in : Window
+    public partial class SignIn : Window
     {
         bool administrativePrivileges;
 
-        public Sign_in(bool a)
+        public SignIn(bool a)
         {
             InitializeComponent();
             administrativePrivileges = a;
@@ -65,4 +65,5 @@ namespace PL
             Close();
         }
     }
+
 }
