@@ -31,7 +31,7 @@ namespace PL
 
         private void SignInAsManager_Click(object sender, RoutedEventArgs e)
         {
-            new Sign_in(true).Show();
+            new SignIn(true).Show();
             Close();
         }
     }

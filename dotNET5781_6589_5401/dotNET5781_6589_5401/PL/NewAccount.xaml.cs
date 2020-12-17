@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using BO;
+using PO;
 
 namespace PL
 {
@@ -19,18 +22,20 @@ namespace PL
     /// </summary>
     public partial class NewAccount : Window
     {
+        static IBL bl;
+
         bool administrativePrivileges;
 
         public NewAccount(bool a)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
             administrativePrivileges = a;
             if (!a)
             {
                 labelpassword.Visibility = Visibility.Hidden;
                 PasswordM.Visibility = Visibility.Hidden;
             }
-
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
