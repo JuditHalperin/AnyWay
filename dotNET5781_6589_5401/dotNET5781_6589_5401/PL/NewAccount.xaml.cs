@@ -33,13 +33,16 @@ namespace PL
             administrativePrivileges = a;
             if (!a)
             {
-                labelpassword.Visibility = Visibility.Hidden;
-                PasswordM.Visibility = Visibility.Hidden;
+                ManagingCode.Visibility = Visibility.Hidden;
+                ManagingCode.Visibility = Visibility.Hidden;
             }
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            if (bl.getManagingCode() != ManagingCode.Password)
+                throw new InvalidInputException("Incorrect managing code.");
+
             string result = validPassword(Password.Password);
 
             if (result != "Valid")
@@ -61,13 +64,13 @@ namespace PL
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
+            new Main().Show();
             Close();
         }
 
         private void ExistingUser_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new SignInAsManager(administrativePrivileges).Show();
+            new SignIn(administrativePrivileges).Show();
             Close();
         }
 
