@@ -14,9 +14,6 @@ namespace DO
         public Regions Region { get; set; }
         public int FirstStation { get; set; }
         public int LastStation { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public override string ToString() => this.ToStringProperty();
     }
 }

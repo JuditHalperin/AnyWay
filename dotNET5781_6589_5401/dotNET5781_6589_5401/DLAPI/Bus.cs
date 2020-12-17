@@ -15,9 +15,6 @@ namespace DO
         public int KmsSinceFuel { get; set; }
         public int KmsSinceService { get; set; }
         public State Status { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public override string ToString() => this.ToStringProperty();
     }
 }

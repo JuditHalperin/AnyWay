@@ -12,9 +12,6 @@ namespace DO
         public DateTime Start { get; set; }
         public int Frequency { get; set; }
         public DateTime End { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public override string ToString() => this.ToStringProperty();
     }
 }

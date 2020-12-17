@@ -107,6 +107,8 @@ namespace BO
 
         #endregion
 
+        public override string ToString() => this.ToStringProperty();
+
         /// <summary>
         /// constructor
         /// change dates and length if they are wrong
