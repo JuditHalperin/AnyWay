@@ -527,6 +527,16 @@ namespace BL
                     stations.ElementAt(i).PathIndex--;
                     updateLineStation(stations.ElementAt(i));
                 }
+                if(lineStation.PathIndex == stations.Count())
+                {
+                    DO.Line line = dal.getLine(lineStation.NumberLine);
+                    line.LastStation = stations.ElementAt(stations.Count() - 1).ID;
+                }
+                if (lineStation.PathIndex == 1)
+                {
+                    DO.Line line = dal.getLine(lineStation.NumberLine);
+                    line.FirstStation = stations.First().ID;
+                }
             }
             catch (DO.StationException ex)
             {
