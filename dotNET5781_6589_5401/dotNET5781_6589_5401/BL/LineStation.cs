@@ -25,7 +25,7 @@ namespace BO
         private int pathIndex; public int PathIndex
         {
             get { return pathIndex; }
-            private set
+            set
             {
                 pathIndex = value;
                 if (PropertyChanged != null)

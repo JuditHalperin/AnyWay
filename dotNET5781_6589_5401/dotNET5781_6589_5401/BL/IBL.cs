@@ -85,5 +85,10 @@ namespace BLAPI
         IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 
         #endregion
+
+        #region ManagingCode
+        string getManagingCode();
+        void updateManagingCode(string code);
+        #endregion
     }
 }

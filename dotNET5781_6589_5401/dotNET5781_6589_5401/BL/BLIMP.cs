@@ -239,7 +239,7 @@ namespace BL
         /// <returns>Line of BO</returns>
         BO.Line convertToLineBO(DO.Line lineD)
         {
-            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.NumberLine);
+            IEnumerable<DO.LineStation> stations = (IEnumerable<DO.LineStation>)dal.GetLineStations(Station => Station.NumberLine == lineD.ThisSerial);
             stations = stations.OrderBy(station => station.PathIndex);
             IEnumerable<BO.LineStation> stationsB = from item in stations
                                                     select convertToLineStationBO(item);
@@ -423,6 +423,11 @@ namespace BL
             try
             {
                 dal.removeStation(convertToStationDO(station));
+                IEnumerable<BO.LineStation> lineStations = GetLineStations(item => item.ID != station.ID);
+                foreach(BO.LineStation lineStation in lineStations)
+                {
+                    removeLineStation(lineStation);
+                }
             }
             catch (DO.StationException ex)
             {
@@ -515,6 +520,23 @@ namespace BL
             try
             {
                 dal.removeLineStation(lineStationD);
+                IEnumerable<BO.LineStation> stations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine);
+                stations = stations.OrderBy(station => station.PathIndex);
+                for (int i = lineStation.PathIndex - 1; i < stations.Count(); i++)
+                {
+                    stations.ElementAt(i).PathIndex--;
+                    updateLineStation(stations.ElementAt(i));
+                }
+                if(lineStation.PathIndex == stations.Count())
+                {
+                    DO.Line line = dal.getLine(lineStation.NumberLine);
+                    line.LastStation = stations.ElementAt(stations.Count() - 1).ID;
+                }
+                if (lineStation.PathIndex == 1)
+                {
+                    DO.Line line = dal.getLine(lineStation.NumberLine);
+                    line.FirstStation = stations.First().ID;
+                }
             }
             catch (DO.StationException ex)
             {
@@ -772,6 +794,17 @@ namespace BL
             }
         }
 
+        #endregion
+
+        #region ManagingCode
+        public string getManagingCode()
+        {
+            return dal.getManagingCode();
+        }
+        public void updateManagingCode(string code)
+        {
+            dal.updateManagingCode(code);
+        }
         #endregion
     }
 }

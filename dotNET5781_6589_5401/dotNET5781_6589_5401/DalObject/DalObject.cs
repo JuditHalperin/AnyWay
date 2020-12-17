@@ -140,17 +140,6 @@ namespace DL
                 throw new LineException("The line does not exist.");
             DS.DataSource.Lines.Remove(l); // remove the old line
             DS.DataSource.Lines.Add(line.Clone()); // add the updated line  
-            if(l.NumberLine!=line.NumberLine)
-            {
-                IEnumerable<LineStation> stations = GetLineStations(item => item.NumberLine == l.NumberLine);
-                foreach(LineStation station in stations)
-                {
-                    station.NumberLine = line.NumberLine;
-                    updateLineStation(station);
-                }
-
-
-            }
         }
         public Line getLine(int serial)
         {
@@ -240,7 +229,7 @@ namespace DL
         public void removeLineStation(LineStation lineStation)
         {
             if (!DS.DataSource.LineStations.Remove(lineStation))
-                throw new StationException("The line station does not exist.");
+                throw new StationException("The line station does not exist.");            
         }
         public void updateLineStation(LineStation lineStation)
         {
@@ -422,6 +411,18 @@ namespace DL
             return drivingLines;
         }
 
+        #endregion
+
+        #region ManagingCode
+
+        public string getManagingCode()
+        {
+            return DataSource.ManagingCode;
+        }
+        public void updateManagingCode(string code)
+        {
+            DataSource.ManagingCode = code;
+        }
         #endregion
     }
 }
