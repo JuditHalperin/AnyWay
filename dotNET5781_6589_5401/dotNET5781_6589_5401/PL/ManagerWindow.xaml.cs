@@ -27,23 +27,33 @@ namespace PL
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-
+            new Buses().Show();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-
+            new Lines().Show();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-
+            new Stations().Show();
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             new Main().Show();
             Close();
+        }
+
+        private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 

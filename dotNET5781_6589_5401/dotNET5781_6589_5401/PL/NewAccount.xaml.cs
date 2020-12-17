@@ -40,26 +40,30 @@ namespace PL
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.getManagingCode() != ManagingCode.Password)
-                throw new InvalidInputException("Incorrect managing code.");
+            try
+            {
+                if (bl.getManagingCode() != ManagingCode.Password)
+                    throw new InvalidInputException("Incorrect managing code.");
 
-            string result = validPassword(Password.Password);
+                string result = validPassword(Password.Password);
+                if (result != "Valid")
+                    MessageBox.Show(result);
 
-            if (result != "Valid")
-                MessageBox.Show(result);
-            else if (PasswordM.Password != "123456")
-                MessageBox.Show("password for manage incorrect!");
-
-            else
-                try
+                else
                 {
-                    Users.addUser(Username.Text, Password.Password, administrativePrivileges);
+                    bl.addUser(new User(Username.Text, Password.Password, administrativePrivileges));
                     new ManagerWindow(Username.Text).Show();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+            }
+            
+            catch (InvalidInputException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (UserException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
