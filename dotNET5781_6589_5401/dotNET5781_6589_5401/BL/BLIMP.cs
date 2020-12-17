@@ -795,5 +795,16 @@ namespace BL
         }
 
         #endregion
+
+        #region ManagingCode
+        public string getManagingCode()
+        {
+            return dal.getManagingCode();
+        }
+        public void updateManagingCode(string code)
+        {
+            dal.updateManagingCode(code);
+        }
+        #endregion
     }
 }

@@ -412,5 +412,17 @@ namespace DL
         }
 
         #endregion
+
+        #region ManagingCode
+
+        public string getManagingCode()
+        {
+            return DataSource.ManagingCode;
+        }
+        public void updateManagingCode(string code)
+        {
+            DataSource.ManagingCode = code;
+        }
+        #endregion
     }
 }
