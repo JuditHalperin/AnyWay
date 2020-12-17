@@ -27,17 +27,17 @@ namespace PL
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            new Buses().Show();
+            new Buses().ShowDialog();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new Lines().Show();
+            new Lines().ShowDialog();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new Stations().Show();
+            new Stations().ShowDialog();
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -48,12 +48,12 @@ namespace PL
 
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("password", Username.Content).ShowDialog();
+            new ChangePassword("password", (string) Username.Content).ShowDialog();
         }
 
         private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("managing code", Username.Content).ShowDialog();
+            new ChangePassword("managing code", (string) Username.Content).ShowDialog();
         }
     }
 

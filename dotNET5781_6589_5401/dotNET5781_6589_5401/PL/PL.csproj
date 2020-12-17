@@ -152,5 +152,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Buses\" />
+    <Folder Include="Lines\" />
+    <Folder Include="PO\" />
+    <Folder Include="Stations\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
