@@ -675,7 +675,5 @@ namespace BL
         //IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition);
 
         #endregion
-
-
     }
 }
