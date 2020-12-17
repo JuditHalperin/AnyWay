@@ -8,6 +8,7 @@ namespace BO
 {
     public class DrivingLine
     {
+        #region
         private int numberLine; public int NumberLine
         {
             get { return numberLine; }
@@ -28,6 +29,8 @@ namespace BO
             get { return end; }
             private set { end = value; }
         }
+
+        #endregion
 
         public DrivingLine(int numberLine, DateTime start, int frequency, DateTime end)
         {

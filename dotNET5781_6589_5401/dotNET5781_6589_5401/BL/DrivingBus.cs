@@ -83,10 +83,10 @@ namespace BO
             LicensePlate = licensePlate;
             Line = line;
             Start = start;
-            //ActualStart
-            //PreviousStationID
-            //PreviousStationTime
-            //NextStationTime
+            ActualStart = DateTime.Now;
+            PreviousStationID = 0;
+            PreviousStationTime = DateTime.Now;
+            NextStationTime = DateTime.Now;
         }
     }
 }
