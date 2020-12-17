@@ -54,18 +54,10 @@ namespace DL
         }
         public User getUser(string username)
         {
-            User user;
-            try
-            {
-                user = (from item in DS.DataSource.Users
-                        where item.Username == username
-                        select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            User user = DataSource.Users.Find(item => item.Username == username);
+            if (user == null)
                 throw new UserException("The user does not exist.");
-            }
-            return user;
+            return user.Clone();
         }
         public IEnumerable<User> GetUsers()
         {
@@ -120,18 +112,10 @@ namespace DL
         }
         public Bus getBus(string licensePlate)
         {
-            Bus bus;
-            try
-            {
-                bus = (from item in DS.DataSource.Buses
-                       where item.LicensePlate == licensePlate
-                       select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            Bus bus = DataSource.Buses.Find(item => item.LicensePlate == licensePlate);
+            if (bus == null)
                 throw new BusException("The bus does not exist.");
-            }
-            return bus;
+            return bus.Clone();
         }
         public IEnumerable<Bus> GetBuses()
         {
@@ -186,18 +170,10 @@ namespace DL
         }
         public Line getLine(int serial)
         {
-            Line line;
-            try
-            {
-                line = (from item in DS.DataSource.Lines
-                        where item.ThisSerial == serial
-                        select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            Line line = DataSource.Lines.Find(item => item.ThisSerial == serial);
+            if (line == null)
                 throw new LineException("The line does not exist.");
-            }
-            return line;
+            return line.Clone();           
         }
         public IEnumerable<Line> GetLines()
         {
@@ -252,18 +228,10 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            Station station;
-            try
-            {
-                station = (from item in DS.DataSource.Stations
-                           where item.ID == id
-                           select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            Station station = DataSource.Stations.Find(item => item.ID == id);
+            if (station == null)
                 throw new LineException("The station does not exist.");
-            }
-            return station;
+            return station.Clone();
         }
         public IEnumerable<Station> GetStations()
         {
@@ -318,18 +286,10 @@ namespace DL
         }
         public LineStation getLineStation(int numberLine, int id)
         {
-            LineStation lineStation;
-            try
-            {
-                lineStation = (from item in DS.DataSource.LineStations
-                               where item.NumberLine == numberLine && item.ID == id
-                               select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            LineStation lineStation = DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id);
+            if (lineStation == null)
                 throw new StationException("The line station does not exist.");
-            }
-            return lineStation;
+            return lineStation.Clone();            
         }
         public IEnumerable<LineStation> GetLineStations()
         {
@@ -384,18 +344,10 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            TwoFollowingStations twoFollowingStations;
-            try
-            {
-                twoFollowingStations = (from item in DS.DataSource.FollowingStations
-                                        where item.FirstStationID == firstStationID && item.SecondStationID == secondStationID
-                                        select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            TwoFollowingStations twoFollowingStations = DataSource.FollowingStations.Find(item => item.FirstStationID == firstStationID && item.SecondStationID == secondStationID);
+            if (twoFollowingStations == null)
                 throw new StationException("The two following stations do not exist.");
-            }
-            return twoFollowingStations;
+            return twoFollowingStations.Clone();
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
@@ -450,18 +402,10 @@ namespace DL
         }
         public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
         {
-            DrivingBus drivingBus;
-            try
-            {
-                drivingBus = (from item in DS.DataSource.DrivingBuses
-                              where item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start
-                              select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            DrivingBus drivingBus = DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start);
+            if (drivingBus == null)
                 throw new BusException("The driving bus does not exist.");
-            }
-            return drivingBus;
+            return drivingBus.Clone();
         }
         public IEnumerable<DrivingBus> GetDrivingBuses()
         {
@@ -516,18 +460,10 @@ namespace DL
         }
         public DrivingLine getDrivingLine(int numberLine, DateTime start)
         {
-            DrivingLine drivingLine;
-            try
-            {
-                drivingLine = (from item in DS.DataSource.DrivingLines
-                               where item.NumberLine == numberLine && item.Start == start
-                               select item).First();
-            }
-            catch (ArgumentNullException)
-            {
+            DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start);
+            if (drivingLine == null)
                 throw new LineException("The driving line does not exist.");
-            }
-            return drivingLine;
+            return drivingLine.Clone();
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
         {
