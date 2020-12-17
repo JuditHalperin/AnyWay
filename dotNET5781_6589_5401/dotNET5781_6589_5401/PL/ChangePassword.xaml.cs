@@ -19,9 +19,21 @@ namespace PL
     /// </summary>
     public partial class ChangePassword : Window
     {
-        public ChangePassword()
+        public ChangePassword(string description)
         {
             InitializeComponent();
+            LabelOldPassword.Content = "Old" + description;
+            LabelNewPassword.Content = "New" + description; 
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

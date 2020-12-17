@@ -58,6 +58,7 @@
     <Compile Include="State.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="StationException.cs" />
+    <Compile Include="Tools.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserException.cs" />
   </ItemGroup>
