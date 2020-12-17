@@ -444,7 +444,15 @@ namespace BL//בbo לא צריך מספר רץ...
                 throw new BO.StationException(ex.Message);
             }
         }
-        //IEnumerable<Station> GetStations(Predicate<Station> condition);
+        IEnumerable<BO.Station> GetStations(Predicate<BO.Station> condition)
+        {
+            IEnumerable<BO.Station> stations = GetStations();
+            stations = from item in stations
+                       select item;
+            if (stations.Count() == 0)
+                throw new BO.StationException("No stations exist.");
+            return stations;
+        }
 
         #endregion
 

@@ -49,7 +49,7 @@ namespace BLAPI
         void updateStation(Station station);
         Station getStation(int id);
         IEnumerable<Station> GetStations();
-        //IEnumerable<Station> GetStations(Predicate<Station> condition);
+        IEnumerable<Station> GetStations(Predicate<Station> condition);
 
         #endregion
 
