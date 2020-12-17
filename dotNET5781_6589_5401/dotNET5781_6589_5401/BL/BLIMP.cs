@@ -282,6 +282,23 @@ namespace BL//בbo לא צריך מספר רץ...
             {
                 throw new BO.LineException(ex.Message);
             }
+
+            for (int i = 0; i < line.Path.Count() - 1; i++)
+            {
+                try
+                {
+                    DO.TwoFollowingStations followingStations = new TwoFollowingStations();
+                    followingStations.FirstStationID = line.Path.ElementAt(i).ID;
+                    followingStations.SecondStationID = line.Path.ElementAt(i + 1).ID;
+                    followingStations.LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations;
+                    followingStations.TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations;
+                    dal.updateTwoFollowingStations(followingStations);
+                }
+                catch (DO.StationException) { }
+
+            }
+
+
         }
         public BO.Line getLine(int serial)
         {
