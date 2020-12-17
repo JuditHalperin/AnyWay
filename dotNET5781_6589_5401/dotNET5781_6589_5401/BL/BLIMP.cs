@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 
-namespace BL//בbo לא צריך מספר רץ...
+namespace BL
 {
     public class BLIMP : IBL
     {
