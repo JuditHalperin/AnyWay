@@ -88,5 +88,17 @@ namespace BO
             PreviousStationTime = DateTime.Now;
             NextStationTime = DateTime.Now;
         }
+
+        public DrivingBus(int thisSerial, string licensePlate, int line, DateTime start, DateTime actualStart, int previousStationID, DateTime previousStationTime, DateTime nextStationTime)
+        {
+            ThisSerial = thisSerial;
+            LicensePlate = licensePlate;
+            Line = line;
+            Start = start;
+            ActualStart = actualStart;
+            PreviousStationID = previousStationID;
+            PreviousStationTime = previousStationTime;
+            NextStationTime = nextStationTime;
+        }
     }
 }
