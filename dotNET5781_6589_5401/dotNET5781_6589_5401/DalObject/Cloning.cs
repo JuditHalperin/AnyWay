@@ -7,23 +7,11 @@ using DO;
 
 namespace DL
 {
-    static class Cloning // one of three
-    {
-        //internal static IClonable Clone(this IClonable original)//דרך שניה - בונוס (יש להשתמש בממשק)
-        //{
-        //    IClonable target = (IClonable)Activator.CreateInstance(original.GetType());
-        //    //...
-        //    return target;
-        //}
-
-        //internal static T Clone<T>(this T original)//דרך שלישית - בונוס
-        //{
-        //    T target = (T)Activator.CreateInstance(original.GetType());
-        //    //...
-        //    return target;
-        //}
-        
-        //cloning of the object...:
+    /// <summary>
+    /// cloning of the objects
+    /// </summary>
+    static class Cloning
+    {     
         /// <summary>
         /// Cloning Bus
         /// </summary>
@@ -41,6 +29,7 @@ namespace DL
             target.LastService = original.LastService;
             return target;
         }
+
         /// <summary>
         /// Cloning Line
         /// </summary>
@@ -56,6 +45,7 @@ namespace DL
             target.Region = original.Region;
             return target;
         }
+
         /// <summary>
         /// Cloning Station
         /// </summary>
@@ -70,6 +60,7 @@ namespace DL
             target.Longitude = original.Longitude;
             return target;
         }
+
         /// <summary>
         /// Cloning LineStation
         /// </summary>
@@ -83,6 +74,7 @@ namespace DL
             target.PathIndex = original.PathIndex;
             return target;
         }
+
         /// <summary>
         /// Cloning DrivingBus
         /// </summary>
@@ -101,6 +93,7 @@ namespace DL
             target.NextStationTime = original.NextStationTime;
             return target;
         }
+
         /// <summary>
         /// Cloning DrivingLine
         /// </summary>
@@ -115,6 +108,7 @@ namespace DL
             target.Frequency = original.Frequency;
             return target;
         }
+
         /// <summary>
         /// Cloning TwoFollowingStations
         /// </summary>
@@ -129,6 +123,7 @@ namespace DL
             target.TimeBetweenStations = original.TimeBetweenStations;
             return target;
         }
+
         /// <summary>
         /// Cloning User
         /// </summary>

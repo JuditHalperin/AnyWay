@@ -66,7 +66,7 @@
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="InvalidInputException.cs" />
-    <Compile Include="Lines.xaml.cs">
+    <Compile Include="Lines\Lines.xaml.cs">
       <DependentUpon>Lines.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main.xaml.cs">
@@ -82,7 +82,7 @@
     <Compile Include="SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Stations.xaml.cs">
+    <Compile Include="Stations\Stations.xaml.cs">
       <DependentUpon>Stations.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -127,7 +127,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Lines.xaml">
+    <Page Include="Lines\Lines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,16 +147,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Stations.xaml">
+    <Page Include="Stations\Stations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Buses\" />
-    <Folder Include="Lines\" />
     <Folder Include="PO\" />
-    <Folder Include="Stations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

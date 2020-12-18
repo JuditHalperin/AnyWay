@@ -45,7 +45,6 @@
     <Compile Include="BusException.cs" />
     <Compile Include="DalConfig.cs" />
     <Compile Include="DalFactory.cs" />
-    <Compile Include="DO.cs" />
     <Compile Include="DrivingBus.cs" />
     <Compile Include="DrivingLine.cs" />
     <Compile Include="IClonable.cs" />
