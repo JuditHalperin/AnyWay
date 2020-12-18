@@ -26,7 +26,7 @@ namespace PL
     public partial class Buses : Window
     {
         public BackgroundWorker worker;
-        
+
         static IBL bl;
 
         public Buses()
@@ -221,4 +221,3 @@ namespace PL
     }
 
 }
-
