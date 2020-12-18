@@ -13,23 +13,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
 using BLAPI;
 using PO;
 using BO;
-using System.Threading;
 
-namespace PL
+namespace PL.Buses
 {
     /// <summary>
-    /// Interaction logic for Buses.xaml
+    /// Interaction logic for BusesList.xaml
     /// </summary>
-    public partial class Buses : Window
+    public partial class BusesList : Window
     {
         public BackgroundWorker worker;
 
         static IBL bl;
 
-        public Buses()
+        public BusesList()
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
@@ -182,42 +182,6 @@ namespace PL
             Close();
             return;
         }
+
     }
-
-    /// <summary>
-    /// convert type state to type bool for binding to property with bool value.
-    /// </summary>
-    public class StateToBool_Drive : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((BO.State)value == BO.State.canDrive)
-                return true;
-            return false;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
-    /// convert type int to type bool for binding to property with bool value.
-    /// </summary>
-    public class intToBool_remove : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((int)value == 0)
-                return false;
-            return true;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
 }

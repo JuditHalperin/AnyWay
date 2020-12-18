@@ -59,15 +59,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Buses\Buses.xaml.cs">
-      <DependentUpon>Buses.xaml</DependentUpon>
+    <Compile Include="Buses\BusesList.xaml.cs">
+      <DependentUpon>BusesList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="InvalidInputException.cs" />
-    <Compile Include="Lines\Lines.xaml.cs">
-      <DependentUpon>Lines.xaml</DependentUpon>
+    <Compile Include="Lines\LinesList.xaml.cs">
+      <DependentUpon>LinesList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
@@ -82,8 +82,8 @@
     <Compile Include="SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Stations\Stations.xaml.cs">
-      <DependentUpon>Stations.xaml</DependentUpon>
+    <Compile Include="Stations\StationsList.xaml.cs">
+      <DependentUpon>StationsList.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +119,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Buses\Buses.xaml">
+    <Page Include="Buses\BusesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,7 +127,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Lines\Lines.xaml">
+    <Page Include="Lines\LinesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,7 +147,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Stations\Stations.xaml">
+    <Page Include="Stations\StationsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

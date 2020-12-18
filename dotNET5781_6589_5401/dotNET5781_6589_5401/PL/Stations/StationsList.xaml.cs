@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Lines
+namespace PL.Stations
 {
     /// <summary>
-    /// Interaction logic for Lines.xaml
+    /// Interaction logic for StationsList.xaml
     /// </summary>
-    public partial class Lines : Window
+    public partial class StationsList : Window
     {
-        public Lines()
+        public StationsList()
         {
             InitializeComponent();
         }
