@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace PO
 {
@@ -28,12 +30,12 @@ namespace PO
         {
             now = DateTime.Now;
             worker = new BackgroundWorker();
-            worker.DoWork += startTimer;
-            worker.ProgressChanged += showTimer;
+            worker.DoWork += startTime;
+            worker.ProgressChanged += showTime;
             worker.WorkerReportsProgress = true;
         }
 
-        private void startTimer(object sender, DoWorkEventArgs e)
+        private void startTime(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
@@ -44,9 +46,10 @@ namespace PO
             }
         }
 
-        private void showTimer(object sender, ProgressChangedEventArgs e)
+        private void showTime(object sender, ProgressChangedEventArgs e)
         {
             Now = DateTime.Now;
         }
     }
+
 }
