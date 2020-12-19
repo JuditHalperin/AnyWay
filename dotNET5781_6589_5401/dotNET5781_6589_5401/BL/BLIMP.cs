@@ -1,11 +1,9 @@
 ﻿using System;
 using BLAPI;
 using DLAPI;
-using BO;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections.ObjectModel;
 
 namespace BL
 {
@@ -526,11 +524,12 @@ namespace BL
         /// <returns>line station of DO</returns>
         DO.LineStation convertToLineStationDO(BO.LineStation lineStationB)
         {
-            DO.LineStation lineStationD = new DO.LineStation();
-            lineStationD.ID = lineStationB.ID;
-            lineStationD.NumberLine = lineStationB.NumberLine;
-            lineStationD.PathIndex = lineStationB.PathIndex;
-            return lineStationD;
+            return new DO.LineStation()
+            {
+                ID = lineStationB.ID,
+                NumberLine = lineStationB.NumberLine,
+                PathIndex = lineStationB.PathIndex
+            };
         }
         /// <summary>
         /// Func that converts line station of DO to line station of BO
@@ -539,7 +538,12 @@ namespace BL
         /// <returns>line station of BO</returns>
         BO.LineStation convertToLineStationBO(DO.LineStation lineStationD)
         {
-            return new BO.LineStation(lineStationD.NumberLine, lineStationD.ID, lineStationD.PathIndex);
+            return new BO.LineStation()
+            {
+                NumberLine = lineStationD.NumberLine,
+                ID = lineStationD.ID,
+                PathIndex = lineStationD.PathIndex
+            };
         }
         public void addLineStation(BO.LineStation lineStation)
         {
@@ -619,10 +623,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.LineStation> lineStations = GetLineStations();
-                lineStations = from item in lineStations
-                               where condition(item)
-                               select item;
+                IEnumerable<BO.LineStation> lineStations = from item in GetLineStations()
+                                                           where condition(item)
+                                                           select item;
                 if (lineStations.Count() == 0)
                     throw new BO.StationException("No line stations exist.");
                 return lineStations;
@@ -638,38 +641,44 @@ namespace BL
         #region DrivingBuses
 
         /// <summary>
-        /// ???
+        /// Func that converts driving bus of BO to driving bus of DO
         /// </summary>
-        /// <param name="drivingBus"></param>
-        /// <returns></returns>
+        /// <param name="drivingBus">driving bus of BO</param>
+        /// <returns>driving bus of DO</returns>
         DO.DrivingBus convertToDrivingBusDO(BO.DrivingBus drivingBus)
         {
-            DO.DrivingBus drivingBusD = new DO.DrivingBus();
-            drivingBusD.ThisSerial = drivingBus.ThisSerial;
-            drivingBusD.Line = drivingBus.Line;
-            drivingBusD.LicensePlate = drivingBus.LicensePlate;
-            drivingBusD.ActualStart = drivingBus.ActualStart;
-            drivingBusD.Start = drivingBus.Start;
-            drivingBusD.PreviousStationID = drivingBus.PreviousStationID;
-            drivingBusD.PreviousStationTime = drivingBus.PreviousStationTime;
-            drivingBusD.NextStationTime = drivingBus.NextStationTime;
-            return drivingBusD;
+            return new DO.DrivingBus()
+            {
+                ThisSerial = drivingBus.ThisSerial,
+                Line = drivingBus.Line,
+                LicensePlate = drivingBus.LicensePlate,
+                ActualStart = drivingBus.ActualStart,
+                Start = drivingBus.Start,
+                PreviousStationID = drivingBus.PreviousStationID,
+                PreviousStationTime = drivingBus.PreviousStationTime,
+                NextStationTime = drivingBus.NextStationTime
+            };
         }
         /// <summary>
-        /// ???
+        /// Func that converts driving bus of DO to driving bus of BO
         /// </summary>
-        /// <param name="drivingBus"></param>
-        /// <returns></returns>
+        /// <param name="drivingBus">driving bus of DO</param>
+        /// <returns>driving bus of BO</returns>
         BO.DrivingBus convertToDrivingBusBO(DO.DrivingBus drivingBus)
         {
-            BO.DrivingBus drivingBusB = new BO.DrivingBus(drivingBus.LicensePlate, drivingBus.Line, drivingBus.Start);
+            return new BO.DrivingBus()
+            {
+                LicensePlate = drivingBus.LicensePlate,
+                Line = drivingBus.Line,
+                Start = drivingBus.Start
+            };
+
             //drivingBusB.ThisSerial = drivingBusD.ThisSerial;
             //drivingBusB.ActualStart = drivingBus.ActualStart;
             //drivingBusB.Start = drivingBus.Start;
             //drivingBusB.PreviousStationID = drivingBus.PreviousStationID;
             //drivingBusB.PreviousStationTime = drivingBus.PreviousStationTime;
             //drivingBusB.NextStationTime = drivingBus.NextStationTime;
-            return drivingBusB;
         }
         public void addDrivingBus(BO.DrivingBus drivingBus)
         {
@@ -733,10 +742,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.DrivingBus> drivingBuses = GetDrivingBuses();
-                drivingBuses = from item in drivingBuses
-                               where condition(item)
-                               select item;
+                IEnumerable<BO.DrivingBus> drivingBuses = from item in GetDrivingBuses()
+                                                          where condition(item)
+                                                          select item;
                 if (drivingBuses.Count() == 0)
                     throw new BO.BusException("No driving buses exist.");
                 return drivingBuses;
@@ -752,27 +760,34 @@ namespace BL
         #region DrivingLines
 
         /// <summary>
-        /// ???
+        /// Func that converts driving line of BO to driving line of DO
         /// </summary>
-        /// <param name="drivingLine"></param>
-        /// <returns></returns>
+        /// <param name="drivingLine">driving line of BO</param>
+        /// <returns>driving line of DO</returns>
         DO.DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
         {
-            DO.DrivingLine drivingLineD = new DO.DrivingLine();
-            drivingLineD.NumberLine = drivingLine.NumberLine;
-            drivingLineD.Start = drivingLine.Start;
-            drivingLineD.End = drivingLine.End;
-            drivingLineD.Frequency = drivingLine.Frequency;
-            return drivingLineD;
+            return new DO.DrivingLine()
+            {
+                NumberLine = drivingLine.NumberLine,
+                Start = drivingLine.Start,
+                End = drivingLine.End,
+                Frequency = drivingLine.Frequency
+            };
         }
         /// <summary>
-        /// ???
+        /// Func that converts driving line of DO to driving line of BO
         /// </summary>
-        /// <param name="drivingLine"></param>
-        /// <returns></returns>
+        /// <param name="drivingLine">driving line of DO</param>
+        /// <returns>driving line of BO</returns>
         BO.DrivingLine convertToDrivingLineBO(DO.DrivingLine drivingLine)
         {
-            return new BO.DrivingLine(drivingLine.NumberLine, drivingLine.Start, drivingLine.Frequency, drivingLine.End);
+            return new BO.DrivingLine()
+            {
+                NumberLine = drivingLine.NumberLine,
+                Start = drivingLine.Start,
+                Frequency = drivingLine.Frequency,
+                End = drivingLine.End
+            };
         }
         public void addDrivingLine(BO.DrivingLine drivingLine)
         {
@@ -836,10 +851,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines();
-                drivingLines = from item in drivingLines
-                               where condition(item)
-                               select item;
+                IEnumerable<BO.DrivingLine> drivingLines = from item in GetDrivingLines()
+                                                           where condition(item)
+                                                           select item;
                 if (drivingLines.Count() == 0)
                     throw new BO.LineException("No driving lines exist.");
                 return drivingLines;
