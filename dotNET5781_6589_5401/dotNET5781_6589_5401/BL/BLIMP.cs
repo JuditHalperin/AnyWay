@@ -1,7 +1,6 @@
 ﻿using System;
 using BLAPI;
 using DLAPI;
-//using DL;
 using BO;
 using DO;
 using System.Collections.Generic;
@@ -23,11 +22,12 @@ namespace BL
         /// <returns>user of DO</returns>
         DO.User convertToUserDO(BO.User user)
         {
-            DO.User userD = new DO.User();
-            userD.Username = user.Username;
-            userD.Password = user.Password;
-            userD.IsManager = user.IsManager;
-            return userD;
+            return new DO.User()
+            {
+                Username = user.Username,
+                Password = user.Password,
+                IsManager = user.IsManager
+            };
         }
         /// <summary>
         /// Func that converts user of DO to user of BO
@@ -36,7 +36,12 @@ namespace BL
         /// <returns>user of BO</returns>
         BO.User convertToUserBO(DO.User user)
         {
-            return new BO.User(user.Username, user.Password, user.IsManager);
+            return new BO.User()
+            {
+                Username = user.Username,
+                Password = user.Password,
+                IsManager = user.IsManager
+            };
         }
         public void addUser(BO.User user)
         {
@@ -100,15 +105,14 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.User> users = GetUsers();
-                users = from item in users
-                        where condition(item)
-                        select item;
+                IEnumerable<BO.User> users = from item in GetUsers()
+                                             where condition(item)
+                                             select item;
                 if (users.Count() == 0)
                     throw new BO.UserException("No users exist.");
                 return users;
             }
-            catch(BO.UserException ex)
+            catch (BO.UserException ex)
             {
                 throw new BO.UserException(ex.Message);
             }
@@ -125,15 +129,16 @@ namespace BL
         /// <returns>bus of DO</returns>
         DO.Bus convertToBusDO(BO.Bus bus)
         {
-            DO.Bus busD = new DO.Bus();
-            busD.LicensePlate = bus.LicensePlate;
-            busD.StartOfWork = bus.StartOfWork;
-            busD.Status = (DO.State)bus.Status;
-            busD.TotalKms = bus.TotalKms;
-            busD.KmsSinceFuel = bus.KmsSinceFuel;
-            busD.KmsSinceService = bus.KmsSinceService;
-            busD.LastService = bus.LastService;
-            return busD;
+            return new DO.Bus()
+            {
+                LicensePlate = bus.LicensePlate,
+                StartOfWork = bus.StartOfWork,
+                Status = (DO.State) bus.Status,
+                TotalKms = bus.TotalKms,
+                KmsSinceFuel = bus.KmsSinceFuel,
+                KmsSinceService = bus.KmsSinceService,
+                LastService = bus.LastService
+            };
         }
         /// <summary>
         /// Func that converts bus of DO to bus of BO
@@ -142,8 +147,15 @@ namespace BL
         /// <returns>bus of BO</returns>
         BO.Bus convertToBusBO(DO.Bus bus)
         {
-            BO.Bus busB = new BO.Bus(bus.StartOfWork, bus.LastService, bus.LicensePlate, bus.TotalKms, bus.KmsSinceFuel, bus.KmsSinceService);
-            return busB;
+            return new BO.Bus()
+            {
+                StartOfWork = bus.StartOfWork,
+                LastService = bus.LastService,
+                LicensePlate = bus.LicensePlate,
+                TotalKms = bus.TotalKms,
+                KmsSinceFuel = bus.KmsSinceFuel,
+                KmsSinceService = bus.KmsSinceService
+            };
         }
         public void addBus(BO.Bus bus)
         {
@@ -207,15 +219,14 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.Bus> buses = GetBuses();
-                buses = from item in buses
-                        where condition(item)
-                        select item;
+                IEnumerable<BO.Bus> buses = from item in GetBuses()
+                                            where condition(item)
+                                            select item;
                 if (buses.Count() == 0)
                     throw new BO.BusException("No buses exist.");
                 return buses;
             }
-            catch(BO.BusException ex)
+            catch (BO.BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
@@ -232,13 +243,14 @@ namespace BL
         /// <returns>line of DO</returns>
         DO.Line convertToLineDO(BO.Line lineB)
         {
-            DO.Line lineD = new DO.Line();
-            lineD.ThisSerial = lineB.ThisSerial;
-            lineD.NumberLine = lineB.NumberLine;
-            lineD.FirstStation = lineB.FirstStation;
-            lineD.LastStation = lineB.LastStation;
-            lineD.Region = (DO.Regions)lineB.Region;
-            return lineD;
+            return new DO.Line()
+            {
+                ThisSerial = lineB.ThisSerial,
+                NumberLine = lineB.NumberLine,
+                FirstStation = lineB.FirstStation,
+                LastStation = lineB.LastStation,
+                Region = (DO.Regions)lineB.Region
+            };
         }
         /// <summary>
         /// Func that converts line of DO to line of BO
@@ -249,7 +261,7 @@ namespace BL
         {
             IEnumerable<DO.LineStation> lineStationsD = dal.GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex);
             IEnumerable<BO.LineStation> lineStationsB = from item in lineStationsD
-                                                         select convertToLineStationBO(item);
+                                                        select convertToLineStationBO(item);
             TwoFollowingStations followingStations = new TwoFollowingStations();
             try
             {
@@ -265,8 +277,13 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
 
-            return new BO.Line(lineD.NumberLine, (BO.Regions)lineD.Region, (ObservableCollection<BO.LineStation>)stationsB);
-        }      
+            return new BO.Line()
+            {
+                NumberLine = lineD.NumberLine,
+                Region = (BO.Regions)lineD.Region,
+                Path = lineStationsB
+            };
+        }
         void convertLineToFollowingStationDO(BO.Line line)
         {
             TwoFollowingStations followingStations = new TwoFollowingStations();
@@ -285,7 +302,7 @@ namespace BL
             {
                 dal.addTwoFollowingStations(followingStations);
             }
-            catch(DO.StationException)
+            catch (DO.StationException)
             {
                 dal.updateTwoFollowingStations(followingStations);
             }
@@ -309,7 +326,7 @@ namespace BL
             }
         }
         public void addLine(BO.Line line)
-        {           
+        {
             try
             {
                 dal.addLine(convertToLineDO(line));
@@ -334,7 +351,7 @@ namespace BL
 
         }
         public void updateLine(BO.Line line)
-        {          
+        {
             try
             {
                 dal.updateLine(convertToLineDO(line));
@@ -344,7 +361,7 @@ namespace BL
             catch (DO.LineException ex)
             {
                 throw new BO.LineException(ex.Message);
-            }          
+            }
         }
         public BO.Line getLine(int serial)
         {
@@ -375,15 +392,14 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.Line> lines = GetLines();
-                lines = from item in lines
-                        where condition(item)
-                        select item;
+                IEnumerable<BO.Line> lines = from item in GetLines()
+                                             where condition(item)
+                                             select item;
                 if (lines.Count() == 0)
                     throw new BO.LineException("No lines exist.");
                 return lines;
             }
-            catch(BO.LineException ex)
+            catch (BO.LineException ex)
             {
                 throw new BO.LineException(ex.Message);
             }
@@ -400,12 +416,13 @@ namespace BL
         /// <returns>station of DO</returns>
         DO.Station convertToStationDO(BO.Station stationB)
         {
-            DO.Station stationD = new DO.Station();
-            stationD.ID = stationB.ID;
-            stationD.Name = stationB.Name;
-            stationD.Latitude = stationB.Latitude;
-            stationD.Longitude = stationB.Longitude;
-            return stationD;
+            return new DO.Station()
+            {
+                ID = stationB.ID,
+                Name = stationB.Name,
+                Latitude = stationB.Latitude,
+                Longitude = stationB.Longitude
+            };
         }
         /// <summary>
         /// Func that converts station of DO to station of BO
@@ -414,7 +431,13 @@ namespace BL
         /// <returns>station of BO</returns>
         BO.Station convertToStationBO(DO.Station stationD)
         {
-            return new BO.Station(stationD.ID, stationD.Name, stationD.Latitude, stationD.Longitude);
+            return new BO.Station()
+            {
+                ID = stationD.ID,
+                Name = stationD.Name,
+                Latitude = stationD.Latitude,
+                Longitude = stationD.Longitude
+            };
         }
         public void addStation(BO.Station station)
         {
@@ -432,7 +455,7 @@ namespace BL
             try
             {
                 dal.removeStation(convertToStationDO(station));
-                foreach(BO.LineStation lineStation in GetLineStations(item => item.ID != station.ID))
+                foreach (BO.LineStation lineStation in GetLineStations(item => item.ID != station.ID))
                     removeLineStation(lineStation);
             }
             catch (DO.StationException ex)
@@ -480,14 +503,13 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.Station> stations = GetStations();
-                stations = from item in stations
-                           select item;
+                IEnumerable<BO.Station> stations = from item in GetStations()
+                                                   select item;
                 if (stations.Count() == 0)
                     throw new BO.StationException("No stations exist.");
                 return stations;
             }
-            catch(BO.StationException ex)
+            catch (BO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -605,7 +627,7 @@ namespace BL
                     throw new BO.StationException("No line stations exist.");
                 return lineStations;
             }
-            catch(BO.StationException ex)
+            catch (BO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -632,7 +654,7 @@ namespace BL
             drivingBusD.PreviousStationTime = drivingBus.PreviousStationTime;
             drivingBusD.NextStationTime = drivingBus.NextStationTime;
             return drivingBusD;
-        }       
+        }
         /// <summary>
         /// ???
         /// </summary>
@@ -719,7 +741,7 @@ namespace BL
                     throw new BO.BusException("No driving buses exist.");
                 return drivingBuses;
             }
-            catch(BO.BusException ex)
+            catch (BO.BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }

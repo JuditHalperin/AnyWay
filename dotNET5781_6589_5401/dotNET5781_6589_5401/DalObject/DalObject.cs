@@ -15,7 +15,6 @@ namespace DL
 
         static readonly DalObject instance = new DalObject();
         public static DalObject Instance => instance;
-
         static DalObject() { }
         DalObject() { }
 
