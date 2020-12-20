@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace DS
         public static List<DrivingBus> DrivingBuses;
 		public static List<DrivingLine> DrivingLines;
         public static string ManagingCode = "123456";
+		public static int serial = 1;
 
         static DataSource()
         {
@@ -582,7 +584,40 @@ namespace DS
 					Latitude = 31.968049,
 					Longitude = 34.818099
 				},
-			};			
-        }       
+			};
+			FollowingStations = new List<TwoFollowingStations>();
+			foreach(Station station1 in Stations)
+            {
+				foreach(Station station2 in Stations)
+                {
+					if(station1!=station2)
+						if(!FollowingStations.Exists(item => (item.FirstStationID == station1.ID && item.SecondStationID == station2.ID) || (item.FirstStationID == station2.ID && item.SecondStationID == station1.ID)))
+                        {
+							TwoFollowingStations twoFollowingStations = new TwoFollowingStations()
+							{
+								FirstStationID = station1.ID,
+								SecondStationID = station2.ID,
+							};
+							GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
+							GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
+							twoFollowingStations.LengthBetweenStations = (int)positionThisStation.GetDistanceTo(positionSecondStation);
+							twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations * 0.001);
+							FollowingStations.Add(twoFollowingStations);
+						}
+				}
+            }
+			List<Line> Lines = new List<Line>();
+			List<LineStation> LineStations = new List<LineStation>();
+            for (int i =0; i < 10; i++)
+            {
+				Lines.Add( new Line()
+				{
+					ThisSerial = serial++,
+					NumberLine = (i + 2) * 5 + 3,//random.
+
+				});
+
+            }
+		}       
 	}
 }
