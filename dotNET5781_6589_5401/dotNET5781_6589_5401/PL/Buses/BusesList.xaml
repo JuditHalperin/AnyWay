@@ -10,7 +10,7 @@
         <local:StateToBool_Drive x:Key="StateToBool_Drive"/>
         <local:StatusToText_Status x:Key="StatusToText_Status"/>
         <local:intToBool_remove x:Key="intToBool_remove"/>
-        <DataTemplate x:Key="busInlistBoxTemplate">
+        <DataTemplate x:Key="BusInListBoxTemplate">
             <Grid x:Name="BusFromListBox">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -46,7 +46,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="LeftGrid" Grid.Column="0">
-                <ListBox x:Name="BusesList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource busInlistBoxTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="BusesList_MouseDoubleClick"/>
+                <ListBox x:Name="BusesList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource BusInListBoxTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="BusesList_MouseDoubleClick"/>
             </Grid>
             <Grid x:Name="RightGrid" Grid.Column="1">
                 <Grid.RowDefinitions>

@@ -6,6 +6,22 @@
         xmlns:local="clr-namespace:PL.Stations"
         mc:Ignorable="d"
         Title="Station Details" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="LineInListBoxTemplate">
+            <Grid x:Name="BusFromListBox">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding}"/>
+                <Label Content="{Binding}"/>
+                <Label x:Name="PreviousStation" Content="{Binding}"/>
+                <Label x:Name="NextStation" Content="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -37,7 +53,7 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Label Content="Lines:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <ListBox x:Name="LinesAtStation" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ListBox x:Name="LinesAtStation" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineInListBoxTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
     </Grid>
 </Window>
