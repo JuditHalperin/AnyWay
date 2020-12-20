@@ -12,8 +12,6 @@ namespace DO
         public int ThisSerial { get; set; }
         public int NumberLine { get; set; }
         public Regions Region { get; set; }
-        public int FirstStation { get; set; }
-        public int LastStation { get; set; }
         public override string ToString() => this.ToStringProperty();
     }
 }

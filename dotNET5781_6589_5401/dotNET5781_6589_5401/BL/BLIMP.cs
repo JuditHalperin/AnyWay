@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BLAPI;
 using DLAPI;
 using DO;
@@ -700,15 +702,13 @@ namespace BL
             {
                 LicensePlate = drivingBus.LicensePlate,
                 Line = drivingBus.Line,
-                Start = drivingBus.Start
+                Start = drivingBus.Start,
+                ThisSerial = drivingBus.ThisSerial,
+                ActualStart = drivingBus.ActualStart,
+                PreviousStationID = drivingBus.PreviousStationID,
+                PreviousStationTime = drivingBus.PreviousStationTime,
+                NextStationTime = drivingBus.NextStationTime
             };
-
-            //drivingBusB.ThisSerial = drivingBusD.ThisSerial;
-            //drivingBusB.ActualStart = drivingBus.ActualStart;
-            //drivingBusB.Start = drivingBus.Start;
-            //drivingBusB.PreviousStationID = drivingBus.PreviousStationID;
-            //drivingBusB.PreviousStationTime = drivingBus.PreviousStationTime;
-            //drivingBusB.NextStationTime = drivingBus.NextStationTime;
         }
         public void addDrivingBus(BO.DrivingBus drivingBus)
         {
