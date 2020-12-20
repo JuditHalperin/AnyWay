@@ -20,7 +20,7 @@ namespace DS
 		public static List<DrivingLine> DrivingLines;
         public static string ManagingCode = "123456";
 		public static int serial = 1;
-		static private Random rand = new Random(DateTime.Now.Millisecond);
+		static private Random rand = new Random(DateTime.Now.Millisecond);//for the constructor
 
 		static DataSource()
 		{
@@ -585,7 +585,7 @@ namespace DS
 					Latitude = 31.968049,
 					Longitude = 34.818099
 				},
-			};
+			};//70 stations.
 			FollowingStations = new List<TwoFollowingStations>();
 			foreach (Station station1 in Stations)
 			{
