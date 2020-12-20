@@ -4,12 +4,47 @@ using DLAPI;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Device.Location;
 
 namespace BL
 {
     public class BLIMP : IBL
     {
         readonly IDAL dal = DalFactory.GetDal();
+        #region Auxiliary functions
+        int calculateDistance(BO.Station first, BO.Station second)
+        {
+            GeoCoordinate positionThisStation = new GeoCoordinate(first.Latitude, first.Longitude);
+            GeoCoordinate positionSecondStation = new GeoCoordinate(second.Latitude, second.Longitude);
+            return (int)positionThisStation.GetDistanceTo(positionSecondStation);
+        }
+        int calculateTime(int distance)
+        {
+            return (int)(distance * 0.001);//according to valocity of 60 Km per hour.
+        }
+        void addOrUpdateTwoFollowingStations(DO.TwoFollowingStations followingStations)
+        {
+            try
+            {
+                dal.addTwoFollowingStations(followingStations);
+            }
+            catch (DO.StationException)
+            {
+                dal.updateTwoFollowingStations(followingStations);
+            }
+        }
+        void addOrUpdateLineStation(BO.LineStation station)
+        {
+            try
+            {
+                addLineStation(station);
+            }
+            catch (BO.StationException)
+            {
+                updateLineStation(station);
+            }
+        }
+        #endregion
 
         #region Users
 
@@ -245,8 +280,8 @@ namespace BL
             {
                 ThisSerial = lineB.ThisSerial,
                 NumberLine = lineB.NumberLine,
-                FirstStation = lineB.FirstStation,
-                LastStation = lineB.LastStation,
+                FirstStation = lineB.Path.First().ID,
+                LastStation = lineB.Path.Last().ID,
                 Region = (DO.Regions)lineB.Region
             };
         }
@@ -294,33 +329,12 @@ namespace BL
                 addOrUpdateTwoFollowingStations(followingStations);
             }
         }
-        void addOrUpdateTwoFollowingStations(DO.TwoFollowingStations followingStations)
-        {
-            try
-            {
-                dal.addTwoFollowingStations(followingStations);
-            }
-            catch (DO.StationException)
-            {
-                dal.updateTwoFollowingStations(followingStations);
-            }
-        }
+        
         void convertLineToLineStationsDO(BO.Line line)
         {
             foreach (BO.LineStation station in line.Path)
             {
                 addOrUpdateLineStation(station);
-            }
-        }
-        void addOrUpdateLineStation(BO.LineStation station)
-        {
-            try
-            {
-                addLineStation(station);
-            }
-            catch (BO.StationException)
-            {
-                updateLineStation(station);
             }
         }
         public void addLine(BO.Line line)
@@ -436,6 +450,22 @@ namespace BL
                 Latitude = stationD.Latitude,
                 Longitude = stationD.Longitude
             };
+        }
+        void stationToFollowingStationAndLineStation(BO.Station station)
+        {
+            IEnumerable<BO.Station> stations = GetStations();
+            foreach (BO.Station station1 in stations)
+            {
+                TwoFollowingStations followingStations = new TwoFollowingStations()
+                {
+                    FirstStationID = station.ID,
+                    SecondStationID = station1.ID,
+                    LengthBetweenStations = calculateDistance(station, station1),
+                    TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations),
+                };
+                addOrUpdateTwoFollowingStations(followingStations);
+            }
+
         }
         public void addStation(BO.Station station)
         {
