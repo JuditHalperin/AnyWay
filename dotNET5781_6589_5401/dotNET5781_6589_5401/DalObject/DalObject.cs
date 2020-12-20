@@ -25,13 +25,13 @@ namespace DL
         public void addUser(User user)
         {
             User clonedUser = user.Clone();
-            if (DS.DataSource.Users.Exists(item => item.Username == clonedUser.Username))
+            if (DataSource.Users.Exists(item => item.Username == clonedUser.Username))
                 throw new UserException("The user already exists.");
-            DS.DataSource.Users.Add(clonedUser);
+            DataSource.Users.Add(clonedUser);
         }
         public void removeUser(User user)
         {
-            if (!DS.DataSource.Users.Remove(user))
+            if (!DataSource.Users.Remove(user))
                 throw new UserException("The user does not exist.");
         }
         public void updateUser(User user)
@@ -39,8 +39,8 @@ namespace DL
             User u = DataSource.Users.Find(item => item.Username == user.Username);
             if (u == null)
                 throw new UserException("The user does not exist.");
-            DS.DataSource.Users.Remove(u); // remove the old user
-            DS.DataSource.Users.Add(user.Clone()); // add the updated user
+            DataSource.Users.Remove(u); // remove the old user
+            DataSource.Users.Add(user.Clone()); // add the updated user
         }
         public User getUser(string username)
         {
@@ -51,7 +51,7 @@ namespace DL
         }
         public IEnumerable<User> GetUsers()
         {
-            IEnumerable<User> users = from item in DS.DataSource.Users
+            IEnumerable<User> users = from item in DataSource.Users
                                       select item.Clone();
             if (users.Count() == 0)
                 throw new UserException("No users exist.");
@@ -59,7 +59,7 @@ namespace DL
         }
         public IEnumerable<User> GetUsers(Predicate<User> condition)
         {
-            IEnumerable<User> users = from item in DS.DataSource.Users
+            IEnumerable<User> users = from item in DataSource.Users
                                       where condition(item)
                                       select item.Clone();
             if (users.Count() == 0) 
@@ -74,13 +74,13 @@ namespace DL
         public void addBus(Bus bus)
         {
             Bus clonedBus = bus.Clone();
-            if (DS.DataSource.Buses.Exists(item => item.LicensePlate == clonedBus.LicensePlate))
+            if (DataSource.Buses.Exists(item => item.LicensePlate == clonedBus.LicensePlate))
                 throw new BusException("The bus already exists.");
-            DS.DataSource.Buses.Add(clonedBus);
+            DataSource.Buses.Add(clonedBus);
         }
         public void removeBus(Bus bus)
         {
-            if (!DS.DataSource.Buses.Remove(bus))
+            if (!DataSource.Buses.Remove(bus))
                 throw new BusException("The bus does not exist.");
         }
         public void updateBus(Bus bus)
@@ -88,8 +88,8 @@ namespace DL
             Bus b = DataSource.Buses.Find(item => item.LicensePlate == bus.LicensePlate);
             if (b == null)
                 throw new BusException("The bus does not exist.");
-            DS.DataSource.Buses.Remove(b); // remove the old bus
-            DS.DataSource.Buses.Add(bus.Clone()); // add the updated bus            
+            DataSource.Buses.Remove(b); // remove the old bus
+            DataSource.Buses.Add(bus.Clone()); // add the updated bus            
         }
         public Bus getBus(string licensePlate)
         {
@@ -100,7 +100,7 @@ namespace DL
         }
         public IEnumerable<Bus> GetBuses()
         {
-            IEnumerable<Bus> buses = from item in DS.DataSource.Buses
+            IEnumerable<Bus> buses = from item in DataSource.Buses
                                      select item.Clone();
             if (buses.Count() == 0)
                 throw new BusException("No buses exist.");
@@ -108,7 +108,7 @@ namespace DL
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
-            IEnumerable<Bus> buses = from item in DS.DataSource.Buses
+            IEnumerable<Bus> buses = from item in DataSource.Buses
                                      where condition(item)
                                      select item.Clone();
             if (buses.Count() == 0)
@@ -123,13 +123,13 @@ namespace DL
         public void addLine(Line line)
         {
             Line clonedLine = line.Clone();
-            if (DS.DataSource.Lines.Exists(item => item.ThisSerial == clonedLine.ThisSerial))
+            if (DataSource.Lines.Exists(item => item.ThisSerial == clonedLine.ThisSerial))
                 throw new LineException("The line already exists.");
-            DS.DataSource.Lines.Add(clonedLine);
+            DataSource.Lines.Add(clonedLine);
         }
         public void removeLine(Line line)
         {
-            if (!DS.DataSource.Lines.Remove(line))
+            if (!DataSource.Lines.Remove(line))
                 throw new LineException("The line does not exist.");
         }
         public void updateLine(Line line)
@@ -137,8 +137,8 @@ namespace DL
             Line l = DataSource.Lines.Find(item => item.ThisSerial == line.ThisSerial);
             if (l == null)
                 throw new LineException("The line does not exist.");
-            DS.DataSource.Lines.Remove(l); // remove the old line
-            DS.DataSource.Lines.Add(line.Clone()); // add the updated line  
+            DataSource.Lines.Remove(l); // remove the old line
+            DataSource.Lines.Add(line.Clone()); // add the updated line  
         }
         public Line getLine(int serial)
         {
@@ -149,7 +149,7 @@ namespace DL
         }
         public IEnumerable<Line> GetLines()
         {
-            IEnumerable<Line> lines = from item in DS.DataSource.Lines
+            IEnumerable<Line> lines = from item in DataSource.Lines
                                      select item.Clone();
             if (lines.Count() == 0)
                 throw new LineException("No lines exist.");
@@ -157,7 +157,7 @@ namespace DL
         }
         public IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
-            IEnumerable<Line> lines = from item in DS.DataSource.Lines
+            IEnumerable<Line> lines = from item in DataSource.Lines
                                       where condition(item)
                                       select item.Clone();
             if (lines.Count() == 0)
@@ -172,13 +172,13 @@ namespace DL
         public void addStation(Station station)
         {
             Station clonedStation = station.Clone();
-            if (DS.DataSource.Stations.Exists(item => item.ID == clonedStation.ID))
+            if (DataSource.Stations.Exists(item => item.ID == clonedStation.ID))
                 throw new StationException("The station already exists.");
-            DS.DataSource.Stations.Add(clonedStation);
+            DataSource.Stations.Add(clonedStation);
         }
         public void removeStation(Station station)
         {
-            if (!DS.DataSource.Stations.Remove(station))
+            if (!DataSource.Stations.Remove(station))
                 throw new StationException("The station does not exist.");
         }
         public void updateStation(Station station)
@@ -186,8 +186,8 @@ namespace DL
             Station s = DataSource.Stations.Find(item => item.ID == station.ID);
             if (s == null)
                 throw new LineException("The station does not exist.");
-            DS.DataSource.Stations.Remove(s); // remove the old station
-            DS.DataSource.Stations.Add(station.Clone()); // add the updated station
+            DataSource.Stations.Remove(s); // remove the old station
+            DataSource.Stations.Add(station.Clone()); // add the updated station
         }
         public Station getStation(int id)
         {
@@ -198,7 +198,7 @@ namespace DL
         }
         public IEnumerable<Station> GetStations()
         {
-            IEnumerable<Station> stations =  from item in DS.DataSource.Stations
+            IEnumerable<Station> stations =  from item in DataSource.Stations
                                              select item.Clone();
             if (stations.Count() == 0)
                 throw new StationException("No stations exist.");
@@ -206,7 +206,7 @@ namespace DL
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
-            IEnumerable<Station> stations = from item in DS.DataSource.Stations
+            IEnumerable<Station> stations = from item in DataSource.Stations
                                             where condition(item)
                                             select item.Clone();
             if (stations.Count() == 0)
@@ -221,13 +221,13 @@ namespace DL
         public void addLineStation(LineStation lineStation)
         {
             LineStation clonedLineStation = lineStation.Clone();
-            if (DS.DataSource.LineStations.Exists(item => item.NumberLine == clonedLineStation.NumberLine && item.ID == clonedLineStation.ID))
+            if (DataSource.LineStations.Exists(item => item.NumberLine == clonedLineStation.NumberLine && item.ID == clonedLineStation.ID))
                 throw new StationException("The line station already exists.");
-            DS.DataSource.LineStations.Add(clonedLineStation);
+            DataSource.LineStations.Add(clonedLineStation);
         }
         public void removeLineStation(LineStation lineStation)
         {
-            if (!DS.DataSource.LineStations.Remove(lineStation))
+            if (!DataSource.LineStations.Remove(lineStation))
                 throw new StationException("The line station does not exist.");            
         }
         public void updateLineStation(LineStation lineStation)
@@ -235,8 +235,8 @@ namespace DL
             LineStation l = DataSource.LineStations.Find(item => item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID);
             if (l == null)
                 throw new StationException("The line station does not exist.");
-            DS.DataSource.LineStations.Remove(l); // remove the old line station
-            DS.DataSource.LineStations.Add(lineStation.Clone()); // add the updated line station
+            DataSource.LineStations.Remove(l); // remove the old line station
+            DataSource.LineStations.Add(lineStation.Clone()); // add the updated line station
         }
         public LineStation getLineStation(int numberLine, int id)
         {
@@ -247,7 +247,7 @@ namespace DL
         }
         public IEnumerable<LineStation> GetLineStations()
         {
-            IEnumerable<LineStation> lineStations = from item in DS.DataSource.LineStations
+            IEnumerable<LineStation> lineStations = from item in DataSource.LineStations
                                                     select item.Clone();
             if (lineStations.Count() == 0)
                 throw new StationException("No line stations exist.");
@@ -255,7 +255,7 @@ namespace DL
         }
         public IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition)
         {
-            IEnumerable<LineStation> lineStations = from item in DS.DataSource.LineStations
+            IEnumerable<LineStation> lineStations = from item in DataSource.LineStations
                                                     where condition(item)
                                                     select item.Clone();
             if (lineStations.Count() == 0)
@@ -270,13 +270,13 @@ namespace DL
         public void addTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
             TwoFollowingStations clonedTwoFollowingStations = twoFollowingStations.Clone();
-            if (DS.DataSource.FollowingStations.Exists(item => item.FirstStationID == clonedTwoFollowingStations.FirstStationID && item.SecondStationID == clonedTwoFollowingStations.SecondStationID))
+            if (DataSource.FollowingStations.Exists(item => item.FirstStationID == clonedTwoFollowingStations.FirstStationID && item.SecondStationID == clonedTwoFollowingStations.SecondStationID))
                 throw new StationException("The two following stations already exist.");
-            DS.DataSource.FollowingStations.Add(clonedTwoFollowingStations);
+            DataSource.FollowingStations.Add(clonedTwoFollowingStations);
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            if (!DS.DataSource.FollowingStations.Remove(twoFollowingStations))
+            if (!DataSource.FollowingStations.Remove(twoFollowingStations))
                 throw new StationException("The two following stations do not exist.");
         }
         public void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations)
@@ -284,8 +284,8 @@ namespace DL
             TwoFollowingStations f = DataSource.FollowingStations.Find(item => item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID);
             if (f == null)
                 throw new StationException("The two following stations do not exist.");            
-            DS.DataSource.FollowingStations.Remove(f); // remove the old two following stations
-            DS.DataSource.FollowingStations.Add(twoFollowingStations.Clone()); // add the updated two following stations
+            DataSource.FollowingStations.Remove(f); // remove the old two following stations
+            DataSource.FollowingStations.Add(twoFollowingStations.Clone()); // add the updated two following stations
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
@@ -296,7 +296,7 @@ namespace DL
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
-            IEnumerable<TwoFollowingStations> followingStations = from item in DS.DataSource.FollowingStations
+            IEnumerable<TwoFollowingStations> followingStations = from item in DataSource.FollowingStations
                                                                   select item.Clone();
             if (followingStations.Count() == 0)
                 throw new StationException("No following stations exist.");
@@ -304,7 +304,7 @@ namespace DL
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
-            IEnumerable<TwoFollowingStations> followingStations = from item in DS.DataSource.FollowingStations
+            IEnumerable<TwoFollowingStations> followingStations = from item in DataSource.FollowingStations
                                                                   where condition(item)
                                                                   select item.Clone();
             if (followingStations.Count() == 0)
@@ -319,13 +319,13 @@ namespace DL
         public void addDrivingBus(DrivingBus drivingBus)
         {
             DrivingBus clonedDrivingBus = drivingBus.Clone();
-            if (DS.DataSource.DrivingBuses.Exists(item => item.ThisSerial == clonedDrivingBus.ThisSerial && item.LicensePlate == clonedDrivingBus.LicensePlate && item.Line == clonedDrivingBus.Line && item.Start == clonedDrivingBus.Start))
+            if (DataSource.DrivingBuses.Exists(item => item.ThisSerial == clonedDrivingBus.ThisSerial && item.LicensePlate == clonedDrivingBus.LicensePlate && item.Line == clonedDrivingBus.Line && item.Start == clonedDrivingBus.Start))
                 throw new BusException("The driving bus already exists.");
-            DS.DataSource.DrivingBuses.Add(clonedDrivingBus);
+            DataSource.DrivingBuses.Add(clonedDrivingBus);
         }
         public void removeDrivingBus(DrivingBus drivingBus)
         {
-            if (!DS.DataSource.DrivingBuses.Remove(drivingBus))
+            if (!DataSource.DrivingBuses.Remove(drivingBus))
                 throw new BusException("The driving bus does not exist.");
         }
         public void updateDrivingBus(DrivingBus drivingBus)
@@ -333,8 +333,8 @@ namespace DL
             DrivingBus d = DataSource.DrivingBuses.Find(item => item.ThisSerial == drivingBus.ThisSerial && item.LicensePlate == drivingBus.LicensePlate && item.Line == drivingBus.Line && item.Start == drivingBus.Start);
             if (d == null)
                 throw new BusException("The driving bus does not exist.");
-            DS.DataSource.DrivingBuses.Remove(d); // remove the old driving bus
-            DS.DataSource.DrivingBuses.Add(drivingBus.Clone()); // add the updated driving bus  
+            DataSource.DrivingBuses.Remove(d); // remove the old driving bus
+            DataSource.DrivingBuses.Add(drivingBus.Clone()); // add the updated driving bus  
         }
         public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
         {
@@ -345,7 +345,7 @@ namespace DL
         }
         public IEnumerable<DrivingBus> GetDrivingBuses()
         {
-            IEnumerable<DrivingBus> drivingBuses = from item in DS.DataSource.DrivingBuses
+            IEnumerable<DrivingBus> drivingBuses = from item in DataSource.DrivingBuses
                                                    select item.Clone();
             if (drivingBuses.Count() == 0)
                 throw new BusException("No driving buses exist.");
@@ -353,7 +353,7 @@ namespace DL
         }
         public IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition)
         {
-            IEnumerable<DrivingBus> drivingBuses = from item in DS.DataSource.DrivingBuses
+            IEnumerable<DrivingBus> drivingBuses = from item in DataSource.DrivingBuses
                                                    where condition(item)
                                                    select item.Clone();
             if (drivingBuses.Count() == 0)
@@ -368,13 +368,13 @@ namespace DL
         public void addDrivingLine(DrivingLine drivingLine)
         {
             DrivingLine clonedDrivingLine = drivingLine.Clone();
-            if (DS.DataSource.DrivingLines.Exists(item => item.NumberLine == clonedDrivingLine.NumberLine && item.Start == clonedDrivingLine.Start))
+            if (DataSource.DrivingLines.Exists(item => item.NumberLine == clonedDrivingLine.NumberLine && item.Start == clonedDrivingLine.Start))
                 throw new LineException("The driving line already exists.");
-            DS.DataSource.DrivingLines.Add(clonedDrivingLine);
+            DataSource.DrivingLines.Add(clonedDrivingLine);
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
-            if (!DS.DataSource.DrivingLines.Remove(drivingLine))
+            if (!DataSource.DrivingLines.Remove(drivingLine))
                 throw new LineException("The driving line does not exist.");
         }
         public void updateDrivingLine(DrivingLine drivingLine)
@@ -382,8 +382,8 @@ namespace DL
             DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
             if (d == null)
                 throw new LineException("The driving line does not exist.");           
-            DS.DataSource.DrivingLines.Remove(d); // remove the old driving line
-            DS.DataSource.DrivingLines.Add(drivingLine.Clone()); // add the updated driving line  
+            DataSource.DrivingLines.Remove(d); // remove the old driving line
+            DataSource.DrivingLines.Add(drivingLine.Clone()); // add the updated driving line  
         }
         public DrivingLine getDrivingLine(int numberLine, DateTime start)
         {
@@ -394,7 +394,7 @@ namespace DL
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
         {
-            IEnumerable<DrivingLine> drivingLines = from item in DS.DataSource.DrivingLines
+            IEnumerable<DrivingLine> drivingLines = from item in DataSource.DrivingLines
                                                     select item.Clone();
             if (drivingLines.Count() == 0)
                 throw new LineException("No driving lines exist.");
@@ -402,7 +402,7 @@ namespace DL
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
         {
-            IEnumerable<DrivingLine> drivingLines = from item in DS.DataSource.DrivingLines
+            IEnumerable<DrivingLine> drivingLines = from item in DataSource.DrivingLines
                                                     where condition(item)
                                                     select item.Clone();
             if (drivingLines.Count() == 0)
@@ -422,6 +422,7 @@ namespace DL
         {
             DataSource.ManagingCode = code;
         }
+
         #endregion
     }
 }
