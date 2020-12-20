@@ -463,8 +463,8 @@ namespace BL
                     FirstStationID = station.ID,
                     SecondStationID = station1.ID,
                     LengthBetweenStations = calculateDistance(station, station1),
-                    TimeBetweenStations = calculateTime(calculateDistance(station, station1)),
                 };
+                followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
                 addOrUpdateTwoFollowingStations(followingStations);
             }
 
