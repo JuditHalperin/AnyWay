@@ -13,7 +13,8 @@ namespace BL
     public class BLIMP : IBL
     {
         readonly IDAL dal = DalFactory.GetDal();
-        #region Auxiliary functions
+        
+        #region Help functions
         int calculateDistance(BO.Station first, BO.Station second)
         {
             GeoCoordinate positionThisStation = new GeoCoordinate(first.Latitude, first.Longitude);
@@ -282,8 +283,6 @@ namespace BL
             {
                 ThisSerial = lineB.ThisSerial,
                 NumberLine = lineB.NumberLine,
-                FirstStation = lineB.Path.First().ID,
-                LastStation = lineB.Path.Last().ID,
                 Region = (DO.Regions)lineB.Region
             };
         }
@@ -598,16 +597,6 @@ namespace BL
                 {
                     lineStations.ElementAt(i).PathIndex--;
                     updateLineStation(lineStations.ElementAt(i));
-                }
-                if (lineStation.PathIndex == lineStations.Count())
-                {
-                    DO.Line line = dal.getLine(lineStation.NumberLine);
-                    line.LastStation = lineStations.ElementAt(lineStations.Count() - 1).ID;
-                }
-                if (lineStation.PathIndex == 1)
-                {
-                    DO.Line line = dal.getLine(lineStation.NumberLine);
-                    line.FirstStation = lineStations.First().ID;
                 }
             }
             catch (DO.StationException ex)
