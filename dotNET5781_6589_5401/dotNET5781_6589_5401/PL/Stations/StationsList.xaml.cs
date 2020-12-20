@@ -33,7 +33,7 @@ namespace PL.Stations
 
         private void StationsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new StationDetails().Show();
+            new StationDetails((Station)StationsList.SelectedItem).Show();
         }
     }
 }

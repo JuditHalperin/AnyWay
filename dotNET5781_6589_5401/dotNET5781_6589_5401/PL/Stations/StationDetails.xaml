@@ -7,6 +7,37 @@
         mc:Ignorable="d"
         Title="Station Details" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Station ID:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="{Binding Path=ID}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Station name:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="{Binding Path=Name}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Latitude:" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="{Binding Path=Latitude}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Longitude:" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="{Binding Path=Longitude}" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Lines:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <ListBox x:Name="LinesAtStation" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
     </Grid>
 </Window>

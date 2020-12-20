@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL.Stations
 {
@@ -19,9 +22,23 @@ namespace PL.Stations
     /// </summary>
     public partial class StationDetails : Window
     {
-        public StationDetails()
+        static IBL bl;
+
+        public StationDetails(Station selectedStation)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
+            DataContext = selectedStation;
+            LinesAtStation.ItemsSource = bl.GetLines(item =>
+            {
+                foreach (LineStation lineStation in item.Path)
+                    if (lineStation.ID == selectedStation.ID)
+                        return true;
+                return false;
+
+            });
         }
+
+
     }
 }
