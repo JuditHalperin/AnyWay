@@ -119,8 +119,7 @@ namespace DL
 
         public void addLine(Line line)
         {
-            if (DataSource.Lines.Exists(item => item.ThisSerial == line.ThisSerial))
-                throw new LineException("The line already exists.");
+            line.ThisSerial = DataSource.serial++;
             DataSource.Lines.Add(line.Clone());
         }
         public void removeLine(Line line)
@@ -146,7 +145,7 @@ namespace DL
         public IEnumerable<Line> GetLines()
         {
             IEnumerable<Line> lines = from item in DataSource.Lines
-                                     select item.Clone();
+                                      select item.Clone();
             if (lines.Count() == 0)
                 throw new LineException("No lines exist.");
             return lines;
@@ -323,15 +322,14 @@ namespace DL
         {
             try // check if the bus exists
             {
-                getBus(drivingBus.LicensePlate); 
+                getBus(drivingBus.LicensePlate);
+                drivingBus.ThisSerial = DataSource.serial++;
+                DataSource.DrivingBuses.Add(drivingBus.Clone());
             }
             catch (BusException ex)
             { 
                 throw new BusException(ex.Message); 
-            }
-            if (DataSource.DrivingBuses.Exists(item => item.ThisSerial == drivingBus.ThisSerial && item.LicensePlate == drivingBus.LicensePlate && item.Line == drivingBus.Line && item.Start == drivingBus.Start))
-                throw new BusException("The driving bus already exists.");
-            DataSource.DrivingBuses.Add(drivingBus.Clone());
+            }           
         }
         public void removeDrivingBus(DrivingBus drivingBus)
         {

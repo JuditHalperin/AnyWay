@@ -27,17 +27,17 @@ namespace PL
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            new Buses().ShowDialog();
+            new Buses.BusesList().ShowDialog();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new Lines().ShowDialog();
+            new Lines.LinesList().ShowDialog();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new Stations().ShowDialog();
+            new Stations.StationsList().ShowDialog();
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
