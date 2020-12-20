@@ -220,10 +220,17 @@ namespace DL
 
         public void addLineStation(LineStation lineStation)
         {
-            LineStation clonedLineStation = lineStation.Clone();
-            if (DataSource.LineStations.Exists(item => item.NumberLine == clonedLineStation.NumberLine && item.ID == clonedLineStation.ID))
+            try // check if the station exists
+            {
+                getStation(lineStation.ID);
+            }
+            catch (StationException ex)
+            {
+                throw new StationException(ex.Message);
+            }
+            if (DataSource.LineStations.Exists(item => item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID))
                 throw new StationException("The line station already exists.");
-            DataSource.LineStations.Add(clonedLineStation);
+            DataSource.LineStations.Add(lineStation.Clone());
         }
         public void removeLineStation(LineStation lineStation)
         {
@@ -318,10 +325,17 @@ namespace DL
 
         public void addDrivingBus(DrivingBus drivingBus)
         {
-            DrivingBus clonedDrivingBus = drivingBus.Clone();
-            if (DataSource.DrivingBuses.Exists(item => item.ThisSerial == clonedDrivingBus.ThisSerial && item.LicensePlate == clonedDrivingBus.LicensePlate && item.Line == clonedDrivingBus.Line && item.Start == clonedDrivingBus.Start))
+            try // check if the bus exists
+            {
+                getBus(drivingBus.LicensePlate); 
+            }
+            catch (BusException ex)
+            { 
+                throw new BusException(ex.Message); 
+            }
+            if (DataSource.DrivingBuses.Exists(item => item.ThisSerial == drivingBus.ThisSerial && item.LicensePlate == drivingBus.LicensePlate && item.Line == drivingBus.Line && item.Start == drivingBus.Start))
                 throw new BusException("The driving bus already exists.");
-            DataSource.DrivingBuses.Add(clonedDrivingBus);
+            DataSource.DrivingBuses.Add(drivingBus.Clone());
         }
         public void removeDrivingBus(DrivingBus drivingBus)
         {
@@ -367,10 +381,17 @@ namespace DL
 
         public void addDrivingLine(DrivingLine drivingLine)
         {
-            DrivingLine clonedDrivingLine = drivingLine.Clone();
-            if (DataSource.DrivingLines.Exists(item => item.NumberLine == clonedDrivingLine.NumberLine && item.Start == clonedDrivingLine.Start))
+            try // check if the line exists
+            {
+                getLine(drivingLine.NumberLine);
+            }
+            catch (LineException ex)
+            {
+                throw new LineException(ex.Message);
+            }
+            if (DataSource.DrivingLines.Exists(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start))
                 throw new LineException("The driving line already exists.");
-            DataSource.DrivingLines.Add(clonedDrivingLine);
+            DataSource.DrivingLines.Add(drivingLine.Clone());
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
