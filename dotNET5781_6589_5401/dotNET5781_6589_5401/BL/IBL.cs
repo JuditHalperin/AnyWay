@@ -37,7 +37,7 @@ namespace BLAPI
         void updateLine(Line line);
         Line getLine(int serial);
         IEnumerable<Line> GetLines();
-        //IEnumerable<Line> GetLines(Predicate<Line> condition);
+        IEnumerable<Line> GetLines(Predicate<Line> condition);
 
         #endregion
 
