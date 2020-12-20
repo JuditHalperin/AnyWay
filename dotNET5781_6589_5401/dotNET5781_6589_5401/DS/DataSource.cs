@@ -585,8 +585,8 @@ namespace DS
 					Latitude = 31.968049,
 					Longitude = 34.818099
 				},
-			};//70 stations.
-			FollowingStations = new List<TwoFollowingStations>();
+            };//70 stations.
+            FollowingStations = new List<TwoFollowingStations>();
 			foreach (Station station1 in Stations)
 			{
 				foreach (Station station2 in Stations)
