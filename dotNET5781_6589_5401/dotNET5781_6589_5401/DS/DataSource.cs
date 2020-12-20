@@ -20,9 +20,10 @@ namespace DS
 		public static List<DrivingLine> DrivingLines;
         public static string ManagingCode = "123456";
 		public static int serial = 1;
+		static private Random rand = new Random(DateTime.Now.Millisecond);
 
-        static DataSource()
-        {
+		static DataSource()
+		{
 			Stations = new List<Station>()
 			{
 				new Station
@@ -586,17 +587,17 @@ namespace DS
 				},
 			};
 			FollowingStations = new List<TwoFollowingStations>();
-			foreach(Station station1 in Stations)
-            {
-				foreach(Station station2 in Stations)
-                {
-					if(station1!=station2)
-						if(!FollowingStations.Exists(item => (item.FirstStationID == station1.ID && item.SecondStationID == station2.ID) || (item.FirstStationID == station2.ID && item.SecondStationID == station1.ID)))
-                        {
+			foreach (Station station1 in Stations)
+			{
+				foreach (Station station2 in Stations)
+				{
+					if (station1 != station2)
+						if (!FollowingStations.Exists(item => (item.FirstStationID == station1.ID && item.SecondStationID == station2.ID) || (item.FirstStationID == station2.ID && item.SecondStationID == station1.ID)))
+						{
 							TwoFollowingStations twoFollowingStations = new TwoFollowingStations()
 							{
 								FirstStationID = station1.ID,
-								SecondStationID = station2.ID,
+								SecondStationID = station2.ID
 							};
 							GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
 							GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
@@ -605,19 +606,78 @@ namespace DS
 							FollowingStations.Add(twoFollowingStations);
 						}
 				}
-            }
-			List<Line> Lines = new List<Line>();
-			List<LineStation> LineStations = new List<LineStation>();
-            for (int i =0; i < 10; i++)
-            {
-				Lines.Add( new Line()
+			}
+			Lines = new List<Line>();
+			for (int i = 0; i < 10; i++)
+			{
+				Lines.Add(new Line()
 				{
 					ThisSerial = serial++,
 					NumberLine = (i + 2) * 5 + 3,//random.
-
+					Region = (Regions)(i % 5)
 				});
-
-            }
-		}       
+			}
+			LineStations = new List<LineStation>();
+			foreach (Line line in Lines)
+			{
+				for (int i = (line.ThisSerial - 1) * 6, j = 1; i < Stations.Count() && i < (line.ThisSerial - 1) * 6 + 16; j++, i++)
+				{
+					LineStations.Add(new LineStation()
+					{
+						NumberLine = line.ThisSerial,
+						ID = Stations[i].ID,
+						PathIndex = j
+					});
+				}
+			}
+			Buses = new List<Bus>();
+			//10 buses before 2018.
+			for (int i = 0; i < 10; i++)
+			{
+				string tmp = Convert.ToString(rand.Next(1000000, 10000000));
+				tmp = tmp.Insert(2, "-");
+				tmp = tmp.Insert(6, "-");
+				new Bus()
+				{
+					LicensePlate = tmp,
+					StartOfWork = new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
+					LastService = new DateTime(rand.Next(DateTime.Now.Year - 1, DateTime.Now.Year + 1), rand.Next(1, 13), rand.Next(1, 29)),
+					TotalKms = rand.Next(20000, 50000),
+					KmsSinceFuel = rand.Next(0, 1200),
+					KmsSinceService = rand.Next(0, 20000)
+				};
+			}
+			//10 buses after 2018.
+			for (int i = 0; i < 10; i++)
+			{
+				string tmp = Convert.ToString(rand.Next(10000000, 100000000));
+				tmp = tmp.Insert(3, "-");
+				tmp = tmp.Insert(6, "-");
+				new Bus()
+				{
+					LicensePlate = tmp,
+					StartOfWork = new DateTime(rand.Next(2018, DateTime.Now.Year), rand.Next(1, 13), rand.Next(1, 29)),
+					LastService = new DateTime(DateTime.Now.Year, rand.Next(1, DateTime.Now.Month), rand.Next(1, DateTime.Now.Day)),
+					TotalKms = rand.Next(20000, 50000),
+					KmsSinceFuel = rand.Next(0, 1200),
+					KmsSinceService = rand.Next(0, 20000)
+				};
+			}
+			Users = new List<User>()
+			{
+				new User()
+				{
+					Username = "Judit",
+					Password = "123456",
+					IsManager = true
+				},
+				new User()
+				{
+					Username = "Asnat",
+					Password = "123456",
+					IsManager = true
+				}
+			};
+		}
 	}
 }
