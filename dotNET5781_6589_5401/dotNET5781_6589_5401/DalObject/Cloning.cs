@@ -22,7 +22,6 @@ namespace DL
             Bus target = new Bus();
             target.LicensePlate = original.LicensePlate;
             target.StartOfWork = original.StartOfWork;
-            target.Status = original.Status;
             target.TotalKms = original.TotalKms;
             target.KmsSinceFuel = original.KmsSinceFuel;
             target.KmsSinceService = original.KmsSinceService;
@@ -40,8 +39,6 @@ namespace DL
             Line target = new Line();
             target.ThisSerial = original.ThisSerial;
             target.NumberLine = original.NumberLine;
-            target.FirstStation = original.FirstStation;
-            target.LastStation = original.LastStation;
             target.Region = original.Region;
             return target;
         }

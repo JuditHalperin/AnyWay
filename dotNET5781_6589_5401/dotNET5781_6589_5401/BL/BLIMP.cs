@@ -167,7 +167,6 @@ namespace BL
             {
                 LicensePlate = bus.LicensePlate,
                 StartOfWork = bus.StartOfWork,
-                Status = (DO.State) bus.Status,
                 TotalKms = bus.TotalKms,
                 KmsSinceFuel = bus.KmsSinceFuel,
                 KmsSinceService = bus.KmsSinceService,
@@ -175,21 +174,35 @@ namespace BL
             };
         }
         /// <summary>
+        /// set the bus status: canDrive, cannotDrive, driving, gettingFueled, gettingTreated
+        /// </summary>
+        /// <returns>bus status</returns>
+        public BO.State setState(BO.Bus bus)
+        {
+            TimeSpan timeSinceLastTreat = DateTime.Now - bus.LastService;
+            if (timeSinceLastTreat.TotalDays >= 365 || bus.KmsSinceService >= 20000 || bus.KmsSinceFuel >= 1200)
+                return BO.State.cannotDrive;
+            return BO.State.canDrive;
+        }
+
+        /// <summary>
         /// Func that converts bus of DO to bus of BO
         /// </summary>
         /// <param name="bus">bus of DO</param>
         /// <returns>bus of BO</returns>
         BO.Bus convertToBusBO(DO.Bus bus)
         {
-            return new BO.Bus()
+            BO.Bus busB = new BO.Bus()
             {
                 StartOfWork = bus.StartOfWork,
                 LastService = bus.LastService,
                 LicensePlate = bus.LicensePlate,
                 TotalKms = bus.TotalKms,
                 KmsSinceFuel = bus.KmsSinceFuel,
-                KmsSinceService = bus.KmsSinceService
+                KmsSinceService = bus.KmsSinceService,
             };
+            busB.Status = setState(busB);
+            return busB;
         }
         public void addBus(BO.Bus bus)
         {
