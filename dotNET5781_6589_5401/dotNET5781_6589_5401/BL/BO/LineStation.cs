@@ -11,7 +11,7 @@ namespace BO
         public int NumberLine { get; set; }
         public int ID { get; set; }
         public int PathIndex { get; set; }
-        public double LengthFromPreviousStations { get; set; }
+        public int LengthFromPreviousStations { get; set; }
         public int TimeFromPreviousStations { get; set; }
         public override string ToString() => this.ToStringProperty();
     }
