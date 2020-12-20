@@ -18,22 +18,27 @@ using BO;
 namespace PL.Stations
 {
     /// <summary>
-    /// Interaction logic for StationsList.xaml
+    /// Interaction logic for StationDetails.xaml
     /// </summary>
-    public partial class StationsList : Window
+    public partial class StationDetails : Window
     {
         static IBL bl;
 
-        public StationsList()
+        public StationDetails(Station selectedStation)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            StationsList.ItemsSource = bl.GetStations();
+            DataContext = selectedStation;
+            LinesAtStation.ItemsSource = bl.GetLines(item =>
+            {
+                foreach (LineStation lineStation in item.Path)
+                    if (lineStation.ID == selectedStation.ID)
+                        return true;
+                return false;
+
+            });
         }
 
-        private void StationsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new StationDetails((Station)StationsList.SelectedItem).Show();
-        }
+
     }
 }

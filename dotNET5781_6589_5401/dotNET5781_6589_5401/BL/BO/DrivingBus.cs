@@ -8,7 +8,6 @@ namespace BO
 {
     public class DrivingBus
     {
-        private static int serial = 1;
         public int ThisSerial { get; set; }
         public string LicensePlate { get; set; }
         public int Line { get; set; }

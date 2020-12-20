@@ -6,25 +6,7 @@
         xmlns:local="clr-namespace:PL.Stations"
         mc:Ignorable="d"
         Title="Stations" Height="450" Width="800">
-    <Window.Resources>
-        <DataTemplate x:Key="stationInlistBoxTemplate">
-            <Grid x:Name="BusFromListBox">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="IdTextBlock" Height="30" Width="130" Grid.Column="0" Text="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="StatusLabel" Height="30" Width="130" Grid.Column="1" Content="{Binding Path=Status, Converter={StaticResource StatusToText_Status}}" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF021B6E"/>
-                <Label x:Name="TimerLabel" Height="30" Width="130" Grid.Column="2" Style="{StaticResource LabelDataStyle}" Content="{Binding Path=Time}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button x:Name="ServiceButton" Width="80" Grid.Column="3" Content="Service" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding Path=Status, Converter={StaticResource StateToBool_Drive}}" Click="DriveButton_Click"/>
-                <Button x:Name="FuelButton" Width="80" Grid.Column="4" Content="Fuel" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding Path=CanBeFueled, UpdateSourceTrigger=PropertyChanged}" Click="FuelButton_Click"/>
-            </Grid>
-        </DataTemplate>
-    </Window.Resources>
     <Grid>
-        <ListBox x:Name="StationsList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource stationInlistBoxTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <ListBox x:Name="StationsList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="StationsList_MouseDoubleClick"/>
     </Grid>
 </Window>
