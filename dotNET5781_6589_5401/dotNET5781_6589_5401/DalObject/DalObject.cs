@@ -271,18 +271,20 @@ namespace DL
 
         public void addTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            if (DataSource.FollowingStations.Exists(item => item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID))
+            if (twoFollowingStations.FirstStationID == twoFollowingStations.SecondStationID)
+                throw new StationException("Two identical statuons.");
+            if (DataSource.FollowingStations.Exists(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID)))
                 throw new StationException("The two following stations already exist.");
             DataSource.FollowingStations.Add(twoFollowingStations.Clone());
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
-        {
-            if (!DataSource.FollowingStations.Remove(twoFollowingStations))
+        {           
+            if (!DataSource.FollowingStations.Remove(twoFollowingStations) && !DataSource.FollowingStations.Remove(new TwoFollowingStations() { FirstStationID = twoFollowingStations.SecondStationID, SecondStationID = twoFollowingStations.FirstStationID, LengthBetweenStations = twoFollowingStations.LengthBetweenStations, TimeBetweenStations = twoFollowingStations.TimeBetweenStations }))
                 throw new StationException("The two following stations do not exist.");
         }
         public void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            TwoFollowingStations f = DataSource.FollowingStations.Find(item => item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID);
+            TwoFollowingStations f = DataSource.FollowingStations.Find(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID));
             if (f == null)
                 throw new StationException("The two following stations do not exist.");            
             DataSource.FollowingStations.Remove(f); // remove the old two following stations
@@ -290,7 +292,7 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            TwoFollowingStations twoFollowingStations = DataSource.FollowingStations.Find(item => item.FirstStationID == firstStationID && item.SecondStationID == secondStationID);
+            TwoFollowingStations twoFollowingStations = DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID));
             if (twoFollowingStations == null)
                 throw new StationException("The two following stations do not exist.");
             return twoFollowingStations.Clone();
