@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BLAPI;
 using DLAPI;
 using DO;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BL
 {
