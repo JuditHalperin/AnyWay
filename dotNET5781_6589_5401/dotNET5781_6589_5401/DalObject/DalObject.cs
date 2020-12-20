@@ -320,9 +320,9 @@ namespace DL
 
         public void addDrivingBus(DrivingBus drivingBus)
         {
-            try // check if the bus exists
+            try 
             {
-                getBus(drivingBus.LicensePlate);
+                getBus(drivingBus.LicensePlate); // check if the bus exists
                 drivingBus.ThisSerial = DataSource.serial++;
                 DataSource.DrivingBuses.Add(drivingBus.Clone());
             }
@@ -375,9 +375,9 @@ namespace DL
 
         public void addDrivingLine(DrivingLine drivingLine)
         {
-            try // check if the line exists
+            try 
             {
-                getLine(drivingLine.NumberLine);
+                getLine(drivingLine.NumberLine); // check if the line exists
             }
             catch (LineException ex)
             {
