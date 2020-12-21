@@ -732,7 +732,7 @@ namespace BL
                         updateLineStation(lineStations.ElementAt(i));
                     }
                 }
-                catch { }
+                catch(BO.BusException) { }
                 finally
                 {
                     dal.addLineStation(convertToLineStationDO(lineStation));
