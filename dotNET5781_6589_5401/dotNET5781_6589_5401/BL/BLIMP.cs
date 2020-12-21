@@ -258,6 +258,30 @@ namespace BL
                 throw new BO.BusException("The bus is not exists");
             }
         }
+        /// <summary>
+        /// Service in bus and fuel when needed.
+        /// </summary>
+        /// <param name="bus">bus for service</param>
+        public void serviceBus(BO.Bus bus)
+        {
+            try
+            {
+                bus = getBus(bus.LicensePlate);
+                bus.KmsSinceService = 0;
+                if (bus.KmsSinceFuel > 1100)//Need refueling soon
+                    bus.KmsSinceFuel = 0;
+                bus.LastService = DateTime.Now.Date;
+                dal.updateBus(convertToBusDO(bus));
+            }
+            catch (BO.BusException)
+            {
+                throw new BO.BusException("The bus is not exists");
+            }
+            catch (DO.BusException)
+            {
+                throw new BO.BusException("The bus is not exists");
+            }
+        }
         public BO.Bus getBus(string licensePlate)
         {
             try
