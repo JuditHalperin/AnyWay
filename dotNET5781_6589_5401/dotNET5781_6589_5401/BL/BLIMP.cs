@@ -772,7 +772,7 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID)).First();//if the station is exists.
+                BO.LineStation station = getLineStation(lineStation.NumberLine,lineStation.ID);//if the station is exists.
                 try
                 {
                     if(lineStation.PathIndex!=station.PathIndex)//if the update in the index of path
@@ -792,15 +792,19 @@ namespace BL
                     }
                     
                 }
-                catch (BO.BusException) { }
+                catch (BO.StationException) { }
                 finally
                 {
                     dal.updateLineStation(convertToLineStationDO(lineStation));
                 }
             }
-            catch (DO.StationException)
+            catch (DO.StationException ex)
             {
-                throw new BO.StationException("The station in line is not exists.");
+                throw new BO.StationException(ex.Message);
+            }
+            catch (BO.StationException ex) 
+            {
+                throw new BO.StationException(ex.Message);
             }
         }
         /// <summary>
