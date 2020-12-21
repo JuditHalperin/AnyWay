@@ -61,7 +61,7 @@ namespace PL.Buses
             Bus bus = (Bus)((List<object>)e.Argument)[1];
             int time = (int)((List<object>)e.Argument).First();
 
-            bus.Time = $"{time / 6:00}:{time % 6:00}:00"; // *10/60=/6
+            //bus.Time = $"{time / 6:00}:{time % 6:00}:00"; // *10/60=/6
 
             for (int i = time - 1; i > 0; i--)
             {
@@ -87,7 +87,7 @@ namespace PL.Buses
         {
             int progress = e.ProgressPercentage * 10; // 1 unreal second = 10 real minutes     
             BO.Bus bus = (BO.Bus)((List<object>)e.UserState)[1];
-            bus.Time = $"{progress / 60:00}:{progress % 60:00}:00";
+            //bus.Time = $"{progress / 60:00}:{progress % 60:00}:00";
         }
 
         /// <summary>
@@ -102,23 +102,8 @@ namespace PL.Buses
         {
             BO.Bus bus = (BO.Bus)((List<object>)e.Result)[1];
 
-            float km = (float)((List<object>)e.Result)[2];
+            int flag = (int)((List<object>)e.Result)[2];
 
-            else if (km == -1) // means refueling
-                bus.KmSinceFueled = 0;
-            else // means service
-            {
-                bus.KmSinceTreated = 0;
-                bus.DateOfLastTreat = DateTime.Now.Date;
-
-                if (bus.KmSinceFueled >= 1200) // refuel if needed
-                    bus.KmSinceFueled = 0;
-            }
-
-            bus.Status = bus.setState();
-            bus.setCanBeFueled();
-            bus.setCanBeServiced();
-            bus.Time = "";
         }
 
         /// <summary>
@@ -129,8 +114,7 @@ namespace PL.Buses
         private void BusesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Bus selectedBus = (Bus)BusesList.SelectedItem;
-            ShowBusDetails window = new ShowBusDetails();
-            window.update(selectedBus);
+            ShowBus window = new ShowBus(selectedBus);
             window.ShowDialog();
         }
 
@@ -146,7 +130,7 @@ namespace PL.Buses
             if (fueling.DataContext is Bus)
             {
                 Bus bus = (Bus)fueling.DataContext;
-                bus.fuel();
+                
             }
         }
 
@@ -168,8 +152,7 @@ namespace PL.Buses
         /// <param name="e"></param>
         private void RemoveBusButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveBus window = new RemoveBus();
-            window.ShowDialog();
+            
         }
 
         /// <summary>
@@ -183,5 +166,55 @@ namespace PL.Buses
             return;
         }
 
+
+        /// <summary>
+        /// convert type int to type bool for binding to property with bool value.
+        /// </summary>
+        public class intToBool_remove : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                if ((int)value == 0)
+                    return false;
+                return true;
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
+            /// <summary>
+            /// convert a status of type 'State' to string
+            /// used to present the buses status on the main window and on the details window
+            /// </summary>
+            public class StatusToText_Status : IValueConverter
+            {
+                public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+                {
+                    State stateValue = (State)value;
+
+                    switch (stateValue)
+                    {
+                        case State.canDrive:
+                            return "Can Drive";
+                        case State.cannotDrive:
+                            return "Cannot Drive";
+                        case State.gettingFueled:
+                            return "Being fueled";
+                        case State.gettingServiced:
+                            return "Being serviced";
+                        case State.driving:
+                            return "Driving";
+                        default:
+                            return null;
+                    }
+                }
+
+                public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
     }
 }
