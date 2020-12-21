@@ -751,6 +751,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Remove station of line
+        /// </summary>
+        /// <param name="lineStation">station in line</param>
         public void removeLineStation(BO.LineStation lineStation)
         {
             try
@@ -768,6 +772,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Update data of station in line
+        /// </summary>
+        /// <param name="lineStation">station in line</param>
         public void updateLineStation(BO.LineStation lineStation)
         {
             try
@@ -779,6 +787,12 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return station in line with the keys: numberLine,id.
+        /// </summary>
+        /// <param name="numberLine">the line that the station in it path.</param>
+        /// <param name="id">number of the station</param>
+        /// <returns>station in line</returns>
         public BO.LineStation getLineStation(int numberLine, int id)
         {
             try
