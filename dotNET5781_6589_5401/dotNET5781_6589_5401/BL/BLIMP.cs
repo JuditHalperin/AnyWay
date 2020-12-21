@@ -722,11 +722,29 @@ namespace BL
                 PathIndex = lineStationD.PathIndex
             };
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lineStation"></param>
         public void addLineStation(BO.LineStation lineStation)
         {
             try
             {
-                dal.addLineStation(convertToLineStationDO(lineStation));
+                try
+                {
+                    BO.LineStation station=GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex)).First();
+                    IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                    for (int i = lineStation.PathIndex-1; i < lineStations.Count(); i++)
+                    {
+                        lineStations.ElementAt(i).PathIndex++;
+                        updateLineStation(lineStations.ElementAt(i));
+                    }
+                }
+                catch { }
+                finally
+                {
+                    dal.addLineStation(convertToLineStationDO(lineStation));
+                }
             }
             catch (DO.StationException ex)
             {
