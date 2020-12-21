@@ -798,9 +798,9 @@ namespace BL
                     dal.updateLineStation(convertToLineStationDO(lineStation));
                 }
             }
-            catch (DO.StationException ex)
+            catch (DO.StationException)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException("The station in line is not exists.");
             }
         }
         /// <summary>
