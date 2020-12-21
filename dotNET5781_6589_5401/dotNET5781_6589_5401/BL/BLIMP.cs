@@ -713,7 +713,7 @@ namespace BL
         /// </summary>
         /// <param name="lineStationD">line station of DO</param>
         /// <returns>line station of BO</returns>
-        BO.LineStation convertToLineStationBO(DO.LineStation lineStationD)
+        BO.LineStation convertToLineStationBO(LineStation lineStationD)
         {
             return new BO.LineStation()
             {
