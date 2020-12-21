@@ -778,7 +778,7 @@ namespace BL
                     if(lineStation.PathIndex!=station.PathIndex)//if the update in the index of path
                     {
                         IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
-                        if(station.PathIndex< lineStation.PathIndex)
+                        if(station.PathIndex< lineStation.PathIndex)//need to back the station that after the old station
                             for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
                             {
                                 lineStations.ElementAt(i).PathIndex--;
