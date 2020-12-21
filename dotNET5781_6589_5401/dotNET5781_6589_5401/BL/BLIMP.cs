@@ -723,9 +723,9 @@ namespace BL
             };
         }
         /// <summary>
-        /// 
+        /// Add station in line
         /// </summary>
-        /// <param name="lineStation"></param>
+        /// <param name="lineStation">station in line</param>
         public void addLineStation(BO.LineStation lineStation)
         {
             try
