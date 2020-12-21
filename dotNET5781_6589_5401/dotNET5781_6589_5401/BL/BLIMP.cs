@@ -772,17 +772,18 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID)).First();
+                BO.LineStation station = GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID)).First();//if the station is exists.
                 try
                 {
-                    if(lineStation.PathIndex!=station.PathIndex)
+                    if(lineStation.PathIndex!=station.PathIndex)//if the update in the index of path
                     {
                         IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
-                        for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
-                        {
-                            lineStations.ElementAt(i).PathIndex--;
-                            updateLineStation(lineStations.ElementAt(i));
-                        }
+                        if(station.PathIndex< lineStation.PathIndex)
+                            for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
+                            {
+                                lineStations.ElementAt(i).PathIndex--;
+                                updateLineStation(lineStations.ElementAt(i));
+                            }
                         for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                         {
                             lineStations.ElementAt(i).PathIndex++;
