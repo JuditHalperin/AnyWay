@@ -28,12 +28,16 @@ namespace PL.Stations
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+
             StationsList.ItemsSource = bl.GetStations();
+            StationsList.SelectedIndex = 0;
+            LinesAtStation.DataContext = bl.getStation(((Station)StationsList.SelectedItem).ID);
+            LinesAtStation.ItemsSource = bl.GetLineStations(item => item.ID == ((Station)LinesAtStation.DataContext).ID);
         }
 
-        private void StationsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            new StationDetails((Station)StationsList.SelectedItem).ShowDialog();
+            LinesAtStation.DataContext = (Station)StationsList.SelectedItem;
         }
     }
 }

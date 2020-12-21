@@ -12,6 +12,6 @@ namespace BO
         public string Name { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public override string ToString() => ID + "\t" + Name;
+        public override string ToString() => ID.ToString();
     }
 }
