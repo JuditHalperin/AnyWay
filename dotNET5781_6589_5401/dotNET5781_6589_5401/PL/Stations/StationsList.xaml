@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="Stations" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="StationsList" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="StationsList_MouseDoubleClick"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Station ID:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <ComboBox x:Name="StationsList" ItemsSource="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+        </Grid>
     </Grid>
 </Window>

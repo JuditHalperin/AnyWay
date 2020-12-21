@@ -29,6 +29,7 @@ namespace PL.Stations
             InitializeComponent();
             bl = BlFactory.GetBl();
             DataContext = selectedStation;
+            // למצוא תחנות קו...
             LinesAtStation.ItemsSource = bl.GetLines(item =>
             {
                 foreach (LineStation lineStation in item.Path)
