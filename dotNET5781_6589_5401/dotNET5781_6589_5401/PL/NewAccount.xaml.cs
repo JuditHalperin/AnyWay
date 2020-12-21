@@ -51,8 +51,10 @@ namespace PL
 
                 else
                 {
-                    bl.addUser(new User(Username.Text, Password.Password, administrativePrivileges));
+                    bl.addUser(new User(){ Username = Username.Text, Password = Password.Password, IsManager = administrativePrivileges });
                     new ManagerWindow(Username.Text).Show();
+                    Close();
+                    return;
                 }
             }
             
