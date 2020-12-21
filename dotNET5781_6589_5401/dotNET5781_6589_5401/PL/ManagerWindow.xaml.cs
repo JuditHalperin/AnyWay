@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL
 {
@@ -19,25 +22,37 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        static IBL bl;
+
         public ManagerWindow(string username)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
             Username.Content = username;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            new Buses.BusesList().ShowDialog();
+            if (bl.GetBuses().Count() == 0)
+                MessageBox.Show("No buses exist.");
+            else
+                new Buses.BusesList().Show(Username.Content);
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new Lines.LinesList().ShowDialog();
+            if (bl.GetLines().Count() == 0)
+                MessageBox.Show("No lines exist.");
+            else
+                new Lines.LinesList().Show(Username.Content);
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new Stations.StationsList().ShowDialog();
+            if (bl.GetStations().Count() == 0)
+                MessageBox.Show("No stations exist.");
+            else
+                new Stations.StationsList().Show(Username.Content);
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
