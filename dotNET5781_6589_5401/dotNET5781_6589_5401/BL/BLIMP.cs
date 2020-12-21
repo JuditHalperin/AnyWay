@@ -772,7 +772,30 @@ namespace BL
         {
             try
             {
-                dal.updateLineStation(convertToLineStationDO(lineStation));
+                BO.LineStation station = GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID)).First();
+                try
+                {
+                    if(lineStation.PathIndex!=station.PathIndex)
+                    {
+                        IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                        for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
+                        {
+                            lineStations.ElementAt(i).PathIndex--;
+                            updateLineStation(lineStations.ElementAt(i));
+                        }
+                        for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
+                        {
+                            lineStations.ElementAt(i).PathIndex++;
+                            updateLineStation(lineStations.ElementAt(i));
+                        }
+                    }
+                    
+                }
+                catch (BO.BusException) { }
+                finally
+                {
+                    dal.updateLineStation(convertToLineStationDO(lineStation));
+                }
             }
             catch (DO.StationException ex)
             {
