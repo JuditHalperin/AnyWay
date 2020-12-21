@@ -148,7 +148,7 @@ namespace DL
                                       select item.Clone();
             if (lines.Count() == 0)
                 throw new LineException("No lines exist.");
-            return lines;
+            return lines.OrderBy(item => item.NumberLine);
         }
         public IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
@@ -157,7 +157,7 @@ namespace DL
                                       select item.Clone();
             if (lines.Count() == 0)
                 throw new LineException("No lines exist.");
-            return lines;
+            return lines.OrderBy(item=>item.NumberLine);
         }
 
         #endregion
@@ -196,7 +196,7 @@ namespace DL
                                              select item.Clone();
             if (stations.Count() == 0)
                 throw new StationException("No stations exist.");
-            return stations;
+            return stations.OrderBy(item=>item.ID);
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
@@ -205,7 +205,7 @@ namespace DL
                                             select item.Clone();
             if (stations.Count() == 0)
                 throw new StationException("No stations exist.");
-            return stations;
+            return stations.OrderBy(item => item.ID);
         }
 
         #endregion
@@ -302,7 +302,7 @@ namespace DL
                                                                   select item.Clone();
             if (followingStations.Count() == 0)
                 throw new StationException("No following stations exist.");
-            return followingStations;
+            return followingStations.OrderBy(item=>item.TimeBetweenStations);
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
@@ -311,7 +311,7 @@ namespace DL
                                                                   select item.Clone();
             if (followingStations.Count() == 0)
                 throw new StationException("No following stations exist.");
-            return followingStations;
+            return followingStations.OrderBy(item => item.TimeBetweenStations);
         }
 
         #endregion
