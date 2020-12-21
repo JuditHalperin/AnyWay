@@ -566,6 +566,10 @@ namespace BL
                 Longitude = stationD.Longitude
             };
         }
+        /// <summary>
+        /// Take data from statin about following stations.
+        /// </summary>
+        /// <param name="station">data about station.</param>
         void stationToFollowingStationAndLineStation(BO.Station station)
         {
             IEnumerable<BO.Station> stations = GetStations();
@@ -587,6 +591,7 @@ namespace BL
             try
             {
                 dal.addStation(convertToStationDO(station));
+                stationToFollowingStationAndLineStation(station);
             }
             catch (DO.StationException ex)
             {
@@ -611,6 +616,7 @@ namespace BL
             try
             {
                 dal.updateStation(convertToStationDO(station));
+                stationToFollowingStationAndLineStation(station);
             }
             catch (DO.StationException ex)
             {
