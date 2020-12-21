@@ -184,7 +184,6 @@ namespace BL
                 return BO.State.cannotDrive;
             return BO.State.canDrive;
         }
-
         /// <summary>
         /// Func that converts bus of DO to bus of BO
         /// </summary>
@@ -204,6 +203,10 @@ namespace BL
             busB.Status = setState(busB);
             return busB;
         }
+        /// <summary>
+        /// Add bus for the data.
+        /// </summary>
+        /// <param name="bus">Bus for add</param>
         public void addBus(BO.Bus bus)
         {
             try
@@ -215,6 +218,10 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// Remove bus from the data.
+        /// </summary>
+        /// <param name="bus">Bus for remove</param>
         public void removeBus(BO.Bus bus)
         {
             try
@@ -226,6 +233,10 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// Update exsits bus.
+        /// </summary>
+        /// <param name="bus">Bus with updated part</param>
         public void updateBus(BO.Bus bus)
         {
             try
@@ -237,6 +248,56 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// fuel bus=KmsSinceFuel = 0
+        /// </summary>
+        /// <param name="bus">bus for fueling</param>
+        public void fuelBus(BO.Bus bus)
+        {
+            try
+            {
+                bus = getBus(bus.LicensePlate);
+                bus.KmsSinceFuel = 0;
+                dal.updateBus(convertToBusDO(bus));
+            }
+            catch(BO.BusException)
+            {
+                throw new BO.BusException("The bus is not exists");
+            }
+            catch (DO.BusException)
+            {
+                throw new BO.BusException("The bus is not exists");
+            }
+        }
+        /// <summary>
+        /// Service in bus and fuel when needed.
+        /// </summary>
+        /// <param name="bus">bus for service</param>
+        public void serviceBus(BO.Bus bus)
+        {
+            try
+            {
+                bus = getBus(bus.LicensePlate);
+                bus.KmsSinceService = 0;
+                if (bus.KmsSinceFuel > 1100)//Need refueling soon
+                    bus.KmsSinceFuel = 0;
+                bus.LastService = DateTime.Now.Date;
+                dal.updateBus(convertToBusDO(bus));
+            }
+            catch (BO.BusException)
+            {
+                throw new BO.BusException("The bus is not exists");
+            }
+            catch (DO.BusException)
+            {
+                throw new BO.BusException("The bus is not exists");
+            }
+        }
+        /// <summary>
+        /// Return bus according to the key of bus= license plate.
+        /// </summary>
+        /// <param name="licensePlate">key of the bus.</param>
+        /// <returns>bus with this license</returns>
         public BO.Bus getBus(string licensePlate)
         {
             try
@@ -248,6 +309,10 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return all the bus from the data
+        /// </summary>
+        /// <returns>list of buses</returns>
         public IEnumerable<BO.Bus> GetBuses()
         {
             try
@@ -262,6 +327,11 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// return any bus that meets the condition.
+        /// </summary>
+        /// <param name="condition">about buses</param>
+        /// <returns>list of buses with the condition.</returns>
         public IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
         {
             try
@@ -329,6 +399,10 @@ namespace BL
                 Path = lineStationsB
             };
         }
+        /// <summary>
+        /// Take from the line data about following stations and enter this data.
+        /// </summary>
+        /// <param name="line">Using in the path of line.</param>
         void convertLineToFollowingStationDO(BO.Line line)
         {
             TwoFollowingStations followingStations = new TwoFollowingStations();
@@ -341,7 +415,10 @@ namespace BL
                 addOrUpdateTwoFollowingStations(followingStations);
             }
         }
-        
+        /// <summary>
+        /// Take from the path of line data about line stations.
+        /// </summary>
+        /// <param name="line">using path</param>
         void convertLineToLineStationsDO(BO.Line line)
         {
             foreach (BO.LineStation station in line.Path)
@@ -349,6 +426,10 @@ namespace BL
                 addOrUpdateLineStation(station);
             }
         }
+        /// <summary>
+        /// Add line from the data.
+        /// </summary>
+        /// <param name="line">line for add</param>
         public void addLine(BO.Line line)
         {
             try
@@ -362,6 +443,10 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Remove line from the data
+        /// </summary>
+        /// <param name="line">Removing</param>
         public void removeLine(BO.Line line)
         {
             try
@@ -374,6 +459,10 @@ namespace BL
             }
 
         }
+        /// <summary>
+        /// Update data of line.
+        /// </summary>
+        /// <param name="line">Updated line</param>
         public void updateLine(BO.Line line)
         {
             try
@@ -387,6 +476,11 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return line according it key= the serial.
+        /// </summary>
+        /// <param name="serial">Key of line.</param>
+        /// <returns>Line with this serial.</returns>
         public BO.Line getLine(int serial)
         {
             try
@@ -398,6 +492,10 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return all the saved lines.
+        /// </summary>
+        /// <returns>List of lines.</returns>
         public IEnumerable<BO.Line> GetLines()
         {
             try
@@ -412,6 +510,11 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return line accordingly the condition.
+        /// </summary>
+        /// <param name="condition">Delegate of Predicate, return 'true' or 'false' about any line</param>
+        /// <returns>list of specific line.</returns>
         public IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
         {
             try
@@ -463,6 +566,10 @@ namespace BL
                 Longitude = stationD.Longitude
             };
         }
+        /// <summary>
+        /// Take data from statin about following stations.
+        /// </summary>
+        /// <param name="station">data about station.</param>
         void stationToFollowingStationAndLineStation(BO.Station station)
         {
             IEnumerable<BO.Station> stations = GetStations();
@@ -479,17 +586,26 @@ namespace BL
             }
 
         }
+        /// <summary>
+        /// Add station to the saved data.
+        /// </summary>
+        /// <param name="station">Station for add.</param>
         public void addStation(BO.Station station)
         {
             try
             {
                 dal.addStation(convertToStationDO(station));
+                stationToFollowingStationAndLineStation(station);
             }
             catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// remove station from the data.
+        /// </summary>
+        /// <param name="station">Station for remove</param>
         public void removeStation(BO.Station station)
         {
             try
@@ -503,17 +619,27 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// update data about station.
+        /// </summary>
+        /// <param name="station">Updated station</param>
         public void updateStation(BO.Station station)
         {
             try
             {
                 dal.updateStation(convertToStationDO(station));
+                stationToFollowingStationAndLineStation(station);
             }
             catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return station with this key
+        /// </summary>
+        /// <param name="id">key</param>
+        /// <returns>station</returns>
         public BO.Station getStation(int id)
         {
             try
@@ -525,6 +651,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// return all the stations.
+        /// </summary>
+        /// <returns>list of all stations.</returns>
         public IEnumerable<BO.Station> GetStations()
         {
             try
@@ -539,6 +669,11 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return station that for these the Predicate return true.
+        /// </summary>
+        /// <param name="condition">Predicete' condition about station</param>
+        /// <returns>list of specific stations</returns>
         public IEnumerable<BO.Station> GetStations(Predicate<BO.Station> condition)
         {
             try
@@ -587,17 +722,39 @@ namespace BL
                 PathIndex = lineStationD.PathIndex
             };
         }
+        /// <summary>
+        /// Add station in line
+        /// </summary>
+        /// <param name="lineStation">station in line</param>
         public void addLineStation(BO.LineStation lineStation)
         {
             try
             {
-                dal.addLineStation(convertToLineStationDO(lineStation));
+                try
+                {
+                    BO.LineStation station=GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex)).First();
+                    IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                    for (int i = lineStation.PathIndex-1; i < lineStations.Count(); i++)
+                    {
+                        lineStations.ElementAt(i).PathIndex++;
+                        updateLineStation(lineStations.ElementAt(i));
+                    }
+                }
+                catch { }
+                finally
+                {
+                    dal.addLineStation(convertToLineStationDO(lineStation));
+                }
             }
             catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Remove station of line
+        /// </summary>
+        /// <param name="lineStation">station in line</param>
         public void removeLineStation(BO.LineStation lineStation)
         {
             try
@@ -615,6 +772,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Update data of station in line
+        /// </summary>
+        /// <param name="lineStation">station in line</param>
         public void updateLineStation(BO.LineStation lineStation)
         {
             try
@@ -626,6 +787,12 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return station in line with the keys: numberLine,id.
+        /// </summary>
+        /// <param name="numberLine">the line that the station in it path.</param>
+        /// <param name="id">number of the station</param>
+        /// <returns>station in line</returns>
         public BO.LineStation getLineStation(int numberLine, int id)
         {
             try
