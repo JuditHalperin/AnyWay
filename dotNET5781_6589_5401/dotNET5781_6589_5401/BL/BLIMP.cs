@@ -184,7 +184,6 @@ namespace BL
                 return BO.State.cannotDrive;
             return BO.State.canDrive;
         }
-
         /// <summary>
         /// Func that converts bus of DO to bus of BO
         /// </summary>
@@ -204,6 +203,10 @@ namespace BL
             busB.Status = setState(busB);
             return busB;
         }
+        /// <summary>
+        /// Add bus for the data.
+        /// </summary>
+        /// <param name="bus">Bus for add</param>
         public void addBus(BO.Bus bus)
         {
             try
@@ -215,6 +218,10 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// Remove bus from the data.
+        /// </summary>
+        /// <param name="bus">Bus for remove</param>
         public void removeBus(BO.Bus bus)
         {
             try
@@ -226,6 +233,10 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// Update exsits bus.
+        /// </summary>
+        /// <param name="bus">Bus with updated part</param>
         public void updateBus(BO.Bus bus)
         {
             try
@@ -282,6 +293,11 @@ namespace BL
                 throw new BO.BusException("The bus is not exists");
             }
         }
+        /// <summary>
+        /// Return bus according to the key of bus= license plate.
+        /// </summary>
+        /// <param name="licensePlate">key of the bus.</param>
+        /// <returns>bus with this license</returns>
         public BO.Bus getBus(string licensePlate)
         {
             try
@@ -293,6 +309,10 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return all the bus from the data
+        /// </summary>
+        /// <returns>list of buses</returns>
         public IEnumerable<BO.Bus> GetBuses()
         {
             try
@@ -307,6 +327,11 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
+        /// <summary>
+        /// return any bus that meets the condition.
+        /// </summary>
+        /// <param name="condition">about buses</param>
+        /// <returns>list of buses with the condition.</returns>
         public IEnumerable<BO.Bus> GetBuses(Predicate<BO.Bus> condition)
         {
             try
@@ -374,6 +399,10 @@ namespace BL
                 Path = lineStationsB
             };
         }
+        /// <summary>
+        /// Take from the line data about following stations and enter this data.
+        /// </summary>
+        /// <param name="line">Using in the path of line.</param>
         void convertLineToFollowingStationDO(BO.Line line)
         {
             TwoFollowingStations followingStations = new TwoFollowingStations();
@@ -386,7 +415,10 @@ namespace BL
                 addOrUpdateTwoFollowingStations(followingStations);
             }
         }
-        
+        /// <summary>
+        /// Take from the path of line data about line stations.
+        /// </summary>
+        /// <param name="line">using path</param>
         void convertLineToLineStationsDO(BO.Line line)
         {
             foreach (BO.LineStation station in line.Path)
@@ -394,6 +426,10 @@ namespace BL
                 addOrUpdateLineStation(station);
             }
         }
+        /// <summary>
+        /// Add line from the data.
+        /// </summary>
+        /// <param name="line">line for add</param>
         public void addLine(BO.Line line)
         {
             try
@@ -407,6 +443,10 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Remove line from the data
+        /// </summary>
+        /// <param name="line">Removing</param>
         public void removeLine(BO.Line line)
         {
             try
@@ -419,6 +459,10 @@ namespace BL
             }
 
         }
+        /// <summary>
+        /// Update data of line.
+        /// </summary>
+        /// <param name="line">Updated line</param>
         public void updateLine(BO.Line line)
         {
             try
@@ -432,6 +476,11 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return line according it key= the serial.
+        /// </summary>
+        /// <param name="serial">Key of line.</param>
+        /// <returns>Line with this serial.</returns>
         public BO.Line getLine(int serial)
         {
             try
@@ -443,6 +492,10 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return all the saved lines.
+        /// </summary>
+        /// <returns>List of lines.</returns>
         public IEnumerable<BO.Line> GetLines()
         {
             try
@@ -457,6 +510,11 @@ namespace BL
                 throw new BO.LineException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return line accordingly the condition.
+        /// </summary>
+        /// <param name="condition">Delegate of Predicate, return 'true' or 'false' about any line</param>
+        /// <returns>list of specific line.</returns>
         public IEnumerable<BO.Line> GetLines(Predicate<BO.Line> condition)
         {
             try
