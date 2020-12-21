@@ -264,10 +264,6 @@ namespace BL
             {
                 throw new BO.BusException("The bus is not exists");
             }
-            catch (DO.BusException)
-            {
-                throw new BO.BusException("The bus is not exists");
-            }
         }
         /// <summary>
         /// Service in bus and fuel when needed.
@@ -285,10 +281,6 @@ namespace BL
                 dal.updateBus(convertToBusDO(bus));
             }
             catch (BO.BusException)
-            {
-                throw new BO.BusException("The bus is not exists");
-            }
-            catch (DO.BusException)
             {
                 throw new BO.BusException("The bus is not exists");
             }
