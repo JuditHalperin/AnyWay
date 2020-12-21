@@ -31,13 +31,48 @@ namespace PL.Stations
 
             StationsList.ItemsSource = bl.GetStations();
             StationsList.SelectedIndex = 0;
-            LinesAtStation.DataContext = bl.getStation(((Station)StationsList.SelectedItem).ID);
-            LinesAtStation.ItemsSource = bl.GetLineStations(item => item.ID == ((Station)LinesAtStation.DataContext).ID);
+            DataContext = (Station)StationsList.SelectedItem;
+
+            LinesAtStation.ItemsSource = bl.GetLineStations(item => item.ID == ((Station)DataContext).ID);
         }
 
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LinesAtStation.DataContext = (Station)StationsList.SelectedItem;
+            DataContext = (Station)StationsList.SelectedItem;
+        }
+
+        private void AddStation_Click(object sender, RoutedEventArgs e)
+        {
+            new AddStation().ShowDialog();
+        }
+
+        private void EditStation_Click(object sender, RoutedEventArgs e)
+        {
+            new EditStation().ShowDialog();
+        }
+
+        private void RemoveStation_Click(object sender, RoutedEventArgs e)
+        {          
+            try
+            {                
+                IEnumerable<DrivingLine> drivingLinesAtStation = bl.GetDrivingLines(item =>
+                {
+                    foreach (LineStation lineStation in LinesAtStation.ItemsSource)
+                        if (item.NumberLine == lineStation.NumberLine)
+                            return true;
+                    return false;
+                });
+
+                if (drivingLinesAtStation.Count() > 0)
+                    throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
+                
+                bl.removeStation((Station)StationsList.SelectedItem);
+            }
+            
+            catch (StationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

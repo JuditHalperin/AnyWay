@@ -417,12 +417,9 @@ namespace DL
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
         {
-            IEnumerable<DrivingLine> drivingLines = from item in DataSource.DrivingLines
-                                                    where condition(item)
-                                                    select item.Clone();
-            if (drivingLines.Count() == 0)
-                throw new LineException("No driving lines exist.");
-            return drivingLines;
+            return from item in DataSource.DrivingLines
+                   where condition(item)
+                   select item.Clone();           
         }
 
         #endregion

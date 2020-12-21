@@ -13,6 +13,7 @@ namespace BL
         readonly IDAL dal = DalFactory.GetDal();
         
         #region Help functions
+
         int calculateDistance(BO.Station first, BO.Station second)
         {
             GeoCoordinate positionThisStation = new GeoCoordinate(first.Latitude, first.Longitude);
@@ -842,12 +843,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.LineStation> lineStations = from item in GetLineStations()
-                                                           where condition(item)
-                                                           select item;
-                if (lineStations.Count() == 0)
-                    throw new BO.StationException("No line stations exist.");
-                return lineStations;
+                return from item in GetLineStations()
+                       where condition(item)
+                       select item;
             }
             catch (BO.StationException ex)
             {
