@@ -586,6 +586,10 @@ namespace BL
             }
 
         }
+        /// <summary>
+        /// Add station to the saved data.
+        /// </summary>
+        /// <param name="station">Station for add.</param>
         public void addStation(BO.Station station)
         {
             try
@@ -598,6 +602,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// remove station from the data.
+        /// </summary>
+        /// <param name="station">Station for remove</param>
         public void removeStation(BO.Station station)
         {
             try
@@ -611,6 +619,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// update data about station.
+        /// </summary>
+        /// <param name="station">Updated station</param>
         public void updateStation(BO.Station station)
         {
             try
@@ -623,6 +635,11 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return station with this key
+        /// </summary>
+        /// <param name="id">key</param>
+        /// <returns>station</returns>
         public BO.Station getStation(int id)
         {
             try
@@ -634,6 +651,10 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// return all the stations.
+        /// </summary>
+        /// <returns>list of all stations.</returns>
         public IEnumerable<BO.Station> GetStations()
         {
             try
@@ -648,6 +669,11 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
         }
+        /// <summary>
+        /// Return station that for these the Predicate return true.
+        /// </summary>
+        /// <param name="condition">Predicete' condition about station</param>
+        /// <returns>list of specific stations</returns>
         public IEnumerable<BO.Station> GetStations(Predicate<BO.Station> condition)
         {
             try
