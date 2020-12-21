@@ -732,7 +732,7 @@ namespace BL
                         updateLineStation(lineStations.ElementAt(i));
                     }
                 }
-                catch { }
+                catch(BO.BusException) { }
                 finally
                 {
                     dal.addLineStation(convertToLineStationDO(lineStation));
@@ -772,9 +772,37 @@ namespace BL
         {
             try
             {
-                dal.updateLineStation(convertToLineStationDO(lineStation));
+                BO.LineStation station = getLineStation(lineStation.NumberLine,lineStation.ID);//if the station is exists.
+                try
+                {
+                    if(lineStation.PathIndex!=station.PathIndex)//if the update in the index of path
+                    {
+                        IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                        if(station.PathIndex< lineStation.PathIndex)//need to back the station that after the old station
+                            for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
+                            {
+                                lineStations.ElementAt(i).PathIndex--;
+                                updateLineStation(lineStations.ElementAt(i));
+                            }
+                        for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
+                        {
+                            lineStations.ElementAt(i).PathIndex++;
+                            updateLineStation(lineStations.ElementAt(i));
+                        }
+                    }
+                    
+                }
+                catch (BO.StationException) { }
+                finally
+                {
+                    dal.updateLineStation(convertToLineStationDO(lineStation));
+                }
             }
             catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+            catch (BO.StationException ex) 
             {
                 throw new BO.StationException(ex.Message);
             }
