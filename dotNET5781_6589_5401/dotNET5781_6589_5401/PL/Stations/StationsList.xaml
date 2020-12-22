@@ -69,6 +69,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Lines:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ListBox x:Name="LinesAtStation" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Label x:Name="NoLines" Grid.Row="1" Visibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

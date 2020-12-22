@@ -32,14 +32,29 @@ namespace PL.Stations
 
             StationsList.ItemsSource = bl.GetStations();
             StationsList.SelectedIndex = 0;
-            DataContext = (Station)StationsList.SelectedItem;
+            selectionChanged();            
+        }
 
-            LinesAtStation.ItemsSource = bl.GetLineStations(item => item.ID == ((Station)DataContext).ID);
+        private void selectionChanged()
+        {
+            DataContext = (Station)StationsList.SelectedItem;
+            IEnumerable<LineStation> lineStations = bl.GetLineStations(item => item.ID == ((Station)DataContext).ID);
+            if (lineStations.Count() > 0)
+            {
+                NoLines.Visibility = Visibility.Hidden;
+                LinesAtStation.Visibility = Visibility.Visible;
+                LinesAtStation.ItemsSource = lineStations;
+            }
+            else
+            {
+                LinesAtStation.Visibility = Visibility.Hidden;
+                NoLines.Visibility = Visibility.Visible;
+            }
         }
 
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataContext = (Station)StationsList.SelectedItem;
+            selectionChanged();
         }
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
