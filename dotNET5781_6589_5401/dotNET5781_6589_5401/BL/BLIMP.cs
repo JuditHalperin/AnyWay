@@ -580,6 +580,21 @@ namespace BL
 
         }
         /// <summary>
+        /// impossible to change a station if there are driving lines that stop there
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        public bool canChangeStation(BO.Station station)
+        {
+            IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
+                                                                from lineStation in GetLineStations(l => l.ID == station.ID)
+                                                                where drivingLine.NumberLine == lineStation.NumberLine
+                                                                select drivingLine;
+            if (drivingLinesAtStation.Count() == 0)
+                return true;
+            return false;
+        }
+        /// <summary>
         /// Add station to the saved data.
         /// </summary>
         /// <param name="station">Station for add.</param>
@@ -602,14 +617,19 @@ namespace BL
         public void removeStation(BO.Station station)
         {
             try
-            {
+            {               
                 dal.removeStation(convertToStationDO(station));
                 foreach (BO.LineStation lineStation in GetLineStations(item => item.ID != station.ID))
                     removeLineStation(lineStation);
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
+            }
+            catch (BO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+
             }
         }
         /// <summary>

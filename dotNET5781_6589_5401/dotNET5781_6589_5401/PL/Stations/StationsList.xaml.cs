@@ -64,24 +64,26 @@ namespace PL.Stations
 
         private void EditStation_Click(object sender, RoutedEventArgs e)
         {
-            new EditStation().ShowDialog();
+            try
+            {
+                if (!bl.canChangeStation((Station)StationsList.SelectedItem))
+                    throw new StationException("Impossible to update a station if there are driving lines that stop there.");
+
+                new EditStation().ShowDialog();
+            }
+
+            catch (StationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {          
             try
-            {                
-                IEnumerable<DrivingLine> drivingLinesAtStation = bl.GetDrivingLines(item =>
-                {
-                    foreach (LineStation lineStation in LinesAtStation.ItemsSource)
-                        if (item.NumberLine == lineStation.NumberLine)
-                            return true;
-                    return false;
-                });
-
-                if (drivingLinesAtStation.Count() > 0)
+            {
+                if (!bl.canChangeStation((Station)StationsList.SelectedItem))
                     throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
-                
                 bl.removeStation((Station)StationsList.SelectedItem);
             }
             
