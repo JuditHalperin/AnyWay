@@ -24,10 +24,11 @@ namespace PL.Stations
     {
         static IBL bl;
 
-        public StationsList()
+        public StationsList(string username)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
             StationsList.ItemsSource = bl.GetStations();
             StationsList.SelectedIndex = 0;

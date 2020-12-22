@@ -29,10 +29,11 @@ namespace PL.Buses
 
         static IBL bl;
 
-        public BusesList()
+        public BusesList(string username)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
             BusesList.ItemsSource = bl.GetBuses();
             RemoveBusButton.DataContext = bl.GetBuses();

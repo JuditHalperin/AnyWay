@@ -29,30 +29,31 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             Username.Content = username;
+
+            if (bl.GetBuses().Count() == 0)
+                ShowBuses.IsEnabled = false;
+            if (bl.GetLines().Count() == 0)
+                ShowLines.IsEnabled = false;
+            if (bl.GetStations().Count() == 0)
+                ShowStations.IsEnabled = false;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.GetBuses().Count() == 0)
-                MessageBox.Show("No buses exist.");
-            else
-                new Buses.BusesList().Show(Username.Content);
+            new Buses.BusesList((string)Username.Content).Show();
+            Close();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.GetLines().Count() == 0)
-                MessageBox.Show("No lines exist.");
-            else
-                new Lines.LinesList().Show(Username.Content);
+            new Lines.LinesList((string)Username.Content).Show();
+            Close();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.GetStations().Count() == 0)
-                MessageBox.Show("No stations exist.");
-            else
-                new Stations.StationsList().Show(Username.Content);
+            new Stations.StationsList((string)Username.Content).Show();
+            Close();
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -71,5 +72,4 @@ namespace PL
             new ChangePassword("managing code", (string) Username.Content).ShowDialog();
         }
     }
-
 }

@@ -22,9 +22,14 @@ namespace PL.Lines
     /// </summary>
     public partial class LinesList : Window
     {
-        public LinesList()
+        static IBL bl;
+
+        public LinesList(string username)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
+            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
+
         }
     }
 }
