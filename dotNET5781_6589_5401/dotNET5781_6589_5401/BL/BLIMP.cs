@@ -376,9 +376,7 @@ namespace BL
         /// <returns>line of BO</returns>
         BO.Line convertToLineBO(DO.Line lineD)
         {
-            IEnumerable<DO.LineStation> lineStationsD = dal.GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex);
-            IEnumerable<BO.LineStation> lineStationsB = from item in lineStationsD
-                                                        select convertToLineStationBO(item);
+            IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex);
             TwoFollowingStations followingStations = new TwoFollowingStations();
             try
             {
@@ -560,12 +558,30 @@ namespace BL
         /// <returns>station of BO</returns>
         BO.Station convertToStationBO(DO.Station stationD)
         {
+            IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.ID == stationD.ID).OrderBy(station => station.ID);
+            TwoFollowingStations followingStations = new TwoFollowingStations();
+            BO.LineStation lineStation1 = new BO.LineStation();
+            try
+            {
+                for (int i = 0; i < lineStationsB.Count() - 1; i++)
+                {
+                    lineStation1 = GetLineStations(item => item.NumberLine == lineStationsB.ElementAt(i).NumberLine && item.PathIndex == (lineStationsB.ElementAt(i).PathIndex+1)).First();
+                    followingStations = dal.getTwoFollowingStations(lineStationsB.ElementAt(i).ID, lineStationsB.ElementAt(i + 1).ID);
+                    lineStationsB.ElementAt(i + 1).LengthFromPreviousStations = followingStations.LengthBetweenStations;
+                    lineStationsB.ElementAt(i + 1).TimeFromPreviousStations = followingStations.TimeBetweenStations;
+                }
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
             return new BO.Station()
             {
                 ID = stationD.ID,
                 Name = stationD.Name,
                 Latitude = stationD.Latitude,
-                Longitude = stationD.Longitude
+                Longitude = stationD.Longitude,
+                Path= lineStationsB
             };
         }
         /// <summary>
@@ -741,7 +757,8 @@ namespace BL
             {
                 NumberLine = lineStationD.NumberLine,
                 ID = lineStationD.ID,
-                PathIndex = lineStationD.PathIndex
+                PathIndex = lineStationD.PathIndex,
+                PreviousStationID=
             };
         }
         /// <summary>
