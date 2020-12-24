@@ -377,21 +377,6 @@ namespace BL
         BO.Line convertToLineBO(DO.Line lineD)
         {
             IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex);
-            TwoFollowingStations followingStations = new TwoFollowingStations();
-            try
-            {
-                for (int i = 0; i < lineStationsB.Count() - 1; i++)
-                {
-                    followingStations = dal.getTwoFollowingStations(lineStationsB.ElementAt(i).ID, lineStationsB.ElementAt(i + 1).ID);
-                    lineStationsB.ElementAt(i + 1).LengthFromPreviousStations = followingStations.LengthBetweenStations;
-                    lineStationsB.ElementAt(i + 1).TimeFromPreviousStations = followingStations.TimeBetweenStations;
-                }
-            }
-            catch (DO.StationException ex)
-            {
-                throw new BO.StationException(ex.Message);
-            }
-
             return new BO.Line()
             {
                 NumberLine = lineD.NumberLine,
@@ -558,31 +543,22 @@ namespace BL
         /// <returns>station of BO</returns>
         BO.Station convertToStationBO(DO.Station stationD)
         {
-            IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.ID == stationD.ID).OrderBy(station => station.ID);
-            TwoFollowingStations followingStations = new TwoFollowingStations();
-            BO.LineStation lineStation1 = new BO.LineStation();
             try
             {
-                for (int i = 0; i < lineStationsB.Count() - 1; i++)
+                IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.ID == stationD.ID).OrderBy(station => station.ID);
+                return new BO.Station()
                 {
-                    lineStation1 = GetLineStations(item => item.NumberLine == lineStationsB.ElementAt(i).NumberLine && item.PathIndex == (lineStationsB.ElementAt(i).PathIndex+1)).First();
-                    followingStations = dal.getTwoFollowingStations(lineStationsB.ElementAt(i).ID, lineStationsB.ElementAt(i + 1).ID);
-                    lineStationsB.ElementAt(i + 1).LengthFromPreviousStations = followingStations.LengthBetweenStations;
-                    lineStationsB.ElementAt(i + 1).TimeFromPreviousStations = followingStations.TimeBetweenStations;
-                }
+                    ID = stationD.ID,
+                    Name = stationD.Name,
+                    Latitude = stationD.Latitude,
+                    Longitude = stationD.Longitude,
+                    LinesAtStation=lineStationsB
+                };
             }
-            catch (DO.StationException ex)
+            catch (BO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
-            return new BO.Station()
-            {
-                ID = stationD.ID,
-                Name = stationD.Name,
-                Latitude = stationD.Latitude,
-                Longitude = stationD.Longitude,
-                Path= lineStationsB
-            };
         }
         /// <summary>
         /// Take data from statin about following stations.
@@ -753,13 +729,28 @@ namespace BL
         /// <returns>line station of BO</returns>
         BO.LineStation convertToLineStationBO(LineStation lineStationD)
         {
-            return new BO.LineStation()
+            BO.LineStation lineStationB = new BO.LineStation()
             {
                 NumberLine = lineStationD.NumberLine,
                 ID = lineStationD.ID,
-                PathIndex = lineStationD.PathIndex,
-                PreviousStationID=
+                PathIndex = lineStationD.PathIndex
             };
+            try
+            {
+                IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine).OrderBy(station => station.PathIndex);
+                TwoFollowingStations followingStations = new TwoFollowingStations();
+                lineStationB.NextStationID = lineStationsB.ElementAt(lineStationB.PathIndex + 1).ID;
+                lineStationB.PreviousStationID = lineStationsB.ElementAt(lineStationB.PathIndex - 1).ID;
+                followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationB.NextStationID);
+                lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
+                lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
+
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
+            return lineStationB;
         }
         /// <summary>
         /// Add station in line
