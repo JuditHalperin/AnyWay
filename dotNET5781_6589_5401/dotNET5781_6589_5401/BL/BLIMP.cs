@@ -12,14 +12,14 @@ namespace BL
     {
         readonly IDAL dal = DalFactory.GetDal();
 
-        #region Singelton
+        //#region Singelton
 
-        static readonly BLIMP instance = new BLIMP();
-        public static BLIMP Instance => instance;
-        static BLIMP() { }
-        BLIMP() { }
+        //static readonly BLIMP instance = new BLIMP();
+        //public static BLIMP Instance => instance;
+        //static BLIMP() { }
+        //BLIMP() { }
 
-        #endregion
+        //#endregion
 
         #region Help functions
 
