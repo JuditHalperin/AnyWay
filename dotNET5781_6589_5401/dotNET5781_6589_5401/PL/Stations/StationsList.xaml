@@ -63,13 +63,17 @@
                 <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveStation_Click"/>
             </Grid>
             <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="459*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Lines:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <Label x:Name="NoLines" Style="{StaticResource LabelTitleStyle}" Content="No lines stop at this station." Grid.Row="1" Visibility="Hidden"/>
+                <Label Content="Lines:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,15,0,14.4"/>
+                <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2" Margin="0,58,-0.2,0.4" Grid.RowSpan="2"/>
+                <Label x:Name="NoLines" Style="{StaticResource LabelTitleStyle}" Content="No lines stop at this station." Visibility="Hidden" Grid.ColumnSpan="2" Margin="0,58,-0.2,0.4" Grid.RowSpan="2"/>
             </Grid>
         </Grid>
     </Grid>

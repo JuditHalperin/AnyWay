@@ -68,7 +68,7 @@ namespace PL.Lines
             {
                 if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to edit a line if it is driving.");
-                //new EditLine((BO.Line)ListOfLines.SelectedItem).ShowDialog();
+                new EditLine((BO.Line)ListOfLines.SelectedItem).ShowDialog();
             }
             catch (LineException ex)
             {

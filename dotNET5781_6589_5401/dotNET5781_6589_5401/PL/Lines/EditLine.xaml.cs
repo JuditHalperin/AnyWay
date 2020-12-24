@@ -19,23 +19,21 @@ using BO;
 namespace PL.Lines
 {
     /// <summary>
-    /// Interaction logic for AddLine.xaml
+    /// Interaction logic for EditLine.xaml
     /// </summary>
-    public partial class AddLine : Window
+    public partial class EditLine : Window
     {
         static IBL bl;
 
         ObservableCollection<Station> path = new ObservableCollection<Station>();
 
-        public AddLine()
+        public EditLine(BO.Line line)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
-            StationsList.ItemsSource = bl.GetStations();
-            StationsList.Text = ((Station)StationsList.SelectedItem).ID + " - " + ((Station)StationsList.SelectedItem).Name;
-            ChosenStations.ItemsSource = path;
-            Ok.IsEnabled = false;
+            DataContext = line;
+            path = (ObservableCollection<Station>)line.Path;
+            LineStations.ItemsSource = path;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -52,24 +50,27 @@ namespace PL.Lines
                     throw new InvalidInputException("Invalid format of line number.");
                 if (path.Count() < 2)
                     throw new InvalidInputException("Path line should be consisted of at least 2 stations.");
-                bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
+                bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = path });
+                Close();
             }
             catch (InvalidInputException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            catch(LineException ex)
+            catch (LineException ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            if (path.Contains((Station)StationsList.SelectedItem))
-                MessageBox.Show($"Station {((Station)StationsList.SelectedItem).ID} is already in the path.");
-            else
-                path.Add((Station)StationsList.SelectedItem);
+
+        }
+
+        private void RemoveStation_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
