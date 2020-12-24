@@ -71,17 +71,17 @@
                 <Label Content="Lines:" Grid.Row="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Line number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Content="Index in the path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Content="Privios station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Content="Next station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Line number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Index in the path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Privios station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Next station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>
-                <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" Grid.Row="2" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" BorderThickness="0" Grid.Row="2" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoLines" Style="{StaticResource LabelTitleStyle}" Content="No lines stop at this station." Grid.Row="2" Visibility="Hidden"/>
             </Grid>
         </Grid>
