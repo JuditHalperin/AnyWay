@@ -50,7 +50,7 @@ namespace PL.Lines
                     throw new InvalidInputException("Invalid format of line number.");
                 if (path.Count() < 2)
                     throw new InvalidInputException("Path line should be consisted of at least 2 stations.");
-                bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = path });
+                //bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = path });
                 Close();
             }
             catch (InvalidInputException ex)

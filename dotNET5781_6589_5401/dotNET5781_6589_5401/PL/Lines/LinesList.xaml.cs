@@ -43,8 +43,8 @@ namespace PL.Lines
         private void selectionChanged()
         {
             DataContext = (BO.Line)ListOfLines.SelectedItem;
-            NumberOfStations.Content = ((BO.Line)ListOfLines.SelectedItem).Path.Count();
-            IEnumerable<LineStation> lineStations = ((BO.Line)ListOfLines.SelectedItem).Path;
+            IEnumerable<LineStation> lineStations = ((BO.Line)DataContext).Path;
+            NumberOfStations.Content = lineStations.Count();
             if (lineStations.Count() > 0)
             {
                 NoStations.Visibility = Visibility.Hidden;

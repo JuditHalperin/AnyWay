@@ -14,10 +14,10 @@ namespace BL
 
         #region Singelton
 
-        static readonly BLIMP instance = new BLIMP();
-        public static BLIMP Instance => instance;
-        static BLIMP() { }
-        BLIMP() { }
+        //static readonly BLIMP instance = new BLIMP();
+        //public static BLIMP Instance => instance;
+        //static BLIMP() { }
+        //BLIMP() { }
 
         #endregion
 
@@ -420,9 +420,7 @@ namespace BL
             try
             {
                 foreach(BO.LineStation station in line.Path)
-                {
                     station.NumberLine = line.ThisSerial;
-                }
                 dal.addLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
