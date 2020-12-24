@@ -26,13 +26,22 @@
                 <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <TextBox x:Name="LineNumber" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" ItemsSource="{Binding}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <ComboBox Name="RegionsList" ItemsSource="{Binding}" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Stations:" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ComboBox Name="StationsList" ItemsSource="{Binding}" Grid.Column="1" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="StationsList_SelectionChanged"/>
+                </Grid>
+                <ListBox x:Name="ChosenStations" Grid.Row="1" ItemsSource="{Binding Path=ID}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
