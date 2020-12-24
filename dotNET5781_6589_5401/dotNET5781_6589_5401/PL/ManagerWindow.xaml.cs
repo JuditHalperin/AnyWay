@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL
 {
@@ -19,25 +22,38 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        static IBL bl;
+
         public ManagerWindow(string username)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
             Username.Content = username;
+
+            if (bl.GetBuses().Count() == 0)
+                ShowBuses.IsEnabled = false;
+            if (bl.GetLines().Count() == 0)
+                ShowLines.IsEnabled = false;
+            if (bl.GetStations().Count() == 0)
+                ShowStations.IsEnabled = false;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            new Buses.BusesList().ShowDialog();
+            new Buses.BusesList((string)Username.Content).Show();
+            Close();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new Lines.LinesList().ShowDialog();
+            new Lines.LinesList((string)Username.Content).Show();
+            Close();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new Stations.StationsList().ShowDialog();
+            new Stations.StationsList((string)Username.Content).Show();
+            Close();
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -56,5 +72,4 @@ namespace PL
             new ChangePassword("managing code", (string) Username.Content).ShowDialog();
         }
     }
-
 }

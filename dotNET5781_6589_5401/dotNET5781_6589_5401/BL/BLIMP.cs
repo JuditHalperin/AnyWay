@@ -11,8 +11,18 @@ namespace BL
     public class BLIMP : IBL
     {
         readonly IDAL dal = DalFactory.GetDal();
-        
+
+        #region Singelton
+
+        static readonly BLIMP instance = new BLIMP();
+        public static BLIMP Instance => instance;
+        static BLIMP() { }
+        BLIMP() { }
+
+        #endregion
+
         #region Help functions
+
         int calculateDistance(BO.Station first, BO.Station second)
         {
             GeoCoordinate positionThisStation = new GeoCoordinate(first.Latitude, first.Longitude);
@@ -597,6 +607,21 @@ namespace BL
 
         }
         /// <summary>
+        /// impossible to change a station if there are driving lines that stop there
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        public bool canChangeStation(BO.Station station)
+        {
+            IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
+                                                                from lineStation in GetLineStations(l => l.ID == station.ID)
+                                                                where drivingLine.NumberLine == lineStation.NumberLine
+                                                                select drivingLine;
+            if (drivingLinesAtStation.Count() == 0)
+                return true;
+            return false;
+        }
+        /// <summary>
         /// Add station to the saved data.
         /// </summary>
         /// <param name="station">Station for add.</param>
@@ -619,14 +644,19 @@ namespace BL
         public void removeStation(BO.Station station)
         {
             try
-            {
+            {               
                 dal.removeStation(convertToStationDO(station));
                 foreach (BO.LineStation lineStation in GetLineStations(item => item.ID != station.ID))
                     removeLineStation(lineStation);
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
+            }
+            catch (BO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+
             }
         }
         /// <summary>
@@ -860,12 +890,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.LineStation> lineStations = from item in GetLineStations()
-                                                           where condition(item)
-                                                           select item;
-                if (lineStations.Count() == 0)
-                    throw new BO.StationException("No line stations exist.");
-                return lineStations;
+                return from item in GetLineStations()
+                       where condition(item)
+                       select item;
             }
             catch (BO.StationException ex)
             {

@@ -24,20 +24,73 @@ namespace PL.Stations
     {
         static IBL bl;
 
-        public StationsList()
+        public StationsList(string username)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
             StationsList.ItemsSource = bl.GetStations();
             StationsList.SelectedIndex = 0;
-            LinesAtStation.DataContext = bl.getStation(((Station)StationsList.SelectedItem).ID);
-            LinesAtStation.ItemsSource = bl.GetLineStations(item => item.ID == ((Station)LinesAtStation.DataContext).ID);
+            selectionChanged();            
+        }
+
+        private void selectionChanged()
+        {
+            DataContext = (Station)StationsList.SelectedItem;
+            IEnumerable<LineStation> lineStations = bl.GetLineStations(item => item.ID == ((Station)DataContext).ID);
+            if (lineStations.Count() > 0)
+            {
+                NoLines.Visibility = Visibility.Hidden;
+                LinesAtStation.Visibility = Visibility.Visible;
+                LinesAtStation.ItemsSource = lineStations;
+            }
+            else
+            {
+                LinesAtStation.Visibility = Visibility.Hidden;
+                NoLines.Visibility = Visibility.Visible;
+            }
         }
 
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LinesAtStation.DataContext = (Station)StationsList.SelectedItem;
+            selectionChanged();
+        }
+
+        private void AddStation_Click(object sender, RoutedEventArgs e)
+        {
+            new AddStation().ShowDialog();
+        }
+
+        private void EditStation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!bl.canChangeStation((Station)StationsList.SelectedItem))
+                    throw new StationException("Impossible to update a station if there are driving lines that stop there.");
+
+                new EditStation().ShowDialog();
+            }
+
+            catch (StationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void RemoveStation_Click(object sender, RoutedEventArgs e)
+        {          
+            try
+            {
+                if (!bl.canChangeStation((Station)StationsList.SelectedItem))
+                    throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
+                bl.removeStation((Station)StationsList.SelectedItem);
+            }
+            
+            catch (StationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

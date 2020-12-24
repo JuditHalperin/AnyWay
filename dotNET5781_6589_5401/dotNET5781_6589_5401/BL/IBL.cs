@@ -51,6 +51,7 @@ namespace BLAPI
         Station getStation(int id);
         IEnumerable<Station> GetStations();
         IEnumerable<Station> GetStations(Predicate<Station> condition);
+        bool canChangeStation(Station station);
 
         #endregion
 

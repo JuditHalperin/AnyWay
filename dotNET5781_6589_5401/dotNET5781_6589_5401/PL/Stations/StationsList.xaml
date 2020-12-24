@@ -34,7 +34,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Station ID:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <ComboBox x:Name="StationsList" ItemsSource="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Stretch" SelectionChanged="StationsList_SelectionChanged"/>
+            <ComboBox x:Name="StationsList" Grid.Column="1" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="StationsList_SelectionChanged"/>
+            <Button x:Name="AddStation" Content="Add station" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -49,6 +50,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Station name:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Name}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -56,8 +59,18 @@
                 <Label Content="{Binding Path=Latitude}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Longitude:" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Longitude}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button x:Name="EditStation" Content="Edit" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditStation_Click"/>
+                <Button x:Name="RemoveStation" Content="Remove" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveStation_Click"/>
             </Grid>
-            <ListBox x:Name="LinesAtStation" Grid.Column="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Lines:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ListBox x:Name="LinesAtStation" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Label x:Name="NoLines" Grid.Row="1" Visibility="Hidden"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

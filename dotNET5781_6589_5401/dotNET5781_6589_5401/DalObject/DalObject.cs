@@ -97,11 +97,8 @@ namespace DL
         }
         public IEnumerable<Bus> GetBuses()
         {
-            IEnumerable<Bus> buses = from item in DataSource.Buses
-                                     select item.Clone();
-            if (buses.Count() == 0)
-                throw new BusException("No buses exist.");
-            return buses;
+            return from item in DataSource.Buses
+                   select item.Clone();
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
@@ -144,11 +141,8 @@ namespace DL
         }
         public IEnumerable<Line> GetLines()
         {
-            IEnumerable<Line> lines = from item in DataSource.Lines
-                                      select item.Clone();
-            if (lines.Count() == 0)
-                throw new LineException("No lines exist.");
-            return lines.OrderBy(item => item.NumberLine);
+            return (from item in DataSource.Lines
+                    select item.Clone()).OrderBy(item => item.NumberLine);
         }
         public IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
@@ -192,11 +186,8 @@ namespace DL
         }
         public IEnumerable<Station> GetStations()
         {
-            IEnumerable<Station> stations =  from item in DataSource.Stations
-                                             select item.Clone();
-            if (stations.Count() == 0)
-                throw new StationException("No stations exist.");
-            return stations.OrderBy(item=>item.ID);
+            return (from item in DataSource.Stations
+                    select item.Clone()).OrderBy(item => item.ID);
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
@@ -417,12 +408,9 @@ namespace DL
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
         {
-            IEnumerable<DrivingLine> drivingLines = from item in DataSource.DrivingLines
-                                                    where condition(item)
-                                                    select item.Clone();
-            if (drivingLines.Count() == 0)
-                throw new LineException("No driving lines exist.");
-            return drivingLines;
+            return from item in DataSource.DrivingLines
+                   where condition(item)
+                   select item.Clone();           
         }
 
         #endregion

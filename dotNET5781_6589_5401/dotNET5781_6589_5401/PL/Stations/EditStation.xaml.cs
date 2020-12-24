@@ -15,21 +15,19 @@ using BLAPI;
 using PO;
 using BO;
 
-namespace PL.Lines
+namespace PL.Stations
 {
     /// <summary>
-    /// Interaction logic for LinesList.xaml
+    /// Interaction logic for EditStation.xaml
     /// </summary>
-    public partial class LinesList : Window
+    public partial class EditStation : Window
     {
         static IBL bl;
 
-        public LinesList(string username)
+        public EditStation()
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
-
         }
     }
 }
