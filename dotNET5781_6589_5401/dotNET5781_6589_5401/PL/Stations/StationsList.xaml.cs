@@ -28,7 +28,7 @@ namespace PL.Stations
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
+            //ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
             ListOfStations.ItemsSource = bl.GetStations();
             ListOfStations.SelectedIndex = 0;
@@ -39,7 +39,7 @@ namespace PL.Stations
         {
             DataContext = (Station)ListOfStations.SelectedItem;
             IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation;
-            if (lineStations.Count() > 0)
+            if (lineStations!=null && lineStations.Count() > 0)
             {
                 NoLines.Visibility = Visibility.Hidden;
                 LinesAtStation.Visibility = Visibility.Visible;

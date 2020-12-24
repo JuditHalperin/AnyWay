@@ -56,7 +56,7 @@ namespace BLAPI
         #endregion
 
         #region LineStations
-
+        IEnumerable<LineStation> convertToLineStationsList(IEnumerable<Station> path);
         void addLineStation(LineStation lineStation);
         void removeLineStation(LineStation lineStation);
         void updateLineStation(LineStation lineStation);

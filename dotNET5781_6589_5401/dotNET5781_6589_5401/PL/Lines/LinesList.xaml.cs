@@ -37,21 +37,21 @@ namespace PL.Lines
 
         private void selectionChanged()
         {
-            DataContext = (Line) ???.SelectedItem;
-            NumberOfStations.Content = ((Line) ???.SelectedItem).Path.Count;
+            //DataContext = (Line) ???.SelectedItem;
+            //NumberOfStations.Content = ((Line) ???.SelectedItem).Path.Count;
 
-            IEnumerable<LineStation> lineStations = ((Line) ???.SelectedItem).Path;
-            if (lineStations.Count() > 0)
-            {
-                NoStations.Visibility = Visibility.Hidden;
-                LineStations.Visibility = Visibility.Visible;
-                LineStations.ItemsSource = lineStations;
-            }
-            else
-            {
-                LineStations.Visibility = Visibility.Hidden;
-                NoStations.Visibility = Visibility.Visible;
-            }
+            //IEnumerable<LineStation> lineStations = ((Line) ???.SelectedItem).Path;
+            //if (lineStations.Count() > 0)
+            //{
+            //    NoStations.Visibility = Visibility.Hidden;
+            //    LineStations.Visibility = Visibility.Visible;
+            //    LineStations.ItemsSource = lineStations;
+            //}
+            //else
+            //{
+            //    LineStations.Visibility = Visibility.Hidden;
+            //    NoStations.Visibility = Visibility.Visible;
+            //}
         }
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
