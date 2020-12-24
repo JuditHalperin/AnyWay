@@ -752,12 +752,12 @@ namespace BL
             };
             try
             {
-                if (lineStationB.PathIndex != 0)
+                if (lineStationB.PathIndex != 1)
                 {
                     LineStation lineStationP = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
                     TwoFollowingStations followingStations = new TwoFollowingStations();
                     lineStationB.PreviousStationID = lineStationP.ID;
-                    followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationB.NextStationID);
+                    followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationP.ID);
                     lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
                     lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
                 }
