@@ -676,8 +676,16 @@ namespace DS
 					Username = "Asnat",
 					Password = "123456",
 					IsManager = true
+				},
+				new User()
+				{
+					Username = "a",
+					Password = "a",
+					IsManager = true
 				}
 			};
+			DrivingBuses = new List<DrivingBus>();
+			DrivingLines = new List<DrivingLine>();
 		}
 	}
 }
