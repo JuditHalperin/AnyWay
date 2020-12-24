@@ -756,14 +756,17 @@ namespace BL
             };
             try
             {
-                LineStation lineStationP = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
+                if (lineStationB.PathIndex != 0)
+                {
+                    LineStation lineStationP = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
+                    TwoFollowingStations followingStations = new TwoFollowingStations();
+                    lineStationB.PreviousStationID = lineStationP.ID;
+                    followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationB.NextStationID);
+                    lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
+                    lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
+                }
                 LineStation lineStationN = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
-                TwoFollowingStations followingStations = new TwoFollowingStations();
                 lineStationB.NextStationID = lineStationN.ID;
-                lineStationB.PreviousStationID = lineStationP.ID;
-                followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationB.NextStationID);
-                lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
-                lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
 
             }
             catch (DO.StationException ex)
