@@ -550,12 +550,30 @@ namespace BL
         /// <returns>station of BO</returns>
         BO.Station convertToStationBO(DO.Station stationD)
         {
+            IEnumerable<DO.LineStation> lineStationsD = dal.GetLineStations(lineStation => lineStation.ID == stationD.ID).OrderBy(station => station.ID);
+            IEnumerable<BO.LineStation> lineStationsB = from item in lineStationsD
+                                                        select convertToLineStationBO(item);
+            TwoFollowingStations followingStations = new TwoFollowingStations();
+            try
+            {
+                for (int i = 0; i < lineStationsB.Count() - 1; i++)
+                {
+                    followingStations = dal.getTwoFollowingStations(lineStationsB.ElementAt(i).ID, lineStationsB.ElementAt(i + 1).ID);
+                    lineStationsB.ElementAt(i + 1).LengthFromPreviousStations = followingStations.LengthBetweenStations;
+                    lineStationsB.ElementAt(i + 1).TimeFromPreviousStations = followingStations.TimeBetweenStations;
+                }
+            }
+            catch (DO.StationException ex)
+            {
+                throw new BO.StationException(ex.Message);
+            }
             return new BO.Station()
             {
                 ID = stationD.ID,
                 Name = stationD.Name,
                 Latitude = stationD.Latitude,
-                Longitude = stationD.Longitude
+                Longitude = stationD.Longitude,
+                Path= lineStationsB
             };
         }
         /// <summary>

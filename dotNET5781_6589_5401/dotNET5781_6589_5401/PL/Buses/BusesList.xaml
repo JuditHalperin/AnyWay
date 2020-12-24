@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Buses" Height="450" Width="800">
     <Window.Resources>
-        <local:StatusToText_Status x:Key="StatusToText_Status"/>
+        <local:
         <local:intToBool_remove x:Key="intToBool_remove"/>
         <DataTemplate x:Key="BusInListBoxTemplate">
             <Grid x:Name="BusFromListBox">

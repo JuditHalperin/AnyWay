@@ -183,38 +183,39 @@ namespace PL.Buses
             {
                 throw new NotImplementedException();
             }
-            /// <summary>
-            /// convert a status of type 'State' to string
-            /// used to present the buses status on the main window and on the details window
-            /// </summary>
-            public class StatusToText_Status : IValueConverter
+        }
+        /// <summary>
+        /// convert a status of type 'State' to string
+        /// used to present the buses status on the main window and on the details window
+        /// </summary>
+        public class StatusToText_Status : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             {
-                public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-                {
-                    State stateValue = (State)value;
+                State stateValue = (State)value;
 
-                    switch (stateValue)
-                    {
-                        case State.canDrive:
-                            return "Can Drive";
-                        case State.cannotDrive:
-                            return "Cannot Drive";
-                        case State.gettingFueled:
-                            return "Being fueled";
-                        case State.gettingServiced:
-                            return "Being serviced";
-                        case State.driving:
-                            return "Driving";
-                        default:
-                            return null;
-                    }
-                }
-
-                public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+                switch (stateValue)
                 {
-                    throw new NotImplementedException();
+                    case State.canDrive:
+                        return "Can Drive";
+                    case State.cannotDrive:
+                        return "Cannot Drive";
+                    case State.gettingFueled:
+                        return "Being fueled";
+                    case State.gettingServiced:
+                        return "Being serviced";
+                    case State.driving:
+                        return "Driving";
+                    default:
+                        return null;
                 }
             }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
         }
+
     }
 }
