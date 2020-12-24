@@ -28,11 +28,15 @@ namespace PL.Stations
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            //ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
+            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
-            ListOfStations.ItemsSource = bl.GetStations();
-            ListOfStations.SelectedIndex = 0;
-            selectionChanged();            
+            IEnumerable<Station> stations = bl.GetStations();
+            ListOfStations.ItemsSource = stations;
+            if (stations.Count() > 0)
+            {
+                ListOfStations.SelectedIndex = 0;
+                selectionChanged();
+            }
         }
 
         private void selectionChanged()
@@ -70,7 +74,6 @@ namespace PL.Stations
                     throw new StationException("Impossible to update a station if there are driving lines that stop there.");
                 new EditStation((Station)ListOfStations.SelectedItem).ShowDialog();
             }
-
             catch (StationException ex)
             {
                 MessageBox.Show(ex.Message);

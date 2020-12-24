@@ -30,8 +30,8 @@
                 <ColumnDefinition Width="265*"/>
                 <ColumnDefinition Width="264*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Station ID:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,22,264.6,21.6"/>
-            <ComboBox x:Name="StationsList" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="0.2,24,0,23.6"/>
+            <Label Content="Serial number of line:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,22,264.6,21.6"/>
+            <ComboBox x:Name="LinesList" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="0.2,24,0,23.6"/>
             <Button x:Name="AddLine" Content="Add line" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Click="AddLine_Click" Margin="0.4,25,0,25.6"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -47,13 +47,17 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Region:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Label Content="{Binding Path=Region}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="Number of stations:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Label x:Name="NumberOfStations" Content="{Binding}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button x:Name="EditLine" Content="Edit" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditLine_Click"/>
-                <Button x:Name="RemoveLine" Content="Remove" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveLine_Click"/>
+                <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="{Binding Path=NumberLine}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Region:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="{Binding Path=Region}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Number of stations:" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label x:Name="NumberOfStations" Content="{Binding}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button x:Name="EditLine" Content="Edit" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditLine_Click"/>
+                <Button x:Name="RemoveLine" Content="Remove" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveLine_Click"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -61,7 +65,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Stations:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <ListBox x:Name="LineStations" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ListBox x:Name="LineStations" Grid.Row="1" ItemsSource="{Binding Path=Path}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoStations" Content="No stations at this line path." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
         </Grid>

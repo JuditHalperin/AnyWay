@@ -30,28 +30,31 @@ namespace PL.Lines
             bl = BlFactory.GetBl();
             ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
-            StationsList.ItemsSource = bl.GetStations();
-            StationsList.SelectedIndex = 0;
-            selectionChanged();
+            IEnumerable<BO.Line> lines = bl.GetLines();
+            LinesList.ItemsSource = lines;
+            if(lines.Count() > 0)
+            {
+                LinesList.SelectedIndex = 0;
+                LinesList.Text = ((BO.Line)LinesList.SelectedItem).ThisSerial.ToString();
+                selectionChanged();
+            }          
         }
 
         private void selectionChanged()
         {
-            //DataContext = (Line) ???.SelectedItem;
-            //NumberOfStations.Content = ((Line) ???.SelectedItem).Path.Count;
-
-            //IEnumerable<LineStation> lineStations = ((Line) ???.SelectedItem).Path;
-            //if (lineStations.Count() > 0)
-            //{
-            //    NoStations.Visibility = Visibility.Hidden;
-            //    LineStations.Visibility = Visibility.Visible;
-            //    LineStations.ItemsSource = lineStations;
-            //}
-            //else
-            //{
-            //    LineStations.Visibility = Visibility.Hidden;
-            //    NoStations.Visibility = Visibility.Visible;
-            //}
+            DataContext = (BO.Line)LinesList.SelectedItem;
+            NumberOfStations.Content = ((BO.Line)LinesList.SelectedItem).Path.Count();
+            IEnumerable<LineStation> lineStations = ((BO.Line)LinesList.SelectedItem).Path;
+            if (lineStations.Count() > 0)
+            {
+                NoStations.Visibility = Visibility.Hidden;
+                LineStations.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LineStations.Visibility = Visibility.Hidden;
+                NoStations.Visibility = Visibility.Visible;
+            }
         }
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
@@ -66,7 +69,15 @@ namespace PL.Lines
 
         private void RemoveLine_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch(LineException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
     }
 }

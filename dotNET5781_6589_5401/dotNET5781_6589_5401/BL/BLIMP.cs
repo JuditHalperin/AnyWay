@@ -466,6 +466,21 @@ namespace BL
             }
         }
         /// <summary>
+        /// impossible to change a line if it is driving
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        public bool canChangeLine(BO.Line line)
+        {
+            //IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
+            //                                                    from lineStation in GetLineStations(l => l.ID == station.ID)
+            //                                                    where drivingLine.NumberLine == lineStation.NumberLine
+            //                                                    select drivingLine;
+            //if (drivingLinesAtStation.Count() == 0)
+            //    return true;
+            //return false;
+        }
+        /// <summary>
         /// Return line according it key= the serial.
         /// </summary>
         /// <param name="serial">Key of line.</param>

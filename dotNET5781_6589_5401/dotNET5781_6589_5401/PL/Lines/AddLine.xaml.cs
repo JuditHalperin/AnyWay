@@ -24,6 +24,7 @@ namespace PL.Lines
     public partial class AddLine : Window
     {
         static IBL bl;
+
         ObservableCollection<Station> path = new ObservableCollection<Station>();
 
         public AddLine()

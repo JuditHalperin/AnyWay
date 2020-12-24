@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Lines"
         mc:Ignorable="d"
-        Title="Add Line" Height="450" Width="800">
+        Title="Add Line" Height="400" Width="700">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
@@ -26,7 +26,7 @@
                 <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <TextBox x:Name="LineNumber" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" ItemsSource="{Binding}" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <ComboBox Name="RegionsList" ItemsSource="{Binding}" Width="70" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

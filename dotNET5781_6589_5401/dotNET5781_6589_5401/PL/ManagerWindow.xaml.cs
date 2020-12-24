@@ -29,13 +29,6 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             Username.Content = username;
-
-            if (bl.GetBuses().Count() == 0)
-                ShowBuses.IsEnabled = false;
-            if (bl.GetLines().Count() == 0)
-                ShowLines.IsEnabled = false;
-            if (bl.GetStations().Count() == 0)
-                ShowStations.IsEnabled = false;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
