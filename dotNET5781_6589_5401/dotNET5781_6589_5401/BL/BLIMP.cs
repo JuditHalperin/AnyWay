@@ -478,7 +478,7 @@ namespace BL
             //                                                    select drivingLine;
             //if (drivingLinesAtStation.Count() == 0)
             //    return true;
-            //return false;
+            return false;
         }
         /// <summary>
         /// Return line according it key= the serial.
@@ -756,8 +756,8 @@ namespace BL
             };
             try
             {
-                BO.LineStation lineStationP = GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
-                BO.LineStation lineStationN = GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
+                LineStation lineStationP = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
+                LineStation lineStationN = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
                 TwoFollowingStations followingStations = new TwoFollowingStations();
                 lineStationB.NextStationID = lineStationN.ID;
                 lineStationB.PreviousStationID = lineStationP.ID;
