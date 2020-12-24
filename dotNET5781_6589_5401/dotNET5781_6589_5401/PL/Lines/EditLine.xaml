@@ -1,11 +1,11 @@
-﻿<Window x:Class="PL.Lines.AddLine"
+﻿<Window x:Class="PL.Lines.EditLine"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Lines"
         mc:Ignorable="d"
-        Title="Add Line" Height="400" Width="700">
+        Title="Edit Line" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
@@ -24,24 +24,26 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="LineNumber" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox x:Name="LineNumber" Grid.Row="1" Text="{Binding Path=NumberLine}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" ItemsSource="{Binding}" Width="70" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <ComboBox Name="RegionsList" ItemsSource="{Binding}" SelectedItem="{Binding Path=Region}" Width="70" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Label Content="Stations:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ListBox x:Name="LineStations" Grid.Row="1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Stations:" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <ComboBox Name="StationsList" ItemsSource="{Binding}" Grid.Column="1" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="StationsList_SelectionChanged"/>
+                    <Button x:Name="AddStation" Content="Add station" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
+                    <Button x:Name="RemoveStation" Content="Remove station" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
                 </Grid>
-                <ListBox x:Name="ChosenStations" Grid.Row="1" ItemsSource="{Binding Path=ID}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

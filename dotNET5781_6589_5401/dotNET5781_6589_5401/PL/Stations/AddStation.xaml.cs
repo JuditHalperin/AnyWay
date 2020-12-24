@@ -51,8 +51,8 @@ namespace PL.Stations
             try
             {
                 int id;
-                if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length < 4)
-                    throw new InvalidInputException("Station ID should be consisted of 4 digits.");
+                if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length < 5)
+                    throw new InvalidInputException("Station ID should be consisted of 5 digits.");
                 bl.addStation(new Station() { ID = id, Name = NameTextBox.Text, Latitude = Convert.ToDouble(LatitudeTextBox.Text), Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
                 Close();
             }
