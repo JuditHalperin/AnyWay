@@ -761,9 +761,12 @@ namespace BL
                     lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
                     lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
                 }
-                LineStation lineStationN = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
-                lineStationB.NextStationID = lineStationN.ID;
-
+                try
+                {
+                    LineStation lineStationN = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
+                    lineStationB.NextStationID = lineStationN.ID;
+                }
+                catch (DO.StationException) { }
             }
             catch (DO.StationException ex)
             {
