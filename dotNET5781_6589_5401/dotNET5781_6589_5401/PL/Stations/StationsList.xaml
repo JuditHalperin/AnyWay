@@ -77,8 +77,8 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
                 <Label Content="Lines:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="Number of Line:" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="Index in the path:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Number of Line:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Index in the path:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="Privios station:" Style="{StaticResource LabelTitleStyle}" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="Next station:" Style="{StaticResource LabelTitleStyle}" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" Grid.Row="2" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
