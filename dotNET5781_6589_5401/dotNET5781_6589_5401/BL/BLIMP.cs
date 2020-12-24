@@ -11,7 +11,16 @@ namespace BL
     public class BLIMP : IBL
     {
         readonly IDAL dal = DalFactory.GetDal();
-        
+
+        #region Singelton
+
+        static readonly BLIMP instance = new BLIMP();
+        public static BLIMP Instance => instance;
+        static BLIMP() { }
+        BLIMP() { }
+
+        #endregion
+
         #region Help functions
 
         int calculateDistance(BO.Station first, BO.Station second)
