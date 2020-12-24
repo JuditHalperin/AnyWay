@@ -30,9 +30,41 @@ namespace PL.Lines
             bl = BlFactory.GetBl();
             ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
+            StationsList.ItemsSource = bl.GetStations();
+            StationsList.SelectedIndex = 0;
+            selectionChanged();
+        }
+
+        private void selectionChanged()
+        {
+            DataContext = (Line)???.SelectedItem;
+            NumberOfStations.Content = ((Line) ???.SelectedItem).Path.Count;
+
+            IEnumerable<LineStation> lineStations = ((Line)???.SelectedItem).Path;
+            if (lineStations.Count() > 0)
+            {
+                NoStations.Visibility = Visibility.Hidden;
+                LineStations.Visibility = Visibility.Visible;
+                LineStations.ItemsSource = lineStations;
+            }
+            else
+            {
+                LineStations.Visibility = Visibility.Hidden;
+                NoStations.Visibility = Visibility.Visible;
+            }
         }
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
+        {
+            new AddLine().ShowDialog();
+        }
+
+        private void EditLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveLine_Click(object sender, RoutedEventArgs e)
         {
 
         }

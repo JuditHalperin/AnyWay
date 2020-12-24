@@ -75,6 +75,9 @@
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="InvalidInputException.cs" />
+    <Compile Include="Lines\AddLine.xaml.cs">
+      <DependentUpon>AddLine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Lines\LinesList.xaml.cs">
       <DependentUpon>LinesList.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lines\AddLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

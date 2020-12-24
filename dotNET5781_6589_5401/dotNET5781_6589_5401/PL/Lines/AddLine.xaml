@@ -1,0 +1,48 @@
+﻿<Window x:Class="PL.Lines.AddLine"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Lines"
+        mc:Ignorable="d"
+        Title="Add Line" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBox x:Name="LineNumber" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <ComboBox Name="RegionsList" ItemsSource="{Binding}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Cancel" Content="Cancel" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+            <Button x:Name="Ok" Content="Ok" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
+        </Grid>
+    </Grid>
+
+</Window>
