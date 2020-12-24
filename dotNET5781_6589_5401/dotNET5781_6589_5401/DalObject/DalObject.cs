@@ -9,7 +9,7 @@ using DS;
 
 namespace DL
 {
-    public class DalObject : IDAL
+    public sealed class DalObject : IDAL
     {
         #region Singelton
 

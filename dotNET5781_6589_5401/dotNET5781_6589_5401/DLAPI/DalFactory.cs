@@ -75,7 +75,6 @@ namespace DLAPI
             {
                 throw new DalConfigException($"Class {dalPackage} is not a singleton", ex);
             }
-
         }
     }
 }
