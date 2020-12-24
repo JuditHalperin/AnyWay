@@ -24,10 +24,33 @@ namespace PL.Stations
     {
         static IBL bl;
 
-        public EditStation()
+        public EditStation(Station station)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            DataContext = station;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.updateStation(new Station { ID = (int)IDLabel.Content, Name = NameTextBox.Text, Latitude = Convert.ToDouble(LatitudeTextBox.Text), Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
+                Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid location format.");
+            }
+            catch (StationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }            
         }
     }
 }
