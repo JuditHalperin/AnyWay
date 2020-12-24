@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Station ID:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <ComboBox x:Name="StationsList" Grid.Column="1" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="StationsList_SelectionChanged"/>
+            <ComboBox x:Name="ListOfStations" Grid.Column="1" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="StationsList_SelectionChanged"/>
             <Button x:Name="AddStation" Content="Add station" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
         </Grid>
         <Grid Grid.Row="1">

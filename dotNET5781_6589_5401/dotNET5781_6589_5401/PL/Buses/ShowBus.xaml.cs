@@ -22,15 +22,15 @@ namespace PL.Buses
     /// </summary>
     public partial class ShowBus : Window
     {
-        static IBL bl;
+        //static IBL bl;
         /// <summary>
         /// constructor
         /// </summary>
         public ShowBus(BO.Bus selectedBus)
         {
             InitializeComponent();
-            bl = BlFactory.GetBl();
-            Details.DataContext = selectedBus;
+            //bl = BlFactory.GetBl();
+            //Details.DataContext = selectedBus;
 
         }
 
@@ -40,45 +40,47 @@ namespace PL.Buses
         /// <param name="selectedBus">The bus for show</param>
 
 
-        /// <summary>
-        /// Click on button for service about the bus.
-        /// </summary>
-        /// <param name="sender">Button that the bus contect to it.</param>
-        /// <param name="e"></param>
-        private void TreatButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button treat = (Button)sender;
-            if (treat.DataContext is BO.Bus)
-            {
-                BO.Bus bus = (BO.Bus)treat.DataContext;
-                
-            }
-        }
+        //        /// <summary>
+        //        /// Click on button for service about the bus.
+        //        /// </summary>
+        //        /// <param name="sender">Button that the bus contect to it.</param>
+        //        /// <param name="e"></param>
+        //        private void TreatButton_Click(object sender, RoutedEventArgs e)
+        //        {
+        //            Button treat = (Button)sender;
+        //            if (treat.DataContext is BO.Bus)
+        //            {
+        //                BO.Bus bus = (BO.Bus)treat.DataContext;
 
-        /// <summary>
-        /// Click on button for fuel bus. summon the function that do it.
-        /// </summary>
-        /// <param name="sender">Button that binding to bus in the list</param>
-        /// <param name="e"></param>
-        private void FuelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button fueling = (Button)sender;
-            if (fueling.DataContext is BO.Bus)
-            {
-                BO.Bus bus = (BO.Bus)fueling.DataContext;
-                
-            }
-        }
+        //            }
+        //        }
 
-        /// <summary>
-        /// click indicate O.K and close the window.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        //        /// <summary>
+        //        /// Click on button for fuel bus. summon the function that do it.
+        //        /// </summary>
+        //        /// <param name="sender">Button that binding to bus in the list</param>
+        //        /// <param name="e"></param>
+        //        private void FuelButton_Click(object sender, RoutedEventArgs e)
+        //        {
+        //            Button fueling = (Button)sender;
+        //            if (fueling.DataContext is BO.Bus)
+        //            {
+        //                BO.Bus bus = (BO.Bus)fueling.DataContext;
+
+        //            }
+        //        }
+
+        //        /// <summary>
+        //        /// click indicate O.K and close the window.
+        //        /// </summary>
+        //        /// <param name="sender"></param>
+        //        /// <param name="e"></param>
+        //        private void OkButton_Click(object sender, RoutedEventArgs e)
+        //        {
+        //            Close();
+        //        }
+        //    }
+        //}
     }
 }
 

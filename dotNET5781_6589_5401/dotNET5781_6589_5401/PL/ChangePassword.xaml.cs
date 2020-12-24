@@ -50,7 +50,12 @@ namespace PL
                     if (message != "Valid")
                         throw new InvalidInputException(message);
 
-                    bl.updateUser(new User(user.Username, NewPassword.Password, user.IsManager));                    
+                    bl.updateUser(new User()
+                    {
+                        Username = user.Username,
+                        Password = NewPassword.Password,
+                        IsManager = user.IsManager
+                    });                    
                 }
                 
                 else if (gettingChanged == "managing code")

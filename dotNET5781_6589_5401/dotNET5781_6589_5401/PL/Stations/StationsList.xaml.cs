@@ -30,15 +30,15 @@ namespace PL.Stations
             bl = BlFactory.GetBl();
             ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
-            StationsList.ItemsSource = bl.GetStations();
-            StationsList.SelectedIndex = 0;
+            ListOfStations.ItemsSource = bl.GetStations();
+            ListOfStations.SelectedIndex = 0;
             selectionChanged();            
         }
 
         private void selectionChanged()
         {
-            DataContext = (Station)StationsList.SelectedItem;
-            IEnumerable<LineStation> lineStations = ((Station)StationsList.SelectedItem).LinesOfStation;
+            DataContext = (Station)ListOfStations.SelectedItem;
+            IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation;
             if (lineStations.Count() > 0)
             {
                 NoLines.Visibility = Visibility.Hidden;
@@ -66,9 +66,9 @@ namespace PL.Stations
         {
             try
             {
-                if (!bl.canChangeStation((Station)StationsList.SelectedItem))
+                if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to update a station if there are driving lines that stop there.");
-                new EditStation((Station)StationsList.SelectedItem).ShowDialog();
+                new EditStation((Station)ListOfStations.SelectedItem).ShowDialog();
             }
 
             catch (StationException ex)
@@ -81,9 +81,9 @@ namespace PL.Stations
         {          
             try
             {
-                if (!bl.canChangeStation((Station)StationsList.SelectedItem))
+                if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
-                bl.removeStation((Station)StationsList.SelectedItem);
+                bl.removeStation((Station)ListOfStations.SelectedItem);
             }
             
             catch (StationException ex)
