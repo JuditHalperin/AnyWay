@@ -419,6 +419,10 @@ namespace BL
         {
             try
             {
+                foreach(BO.LineStation station in line.Path)
+                {
+                    station.NumberLine = line.ThisSerial;
+                }
                 dal.addLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
@@ -737,10 +741,11 @@ namespace BL
             };
             try
             {
-                IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine).OrderBy(station => station.PathIndex);
+                BO.LineStation lineStationP = GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
+                BO.LineStation lineStationN = GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
                 TwoFollowingStations followingStations = new TwoFollowingStations();
-                lineStationB.NextStationID = lineStationsB.ElementAt(lineStationB.PathIndex + 1).ID;
-                lineStationB.PreviousStationID = lineStationsB.ElementAt(lineStationB.PathIndex - 1).ID;
+                lineStationB.NextStationID = lineStationN.ID;
+                lineStationB.PreviousStationID = lineStationP.ID;
                 followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationB.NextStationID);
                 lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
                 lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
@@ -751,6 +756,37 @@ namespace BL
                 throw new BO.StationException(ex.Message);
             }
             return lineStationB;
+        }
+        public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
+        {
+            List<BO.LineStation> lineStations = new List<BO.LineStation>();
+            lineStations.Add(new BO.LineStation()
+            {
+                ID=path.ElementAt(0).ID,
+                PathIndex=0,
+                NextStationID=path.ElementAt(1).ID
+            });
+            for (int i = 1; i < path.Count()-1; i++)
+            {
+                lineStations.Add(new BO.LineStation()
+                {
+                    ID = path.ElementAt(i).ID,
+                    PathIndex = i,
+                    NextStationID = path.ElementAt(i + 1).ID,
+                    PreviousStationID = path.ElementAt(i - 1).ID,
+                    LengthFromPreviousStations=calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)),
+                    TimeFromPreviousStations=calculateTime(calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)))
+                });
+            }
+            lineStations.Add(new BO.LineStation()
+            {
+                ID = path.ElementAt(path.Count() - 1).ID,
+                PathIndex = path.Count() - 1,
+                PreviousStationID = path.ElementAt(path.Count() - 2).ID,
+                LengthFromPreviousStations = calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)),
+                TimeFromPreviousStations = calculateTime(calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)))
+            });
+            return lineStations;
         }
         /// <summary>
         /// Add station in line
