@@ -22,22 +22,22 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Station ID:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="Station name:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="Latitude:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="Longitude:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <TextBox x:Name="IDTextBox" Grid.Row="1" Grid.Column="0" Width="70" MaxLength="4" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="NameTextBox" Grid.Row="1" Grid.Column="1" Width="200" MaxLength="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="LatitudeTextBox" Grid.Row="3" Grid.Column="0" Width="100" MaxLength="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name="LongitudeTextBox" Grid.Row="3" Grid.Column="1" Width="100" MaxLength="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Content="Station ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Station name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Latitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Longitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <TextBox x:Name="IDTextBox" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Grid.Column="0" Width="70" MaxLength="4" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="NameTextBox" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Grid.Column="1" Width="200" MaxLength="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="LatitudeTextBox" Style="{StaticResource TextBoxStyle}" Grid.Row="3" Grid.Column="0" Width="100" MaxLength="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name="LongitudeTextBox" Style="{StaticResource TextBoxStyle}" Grid.Row="3" Grid.Column="1" Width="100" MaxLength="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Cancel" Content="Cancel" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
-            <Button x:Name="Ok" Content="Ok" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
+            <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}"  Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+            <Button x:Name="Ok" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
         </Grid>
     </Grid>
 </Window>
