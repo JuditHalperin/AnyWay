@@ -31,20 +31,20 @@ namespace PL.Lines
             ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
             IEnumerable<BO.Line> lines = bl.GetLines();
-            LinesList.ItemsSource = lines;
+            ListOfLines.ItemsSource = lines;
             if(lines.Count() > 0)
             {
-                LinesList.SelectedIndex = 0;
-                LinesList.Text = ((BO.Line)LinesList.SelectedItem).ThisSerial.ToString();
+                ListOfLines.SelectedIndex = 0;
+                ListOfLines.Text = ((BO.Line)ListOfLines.SelectedItem).ThisSerial.ToString();
                 selectionChanged();
             }          
         }
 
         private void selectionChanged()
         {
-            DataContext = (BO.Line)LinesList.SelectedItem;
-            NumberOfStations.Content = ((BO.Line)LinesList.SelectedItem).Path.Count();
-            IEnumerable<LineStation> lineStations = ((BO.Line)LinesList.SelectedItem).Path;
+            DataContext = (BO.Line)ListOfLines.SelectedItem;
+            NumberOfStations.Content = ((BO.Line)ListOfLines.SelectedItem).Path.Count();
+            IEnumerable<LineStation> lineStations = ((BO.Line)ListOfLines.SelectedItem).Path;
             if (lineStations.Count() > 0)
             {
                 NoStations.Visibility = Visibility.Hidden;
@@ -64,16 +64,27 @@ namespace PL.Lines
 
         private void EditLine_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
+                    throw new LineException("Impossible to edit a line if it is driving.");
+                //new EditLine((BO.Line)ListOfLines.SelectedItem).ShowDialog();
+            }
+            catch (LineException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void RemoveLine_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-
+                if(!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
+                    throw new LineException("Impossible to remove a line if it is driving.");
+                bl.removeLine((BO.Line)ListOfLines.SelectedItem);
             }
-            catch(LineException ex)
+            catch (LineException ex)
             {
                 MessageBox.Show(ex.Message);
             }

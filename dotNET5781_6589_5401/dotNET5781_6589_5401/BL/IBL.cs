@@ -40,6 +40,7 @@ namespace BLAPI
         Line getLine(int serial);
         IEnumerable<Line> GetLines();
         IEnumerable<Line> GetLines(Predicate<Line> condition);
+        bool canChangeLine(Line line);
 
         #endregion
 

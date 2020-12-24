@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="264*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Serial number of line:" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,22,264.6,21.6"/>
-            <ComboBox x:Name="LinesList" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="0.2,24,0,23.6"/>
+            <ComboBox x:Name="ListOfLines" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="0.2,24,0,23.6"/>
             <Button x:Name="AddLine" Content="Add line" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Click="AddLine_Click" Margin="0.4,25,0,25.6"/>
         </Grid>
         <Grid Grid.Row="1">
