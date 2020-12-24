@@ -15,10 +15,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Line" Content="{Binding Path=NumberLine}"/>
-                <Label x:Name="Index" Content="{Binding Path=PathIndex}"/>
-                <Label x:Name="PreviousStation" Content="{Binding}"/>
-                <Label x:Name="NextStation" Content="{Binding}"/>
+                <Label x:Name="Line" Grid.Column="0" Content="{Binding Path=NumberLine}"/>
+                <Label x:Name="Index" Grid.Column="1" Content="{Binding Path=PathIndex}"/>
+                <Label x:Name="PreviousStation" Grid.Column="2" Content="{Binding Path=PreviousStationID}"/>
+                <Label x:Name="NextStation" Grid.Column="3" Content="{Binding Path=NextStationID}"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -27,7 +27,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="#FFEEF5FF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -69,7 +69,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Lines:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ListBox x:Name="LinesAtStation" Grid.Row="1" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                <Label x:Name="NoLines" Grid.Row="1" Visibility="Hidden"/>
+                <Label x:Name="NoLines" Content="No lines stop at this station." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

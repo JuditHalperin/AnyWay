@@ -50,14 +50,15 @@ namespace PL.Stations
         {
             try
             {
-                if (IDTextBox.Text.Length < 4)
-                    throw new InvalidInputException("Invalid length of station ID.");
-                bl.addStation(new Station() { ID = Convert.ToInt32(IDTextBox.Text), Name = NameTextBox.Text, Latitude = Convert.ToDouble(LatitudeTextBox.Text), Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
+                int id;
+                if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length < 4)
+                    throw new InvalidInputException("Station ID should be consisted of 4 digits.");
+                bl.addStation(new Station() { ID = id, Name = NameTextBox.Text, Latitude = Convert.ToDouble(LatitudeTextBox.Text), Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
                 Close();
             }
             catch (FormatException)
             {
-                MessageBox.Show("Invalid format.");
+                MessageBox.Show("Invalid format of location.");
             }
             catch (StationException ex)
             {

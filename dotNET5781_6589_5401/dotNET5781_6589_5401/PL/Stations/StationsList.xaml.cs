@@ -68,7 +68,6 @@ namespace PL.Stations
             {
                 if (!bl.canChangeStation((Station)StationsList.SelectedItem))
                     throw new StationException("Impossible to update a station if there are driving lines that stop there.");
-
                 new EditStation().ShowDialog();
             }
 
