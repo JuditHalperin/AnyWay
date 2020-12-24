@@ -51,7 +51,7 @@ namespace PL.Lines
                     throw new InvalidInputException("Invalid format of line number.");
                 if (path.Count() < 2)
                     throw new InvalidInputException("Path line should be consisted of at least 2 stations.");
-                bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = convertToLineStationsList(path) });
+                bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
             }
             catch (InvalidInputException ex)
             {
@@ -61,13 +61,10 @@ namespace PL.Lines
 
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(!path.Contains((Station)StationsList.SelectedItem))
+            if (path.Contains((Station)StationsList.SelectedItem))
+                MessageBox.Show($"Station {((Station)StationsList.SelectedItem).ID} is already in the path.");
+            else
                 path.Add((Station)StationsList.SelectedItem);
-        }
-
-        IEnumerable<LineStation> convertToLineStationsList(ObservableCollection<Station> path)
-        {
-
         }
     }
 }
