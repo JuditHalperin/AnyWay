@@ -31,5 +31,10 @@ namespace PL.Lines
             ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
 
         }
+
+        private void AddLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

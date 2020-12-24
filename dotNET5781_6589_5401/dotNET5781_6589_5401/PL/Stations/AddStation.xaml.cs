@@ -58,7 +58,7 @@ namespace PL.Stations
             }
             catch (FormatException)
             {
-                MessageBox.Show("Invalid format of location.");
+                MessageBox.Show("Invalid location format.");
             }
             catch (StationException ex)
             {

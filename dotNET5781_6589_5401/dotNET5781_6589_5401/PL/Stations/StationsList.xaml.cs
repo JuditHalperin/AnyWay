@@ -39,6 +39,8 @@ namespace PL.Stations
         {
             DataContext = (Station)ListOfStations.SelectedItem;
             IEnumerable<LineStation> lineStations = bl.GetLineStations(item => item.ID == ((Station)DataContext).ID);
+            DataContext = (Station)StationsList.SelectedItem;
+            IEnumerable<LineStation> lineStations = ((Station)StationsList.SelectedItem).LinesOfStation;
             if (lineStations.Count() > 0)
             {
                 NoLines.Visibility = Visibility.Hidden;
@@ -68,7 +70,7 @@ namespace PL.Stations
             {
                 if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to update a station if there are driving lines that stop there.");
-                new EditStation().ShowDialog();
+                new EditStation((Station)StationsList.SelectedItem).ShowDialog();
             }
 
             catch (StationException ex)
