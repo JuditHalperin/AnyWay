@@ -472,12 +472,8 @@ namespace BL
         /// <returns></returns>
         public bool canChangeLine(BO.Line line)
         {
-            //IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
-            //                                                    from lineStation in GetLineStations(l => l.ID == station.ID)
-            //                                                    where drivingLine.NumberLine == lineStation.NumberLine
-            //                                                    select drivingLine;
-            //if (drivingLinesAtStation.Count() == 0)
-            //    return true;
+            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial).Count() == 0)
+                return true;
             return false;
         }
         /// <summary>
