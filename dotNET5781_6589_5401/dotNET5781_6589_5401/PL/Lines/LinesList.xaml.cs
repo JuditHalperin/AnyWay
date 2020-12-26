@@ -45,9 +45,9 @@ namespace PL.Lines
         private void selectionChanged()
         {
             DataContext = (BO.Line)ListOfLines.SelectedItem;
-            IEnumerable<LineStation> lineStations = ((BO.Line)DataContext).Path;
-            NumberOfStations.Content = lineStations.Count();
-            if (lineStations.Count() > 0)
+            int numberOfStations = ((BO.Line)DataContext).Path.Count();
+            NumberOfStations.Content = numberOfStations;
+            if (numberOfStations > 0)
             {
                 NoStations.Visibility = Visibility.Hidden;
                 LineStations.Visibility = Visibility.Visible;
@@ -59,6 +59,11 @@ namespace PL.Lines
             }
         }
 
+        private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectionChanged();
+        }
+        
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
             new AddLine().ShowDialog();
@@ -94,7 +99,7 @@ namespace PL.Lines
 
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
         }     
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
