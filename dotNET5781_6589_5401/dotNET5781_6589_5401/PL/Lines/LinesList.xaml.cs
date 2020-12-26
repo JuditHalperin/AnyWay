@@ -24,11 +24,13 @@ namespace PL.Lines
     {
         static IBL bl;
 
-        public LinesList(string username)
+        string username;
+
+        public LinesList(string name)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
+            username = name;
 
             IEnumerable<BO.Line> lines = bl.GetLines();
             ListOfLines.ItemsSource = lines;
@@ -93,6 +95,12 @@ namespace PL.Lines
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
+        }     
+
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new ManagerWindow(username).Show();
+            Close();
         }
     }
 }

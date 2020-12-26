@@ -24,11 +24,13 @@ namespace PL.Stations
     {
         static IBL bl;
 
-        public StationsList(string username)
+        string username;
+
+        public StationsList(string name)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
+            username = name;
 
             IEnumerable<Station> stations = bl.GetStations();
             ListOfStations.ItemsSource = stations;
@@ -93,6 +95,12 @@ namespace PL.Stations
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new ManagerWindow(username).Show();
+            Close();
         }
     }
 }

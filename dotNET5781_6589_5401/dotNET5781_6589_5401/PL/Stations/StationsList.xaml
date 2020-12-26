@@ -29,13 +29,15 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#FFEEF5FF">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Station ID:" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <ComboBox x:Name="ListOfStations" Style="{StaticResource ComboBoxStyle}" Grid.Column="1" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="StationsList_SelectionChanged"/>
-            <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
+            <Image x:Name="Back" Source="PL/BackButton.png" Width="35" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Back_MouseDown"/>
+            <Label Content="Station ID:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ListOfStations" Style="{StaticResource ComboBoxStyle}" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="StationsList_SelectionChanged"/>
+            <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
