@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>bus.ico</ApplicationIcon>
+    <ApplicationIcon>Images\bus.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -205,10 +205,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bus.ico" />
+    <Resource Include="Images\bus.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BackButton.png" />
+    <Resource Include="Images\BackButton.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
