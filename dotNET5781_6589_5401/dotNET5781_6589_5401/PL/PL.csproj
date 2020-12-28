@@ -208,11 +208,10 @@
     <Resource Include="Images\BusIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\BackButton.png" />
+    <Resource Include="Lines\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\busesAndCar.png" />
-    <Resource Include="Images\pictureBus.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Users\pictureBus.jpg" />
