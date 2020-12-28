@@ -251,8 +251,8 @@ namespace DL
             IEnumerable<LineStation> lineStations = from item in DataSource.LineStations
                                                     where condition(item)
                                                     select item.Clone();
-            if (lineStations.Count() == 0)
-                throw new StationException("No line stations exist.");
+            //if (lineStations.Count() == 0)
+            //    throw new StationException("No line stations exist.");
             return lineStations;
         }
 
