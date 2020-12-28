@@ -42,27 +42,18 @@ namespace DL
         }
         public User getUser(string username)
         {
-            User user = DataSource.Users.Find(item => item.Username == username);
-            if (user == null)
-                throw new UserException("The user does not exist.");
-            return user.Clone();
+            return DataSource.Users.Find(item => item.Username == username).Clone();       
         }
         public IEnumerable<User> GetUsers()
         {
-            IEnumerable<User> users = from item in DataSource.Users
-                                      select item.Clone();
-            if (users.Count() == 0)
-                throw new UserException("No users exist.");
-            return users;
+            return from item in DataSource.Users
+                   select item.Clone();
         }
         public IEnumerable<User> GetUsers(Predicate<User> condition)
         {
-            IEnumerable<User> users = from item in DataSource.Users
-                                      where condition(item)
-                                      select item.Clone();
-            if (users.Count() == 0) 
-                throw new UserException("No users exist.");
-            return users;
+            return from item in DataSource.Users
+                   where condition(item)
+                   select item.Clone();
         }
 
         #endregion
@@ -90,10 +81,7 @@ namespace DL
         }
         public Bus getBus(string licensePlate)
         {
-            Bus bus = DataSource.Buses.Find(item => item.LicensePlate == licensePlate);
-            if (bus == null)
-                throw new BusException("The bus does not exist.");
-            return bus.Clone();
+            return DataSource.Buses.Find(item => item.LicensePlate == licensePlate).Clone();         
         }
         public IEnumerable<Bus> GetBuses()
         {
@@ -102,12 +90,9 @@ namespace DL
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
-            IEnumerable<Bus> buses = from item in DataSource.Buses
-                                     where condition(item)
-                                     select item.Clone();
-            if (buses.Count() == 0)
-                throw new BusException("No buses exist.");
-            return buses;
+            return from item in DataSource.Buses
+                   where condition(item)
+                   select item.Clone();
         }
 
         #endregion
@@ -135,10 +120,7 @@ namespace DL
         }
         public Line getLine(int serial)
         {
-            Line line = DataSource.Lines.Find(item => item.ThisSerial == serial);
-            if (line == null)
-                throw new LineException("The line does not exist.");
-            return line.Clone();           
+            return DataSource.Lines.Find(item => item.ThisSerial == serial).Clone();               
         }
         public IEnumerable<Line> GetLines()
         {
@@ -147,12 +129,9 @@ namespace DL
         }
         public IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
-            IEnumerable<Line> lines = from item in DataSource.Lines
-                                      where condition(item)
-                                      select item.Clone();
-            if (lines.Count() == 0)
-                throw new LineException("No lines exist.");
-            return lines.OrderBy(item=>item.NumberLine);
+            return (from item in DataSource.Lines
+                    where condition(item)
+                    select item.Clone()).OrderBy(item => item.NumberLine);           
         }
 
         #endregion
@@ -180,10 +159,7 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            Station station = DataSource.Stations.Find(item => item.ID == id);
-            if (station == null)
-                throw new LineException("The station does not exist.");
-            return station.Clone();
+            return DataSource.Stations.Find(item => item.ID == id).Clone();
         }
         public IEnumerable<Station> GetStations()
         {
@@ -192,12 +168,9 @@ namespace DL
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
-            IEnumerable<Station> stations = from item in DataSource.Stations
-                                            where condition(item)
-                                            select item.Clone();
-            if (stations.Count() == 0)
-                throw new StationException("No stations exist.");
-            return stations.OrderBy(item => item.ID);
+            return (from item in DataSource.Stations
+                    where condition(item)
+                    select item.Clone()).OrderBy(item => item.ID); ;           
         }
 
         #endregion
@@ -233,27 +206,18 @@ namespace DL
         }
         public LineStation getLineStation(int numberLine, int id)
         {
-            LineStation lineStation = DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id);
-            if (lineStation == null)
-                throw new StationException("The line station does not exist.");
-            return lineStation.Clone();            
+            return DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id).Clone();                   
         }
         public IEnumerable<LineStation> GetLineStations()
         {
-            IEnumerable<LineStation> lineStations = from item in DataSource.LineStations
-                                                    select item.Clone();
-            if (lineStations.Count() == 0)
-                throw new StationException("No line stations exist.");
-            return lineStations;
+            return from item in DataSource.LineStations
+                   select item.Clone();           
         }
         public IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition)
         {
-            IEnumerable<LineStation> lineStations = from item in DataSource.LineStations
-                                                    where condition(item)
-                                                    select item.Clone();
-            //if (lineStations.Count() == 0)
-            //    throw new StationException("No line stations exist.");
-            return lineStations;
+            return (from item in DataSource.LineStations
+                   where condition(item)
+                   select item.Clone()).OrderBy(item => item.PathIndex);      
         }
 
         #endregion
@@ -285,27 +249,18 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            TwoFollowingStations twoFollowingStations = DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID));
-            if (twoFollowingStations == null)
-                throw new StationException("The two following stations do not exist.");
-            return twoFollowingStations.Clone();
+            return DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID)).Clone();
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
-            IEnumerable<TwoFollowingStations> followingStations = from item in DataSource.FollowingStations
-                                                                  select item.Clone();
-            if (followingStations.Count() == 0)
-                throw new StationException("No following stations exist.");
-            return followingStations.OrderBy(item=>item.TimeBetweenStations);
+            return (from item in DataSource.FollowingStations
+                   select item.Clone()).OrderBy(item => item.TimeBetweenStations);
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
-            IEnumerable<TwoFollowingStations> followingStations = from item in DataSource.FollowingStations
-                                                                  where condition(item)
-                                                                  select item.Clone();
-            if (followingStations.Count() == 0)
-                throw new StationException("No following stations exist.");
-            return followingStations.OrderBy(item => item.TimeBetweenStations);
+            return (from item in DataSource.FollowingStations
+                   where condition(item)
+                   select item.Clone()).OrderBy(item => item.TimeBetweenStations);       
         }
 
         #endregion
@@ -340,27 +295,18 @@ namespace DL
         }
         public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
         {
-            DrivingBus drivingBus = DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start);
-            if (drivingBus == null)
-                throw new BusException("The driving bus does not exist.");
-            return drivingBus.Clone();
+            return DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start).Clone();
         }
         public IEnumerable<DrivingBus> GetDrivingBuses()
         {
-            IEnumerable<DrivingBus> drivingBuses = from item in DataSource.DrivingBuses
-                                                   select item.Clone();
-            if (drivingBuses.Count() == 0)
-                throw new BusException("No driving buses exist.");
-            return drivingBuses;
+            return from item in DataSource.DrivingBuses
+                   select item.Clone();
         }
         public IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition)
         {
-            IEnumerable<DrivingBus> drivingBuses = from item in DataSource.DrivingBuses
-                                                   where condition(item)
-                                                   select item.Clone();
-            if (drivingBuses.Count() == 0)
-                throw new BusException("No driving buses exist.");
-            return drivingBuses;
+            return from item in DataSource.DrivingBuses
+                   where condition(item)
+                   select item.Clone();
         }
 
         #endregion
@@ -396,18 +342,12 @@ namespace DL
         }
         public DrivingLine getDrivingLine(int numberLine, DateTime start)
         {
-            DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start);
-            if (drivingLine == null)
-                throw new LineException("The driving line does not exist.");
-            return drivingLine.Clone();
+            return DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start).Clone();
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
         {
-            IEnumerable<DrivingLine> drivingLines = from item in DataSource.DrivingLines
-                                                    select item.Clone();
-            if (drivingLines.Count() == 0)
-                throw new LineException("No driving lines exist.");
-            return drivingLines;
+            return from item in DataSource.DrivingLines
+                   select item.Clone();
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
         {

@@ -32,14 +32,10 @@ namespace PL.Lines
             bl = BlFactory.GetBl();
             username = name;
 
-            IEnumerable<BO.Line> lines = bl.GetLines();
-            ListOfLines.ItemsSource = lines;
-            if(lines.Count() > 0)
-            {
-                ListOfLines.SelectedIndex = 0;
-                ListOfLines.Text = ((BO.Line)ListOfLines.SelectedItem).ThisSerial.ToString();
-                selectionChanged();
-            }          
+            ListOfLines.ItemsSource = bl.GetLines(); // possible to open this window when there are lines
+            ListOfLines.SelectedIndex = 0;
+            ListOfLines.Text = ((BO.Line)ListOfLines.SelectedItem).ThisSerial.ToString();
+            selectionChanged();
         }
 
         private void selectionChanged()
