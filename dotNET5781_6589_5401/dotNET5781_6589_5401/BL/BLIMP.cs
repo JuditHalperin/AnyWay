@@ -364,7 +364,6 @@ namespace BL
         {
             return new Line()
             {
-                ThisSerial = lineB.ThisSerial,
                 NumberLine = lineB.NumberLine,
                 Region = (Regions)lineB.Region
             };
@@ -416,10 +415,16 @@ namespace BL
         public void addLine(BO.Line line)
         {
             try
-            {                
+            {
+                if (line.Path.Count() < 2)
+                    throw new BO.LineException("A line path should contain at least two stations.");
                 dal.addLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
+            }
+            catch (BO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message);
             }
             catch (LineException ex)
             {
