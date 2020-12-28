@@ -523,7 +523,7 @@ namespace BL
         /// <returns></returns>
         public bool canChangeLine(BO.Line line)
         {
-            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial) == null)
+            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial).Count() == 0)
                 return true;
             return false;
         }
@@ -705,7 +705,7 @@ namespace BL
                                                                 from lineStation in GetLineStations(l => l.ID == station.ID)
                                                                 where drivingLine.NumberLine == lineStation.NumberLine
                                                                 select drivingLine;
-            if (drivingLinesAtStation == null)
+            if (drivingLinesAtStation.Count() == 0)
                 return true;
             return false;
         }
