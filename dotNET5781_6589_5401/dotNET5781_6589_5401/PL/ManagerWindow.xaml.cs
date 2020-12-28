@@ -22,12 +22,10 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
-        static IBL bl;
 
         public ManagerWindow(string username)
         {
             InitializeComponent();
-            bl = BlFactory.GetBl();
             Username.Content = username;
         }
 

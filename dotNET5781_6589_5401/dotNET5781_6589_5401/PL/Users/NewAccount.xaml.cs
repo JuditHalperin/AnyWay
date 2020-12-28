@@ -15,7 +15,7 @@ using BLAPI;
 using BO;
 using PO;
 
-namespace PL
+namespace PL.Users
 {
     /// <summary>
     /// Interaction logic for NewAccount.xaml
@@ -51,13 +51,13 @@ namespace PL
 
                 else
                 {
-                    bl.addUser(new User(){ Username = Username.Text, Password = Password.Password, IsManager = administrativePrivileges });
+                    bl.addUser(new User() { Username = Username.Text, Password = Password.Password, IsManager = administrativePrivileges });
                     new ManagerWindow(Username.Text).Show();
                     Close();
                     return;
                 }
             }
-            
+
             catch (InvalidInputException ex)
             {
                 MessageBox.Show(ex.Message);

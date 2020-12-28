@@ -15,7 +15,7 @@ using BLAPI;
 using BO;
 using PO;
 
-namespace PL
+namespace PL.Users
 {
     /// <summary>
     /// Interaction logic for SignIn.xaml
@@ -50,7 +50,7 @@ namespace PL
                 {
                     new ManagerWindow(Username.Text).Show();
                     Close();
-                }                
+                }
             }
             catch (UserException ex)
             {
@@ -69,5 +69,4 @@ namespace PL
             Close();
         }
     }
-
 }
