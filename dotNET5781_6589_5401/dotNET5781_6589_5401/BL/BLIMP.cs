@@ -169,9 +169,9 @@ namespace BL
         /// </summary>
         /// <param name="bus">bus of BO</param>
         /// <returns>bus of DO</returns>
-        DO.Bus convertToBusDO(BO.Bus bus)
+        Bus convertToBusDO(BO.Bus bus)
         {
-            return new DO.Bus()
+            return new Bus()
             {
                 LicensePlate = bus.LicensePlate,
                 StartOfWork = bus.StartOfWork,
@@ -197,7 +197,7 @@ namespace BL
         /// </summary>
         /// <param name="bus">bus of DO</param>
         /// <returns>bus of BO</returns>
-        BO.Bus convertToBusBO(DO.Bus bus)
+        BO.Bus convertToBusBO(Bus bus)
         {
             BO.Bus busB = new BO.Bus()
             {
@@ -206,7 +206,7 @@ namespace BL
                 LicensePlate = bus.LicensePlate,
                 TotalKms = bus.TotalKms,
                 KmsSinceFuel = bus.KmsSinceFuel,
-                KmsSinceService = bus.KmsSinceService,
+                KmsSinceService = bus.KmsSinceService
             };
             busB.Status = setState(busB);
             return busB;
@@ -221,7 +221,7 @@ namespace BL
             {
                 dal.addBus(convertToBusDO(bus));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
@@ -236,7 +236,7 @@ namespace BL
             {
                 dal.removeBus(convertToBusDO(bus));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
@@ -251,13 +251,13 @@ namespace BL
             {
                 dal.updateBus(convertToBusDO(bus));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
         }
         /// <summary>
-        /// fuel bus=KmsSinceFuel = 0
+        /// fuel the bus
         /// </summary>
         /// <param name="bus">bus for fueling</param>
         public void fuelBus(BO.Bus bus)
@@ -268,9 +268,9 @@ namespace BL
                 bus.KmsSinceFuel = 0;
                 dal.updateBus(convertToBusDO(bus));
             }
-            catch (BO.BusException)
+            catch (BO.BusException ex) // the bus does not exist
             {
-                throw new BO.BusException("The bus is not exists");
+                throw new BO.BusException(ex.Message);
             }
         }
         /// <summary>
@@ -283,14 +283,14 @@ namespace BL
             {
                 bus = getBus(bus.LicensePlate);
                 bus.KmsSinceService = 0;
-                if (bus.KmsSinceFuel > 1100)//Need refueling soon
-                    bus.KmsSinceFuel = 0;
                 bus.LastService = DateTime.Now.Date;
+                if (bus.KmsSinceFuel > 1100) // needs refueling soon
+                    bus.KmsSinceFuel = 0;
                 dal.updateBus(convertToBusDO(bus));
             }
-            catch (BO.BusException)
+            catch (BO.BusException ex) // the bus does not exist
             {
-                throw new BO.BusException("The bus is not exists");
+                throw new BO.BusException(ex.Message);
             }
         }
         /// <summary>
@@ -304,7 +304,7 @@ namespace BL
             {
                 return convertToBusBO(dal.getBus(licensePlate));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
@@ -317,12 +317,10 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.Bus> busesD = dal.GetBuses();
-                IEnumerable<BO.Bus> busesB = from bus in busesD
-                                             select convertToBusBO(bus);
-                return busesB;
+                return from bus in dal.GetBuses()
+                       select convertToBusBO(bus);
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
@@ -419,7 +417,7 @@ namespace BL
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
                 throw new BO.LineException(ex.Message);
             }
@@ -434,11 +432,10 @@ namespace BL
             {
                 dal.removeLine(convertToLineDO(line));
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
                 throw new BO.LineException(ex.Message);
             }
-
         }
         /// <summary>
         /// Update data of line.
@@ -452,7 +449,7 @@ namespace BL
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
                 throw new BO.LineException(ex.Message);
             }
@@ -464,12 +461,12 @@ namespace BL
         /// <returns></returns>
         public bool canChangeLine(BO.Line line)
         {
-            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial).Count() == 0)
+            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial) == null)
                 return true;
             return false;
         }
         /// <summary>
-        /// Return line according it key= the serial.
+        /// Return line according it key = the serial.
         /// </summary>
         /// <param name="serial">Key of line.</param>
         /// <returns>Line with this serial.</returns>
@@ -479,7 +476,7 @@ namespace BL
             {
                 return convertToLineBO(dal.getLine(serial));
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
                 throw new BO.LineException(ex.Message);
             }
@@ -492,12 +489,10 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.Line> linesD = dal.GetLines();
-                IEnumerable<BO.Line> linesB = from line in linesD
-                                              select convertToLineBO(line);
-                return linesB;
+                return from line in dal.GetLines()
+                       select convertToLineBO(line);
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
                 throw new BO.LineException(ex.Message);
             }
@@ -511,12 +506,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.Line> lines = from item in GetLines()
-                                             where condition(item)
-                                             select item;
-                if (lines.Count() == 0)
-                    throw new BO.LineException("No lines exist.");
-                return lines;
+                return from item in GetLines()
+                       where condition(item)
+                       select item;                
             }
             catch (BO.LineException ex)
             {
