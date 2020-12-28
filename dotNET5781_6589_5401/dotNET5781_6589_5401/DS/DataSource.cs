@@ -12,12 +12,12 @@ namespace DS
     {
         public static List<User> Users;
         public static List<Bus> Buses = new List<Bus>();
-		public static List<Line> Lines = new List<Line>();
+		public static List<Line> Lines;
 		public static List<Station> Stations;
-        public static List<LineStation> LineStations = new List<LineStation>();
-		public static List<TwoFollowingStations> FollowingStations = new List<TwoFollowingStations>();
-		public static List<DrivingBus> DrivingBuses = new List<DrivingBus>();
-		public static List<DrivingLine> DrivingLines = new List<DrivingLine>();
+        public static List<LineStation> LineStations;
+		public static List<TwoFollowingStations> FollowingStations;
+		public static List<DrivingBus> DrivingBuses;
+		public static List<DrivingLine> DrivingLines;
 		public static string ManagingCode = "123456";
 		public static int serial = 1;
 		
@@ -614,6 +614,9 @@ namespace DS
 					Longitude = 34.818099
 				},
             }; // 70 stations
+			Lines = new List<Line>();
+			LineStations = new List<LineStation>();
+			FollowingStations = new List<TwoFollowingStations>();
 			foreach (Station station1 in Stations)
 			{
 				foreach (Station station2 in Stations)
@@ -683,6 +686,8 @@ namespace DS
 					KmsSinceService = rand.Next(0, 20000)
 				};
 			} //10 buses after 2018
+			DrivingBuses = new List<DrivingBus>();
+			DrivingLines = new List<DrivingLine>();
 		}
 	}
 }

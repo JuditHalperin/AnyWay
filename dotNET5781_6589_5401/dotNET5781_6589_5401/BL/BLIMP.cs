@@ -740,34 +740,26 @@ namespace BL
                 ID = lineStationD.ID,
                 PathIndex = lineStationD.PathIndex
             };
-
-            try
+            LineStation lineStationP = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex - 1).FirstOrDefault();
+            if (lineStationP != null)
             {
-                LineStation lineStationP = dal.getLineStation(lineStationD.NumberLine, lineStationD.PathIndex - 1);
                 TwoFollowingStations followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationP.ID);
                 lineStationB.PreviousStationID = lineStationP.ID;
                 lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
                 lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
             }
-            catch (StationException) // if it is the first line station
+            else // if it is the first line station
             {
                 lineStationB.PreviousStationID = -1;
                 lineStationB.LengthFromPreviousStations = -1;
                 lineStationB.TimeFromPreviousStations = -1;
             }
-            finally
-            {
-                try
-                {
-                    lineStationB.NextStationID = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex + 1).FirstOrDefault().ID;
-                }
-                catch (StationException) // if it is the last line station
-                {
-                    lineStationB.NextStationID = -1;
-                }
-
-            } 
-         return lineStationB;
+            LineStation lineStationN = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex + 1).FirstOrDefault();
+            if (lineStationN != null)
+                lineStationB.NextStationID = lineStationN.ID;
+            else // if it is the last line station
+                    lineStationB.NextStationID = -1; 
+            return lineStationB;
         }
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
