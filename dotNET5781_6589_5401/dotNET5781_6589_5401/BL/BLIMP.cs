@@ -270,7 +270,7 @@ namespace BL
                 bus.KmsSinceFuel = 0;
                 dal.updateBus(convertToBusDO(bus));
             }
-            catch(BO.BusException)
+            catch (BO.BusException)
             {
                 throw new BO.BusException("The bus is not exists");
             }
@@ -419,7 +419,7 @@ namespace BL
         {
             try
             {
-                foreach(BO.LineStation station in line.Path)
+                foreach (BO.LineStation station in line.Path)
                     station.NumberLine = line.ThisSerial;
                 dal.addLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
@@ -565,7 +565,7 @@ namespace BL
                     Name = stationD.Name,
                     Latitude = stationD.Latitude,
                     Longitude = stationD.Longitude,
-                    LinesAtStation=lineStationsB
+                    LinesAtStation = lineStationsB
                 };
             }
             catch (BO.StationException ex)
@@ -631,7 +631,7 @@ namespace BL
         public void removeStation(BO.Station station)
         {
             try
-            {               
+            {
                 dal.removeStation(convertToStationDO(station));
                 foreach (BO.LineStation lineStation in GetLineStations(item => item.ID != station.ID))
                     removeLineStation(lineStation);
@@ -748,7 +748,7 @@ namespace BL
                 ID = lineStationD.ID,
                 PathIndex = lineStationD.PathIndex
             };
-            
+
             try
             {
                 LineStation lineStationP = dal.getLineStation(lineStationD.NumberLine, lineStationD.PathIndex - 1);
@@ -780,11 +780,11 @@ namespace BL
             List<BO.LineStation> lineStations = new List<BO.LineStation>();
             lineStations.Add(new BO.LineStation()
             {
-                ID=path.ElementAt(0).ID,
-                PathIndex=0,
-                NextStationID=path.ElementAt(1).ID
+                ID = path.ElementAt(0).ID,
+                PathIndex = 0,
+                NextStationID = path.ElementAt(1).ID
             });
-            for (int i = 1; i < path.Count()-1; i++)
+            for (int i = 1; i < path.Count() - 1; i++)
             {
                 lineStations.Add(new BO.LineStation()
                 {
@@ -792,8 +792,8 @@ namespace BL
                     PathIndex = i,
                     NextStationID = path.ElementAt(i + 1).ID,
                     PreviousStationID = path.ElementAt(i - 1).ID,
-                    LengthFromPreviousStations=calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)),
-                    TimeFromPreviousStations=calculateTime(calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)))
+                    LengthFromPreviousStations = calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)),
+                    TimeFromPreviousStations = calculateTime(calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)))
                 });
             }
             lineStations.Add(new BO.LineStation()
@@ -812,27 +812,27 @@ namespace BL
         /// <param name="lineStation">station in line</param>
         public void addLineStation(BO.LineStation lineStation)
         {
-            try
+            try // if the line station exists
+            {
+                BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.PathIndex);
+                IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
+                {
+                    lineStations.ElementAt(i).PathIndex++;
+                    updateLineStation(lineStations.ElementAt(i));
+                }
+            }
+            catch (BO.BusException) { }
+            finally
             {
                 try
                 {
-                    BO.LineStation station=GetLineStations(item => (item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex)).First();
-                    IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
-                    for (int i = lineStation.PathIndex-1; i < lineStations.Count(); i++)
-                    {
-                        lineStations.ElementAt(i).PathIndex++;
-                        updateLineStation(lineStations.ElementAt(i));
-                    }
-                }
-                catch(BO.BusException) { }
-                finally
-                {
                     dal.addLineStation(convertToLineStationDO(lineStation));
                 }
-            }
-            catch (DO.StationException ex)
-            {
-                throw new BO.StationException(ex.Message);
+                catch (StationException ex)
+                {
+                    throw new BO.StationException(ex.Message);
+                }
             }
         }
         /// <summary>
@@ -864,13 +864,13 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = getLineStation(lineStation.NumberLine,lineStation.ID);//if the station is exists.
+                BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.ID); // if the line station exists
                 try
                 {
-                    if(lineStation.PathIndex!=station.PathIndex)//if the update in the index of path
+                    if (lineStation.PathIndex != station.PathIndex) // if the index is updated
                     {
                         IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
-                        if(station.PathIndex< lineStation.PathIndex)//need to back the station that after the old station
+                        if (station.PathIndex < lineStation.PathIndex) // need to increase the stations index that after the old station
                             for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
                             {
                                 lineStations.ElementAt(i).PathIndex--;
@@ -882,7 +882,6 @@ namespace BL
                             updateLineStation(lineStations.ElementAt(i));
                         }
                     }
-                    
                 }
                 catch (BO.StationException) { }
                 finally
@@ -890,11 +889,11 @@ namespace BL
                     dal.updateLineStation(convertToLineStationDO(lineStation));
                 }
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
-            catch (BO.StationException ex) 
+            catch (BO.StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -920,12 +919,10 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.LineStation> lineStationD = dal.GetLineStations();
-                IEnumerable<BO.LineStation> linetationB = from lineStation in lineStationD
-                                                          select convertToLineStationBO(lineStation);
-                return linetationB;
+                return from lineStation in dal.GetLineStations()
+                       select convertToLineStationBO(lineStation);
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
