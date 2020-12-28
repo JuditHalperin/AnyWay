@@ -748,28 +748,31 @@ namespace BL
                 ID = lineStationD.ID,
                 PathIndex = lineStationD.PathIndex
             };
+            
             try
             {
-                if (lineStationB.PathIndex != 1)
-                {
-                    LineStation lineStationP = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex - 1)).First();
-                    TwoFollowingStations followingStations = new TwoFollowingStations();
-                    lineStationB.PreviousStationID = lineStationP.ID;
-                    followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationP.ID);
-                    lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
-                    lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
-                }
-                try
-                {
-                    LineStation lineStationN = dal.GetLineStations(lineStation => lineStation.NumberLine == lineStationD.NumberLine && lineStation.PathIndex == (lineStationD.PathIndex + 1)).First();
-                    lineStationB.NextStationID = lineStationN.ID;
-                }
-                catch (DO.StationException) { }
+                LineStation lineStationP = dal.getLineStation(lineStationD.NumberLine, lineStationD.PathIndex - 1);
+                TwoFollowingStations followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationP.ID);
+                lineStationB.PreviousStationID = lineStationP.ID;
+                lineStationB.LengthFromPreviousStations = followingStations.LengthBetweenStations;
+                lineStationB.TimeFromPreviousStations = followingStations.TimeBetweenStations;
             }
-            catch (DO.StationException ex)
+            catch (StationException) // if it is the first line station
             {
-                throw new BO.StationException(ex.Message);
+                lineStationB.PreviousStationID = -1;
+                lineStationB.LengthFromPreviousStations = -1;
+                lineStationB.TimeFromPreviousStations = -1;
             }
+
+            try
+            {
+                lineStationB.NextStationID = dal.getLineStation(lineStationD.NumberLine, lineStationD.PathIndex + 1).ID;
+            }
+            catch (StationException) // if it is the last line station
+            {
+                lineStationB.NextStationID = -1;
+            }
+
             return lineStationB;
         }
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
@@ -1031,10 +1034,8 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.DrivingBus> drivingBusesD = dal.GetDrivingBuses();
-                IEnumerable<BO.DrivingBus> drivingBusesB = from drivingBus in drivingBusesD
-                                                           select convertToDrivingBusBO(drivingBus);
-                return drivingBusesB;
+                return from drivingBus in dal.GetDrivingBuses()
+                       select convertToDrivingBusBO(drivingBus);
             }
             catch (DO.BusException ex)
             {
@@ -1045,12 +1046,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.DrivingBus> drivingBuses = from item in GetDrivingBuses()
-                                                          where condition(item)
-                                                          select item;
-                if (drivingBuses.Count() == 0)
-                    throw new BO.BusException("No driving buses exist.");
-                return drivingBuses;
+                return from item in GetDrivingBuses()
+                       where condition(item)
+                       select item;
             }
             catch (BO.BusException ex)
             {
@@ -1140,10 +1138,8 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.DrivingLine> drivingLinesD = dal.GetDrivingLines();
-                IEnumerable<BO.DrivingLine> drivingLinesB = from drivingLine in drivingLinesD
-                                                            select convertToDrivingLineBO(drivingLine);
-                return drivingLinesB;
+                return from drivingLine in dal.GetDrivingLines()
+                       select convertToDrivingLineBO(drivingLine);
             }
             catch (DO.LineException ex)
             {
@@ -1154,12 +1150,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.DrivingLine> drivingLines = from item in GetDrivingLines()
-                                                           where condition(item)
-                                                           select item;
-                if (drivingLines.Count() == 0)
-                    throw new BO.LineException("No driving lines exist.");
-                return drivingLines;
+                return from item in GetDrivingLines()
+                       where condition(item)
+                       select item;
             }
             catch (BO.LineException ex)
             {
