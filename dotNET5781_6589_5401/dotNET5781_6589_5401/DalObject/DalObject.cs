@@ -261,8 +261,10 @@ namespace DL
 
         public void addTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
+            if(!DataSource.Stations.Exists(item => item.ID == twoFollowingStations.FirstStationID) || !DataSource.Stations.Exists(item => item.ID == twoFollowingStations.SecondStationID))
+                throw new StationException("At least one of the station does not exist.");
             if (twoFollowingStations.FirstStationID == twoFollowingStations.SecondStationID)
-                throw new StationException("Two identical statuons.");
+                throw new StationException("Two identical stations.");
             if (DataSource.FollowingStations.Exists(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID)))
                 throw new StationException("The two following stations already exist.");
             DataSource.FollowingStations.Add(twoFollowingStations.Clone());
