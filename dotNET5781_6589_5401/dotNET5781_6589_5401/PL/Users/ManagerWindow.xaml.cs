@@ -11,11 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BLAPI;
-using PO;
-using BO;
 
-namespace PL
+namespace PL.Users
 {
     /// <summary>
     /// Interaction logic for ManagerWindow.xaml
@@ -55,12 +52,12 @@ namespace PL
 
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("password", (string) Username.Content).ShowDialog();
+            new ChangePassword("password", (string)Username.Content).ShowDialog();
         }
 
         private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("managing code", (string) Username.Content).ShowDialog();
+            new ChangePassword("managing code", (string)Username.Content).ShowDialog();
         }
     }
 }
