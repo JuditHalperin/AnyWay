@@ -377,6 +377,7 @@ namespace BL
         {
             return new BO.Line()
             {
+                ThisSerial=lineD.ThisSerial,
                 NumberLine = lineD.NumberLine,
                 Region = (BO.Regions)lineD.Region,
                 Path = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex)
