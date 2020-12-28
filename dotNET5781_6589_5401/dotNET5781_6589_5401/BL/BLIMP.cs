@@ -418,7 +418,9 @@ namespace BL
             {
                 if (line.Path.Count() < 2)
                     throw new BO.LineException("A line path should contain at least two stations.");
-                dal.addLine(convertToLineDO(line));
+                int thisSerial = dal.addLine(convertToLineDO(line));
+                foreach (BO.LineStation lineStation in line.Path)
+                    lineStation.NumberLine = thisSerial;
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
             }

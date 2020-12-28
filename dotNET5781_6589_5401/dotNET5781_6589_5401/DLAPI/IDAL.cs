@@ -32,7 +32,7 @@ namespace DLAPI
 
         #region Lines
 
-        void addLine(Line line);
+        int addLine(Line line);
         void removeLine(Line line);
         void updateLine(Line line);
         Line getLine(int serial);

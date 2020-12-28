@@ -114,10 +114,11 @@ namespace DL
 
         #region Lines
 
-        public void addLine(Line line)
+        public int addLine(Line line)
         {
             line.ThisSerial = DataSource.serial++;
             DataSource.Lines.Add(line.Clone());
+            return line.ThisSerial;
         }
         public void removeLine(Line line)
         {
