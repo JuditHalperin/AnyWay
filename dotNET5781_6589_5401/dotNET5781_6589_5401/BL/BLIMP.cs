@@ -755,17 +755,19 @@ namespace BL
                 lineStationB.LengthFromPreviousStations = -1;
                 lineStationB.TimeFromPreviousStations = -1;
             }
-
-            try
+            finally
             {
-                lineStationB.NextStationID = dal.getLineStation(lineStationD.NumberLine, lineStationD.PathIndex + 1).ID;
-            }
-            catch (StationException) // if it is the last line station
-            {
-                lineStationB.NextStationID = -1;
-            }
+                try
+                {
+                    lineStationB.NextStationID = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex + 1).FirstOrDefault().ID;
+                }
+                catch (StationException) // if it is the last line station
+                {
+                    lineStationB.NextStationID = -1;
+                }
 
-            return lineStationB;
+            } 
+         return lineStationB;
         }
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
