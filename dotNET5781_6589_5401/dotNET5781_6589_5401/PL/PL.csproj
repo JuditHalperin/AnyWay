@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\bus.ico</ApplicationIcon>
+    <ApplicationIcon>Images\BusIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -205,7 +205,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\bus.ico" />
+    <Resource Include="Images\BusIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BackButton.png" />
