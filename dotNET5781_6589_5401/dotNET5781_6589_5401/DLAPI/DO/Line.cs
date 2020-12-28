@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public class DrivingLine
+    public class Line
     {
+        public int ThisSerial { get; set; }
         public int NumberLine { get; set; }
-        public DateTime Start { get; set; }
-        public int Frequency { get; set; }
-        public DateTime End { get; set; }
+        public Regions Region { get; set; }
         public override string ToString() => this.ToStringProperty();
     }
 }
