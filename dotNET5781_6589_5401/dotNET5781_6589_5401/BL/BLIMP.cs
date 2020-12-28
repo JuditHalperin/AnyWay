@@ -358,13 +358,13 @@ namespace BL
         /// </summary>
         /// <param name="bus">line of BO</param>
         /// <returns>line of DO</returns>
-        DO.Line convertToLineDO(BO.Line lineB)
+        Line convertToLineDO(BO.Line lineB)
         {
-            return new DO.Line()
+            return new Line()
             {
                 ThisSerial = lineB.ThisSerial,
                 NumberLine = lineB.NumberLine,
-                Region = (DO.Regions)lineB.Region
+                Region = (Regions)lineB.Region
             };
         }
         /// <summary>
@@ -372,14 +372,13 @@ namespace BL
         /// </summary>
         /// <param name="bus">line of DO</param>
         /// <returns>line of BO</returns>
-        BO.Line convertToLineBO(DO.Line lineD)
+        BO.Line convertToLineBO(Line lineD)
         {
-            IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex);
             return new BO.Line()
             {
                 NumberLine = lineD.NumberLine,
                 Region = (BO.Regions)lineD.Region,
-                Path = lineStationsB
+                Path = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex)
             };
         }
         /// <summary>
@@ -388,14 +387,15 @@ namespace BL
         /// <param name="line">Using in the path of line.</param>
         void convertLineToFollowingStationDO(BO.Line line)
         {
-            TwoFollowingStations followingStations = new TwoFollowingStations();
             for (int i = 0; i < line.Path.Count() - 1; i++)
-            {
-                followingStations.FirstStationID = line.Path.ElementAt(i).ID;
-                followingStations.SecondStationID = line.Path.ElementAt(i + 1).ID;
-                followingStations.LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations;
-                followingStations.TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations;
-                addOrUpdateTwoFollowingStations(followingStations);
+            {             
+                addOrUpdateTwoFollowingStations(new TwoFollowingStations()
+                {
+                    FirstStationID = line.Path.ElementAt(i).ID,
+                    SecondStationID = line.Path.ElementAt(i + 1).ID,
+                    LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations,
+                    TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations
+                });
             }
         }
         /// <summary>
@@ -405,9 +405,7 @@ namespace BL
         void convertLineToLineStationsDO(BO.Line line)
         {
             foreach (BO.LineStation station in line.Path)
-            {
                 addOrUpdateLineStation(station);
-            }
         }
         /// <summary>
         /// Add line from the data.
@@ -416,9 +414,7 @@ namespace BL
         public void addLine(BO.Line line)
         {
             try
-            {
-                foreach (BO.LineStation station in line.Path)
-                    station.NumberLine = line.ThisSerial;
+            {                
                 dal.addLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
                 convertLineToLineStationsDO(line);
@@ -537,9 +533,9 @@ namespace BL
         /// </summary>
         /// <param name="stationB">station of BO</param>
         /// <returns>station of DO</returns>
-        DO.Station convertToStationDO(BO.Station stationB)
+        Station convertToStationDO(BO.Station stationB)
         {
-            return new DO.Station()
+            return new Station()
             {
                 ID = stationB.ID,
                 Name = stationB.Name,
@@ -552,7 +548,7 @@ namespace BL
         /// </summary>
         /// <param name="stationD">station of DO</param>
         /// <returns>station of BO</returns>
-        BO.Station convertToStationBO(DO.Station stationD)
+        BO.Station convertToStationBO(Station stationD)
         {
             try
             {
@@ -576,17 +572,19 @@ namespace BL
         /// <param name="station">data about station.</param>
         void stationToFollowingStationAndLineStation(BO.Station station)
         {
-            foreach (BO.Station otherStation in GetStations(item => item.ID != station.ID))
-            {
-                TwoFollowingStations followingStations = new TwoFollowingStations()
+            IEnumerable<BO.Station> stations = GetStations(item => item.ID != station.ID);
+            if(stations != null)
+                foreach (BO.Station otherStation in stations)
                 {
-                    FirstStationID = station.ID,
-                    SecondStationID = otherStation.ID,
-                    LengthBetweenStations = calculateDistance(station, otherStation),
-                };
-                followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
-                addOrUpdateTwoFollowingStations(followingStations);
-            }
+                    TwoFollowingStations followingStations = new TwoFollowingStations()
+                    {
+                        FirstStationID = station.ID,
+                        SecondStationID = otherStation.ID,
+                        LengthBetweenStations = calculateDistance(station, otherStation),
+                    };
+                    followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
+                    addOrUpdateTwoFollowingStations(followingStations);
+                }
         }
         /// <summary>
         /// impossible to change a station if there are driving lines that stop there
@@ -652,7 +650,7 @@ namespace BL
                 dal.updateStation(convertToStationDO(station));
                 stationToFollowingStationAndLineStation(station);
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -668,7 +666,7 @@ namespace BL
             {
                 return convertToStationBO(dal.getStation(id));
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -681,12 +679,10 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.Station> stationsD = dal.GetStations();
-                IEnumerable<BO.Station> stationsB = from station in stationsD
-                                                    select convertToStationBO(station);
-                return stationsB;
+                return from station in dal.GetStations()
+                       select convertToStationBO(station);
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -700,11 +696,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.Station> stations = from item in GetStations()
-                                                   select item;
-                if (stations.Count() == 0)
-                    throw new BO.StationException("No stations exist.");
-                return stations;
+                return from item in GetStations()
+                       where condition(item)
+                       select item;              
             }
             catch (BO.StationException ex)
             {
@@ -721,9 +715,9 @@ namespace BL
         /// </summary>
         /// <param name="lineStationB">line station of BO</param>
         /// <returns>line station of DO</returns>
-        DO.LineStation convertToLineStationDO(BO.LineStation lineStationB)
+        LineStation convertToLineStationDO(BO.LineStation lineStationB)
         {
-            return new DO.LineStation()
+            return new LineStation()
             {
                 ID = lineStationB.ID,
                 NumberLine = lineStationB.NumberLine,
