@@ -581,22 +581,7 @@ namespace BL
                     followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
                     addOrUpdateTwoFollowingStations(followingStations);
                 }
-        }
-        /// <summary>
-        /// impossible to change a station if there are driving lines that stop there
-        /// </summary>
-        /// <param name="station"></param>
-        /// <returns></returns>
-        public bool canChangeStation(BO.Station station)
-        {
-            IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
-                                                                from lineStation in GetLineStations(l => l.ID == station.ID)
-                                                                where drivingLine.NumberLine == lineStation.NumberLine
-                                                                select drivingLine;
-            if (drivingLinesAtStation == null)
-                return true;
-            return false;
-        }
+        }      
         /// <summary>
         /// Add station to the saved data.
         /// </summary>
@@ -700,6 +685,21 @@ namespace BL
             {
                 throw new BO.StationException(ex.Message);
             }
+        }
+        /// <summary>
+        /// impossible to change a station if there are driving lines that stop there
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        public bool canChangeStation(BO.Station station)
+        {
+            IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
+                                                                from lineStation in GetLineStations(l => l.ID == station.ID)
+                                                                where drivingLine.NumberLine == lineStation.NumberLine
+                                                                select drivingLine;
+            if (drivingLinesAtStation == null)
+                return true;
+            return false;
         }
 
         #endregion
