@@ -15,7 +15,7 @@ using BLAPI;
 using BO;
 using PO;
 
-namespace PL
+namespace PL.Users
 {
     /// <summary>
     /// Interaction logic for ChangePassword.xaml
@@ -55,9 +55,9 @@ namespace PL
                         Username = user.Username,
                         Password = NewPassword.Password,
                         IsManager = user.IsManager
-                    });                    
+                    });
                 }
-                
+
                 else if (gettingChanged == "managing code")
                 {
                     if (bl.getManagingCode() != OldPassword.Password)
@@ -72,7 +72,7 @@ namespace PL
             catch (InvalidInputException ex)
             {
                 MessageBox.Show(ex.Message);
-            }  
+            }
             catch (UserException ex)
             {
                 MessageBox.Show(ex.Message);

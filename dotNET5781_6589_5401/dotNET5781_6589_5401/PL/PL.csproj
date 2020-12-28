@@ -71,9 +71,6 @@
     <Compile Include="Buses\ShowBus.xaml.cs">
       <DependentUpon>ShowBus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChangePassword.xaml.cs">
-      <DependentUpon>ChangePassword.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Lines\AddLine.xaml.cs">
       <DependentUpon>AddLine.xaml</DependentUpon>
     </Compile>
@@ -102,6 +99,9 @@
     </Compile>
     <Compile Include="Stations\StationsList.xaml.cs">
       <DependentUpon>StationsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="Users\NewAccount.xaml.cs">
       <DependentUpon>NewAccount.xaml</DependentUpon>
@@ -155,10 +155,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangePassword.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Lines\AddLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Stations\StationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
