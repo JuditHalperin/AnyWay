@@ -103,7 +103,7 @@ namespace PL.Lines
             Close();
         }
     }
-    public class idToName_Station : IValueConverter
+    public class idToNameOfStation : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
