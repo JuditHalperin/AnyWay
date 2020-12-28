@@ -102,7 +102,7 @@ namespace PL.Stations
     }
     public class intTostring_Station : IValueConverter
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int id = (int)value;
             if (id > 0)
@@ -111,7 +111,7 @@ namespace PL.Stations
                 return "-";
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

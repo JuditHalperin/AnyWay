@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BLAPI;
 using PO;
 using BO;
+using System.Globalization;
 
 namespace PL.Lines
 {
@@ -22,7 +23,7 @@ namespace PL.Lines
     /// </summary>
     public partial class LinesList : Window
     {
-        static IBL bl;
+        static public IBL bl;
 
         string username;
 
@@ -100,6 +101,20 @@ namespace PL.Lines
         {
             new Users.ManagerWindow(username).Show();
             Close();
+        }
+    }
+    public class idToName_Station : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int id = (int)value;
+            string name = LinesList.bl.getStation(id).Name;
+            return name;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }
