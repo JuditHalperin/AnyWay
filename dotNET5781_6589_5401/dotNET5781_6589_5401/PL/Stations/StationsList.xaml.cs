@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BLAPI;
 using PO;
 using BO;
+using System.Globalization;
 
 namespace PL.Stations
 {
@@ -101,6 +102,22 @@ namespace PL.Stations
         {
             new Users.ManagerWindow(username).Show();
             Close();
+        }
+    }
+    public class intTostring_Station : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int id = (int)value;
+            if (id > 0)
+                return id;
+            else
+                return "-";
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

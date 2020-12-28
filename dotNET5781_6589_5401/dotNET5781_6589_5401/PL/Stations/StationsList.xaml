@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Stations" Height="450" Width="860">
     <Window.Resources>
+        <local:intTostring_Station x:Key="intTostring_Station"/>
         <DataTemplate x:Key="LineStations">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -17,8 +18,8 @@
                 </Grid.ColumnDefinitions>
                 <Label x:Name="Line" Style="{StaticResource LabelDataStyle}" Grid.Column="0" Width="150" Content="{Binding Path=NumberLine}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label x:Name="Index" Style="{StaticResource LabelDataStyle}" Grid.Column="1" Width="150" Content="{Binding Path=PathIndex}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="Previous" Style="{StaticResource LabelDataStyle}" Grid.Column="2" Width="150" Content="{Binding Path=PreviousStationID}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="Next" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="150" Content="{Binding Path=NextStationID}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Previous" Style="{StaticResource LabelDataStyle}" Grid.Column="2" Width="150" Content="{Binding Path=PreviousStationID, Converter={StaticResource intTostring_Station}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Next" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="150" Content="{Binding Path=NextStationID, Converter={StaticResource intTostring_Station}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
