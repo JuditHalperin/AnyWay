@@ -104,7 +104,7 @@ namespace PL.Lines
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ManagerWindow(username).Show();
+            new Users.ManagerWindow(username).Show();
             Close();
         }
     }
