@@ -24,11 +24,12 @@ namespace BLAPI
         void addBus(Bus bus);
         void removeBus(Bus bus);
         void updateBus(Bus bus);
-        void fuelBus(BO.Bus bus);
-        void serviceBus(BO.Bus bus);
         Bus getBus(string licensePlate);
         IEnumerable<Bus> GetBuses();
         IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
+        bool canChangeBus(Bus bus);
+        void fuelBus(Bus bus);
+        void serviceBus(Bus bus);
 
         #endregion
 

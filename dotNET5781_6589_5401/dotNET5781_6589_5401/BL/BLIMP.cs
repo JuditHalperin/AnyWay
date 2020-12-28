@@ -31,13 +31,13 @@ namespace BL
         {
             return (int) (distance * 0.001); // valocity of 60 km per hour
         }
-        void addOrUpdateTwoFollowingStations(DO.TwoFollowingStations followingStations)
+        void addOrUpdateTwoFollowingStations(TwoFollowingStations followingStations)
         {
             try
             {
                 dal.addTwoFollowingStations(followingStations);
             }
-            catch (DO.StationException)
+            catch (StationException)
             {
                 dal.updateTwoFollowingStations(followingStations);
             }
@@ -53,6 +53,7 @@ namespace BL
                 updateLineStation(station);
             }
         }
+
         #endregion
 
         #region Users
@@ -62,9 +63,9 @@ namespace BL
         /// </summary>
         /// <param name="user">user of BO</param>
         /// <returns>user of DO</returns>
-        DO.User convertToUserDO(BO.User user)
+        User convertToUserDO(BO.User user)
         {
-            return new DO.User()
+            return new User()
             {
                 Username = user.Username,
                 Password = user.Password,
@@ -76,7 +77,7 @@ namespace BL
         /// </summary>
         /// <param name="user">user of DO</param>
         /// <returns>user of BO</returns>
-        BO.User convertToUserBO(DO.User user)
+        BO.User convertToUserBO(User user)
         {
             return new BO.User()
             {
@@ -91,7 +92,7 @@ namespace BL
             {
                 dal.addUser(convertToUserDO(user));
             }
-            catch (DO.UserException ex)
+            catch (UserException ex)
             {
                 throw new BO.UserException(ex.Message);
             }
@@ -102,7 +103,7 @@ namespace BL
             {
                 dal.removeUser(convertToUserDO(user));
             }
-            catch (DO.UserException ex)
+            catch (UserException ex)
             {
                 throw new BO.UserException(ex.Message);
             }
@@ -113,7 +114,7 @@ namespace BL
             {
                 dal.updateUser(convertToUserDO(user));
             }
-            catch (DO.UserException ex)
+            catch (UserException ex)
             {
                 throw new BO.UserException(ex.Message);
             }
@@ -124,7 +125,7 @@ namespace BL
             {
                 return convertToUserBO(dal.getUser(username));
             }
-            catch (DO.UserException ex)
+            catch (UserException ex)
             {
                 throw new BO.UserException(ex.Message);
             }
@@ -133,12 +134,10 @@ namespace BL
         {
             try
             {
-                IEnumerable<DO.User> usersD = dal.GetUsers();
-                IEnumerable<BO.User> usersB = from user in usersD
-                                              select convertToUserBO(user);
-                return usersB;
+                return from user in dal.GetUsers()
+                       select convertToUserBO(user);
             }
-            catch (DO.UserException ex)
+            catch (UserException ex)
             {
                 throw new BO.UserException(ex.Message);
             }
@@ -147,12 +146,9 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.User> users = from item in GetUsers()
-                                             where condition(item)
-                                             select item;
-                if (users.Count() == 0)
-                    throw new BO.UserException("No users exist.");
-                return users;
+                return from item in GetUsers()
+                       where condition(item)
+                       select item;              
             }
             catch (BO.UserException ex)
             {
@@ -180,18 +176,7 @@ namespace BL
                 KmsSinceService = bus.KmsSinceService,
                 LastService = bus.LastService
             };
-        }
-        /// <summary>
-        /// set the bus status: canDrive, cannotDrive, driving, gettingFueled, gettingTreated
-        /// </summary>
-        /// <returns>bus status</returns>
-        public BO.State setState(BO.Bus bus)
-        {
-            TimeSpan timeSinceLastTreat = DateTime.Now - bus.LastService;
-            if (timeSinceLastTreat.TotalDays >= 365 || bus.KmsSinceService >= 20000 || bus.KmsSinceFuel >= 1200)
-                return BO.State.cannotDrive;
-            return BO.State.canDrive;
-        }
+        }       
         /// <summary>
         /// Func that converts bus of DO to bus of BO
         /// </summary>
@@ -210,6 +195,17 @@ namespace BL
             };
             busB.Status = setState(busB);
             return busB;
+        }
+        /// <summary>
+        /// set the bus status: canDrive, cannotDrive, driving, gettingFueled, gettingTreated
+        /// </summary>
+        /// <returns>bus status</returns>
+        public BO.State setState(BO.Bus bus)
+        {
+            TimeSpan timeSinceLastTreat = DateTime.Now - bus.LastService;
+            if (timeSinceLastTreat.TotalDays >= 365 || bus.KmsSinceService >= 20000 || bus.KmsSinceFuel >= 1200)
+                return BO.State.cannotDrive;
+            return BO.State.canDrive;
         }
         /// <summary>
         /// Add bus for the data.
@@ -255,44 +251,7 @@ namespace BL
             {
                 throw new BO.BusException(ex.Message);
             }
-        }
-        /// <summary>
-        /// fuel the bus
-        /// </summary>
-        /// <param name="bus">bus for fueling</param>
-        public void fuelBus(BO.Bus bus)
-        {
-            try
-            {
-                bus = getBus(bus.LicensePlate);
-                bus.KmsSinceFuel = 0;
-                dal.updateBus(convertToBusDO(bus));
-            }
-            catch (BO.BusException ex) // the bus does not exist
-            {
-                throw new BO.BusException(ex.Message);
-            }
-        }
-        /// <summary>
-        /// Service in bus and fuel when needed.
-        /// </summary>
-        /// <param name="bus">bus for service</param>
-        public void serviceBus(BO.Bus bus)
-        {
-            try
-            {
-                bus = getBus(bus.LicensePlate);
-                bus.KmsSinceService = 0;
-                bus.LastService = DateTime.Now.Date;
-                if (bus.KmsSinceFuel > 1100) // needs refueling soon
-                    bus.KmsSinceFuel = 0;
-                dal.updateBus(convertToBusDO(bus));
-            }
-            catch (BO.BusException ex) // the bus does not exist
-            {
-                throw new BO.BusException(ex.Message);
-            }
-        }
+        }        
         /// <summary>
         /// Return bus according to the key of bus= license plate.
         /// </summary>
@@ -334,19 +293,64 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.Bus> buses = from item in GetBuses()
-                                            where condition(item)
-                                            select item;
-                if (buses.Count() == 0)
-                    throw new BO.BusException("No buses exist.");
-                return buses;
+                return from item in GetBuses()
+                       where condition(item)
+                       select item;
             }
             catch (BO.BusException ex)
             {
                 throw new BO.BusException(ex.Message);
             }
         }
-
+        /// <summary>
+        /// impossible to change a bus if it is driving
+        /// </summary>
+        /// <param name="bus"></param>
+        /// <returns></returns>
+        public bool canChangeBus(BO.Bus bus)
+        {
+            if (GetDrivingBuses(item => item.LicensePlate == bus.LicensePlate) == null)
+                return true;
+            return false;
+        }
+        /// <summary>
+        /// fuel the bus
+        /// </summary>
+        /// <param name="bus">bus for fueling</param>
+        public void fuelBus(BO.Bus bus)
+        {
+            try
+            {
+                bus = getBus(bus.LicensePlate);
+                bus.KmsSinceFuel = 0;
+                dal.updateBus(convertToBusDO(bus));
+            }
+            catch (BO.BusException ex) // the bus does not exist
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        /// <summary>
+        /// Service the bus, and fuel too when needed
+        /// </summary>
+        /// <param name="bus">bus for service</param>
+        public void serviceBus(BO.Bus bus)
+        {
+            try
+            {
+                bus = getBus(bus.LicensePlate);
+                bus.KmsSinceService = 0;
+                bus.LastService = DateTime.Now.Date;
+                if (bus.KmsSinceFuel > 1100) // needs refueling soon
+                    bus.KmsSinceFuel = 0;
+                dal.updateBus(convertToBusDO(bus));
+            }
+            catch (BO.BusException ex) // the bus does not exist
+            {
+                throw new BO.BusException(ex.Message);
+            }
+        }
+        
         #endregion
 
         #region Lines
@@ -453,18 +457,7 @@ namespace BL
             {
                 throw new BO.LineException(ex.Message);
             }
-        }
-        /// <summary>
-        /// impossible to change a line if it is driving
-        /// </summary>
-        /// <param name="station"></param>
-        /// <returns></returns>
-        public bool canChangeLine(BO.Line line)
-        {
-            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial) == null)
-                return true;
-            return false;
-        }
+        }       
         /// <summary>
         /// Return line according it key = the serial.
         /// </summary>
@@ -514,6 +507,17 @@ namespace BL
             {
                 throw new BO.LineException(ex.Message);
             }
+        }
+        /// <summary>
+        /// impossible to change a line if it is driving
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        public bool canChangeLine(BO.Line line)
+        {
+            if (GetDrivingLines(item => item.NumberLine == line.ThisSerial) == null)
+                return true;
+            return false;
         }
 
         #endregion
