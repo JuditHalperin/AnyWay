@@ -11,19 +11,47 @@ namespace DS
     public static class DataSource
     {
         public static List<User> Users;
-        public static List<Bus> Buses;
-        public static List<Line> Lines;
-        public static List<Station> Stations;
-        public static List<LineStation> LineStations;
-		public static List<TwoFollowingStations> FollowingStations;
-        public static List<DrivingBus> DrivingBuses;
-		public static List<DrivingLine> DrivingLines;
-        public static string ManagingCode = "123456";
+        public static List<Bus> Buses = new List<Bus>();
+		public static List<Line> Lines = new List<Line>();
+		public static List<Station> Stations;
+        public static List<LineStation> LineStations = new List<LineStation>();
+		public static List<TwoFollowingStations> FollowingStations = new List<TwoFollowingStations>();
+		public static List<DrivingBus> DrivingBuses = new List<DrivingBus>();
+		public static List<DrivingLine> DrivingLines = new List<DrivingLine>();
+		public static string ManagingCode = "123456";
 		public static int serial = 1;
-		static private Random rand = new Random(DateTime.Now.Millisecond);//for the constructor
+		
+		private static Random rand = new Random(DateTime.Now.Millisecond); // for the constructor
 
+		/// <summary>
+		/// constructor
+		/// initialize the lists
+		/// </summary>
 		static DataSource()
 		{
+			Users = new List<User>()
+			{
+				new User()
+				{
+					Username = "Judit",
+					Password = "123456",
+					IsManager = true
+				},
+
+				new User()
+				{
+					Username = "Asnat",
+					Password = "123456",
+					IsManager = true
+				},
+
+				new User()
+				{
+					Username = "a",
+					Password = "a",
+					IsManager = true
+				}
+			}; // users
 			Stations = new List<Station>()
 			{
 				new Station
@@ -585,12 +613,10 @@ namespace DS
 					Latitude = 31.968049,
 					Longitude = 34.818099
 				},
-            };//70 stations.
-            FollowingStations = new List<TwoFollowingStations>();
+            }; // 70 stations
 			foreach (Station station1 in Stations)
 			{
 				foreach (Station station2 in Stations)
-				{
 					if (station1 != station2)
 						if (!FollowingStations.Exists(item => (item.FirstStationID == station1.ID && item.SecondStationID == station2.ID) || (item.FirstStationID == station2.ID && item.SecondStationID == station1.ID)))
 						{
@@ -605,19 +631,16 @@ namespace DS
 							twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations * 0.001);
 							FollowingStations.Add(twoFollowingStations);
 						}
-				}
-			}
-			Lines = new List<Line>();
+			} // following stations
 			for (int i = 0; i < 10; i++)
 			{
 				Lines.Add(new Line()
 				{
 					ThisSerial = serial++,
-					NumberLine = (i + 2) * 5 + 3,//random.
+					NumberLine = (i + 2) * 5 + 3, // random
 					Region = (Regions)(i % 5)
 				});
-			}
-			LineStations = new List<LineStation>();
+			} // 10 lines
 			foreach (Line line in Lines)
 			{
 				for (int i = (line.ThisSerial - 1) * 6, j = 1; i < Stations.Count() && i < (line.ThisSerial - 1) * 6 + 16; j++, i++)
@@ -629,9 +652,7 @@ namespace DS
 						PathIndex = j
 					});
 				}
-			}
-			Buses = new List<Bus>();
-			//10 buses before 2018.
+			} // line stations
 			for (int i = 0; i < 10; i++)
 			{
 				string tmp = Convert.ToString(rand.Next(1000000, 10000000));
@@ -646,8 +667,7 @@ namespace DS
 					KmsSinceFuel = rand.Next(0, 1200),
 					KmsSinceService = rand.Next(0, 20000)
 				};
-			}
-			//10 buses after 2018.
+			} // 10 buses before 2018
 			for (int i = 0; i < 10; i++)
 			{
 				string tmp = Convert.ToString(rand.Next(10000000, 100000000));
@@ -662,30 +682,7 @@ namespace DS
 					KmsSinceFuel = rand.Next(0, 1200),
 					KmsSinceService = rand.Next(0, 20000)
 				};
-			}
-			Users = new List<User>()
-			{
-				new User()
-				{
-					Username = "Judit",
-					Password = "123456",
-					IsManager = true
-				},
-				new User()
-				{
-					Username = "Asnat",
-					Password = "123456",
-					IsManager = true
-				},
-				new User()
-				{
-					Username = "a",
-					Password = "a",
-					IsManager = true
-				}
-			};
-			DrivingBuses = new List<DrivingBus>();
-			DrivingLines = new List<DrivingLine>();
+			} //10 buses after 2018
 		}
 	}
 }
