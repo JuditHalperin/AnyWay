@@ -25,13 +25,11 @@ namespace BL
 
         int calculateDistance(BO.Station first, BO.Station second)
         {
-            GeoCoordinate positionThisStation = new GeoCoordinate(first.Latitude, first.Longitude);
-            GeoCoordinate positionSecondStation = new GeoCoordinate(second.Latitude, second.Longitude);
-            return (int)positionThisStation.GetDistanceTo(positionSecondStation);
+            return (int) new GeoCoordinate(first.Latitude, first.Longitude).GetDistanceTo(new GeoCoordinate(second.Latitude, second.Longitude));
         }
         int calculateTime(int distance)
         {
-            return (int)(distance * 0.001);//according to valocity of 60 Km per hour.
+            return (int) (distance * 0.001); // valocity of 60 km per hour
         }
         void addOrUpdateTwoFollowingStations(DO.TwoFollowingStations followingStations)
         {
@@ -558,14 +556,13 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.LineStation> lineStationsB = GetLineStations(lineStation => lineStation.ID == stationD.ID).OrderBy(station => station.ID);
                 return new BO.Station()
                 {
                     ID = stationD.ID,
                     Name = stationD.Name,
                     Latitude = stationD.Latitude,
                     Longitude = stationD.Longitude,
-                    LinesAtStation = lineStationsB
+                    LinesAtStation = GetLineStations(lineStation => lineStation.ID == stationD.ID).OrderBy(station => station.ID)
                 };
             }
             catch (BO.StationException ex)
@@ -579,19 +576,17 @@ namespace BL
         /// <param name="station">data about station.</param>
         void stationToFollowingStationAndLineStation(BO.Station station)
         {
-            IEnumerable<BO.Station> stations = GetStations();
-            foreach (BO.Station station1 in stations)
+            foreach (BO.Station otherStation in GetStations(item => item.ID != station.ID))
             {
                 TwoFollowingStations followingStations = new TwoFollowingStations()
                 {
                     FirstStationID = station.ID,
-                    SecondStationID = station1.ID,
-                    LengthBetweenStations = calculateDistance(station, station1),
+                    SecondStationID = otherStation.ID,
+                    LengthBetweenStations = calculateDistance(station, otherStation),
                 };
                 followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
                 addOrUpdateTwoFollowingStations(followingStations);
             }
-
         }
         /// <summary>
         /// impossible to change a station if there are driving lines that stop there
@@ -604,7 +599,7 @@ namespace BL
                                                                 from lineStation in GetLineStations(l => l.ID == station.ID)
                                                                 where drivingLine.NumberLine == lineStation.NumberLine
                                                                 select drivingLine;
-            if (drivingLinesAtStation.Count() == 0)
+            if (drivingLinesAtStation == null)
                 return true;
             return false;
         }
@@ -619,7 +614,7 @@ namespace BL
                 dal.addStation(convertToStationDO(station));
                 stationToFollowingStationAndLineStation(station);
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
@@ -633,7 +628,7 @@ namespace BL
             try
             {
                 dal.removeStation(convertToStationDO(station));
-                foreach (BO.LineStation lineStation in GetLineStations(item => item.ID != station.ID))
+                foreach (BO.LineStation lineStation in GetLineStations(item => item.ID == station.ID))
                     removeLineStation(lineStation);
             }
             catch (StationException ex)
@@ -782,7 +777,10 @@ namespace BL
             {
                 ID = path.ElementAt(0).ID,
                 PathIndex = 0,
-                NextStationID = path.ElementAt(1).ID
+                NextStationID = path.ElementAt(1).ID,
+                PreviousStationID = -1,
+                LengthFromPreviousStations = -1,
+                TimeFromPreviousStations = -1
             });
             for (int i = 1; i < path.Count() - 1; i++)
             {
@@ -800,6 +798,7 @@ namespace BL
             {
                 ID = path.ElementAt(path.Count() - 1).ID,
                 PathIndex = path.Count() - 1,
+                NextStationID = -1,
                 PreviousStationID = path.ElementAt(path.Count() - 2).ID,
                 LengthFromPreviousStations = calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)),
                 TimeFromPreviousStations = calculateTime(calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)))
@@ -851,7 +850,7 @@ namespace BL
                     updateLineStation(lineStations.ElementAt(i));
                 }
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
                 throw new BO.StationException(ex.Message);
             }
