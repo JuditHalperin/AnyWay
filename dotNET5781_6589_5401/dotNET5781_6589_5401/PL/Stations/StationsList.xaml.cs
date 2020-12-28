@@ -33,20 +33,16 @@ namespace PL.Stations
             bl = BlFactory.GetBl();
             username = name;
 
-            IEnumerable<Station> stations = bl.GetStations();
-            ListOfStations.ItemsSource = stations;
-            if (stations.Count() > 0)
-            {
-                ListOfStations.SelectedIndex = 0;
-                selectionChanged();
-            }
+            ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
+            ListOfStations.SelectedIndex = 0;
+            selectionChanged();
         }
 
         private void selectionChanged()
         {
             DataContext = (Station)ListOfStations.SelectedItem;
             IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation;
-            if (lineStations!=null && lineStations.Count() > 0)
+            if (lineStations != null && lineStations.Count() > 0)
             {
                 NoLines.Visibility = Visibility.Hidden;
                 LinesAtStation.Visibility = Visibility.Visible;

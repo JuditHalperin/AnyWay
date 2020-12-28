@@ -32,7 +32,7 @@ namespace PL.Lines
             bl = BlFactory.GetBl();
             username = name;
 
-            ListOfLines.ItemsSource = bl.GetLines(); // possible to open this window when there are lines
+            ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
             ListOfLines.SelectedIndex = 0;
             ListOfLines.Text = ((BO.Line)ListOfLines.SelectedItem).ThisSerial.ToString();
             selectionChanged();

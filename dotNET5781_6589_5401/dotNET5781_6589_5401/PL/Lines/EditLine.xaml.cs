@@ -31,6 +31,7 @@ namespace PL.Lines
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+
             DataContext = line;
             path = (ObservableCollection<Station>)line.Path;
             LineStations.ItemsSource = path;
