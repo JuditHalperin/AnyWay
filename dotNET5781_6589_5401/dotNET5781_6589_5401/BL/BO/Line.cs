@@ -12,6 +12,6 @@ namespace BO
         public int ThisSerial { get; set; }
         public int NumberLine { get; set; }
         public Regions Region { get; set; }
-        public override string ToString() => this.ToStringProperty();
+        public override string ToString() => ThisSerial.ToString();
     }
 }

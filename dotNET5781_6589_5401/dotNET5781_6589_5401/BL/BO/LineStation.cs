@@ -14,6 +14,6 @@ namespace BO
         public int NextStationID { get; set; }
         public int LengthFromPreviousStations { get; set; }
         public int TimeFromPreviousStations { get; set; }
-        public override string ToString() => this.ToStringProperty();
+        public override string ToString() => ID.ToString();
     }
 }

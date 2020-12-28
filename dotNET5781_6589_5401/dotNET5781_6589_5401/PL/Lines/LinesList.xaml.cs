@@ -34,16 +34,14 @@ namespace PL.Lines
 
             ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
             ListOfLines.SelectedIndex = 0;
-            ListOfLines.Text = ((BO.Line)ListOfLines.SelectedItem).ThisSerial.ToString();
             selectionChanged();
         }
 
         private void selectionChanged()
         {
             DataContext = (BO.Line)ListOfLines.SelectedItem;
-            int numberOfStations = ((BO.Line)DataContext).Path.Count();
-            NumberOfStations.Content = numberOfStations;
-            if (numberOfStations > 0)
+            NumberOfStations.Content = ((BO.Line)ListOfLines.SelectedItem).Path.Count();
+            if ((int)NumberOfStations.Content > 0)
             {
                 NoStations.Visibility = Visibility.Hidden;
                 LineStations.Visibility = Visibility.Visible;
