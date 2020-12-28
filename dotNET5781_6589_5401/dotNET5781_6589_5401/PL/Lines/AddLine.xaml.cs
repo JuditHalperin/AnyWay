@@ -51,7 +51,7 @@ namespace PL.Lines
                 if (LineNumber.Text.Length == 0 || !int.TryParse(LineNumber.Text, out line))
                     throw new InvalidInputException("Invalid format of line number.");
                 if (path.Count() < 2)
-                    throw new InvalidInputException("Path line should be consisted of at least 2 stations.");
+                    throw new InvalidInputException("A line path should contain at least 2 stations.");
                 bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
             }
             catch (InvalidInputException ex)
