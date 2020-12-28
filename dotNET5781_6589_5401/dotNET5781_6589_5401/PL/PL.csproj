@@ -216,5 +216,8 @@
   <ItemGroup>
     <Resource Include="Users\pictureBus.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Stations\BackButton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

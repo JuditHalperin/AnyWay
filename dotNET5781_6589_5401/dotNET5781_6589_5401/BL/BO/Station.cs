@@ -13,6 +13,6 @@ namespace BO
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public IEnumerable<LineStation> LinesAtStation { get; set; }
-        public override string ToString() => ID.ToString();
+        public override string ToString() => ID.ToString() + '\t' + Name;
     }
 }

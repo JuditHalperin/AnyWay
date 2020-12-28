@@ -34,7 +34,6 @@ namespace PL.Lines
 
             RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
             StationsList.ItemsSource = bl.GetStations();
-            StationsList.Text = ((Station)StationsList.SelectedItem).ID + " - " + ((Station)StationsList.SelectedItem).Name;
             ChosenStations.ItemsSource = path;
             Ok.IsEnabled = false;
         }

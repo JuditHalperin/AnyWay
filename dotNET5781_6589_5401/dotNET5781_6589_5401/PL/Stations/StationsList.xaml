@@ -30,14 +30,14 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#FFEEF5FF">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Image x:Name="Back" Source="BackButton.png" Width="35" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Back_MouseDown"/>
-            <Label Content="Station ID:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <ComboBox x:Name="ListOfStations" Style="{StaticResource ComboBoxStyle}" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="StationsList_SelectionChanged"/>
+            <Label Content="Station:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ListOfStations" Style="{StaticResource ComboBoxStyle}" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" SelectionChanged="StationsList_SelectionChanged"/>
             <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -53,17 +53,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Station name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Label Content="{Binding Path=Name}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="Latitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Label Content="{Binding Path=Latitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="Longitude:" Grid.Row="4" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Label Content="{Binding Path=Longitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button x:Name="EditStation" Content="Edit" Style="{StaticResource ButtonStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditStation_Click"/>
-                <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveStation_Click"/>
+                <Label Content="Latitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="{Binding Path=Latitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Longitude:" Grid.Row="2" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="{Binding Path=Longitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button x:Name="EditStation" Content="Edit" Style="{StaticResource ButtonStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditStation_Click"/>
+                <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveStation_Click"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
