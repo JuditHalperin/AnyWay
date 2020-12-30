@@ -24,7 +24,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="LineNumber" Grid.Row="1" Text="{Binding Path=NumberLine}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBox x:Name="LineNumber" Grid.Row="1" Text="{Binding Path=NumberLine}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
                 <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <ComboBox Name="RegionsList" ItemsSource="{Binding}" SelectedItem="{Binding Path=Region}" Width="70" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
