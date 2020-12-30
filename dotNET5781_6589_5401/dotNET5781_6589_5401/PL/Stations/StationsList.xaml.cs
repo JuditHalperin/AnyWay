@@ -34,7 +34,6 @@ namespace PL.Stations
             username = name;
 
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
-            ListOfStations.SelectedIndex = 0;
             selectionChanged();
         }
 
@@ -63,6 +62,7 @@ namespace PL.Stations
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             new AddStation().ShowDialog();
+            ListOfStations.ItemsSource = bl.GetStations();
         }
 
         private void EditStation_Click(object sender, RoutedEventArgs e)

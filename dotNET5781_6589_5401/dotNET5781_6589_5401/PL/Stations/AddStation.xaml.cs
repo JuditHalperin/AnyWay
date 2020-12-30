@@ -28,7 +28,6 @@ namespace PL.Stations
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-            Ok.IsEnabled = false; // enabled when all TextBox are full
         }
 
         /// <summary>
@@ -51,7 +50,7 @@ namespace PL.Stations
             try
             {
                 int id;
-                if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length < 5)
+                if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length != 5)
                     throw new InvalidInputException("Station ID should be consisted of 5 digits.");
                 bl.addStation(new Station() { ID = id, Name = NameTextBox.Text, Latitude = Convert.ToDouble(LatitudeTextBox.Text), Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
                 Close();
@@ -68,6 +67,25 @@ namespace PL.Stations
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+    }
+
+    /// <summary>
+    /// enable 'Ok' button when all TextBox are filled with some text
+    /// </summary>
+    public class AllTextBoxAreFull : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            foreach (object val in values)
+                if (string.IsNullOrEmpty(val as string))
+                    return false;
+            return true;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }
