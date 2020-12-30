@@ -15,7 +15,7 @@ using BLAPI;
 using PO;
 using BO;
 
-namespace PL.Stations
+namespace PL
 {
     /// <summary>
     /// Interaction logic for EditStation.xaml

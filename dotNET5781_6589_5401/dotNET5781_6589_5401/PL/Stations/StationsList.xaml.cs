@@ -16,7 +16,7 @@ using PO;
 using BO;
 using System.Globalization;
 
-namespace PL.Stations
+namespace PL
 {
     /// <summary>
     /// Interaction logic for StationsList.xaml
@@ -34,13 +34,13 @@ namespace PL.Stations
             username = name;
 
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
-            selectionChanged();
+            ListOfStations.SelectedIndex = 0;
         }
 
         private void selectionChanged()
         {
             DataContext = (Station)ListOfStations.SelectedItem;
-            IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation;
+            IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation.ToList();
             if (lineStations != null && lineStations.Count() > 0)
             {
                 NoLines.Visibility = Visibility.Hidden;
@@ -63,6 +63,7 @@ namespace PL.Stations
         {
             new AddStation().ShowDialog();
             ListOfStations.ItemsSource = bl.GetStations();
+            ListOfStations.SelectedIndex = 0;
         }
 
         private void EditStation_Click(object sender, RoutedEventArgs e)

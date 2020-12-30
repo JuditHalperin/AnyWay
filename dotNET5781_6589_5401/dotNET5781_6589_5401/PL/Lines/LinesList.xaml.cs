@@ -16,7 +16,7 @@ using PO;
 using BO;
 using System.Globalization;
 
-namespace PL.Lines
+namespace PL
 {
     /// <summary>
     /// Interaction logic for LinesList.xaml

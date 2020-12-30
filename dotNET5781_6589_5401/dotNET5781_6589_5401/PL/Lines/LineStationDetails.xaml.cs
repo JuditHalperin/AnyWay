@@ -15,7 +15,7 @@ using BLAPI;
 using PO;
 using BO;
 
-namespace PL.Lines
+namespace PL
 {
     /// <summary>
     /// Interaction logic for LineStationDetails.xaml

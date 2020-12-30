@@ -15,7 +15,7 @@ using BLAPI;
 using PO;
 using BO;
 
-namespace PL.Buses
+namespace PL
 {
     /// <summary>
     /// Interaction logic for AddBus.xaml

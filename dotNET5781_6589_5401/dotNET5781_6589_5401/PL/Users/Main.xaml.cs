@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PO;
 
-namespace PL.Users
+namespace PL
 {
     /// <summary>
     /// Interaction logic for Main.xaml

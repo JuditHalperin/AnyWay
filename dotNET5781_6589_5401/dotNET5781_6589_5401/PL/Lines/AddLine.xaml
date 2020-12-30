@@ -1,9 +1,9 @@
-﻿<Window x:Class="PL.Lines.AddLine"
+﻿<Window x:Class="PL.AddLine"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Lines"
+        xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Add Line" Height="400" Width="700">
     <Grid>

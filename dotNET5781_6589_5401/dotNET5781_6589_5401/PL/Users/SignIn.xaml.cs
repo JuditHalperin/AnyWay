@@ -15,7 +15,7 @@ using BLAPI;
 using BO;
 using PO;
 
-namespace PL.Users
+namespace PL
 {
     /// <summary>
     /// Interaction logic for SignIn.xaml
