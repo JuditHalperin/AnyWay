@@ -25,7 +25,7 @@ namespace BL
 
         int calculateDistance(BO.Station first, BO.Station second)
         {
-            return (int) new GeoCoordinate(first.Latitude, first.Longitude).GetDistanceTo(new GeoCoordinate(second.Latitude, second.Longitude));
+            return (int) (new GeoCoordinate(first.Latitude, first.Longitude).GetDistanceTo(new GeoCoordinate(second.Latitude, second.Longitude))*1.5);
         }
         int calculateTime(int distance)
         {
