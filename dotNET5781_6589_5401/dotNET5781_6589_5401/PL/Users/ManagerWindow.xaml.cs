@@ -28,19 +28,19 @@ namespace PL
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            new Buses.BusesList((string)Username.Content).Show();
+            new BusesList((string)Username.Content).Show();
             Close();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new Lines.LinesList((string)Username.Content).Show();
+            new LinesList((string)Username.Content).Show();
             Close();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new Stations.StationsList((string)Username.Content).Show();
+            new StationsList((string)Username.Content).Show();
             Close();
         }
 

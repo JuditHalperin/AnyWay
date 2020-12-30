@@ -99,7 +99,7 @@ namespace PL
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new Users.ManagerWindow(username).Show();
+            new ManagerWindow(username).Show();
             Close();
         }
     }
