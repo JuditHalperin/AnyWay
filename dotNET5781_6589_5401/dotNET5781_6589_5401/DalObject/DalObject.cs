@@ -29,8 +29,14 @@ namespace DL
         }
         public void removeUser(User user)
         {
-            if (!DataSource.Users.Remove(user))
+            try
+            {
+                DataSource.Users.RemoveAll(item=>item.Username==user.Username);
+            }
+            catch(ArgumentNullException)
+            {
                 throw new UserException("The user does not exist.");
+            }
         }
         public void updateUser(User user)
         {
@@ -107,8 +113,10 @@ namespace DL
         }
         public void removeLine(Line line)
         {
-            if (!DataSource.Lines.Remove(line))
+            Line l = DataSource.Lines.Find(item => item.ThisSerial == line.ThisSerial);
+            if (l == null)
                 throw new LineException("The line does not exist.");
+            DataSource.Lines.Remove(l); // remove the old line
         }
         public void updateLine(Line line)
         {
@@ -199,15 +207,14 @@ namespace DL
         }
         public void removeLineStation(LineStation lineStation)
         {
-            if (!DataSource.LineStations.Remove(lineStation))
-                throw new StationException("The line station does not exist.");            
-        }
-        public void updateLineStation(LineStation lineStation)
-        {
             LineStation l = DataSource.LineStations.Find(item => item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID);
             if (l == null)
                 throw new StationException("The line station does not exist.");
-            DataSource.LineStations.Remove(l); // remove the old line station
+            DataSource.LineStations.Remove(l); // remove the old line station            
+        }
+        public void updateLineStation(LineStation lineStation)
+        {
+            removeLineStation(lineStation); // remove the old line station=delete according the key.
             DataSource.LineStations.Add(lineStation.Clone()); // add the updated line station
         }
         public LineStation getLineStation(int numberLine, int id)
@@ -241,9 +248,11 @@ namespace DL
             DataSource.FollowingStations.Add(twoFollowingStations.Clone());
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
-        {           
-            if (!DataSource.FollowingStations.Remove(twoFollowingStations) && !DataSource.FollowingStations.Remove(new TwoFollowingStations() { FirstStationID = twoFollowingStations.SecondStationID, SecondStationID = twoFollowingStations.FirstStationID, LengthBetweenStations = twoFollowingStations.LengthBetweenStations, TimeBetweenStations = twoFollowingStations.TimeBetweenStations }))
+        {
+            TwoFollowingStations f = DataSource.FollowingStations.Find(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID));
+            if (f == null)
                 throw new StationException("The two following stations do not exist.");
+            DataSource.FollowingStations.Remove(f); // remove the old two following stations
         }
         public void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
@@ -288,15 +297,14 @@ namespace DL
         }
         public void removeDrivingBus(DrivingBus drivingBus)
         {
-            if (!DataSource.DrivingBuses.Remove(drivingBus))
-                throw new BusException("The driving bus does not exist.");
-        }
-        public void updateDrivingBus(DrivingBus drivingBus)
-        {
             DrivingBus d = DataSource.DrivingBuses.Find(item => item.ThisSerial == drivingBus.ThisSerial && item.LicensePlate == drivingBus.LicensePlate && item.Line == drivingBus.Line && item.Start == drivingBus.Start);
             if (d == null)
                 throw new BusException("The driving bus does not exist.");
             DataSource.DrivingBuses.Remove(d); // remove the old driving bus
+        }
+        public void updateDrivingBus(DrivingBus drivingBus)
+        {
+            removeDrivingBus(drivingBus); // remove the old driving bus
             DataSource.DrivingBuses.Add(drivingBus.Clone()); // add the updated driving bus  
         }
         public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
@@ -335,8 +343,10 @@ namespace DL
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
-            if (!DataSource.DrivingLines.Remove(drivingLine))
+            DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
+            if (d == null)
                 throw new LineException("The driving line does not exist.");
+            DataSource.DrivingLines.Remove(d); // remove the old driving line
         }
         public void updateDrivingLine(DrivingLine drivingLine)
         {
