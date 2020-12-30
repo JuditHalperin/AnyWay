@@ -630,7 +630,7 @@ namespace DS
 							};
 							GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
 							GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
-							twoFollowingStations.LengthBetweenStations = (int)positionThisStation.GetDistanceTo(positionSecondStation);
+							twoFollowingStations.LengthBetweenStations = (int)(positionThisStation.GetDistanceTo(positionSecondStation)*1.5);
 							twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations * 0.001);
 							FollowingStations.Add(twoFollowingStations);
 						}
