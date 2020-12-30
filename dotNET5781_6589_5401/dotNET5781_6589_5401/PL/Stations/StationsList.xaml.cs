@@ -36,11 +36,11 @@ namespace PL
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
             ListOfStations.SelectedIndex = 0;
         }
-
-        private void selectionChanged()
+    
+        private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataContext = (Station)ListOfStations.SelectedItem;
-            IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation.ToList();
+            IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation;
             if (lineStations != null && lineStations.Count() > 0)
             {
                 NoLines.Visibility = Visibility.Hidden;
@@ -52,11 +52,6 @@ namespace PL
                 LinesAtStation.Visibility = Visibility.Hidden;
                 NoLines.Visibility = Visibility.Visible;
             }
-        }
-
-        private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectionChanged();
         }
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
