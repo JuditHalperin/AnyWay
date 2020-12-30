@@ -101,19 +101,4 @@ namespace PL
             Close();
         }
     }
-    public class intTostring_Station : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            int id = (int)value;
-            if (id > 0)
-                return id;
-            return "-";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }
