@@ -41,7 +41,7 @@ namespace PL.Stations
             try
             {
                 int id;
-                if (!int.TryParse((string)IDLabel.Content, out id))
+                if (!int.TryParse(IDLabel.Content.ToString(), out id))
                     throw new InvalidInputException("Invalid format of station ID.");
                 bl.updateStation(new Station { ID = id, Name = NameTextBox.Text, Latitude = Convert.ToDouble(LatitudeTextBox.Text), Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
                 Close();

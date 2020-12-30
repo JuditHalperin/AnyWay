@@ -23,7 +23,7 @@ namespace PL.Lines
     /// </summary>
     public partial class LinesList : Window
     {
-        static public IBL bl;
+        static IBL bl;
 
         string username;
 
@@ -107,9 +107,7 @@ namespace PL.Lines
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int id = (int)value;
-            string name = LinesList.bl.getStation(id).Name;
-            return name;
+            return BlFactory.GetBl().getStation((int)value).Name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

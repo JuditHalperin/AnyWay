@@ -107,8 +107,7 @@ namespace PL.Stations
             int id = (int)value;
             if (id > 0)
                 return id;
-            else
-                return "-";
+            return "-";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
