@@ -803,7 +803,7 @@ namespace BL
         {
             IEnumerable<BO.Station> stations = from station in path
                                                select getStation(station.ID);
-            return stations.ToList();
+            return stations;
         }
         /// <summary>
         /// Add station in line
