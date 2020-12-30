@@ -75,7 +75,7 @@
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Line number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Line number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,12"/>
                     <Label Content="Index in the path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Privios station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Next station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
