@@ -799,6 +799,12 @@ namespace BL
             });
             return lineStations;
         }
+        public IEnumerable<BO.Station> convertToStationsList(IEnumerable<BO.LineStation> path)
+        {
+            IEnumerable<BO.Station> stations = from station in path
+                                               select getStation(station.ID);
+            return stations.ToList();
+        }
         /// <summary>
         /// Add station in line
         /// </summary>

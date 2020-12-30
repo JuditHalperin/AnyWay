@@ -27,6 +27,6 @@
         <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Password:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <PasswordBox x:Name="Password" Grid.Row="3" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label x:Name="NewAccount" Style="{StaticResource LabelToClickStyle}" Content="I do not have an account" Foreground="Blue" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="NewAccount_PreviewMouseDown" />
+        <Label x:Name="NewAccount" Style="{StaticResource LabelToClickStyle}" Content="I do not have an account" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="NewAccount_PreviewMouseDown" />
     </Grid>
 </Window>
