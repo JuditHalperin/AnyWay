@@ -39,6 +39,8 @@ namespace PL
     
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if ((Station)ListOfStations.SelectedItem == null)
+                ListOfStations.SelectedIndex = 0;
             DataContext = (Station)ListOfStations.SelectedItem;
             IEnumerable<LineStation> lineStations = ((Station)ListOfStations.SelectedItem).LinesAtStation;
             if (lineStations != null && lineStations.Count() > 0)
@@ -58,7 +60,6 @@ namespace PL
         {
             new AddStation().ShowDialog();
             ListOfStations.ItemsSource = bl.GetStations();
-            ListOfStations.SelectedIndex = 0;
         }
 
         private void EditStation_Click(object sender, RoutedEventArgs e)
@@ -68,6 +69,7 @@ namespace PL
                 if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to edit a station if there are driving lines that stop there.");
                 new EditStation((Station)ListOfStations.SelectedItem).ShowDialog();
+                ListOfStations.ItemsSource = bl.GetStations();
             }
             catch (StationException ex)
             {
@@ -82,8 +84,9 @@ namespace PL
                 if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
                 bl.removeStation((Station)ListOfStations.SelectedItem);
+                ListOfStations.ItemsSource = bl.GetStations();
             }
-            
+
             catch (StationException ex)
             {
                 MessageBox.Show(ex.Message);
