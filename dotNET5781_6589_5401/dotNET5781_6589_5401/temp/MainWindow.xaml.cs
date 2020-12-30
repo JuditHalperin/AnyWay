@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace temp
 {
     /// <summary>
@@ -40,5 +41,6 @@ namespace temp
             new SignInAsManager(true).Show();
             Close();
         }
+      
     }
 }
