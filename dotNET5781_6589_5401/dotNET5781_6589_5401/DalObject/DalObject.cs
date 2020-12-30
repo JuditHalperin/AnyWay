@@ -146,8 +146,14 @@ namespace DL
         }
         public void removeStation(Station station)
         {
-            if (!DataSource.Stations.Remove(station))
+            try
+            {
+                DataSource.Stations.RemoveAll(item => item.ID == station.ID);
+            }
+            catch (ArgumentNullException)
+            {
                 throw new StationException("The station does not exist.");
+            }
         }
         public void updateStation(Station station)
         {
