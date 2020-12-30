@@ -24,9 +24,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="SignOut" Content="Sign out" Style="{StaticResource LabelToClickStyle}" Foreground="Blue" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown"/>
-            <Label x:Name="ChangePassword" Content="Change password" Style="{StaticResource LabelToClickStyle}" Foreground="Blue" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangePassword_PreviewMouseDown"/>
-            <Label x:Name="ChangeCode" Content="Change managing code" Style="{StaticResource LabelToClickStyle}" Foreground="Blue" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangeCode_PreviewMouseDown"/>
+            <Label x:Name="SignOut" Content="Sign out" Style="{StaticResource LabelToClickStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown"/>
+            <Label x:Name="ChangePassword" Content="Change password" Style="{StaticResource LabelToClickStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangePassword_PreviewMouseDown"/>
+            <Label x:Name="ChangeCode" Content="Change managing code" Style="{StaticResource LabelToClickStyle}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangeCode_PreviewMouseDown"/>
         </Grid>
     </Grid>
 </Window>

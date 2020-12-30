@@ -30,6 +30,6 @@
         <PasswordBox x:Name="Password" Grid.Row="3" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label Content="Managing code:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12"/>
         <PasswordBox x:Name="ManagingCode" Grid.Row="4" Width="100" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelToClickStyle}" Foreground="Blue" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
+        <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelToClickStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
     </Grid>
 </Window>
