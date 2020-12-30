@@ -617,6 +617,8 @@ namespace BL
                 dal.removeStation(convertToStationDO(station));
                 foreach (BO.LineStation lineStation in GetLineStations(item => item.ID == station.ID))
                     removeLineStation(lineStation);
+                foreach (TwoFollowingStations followingStations in dal.GetFollowingStations(item => item.FirstStationID == station.ID || item.SecondStationID == station.ID))
+                    dal.removeTwoFollowingStations(followingStations);
             }
             catch (StationException ex)
             {
