@@ -33,7 +33,7 @@ namespace PL
             bl = BlFactory.GetBl();
 
             DataContext = line;
-            path = line.Path;
+            path = bl.convertToLineStationsList(line.Path);
             LineStations.ItemsSource = path;
             Ok.IsEnabled = true;
         }
@@ -67,8 +67,9 @@ namespace PL
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+            new AddLineStation().ShowDialog();
+
+
             Ok.IsEnabled = OkButton_IsEnabled();
         }
 
