@@ -33,8 +33,9 @@ namespace PL
             bl = BlFactory.GetBl();
 
             DataContext = line;
-            path = (ObservableCollection<Station>)line.Path;
+            path = line.Path;
             LineStations.ItemsSource = path;
+            Ok.IsEnabled = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -51,7 +52,7 @@ namespace PL
                     throw new InvalidInputException("Invalid format of line number.");
                 if (path.Count() < 2)
                     throw new InvalidInputException("A line path should contain at least 2 stations.");
-                //bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = path });
+                bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
                 Close();
             }
             catch (InvalidInputException ex)
@@ -66,12 +67,28 @@ namespace PL
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-
+            
+            
+            Ok.IsEnabled = OkButton_IsEnabled();
         }
 
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
 
+
+            Ok.IsEnabled = OkButton_IsEnabled();
+        }
+
+        private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Ok.IsEnabled = OkButton_IsEnabled();
+        }
+
+        private bool OkButton_IsEnabled()
+        {
+            if (LineNumber.Text.Length == 0 || path.Count() < 2)
+                return false;
+            return true;
         }
     }
 }

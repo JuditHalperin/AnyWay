@@ -69,7 +69,22 @@ namespace PL
             if (path.Contains((Station)StationsList.SelectedItem))
                 MessageBox.Show($"Station {((Station)StationsList.SelectedItem).ID} is already in the path.");
             else
+            {
                 path.Add((Station)StationsList.SelectedItem);
+                Ok.IsEnabled = OkButton_IsEnabled();
+            }
         }
+
+        private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Ok.IsEnabled = OkButton_IsEnabled();
+        }
+
+        private bool OkButton_IsEnabled()
+        {
+            if (LineNumber.Text.Length == 0 || path.Count() < 2)
+                return false;
+            return true;
+        }       
     }
 }
