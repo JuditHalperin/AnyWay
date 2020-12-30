@@ -52,11 +52,16 @@ namespace PL
                 int id;
                 if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length != 5)
                     throw new InvalidInputException("Station ID should be consisted of 5 digits.");
+                
                 double latitude = Convert.ToDouble(LatitudeTextBox.Text);
-                if(latitude < 31 || latitude > 33.3)
-                    throw new InvalidInputException("");
-
-                bl.addStation(new Station() { ID = id, Name = NameTextBox.Text, Latitude = , Longitude = Convert.ToDouble(LongitudeTextBox.Text) });
+                if (latitude < 31 || latitude > 33.3)
+                    throw new InvalidInputException("Latitude should be between 31°N to 33.3°N.");
+                
+                double longitude = Convert.ToDouble(LongitudeTextBox.Text);
+                if (longitude < 34.3 || longitude > 35.5)
+                    throw new InvalidInputException("Longitude should be between 34.3°E to 35.5°E.");
+                
+                bl.addStation(new Station() { ID = id, Name = NameTextBox.Text, Latitude = latitude, Longitude = longitude });
                 Close();
             }
             catch (FormatException)

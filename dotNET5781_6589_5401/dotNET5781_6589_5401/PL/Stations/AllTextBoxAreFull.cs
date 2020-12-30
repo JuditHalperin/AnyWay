@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace PL.Stations
+namespace PL
 {
     /// <summary>
     /// enable 'Ok' button when all TextBox are filled with some text
