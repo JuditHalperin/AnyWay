@@ -770,7 +770,7 @@ namespace BL
             lineStations.Add(new BO.LineStation()
             {
                 ID = path.ElementAt(0).ID,
-                PathIndex = 0,
+                PathIndex = 1,
                 NextStationID = path.ElementAt(1).ID,
                 PreviousStationID = -1,
                 LengthFromPreviousStations = -1,
@@ -781,7 +781,7 @@ namespace BL
                 lineStations.Add(new BO.LineStation()
                 {
                     ID = path.ElementAt(i).ID,
-                    PathIndex = i,
+                    PathIndex = i + 1,
                     NextStationID = path.ElementAt(i + 1).ID,
                     PreviousStationID = path.ElementAt(i - 1).ID,
                     LengthFromPreviousStations = calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)),
@@ -803,7 +803,7 @@ namespace BL
         {
             IEnumerable<BO.Station> stations = from station in path
                                                select getStation(station.ID);
-            return stations.ToList();
+            return stations;
         }
         /// <summary>
         /// Add station in line
