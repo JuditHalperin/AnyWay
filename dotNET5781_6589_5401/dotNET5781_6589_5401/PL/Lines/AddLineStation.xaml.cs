@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL
 {
@@ -19,14 +22,29 @@ namespace PL
     /// </summary>
     public partial class AddLineStation : Window
     {
-        public AddLineStation()
+        static IBL bl;
+        int thisSerial;
+        public Station stationToAdd;
+
+        public AddLineStation(int serial)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
+            thisSerial = serial;
+
+            LineStations.ItemsSource = bl.GetStations(item => // all stations that this line does not stop at
+            {
+                foreach (LineStation lineStation in item.LinesAtStation)
+                    if (lineStation.NumberLine != thisSerial)
+                        return true;
+                return false;
+            }).ToList();
         }
 
         private void LineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            stationToAdd = (Station)LineStations.SelectedItem;
+            Close();
         }
     }
 }

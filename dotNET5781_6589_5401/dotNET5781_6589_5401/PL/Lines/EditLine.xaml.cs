@@ -33,7 +33,7 @@ namespace PL
             bl = BlFactory.GetBl();
 
             DataContext = line;
-            path = bl.convertToLineStationsList(line.Path);
+            path = (ObservableCollection<Station>)bl.convertToStationsList(line.Path);
             LineStations.ItemsSource = path;
             Ok.IsEnabled = true;
         }
@@ -67,9 +67,9 @@ namespace PL
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            new AddLineStation().ShowDialog();
-
-
+            AddLineStation window = new AddLineStation(((BO.Line)DataContext).ThisSerial);
+            window.ShowDialog();
+            path.Add(window.stationToAdd);
             Ok.IsEnabled = OkButton_IsEnabled();
         }
 
