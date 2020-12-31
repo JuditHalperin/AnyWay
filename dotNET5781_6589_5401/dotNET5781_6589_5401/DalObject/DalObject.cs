@@ -90,7 +90,10 @@ namespace DL
         }
         public Bus getBus(string licensePlate)
         {
-            return DataSource.Buses.Find(item => item.LicensePlate == licensePlate).Clone();         
+            Bus bus = DataSource.Buses.Find(item => item.LicensePlate == licensePlate);
+            if (bus == null)
+                return null;
+            return bus.Clone();
         }
         public IEnumerable<Bus> GetBuses()
         {
@@ -321,7 +324,10 @@ namespace DL
         }
         public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
         {
-            return DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start).Clone();
+            DrivingBus drivingBus = DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start);
+            if (drivingBus == null)
+                return null;
+            return drivingBus.Clone();
         }
         public IEnumerable<DrivingBus> GetDrivingBuses()
         {
