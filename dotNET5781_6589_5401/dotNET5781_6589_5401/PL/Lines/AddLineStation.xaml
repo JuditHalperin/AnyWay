@@ -16,8 +16,8 @@
         </Grid.RowDefinitions>
         <Label Content="Choose station to add:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <ComboBox Name="LineStations" Grid.Row="1" ItemsSource="{Binding}" Width="300" HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}" VerticalAlignment="Top" SelectionChanged="LineStations_SelectionChanged"/>
-        <Label Content="index in the path" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Name="index" Style="{StaticResource TextBoxStyle}" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50"/>
+        <Label Content="Index in the path:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Name="Index" Style="{StaticResource TextBoxStyle}" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" TextChanged="Index_TextChanged"/>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

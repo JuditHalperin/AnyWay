@@ -24,26 +24,43 @@ namespace PL
     public partial class AddLineStation : Window
     {
         static IBL bl;
-        public Station stationToAdd;
-        public int indexInPath;
+        public Station StationToAdd;
+        public int IndexInPath;
+        public bool ToAdd = false;
 
         public AddLineStation(ObservableCollection<Station> path)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            Ok.IsEnabled = false;
             LineStations.ItemsSource = bl.GetStations(item => // all stations that this line does not stop at
             {
                 foreach (Station station in path)
-                    if (station!=null && station.ID == item.ID)
+                    if (station != null && station.ID == item.ID)
                         return false;
                 return true;
             }).ToList();
         }
 
+        private void Ok_IsEnabled()
+        {
+            if (Index.Text.Length != 0 && StationToAdd != null)
+                Ok.IsEnabled = true;
+            else
+                Ok.IsEnabled = false;
+        }
+
         private void LineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            stationToAdd = (Station)LineStations.SelectedItem;
+            StationToAdd = (Station)LineStations.SelectedItem;
+            Ok_IsEnabled();
         }
+
+        private void Index_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Ok_IsEnabled();
+        }
+
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -53,20 +70,13 @@ namespace PL
         {
             try
             {
-                if (index.Text.Length == 0 || !int.TryParse(index.Text, out indexInPath))
+                if (!int.TryParse(Index.Text, out IndexInPath) || IndexInPath <= 0)
                     throw new InvalidInputException("Invalid format of index.");
-                if (stationToAdd == null)
-                    throw new InvalidInputException("No station selected.");
+                ToAdd = true;
                 Close();
             }
-            catch (InvalidInputException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (LineException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+            catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }
+            catch (LineException ex) { MessageBox.Show(ex.Message); }
+        }        
     }
 }

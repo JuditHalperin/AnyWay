@@ -22,8 +22,8 @@ namespace PL
     /// </summary>
     public partial class RemoveLineStation : Window
     {
-        public Station stationToRemove;
-
+        public Station StationToRemove;
+        public bool ToRemove = false;
         public RemoveLineStation(ObservableCollection<Station> path)
         {
             InitializeComponent();
@@ -32,7 +32,8 @@ namespace PL
 
         private void LineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            stationToRemove = (Station)LineStations.SelectedItem;
+            StationToRemove = (Station)LineStations.SelectedItem;
+            ToRemove = true;
             Close();
         }
 

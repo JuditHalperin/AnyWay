@@ -54,14 +54,8 @@ namespace PL
                 bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
                 Close();
             }
-            catch (InvalidInputException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (LineException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }
+            catch (LineException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
@@ -72,13 +66,16 @@ namespace PL
                     throw new StationException("There are no more stations to add.");
                 AddLineStation window = new AddLineStation(path);
                 window.ShowDialog();
-                int index = window.indexInPath - 1;
-                if (index > path.Count())
-                    index = path.Count();
-                else if (index < 0)
-                    index = 0;
-                path.Insert(index, window.stationToAdd);
-                Ok.IsEnabled = OkButton_IsEnabled();
+                if (window.ToAdd)
+                {
+                    int index = window.IndexInPath - 1;
+                    if (index > path.Count())
+                        index = path.Count();
+                    else if (index < 0)
+                        index = 0;
+                    path.Insert(index, window.StationToAdd);
+                    Ok.IsEnabled = OkButton_IsEnabled();
+                }
             }
             catch (StationException ex) { MessageBox.Show(ex.Message); }
         }
@@ -91,8 +88,11 @@ namespace PL
                     throw new StationException("There are no stations to remove.");
                 RemoveLineStation window = new RemoveLineStation(path);
                 window.ShowDialog();
-                path.Remove(window.stationToRemove);
-                Ok.IsEnabled = OkButton_IsEnabled();
+                if (window.ToRemove)
+                {
+                    path.Remove(window.StationToRemove);
+                    Ok.IsEnabled = OkButton_IsEnabled();
+                }
             }
             catch (StationException ex) { MessageBox.Show(ex.Message); }
         }
