@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Add Line" Height="400" Width="700">
+    <Window.Resources>
+        <local:PathIsNotEmpty_RemoveLineStations x:Key="PathIsNotEmpty_RemoveLineStations"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
