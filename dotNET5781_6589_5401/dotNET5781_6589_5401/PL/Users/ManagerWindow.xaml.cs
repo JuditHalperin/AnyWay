@@ -29,13 +29,17 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             Username.Content = username;
+            enableButtons();
+        }
 
+        private void enableButtons()
+        {
             if (bl.NoBuses()) AddFirstBus.IsEnabled = true;
             else ShowBuses.IsEnabled = true;
             if (bl.NoLines()) AddFirstLine.IsEnabled = true;
-            else ShowLines.IsEnabled = true; 
+            else ShowLines.IsEnabled = true;
             if (bl.NoStations()) AddFirstStation.IsEnabled = true;
-            else ShowStations.IsEnabled = true;           
+            else ShowStations.IsEnabled = true;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
@@ -59,22 +63,19 @@ namespace PL
         private void AddFirstBus_Click(object sender, RoutedEventArgs e)
         {
             new AddBus().ShowDialog();
-            new ManagerWindow((string)Username.Content).Show();
-            Close();
+            enableButtons(); // refresh
         }
 
         private void AddFirstLine_Click(object sender, RoutedEventArgs e)
         {
             new AddLine().ShowDialog();
-            new ManagerWindow((string)Username.Content).Show();
-            Close();
+            enableButtons(); // refresh
         }
 
         private void AddFirstStation_Click(object sender, RoutedEventArgs e)
         {
             new AddStation().ShowDialog();
-            new ManagerWindow((string)Username.Content).Show();
-            Close();
+            enableButtons(); // refresh
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
