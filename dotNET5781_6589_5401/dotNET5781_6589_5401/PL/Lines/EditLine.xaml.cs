@@ -67,7 +67,7 @@ namespace PL
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            AddLineStation window = new AddLineStation(((BO.Line)DataContext).ThisSerial);
+            AddLineStation window = new AddLineStation(path);
             window.ShowDialog();
             path.Add(window.stationToAdd);
             Ok.IsEnabled = OkButton_IsEnabled();
@@ -75,8 +75,9 @@ namespace PL
 
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
-
-
+            RemoveLineStation window = new RemoveLineStation(path);
+            window.ShowDialog();
+            path.Remove(window.stationToRemove);
             Ok.IsEnabled = OkButton_IsEnabled();
         }
 
@@ -85,6 +86,10 @@ namespace PL
             Ok.IsEnabled = OkButton_IsEnabled();
         }
 
+        /// <summary>
+        /// enable to press 'Ok' when the line field is full and when there are at least two stations
+        /// </summary>
+        /// <returns></returns>
         private bool OkButton_IsEnabled()
         {
             if (LineNumber.Text.Length == 0 || path.Count() < 2)

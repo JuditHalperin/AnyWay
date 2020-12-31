@@ -18,29 +18,21 @@ using BO;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for AddLineStation.xaml
+    /// Interaction logic for RemoveLineStation.xaml
     /// </summary>
-    public partial class AddLineStation : Window
+    public partial class RemoveLineStation : Window
     {
-        static IBL bl;
-        public Station stationToAdd;
+        public Station stationToRemove;
 
-        public AddLineStation(ObservableCollection<Station> path)
+        public RemoveLineStation(ObservableCollection<Station> path)
         {
             InitializeComponent();
-            bl = BlFactory.GetBl();
-            LineStations.ItemsSource = bl.GetStations(item => // all stations that this line does not stop at
-            {
-                foreach (Station station in path)
-                    if (station.ID == item.ID)
-                        return false;
-                return true;
-            }).ToList();
+            LineStations.ItemsSource = path; // all stations that this line stops at           
         }
 
         private void LineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            stationToAdd = (Station)LineStations.SelectedItem;
+            stationToRemove = (Station)LineStations.SelectedItem;
             Close();
         }
     }

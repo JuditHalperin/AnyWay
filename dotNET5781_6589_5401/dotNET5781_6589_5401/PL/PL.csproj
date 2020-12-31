@@ -86,6 +86,9 @@
     <Compile Include="Lines\LineStationDetails.xaml.cs">
       <DependentUpon>LineStationDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lines\RemoveLineStation.xaml.cs">
+      <DependentUpon>RemoveLineStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PO\Exceptions.cs" />
     <Compile Include="PO\NotifyingDateTime.cs" />
     <Compile Include="Stations\AddStation.xaml.cs">
@@ -176,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lines\LineStationDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lines\RemoveLineStation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
