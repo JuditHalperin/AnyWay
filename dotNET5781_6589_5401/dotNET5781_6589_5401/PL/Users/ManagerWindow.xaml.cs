@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL
 {
@@ -19,11 +22,20 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        static IBL bl;
 
         public ManagerWindow(string username)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
             Username.Content = username;
+
+            if (bl.NoBuses()) AddFirstBus.IsEnabled = true;
+            else ShowBuses.IsEnabled = true;
+            if (bl.NoLines()) AddFirstLine.IsEnabled = true;
+            else ShowLines.IsEnabled = true; 
+            if (bl.NoStations()) AddFirstStation.IsEnabled = true;
+            else ShowStations.IsEnabled = true;           
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
@@ -41,6 +53,27 @@ namespace PL
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
             new StationsList((string)Username.Content).Show();
+            Close();
+        }
+        
+        private void AddFirstBus_Click(object sender, RoutedEventArgs e)
+        {
+            new AddBus().ShowDialog();
+            new ManagerWindow((string)Username.Content).Show();
+            Close();
+        }
+
+        private void AddFirstLine_Click(object sender, RoutedEventArgs e)
+        {
+            new AddLine().ShowDialog();
+            new ManagerWindow((string)Username.Content).Show();
+            Close();
+        }
+
+        private void AddFirstStation_Click(object sender, RoutedEventArgs e)
+        {
+            new AddStation().ShowDialog();
+            new ManagerWindow((string)Username.Content).Show();
             Close();
         }
 
