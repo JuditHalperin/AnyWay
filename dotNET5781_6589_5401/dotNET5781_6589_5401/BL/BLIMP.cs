@@ -94,7 +94,7 @@ namespace BL
             }
             catch (UserException ex)
             {
-                throw new BO.UserException(ex.Message);
+                throw new BO.UserException(ex.Message, ex);
             }
         }
         public void removeUser(BO.User user)
@@ -105,7 +105,7 @@ namespace BL
             }
             catch (UserException ex)
             {
-                throw new BO.UserException(ex.Message);
+                throw new BO.UserException(ex.Message, ex);
             }
         }
         public void updateUser(BO.User user)
@@ -116,7 +116,7 @@ namespace BL
             }
             catch (UserException ex)
             {
-                throw new BO.UserException(ex.Message);
+                throw new BO.UserException(ex.Message, ex);
             }
         }
         public BO.User getUser(string username)
@@ -127,7 +127,7 @@ namespace BL
             }
             catch (UserException ex)
             {
-                throw new BO.UserException(ex.Message);
+                throw new BO.UserException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.User> GetUsers()
@@ -139,7 +139,7 @@ namespace BL
             }
             catch (UserException ex)
             {
-                throw new BO.UserException(ex.Message);
+                throw new BO.UserException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.User> GetUsers(Predicate<BO.User> condition)
@@ -219,7 +219,7 @@ namespace BL
             }
             catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -234,7 +234,7 @@ namespace BL
             }
             catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -249,7 +249,7 @@ namespace BL
             }
             catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }        
         /// <summary>
@@ -265,7 +265,7 @@ namespace BL
             }
             catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -281,7 +281,7 @@ namespace BL
             }
             catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -434,7 +434,7 @@ namespace BL
             }
             catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -449,7 +449,7 @@ namespace BL
             }
             catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -466,7 +466,7 @@ namespace BL
             }
             catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }       
         /// <summary>
@@ -482,7 +482,7 @@ namespace BL
             }
             catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -498,7 +498,7 @@ namespace BL
             }
             catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -610,7 +610,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -629,7 +629,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
             catch (BO.StationException ex)
             {
@@ -650,7 +650,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -666,7 +666,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -682,7 +682,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -812,9 +812,8 @@ namespace BL
         }
         public IEnumerable<BO.Station> convertToStationsList(IEnumerable<BO.LineStation> path)
         {
-            IEnumerable<BO.Station> stations = from station in path
-                                               select getStation(station.ID);
-            return stations;
+            return from station in path
+                   select getStation(station.ID);
         }
         /// <summary>
         /// Add station in line
@@ -843,7 +842,7 @@ namespace BL
                 }
                 catch (StationException ex)
                 {
-                    throw new BO.StationException(ex.Message);
+                    throw new BO.StationException(ex.Message, ex);
                 }
             }
         }
@@ -865,7 +864,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -903,7 +902,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
             catch (BO.StationException ex)
             {
@@ -922,9 +921,9 @@ namespace BL
             {
                 return convertToLineStationBO(dal.getLineStation(numberLine, id));
             }
-            catch (DO.StationException ex)
+            catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.LineStation> GetLineStations()
@@ -936,7 +935,7 @@ namespace BL
             }
             catch (StationException ex)
             {
-                throw new BO.StationException(ex.Message);
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.LineStation> GetLineStations(Predicate<BO.LineStation> condition)
@@ -962,9 +961,9 @@ namespace BL
         /// </summary>
         /// <param name="drivingBus">driving bus of BO</param>
         /// <returns>driving bus of DO</returns>
-        DO.DrivingBus convertToDrivingBusDO(BO.DrivingBus drivingBus)
+        DrivingBus convertToDrivingBusDO(BO.DrivingBus drivingBus)
         {
-            return new DO.DrivingBus()
+            return new DrivingBus()
             {
                 ThisSerial = drivingBus.ThisSerial,
                 Line = drivingBus.Line,
@@ -981,7 +980,7 @@ namespace BL
         /// </summary>
         /// <param name="drivingBus">driving bus of DO</param>
         /// <returns>driving bus of BO</returns>
-        BO.DrivingBus convertToDrivingBusBO(DO.DrivingBus drivingBus)
+        BO.DrivingBus convertToDrivingBusBO(DrivingBus drivingBus)
         {
             return new BO.DrivingBus()
             {
@@ -1001,9 +1000,9 @@ namespace BL
             {
                 dal.addDrivingBus(convertToDrivingBusDO(drivingBus));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         public void removeDrivingBus(BO.DrivingBus drivingBus)
@@ -1012,9 +1011,9 @@ namespace BL
             {
                 dal.removeDrivingBus(convertToDrivingBusDO(drivingBus));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         public void updateDrivingBus(BO.DrivingBus drivingBus)
@@ -1023,9 +1022,9 @@ namespace BL
             {
                 dal.updateDrivingBus(convertToDrivingBusDO(drivingBus));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         public BO.DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
@@ -1034,9 +1033,9 @@ namespace BL
             {
                 return convertToDrivingBusBO(dal.getDrivingBus(thisSerial, licensePlate, line, start));
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.DrivingBus> GetDrivingBuses()
@@ -1046,9 +1045,9 @@ namespace BL
                 return from drivingBus in dal.GetDrivingBuses()
                        select convertToDrivingBusBO(drivingBus);
             }
-            catch (DO.BusException ex)
+            catch (BusException ex)
             {
-                throw new BO.BusException(ex.Message);
+                throw new BO.BusException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.DrivingBus> GetDrivingBuses(Predicate<BO.DrivingBus> condition)
@@ -1074,9 +1073,9 @@ namespace BL
         /// </summary>
         /// <param name="drivingLine">driving line of BO</param>
         /// <returns>driving line of DO</returns>
-        DO.DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
+        DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
         {
-            return new DO.DrivingLine()
+            return new DrivingLine()
             {
                 NumberLine = drivingLine.NumberLine,
                 Start = drivingLine.Start,
@@ -1089,7 +1088,7 @@ namespace BL
         /// </summary>
         /// <param name="drivingLine">driving line of DO</param>
         /// <returns>driving line of BO</returns>
-        BO.DrivingLine convertToDrivingLineBO(DO.DrivingLine drivingLine)
+        BO.DrivingLine convertToDrivingLineBO(DrivingLine drivingLine)
         {
             return new BO.DrivingLine()
             {
@@ -1105,9 +1104,9 @@ namespace BL
             {
                 dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         public void removeDrivingLine(BO.DrivingLine drivingLine)
@@ -1116,9 +1115,9 @@ namespace BL
             {
                 dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         public void updateDrivingLine(BO.DrivingLine drivingLine)
@@ -1127,9 +1126,9 @@ namespace BL
             {
                 dal.updateDrivingLine(convertToDrivingLineDO(drivingLine));
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         public BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
@@ -1138,9 +1137,9 @@ namespace BL
             {
                 return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines()
@@ -1150,9 +1149,9 @@ namespace BL
                 return from drivingLine in dal.GetDrivingLines()
                        select convertToDrivingLineBO(drivingLine);
             }
-            catch (DO.LineException ex)
+            catch (LineException ex)
             {
-                throw new BO.LineException(ex.Message);
+                throw new BO.LineException(ex.Message, ex);
             }
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)

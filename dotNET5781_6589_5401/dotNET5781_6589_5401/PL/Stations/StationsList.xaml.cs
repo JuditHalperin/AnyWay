@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using BLAPI;
 using PO;
 using BO;
-using System.Globalization;
 
 namespace PL
 {
