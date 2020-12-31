@@ -75,10 +75,7 @@ namespace PL
                 path.Add(window.stationToAdd);
                 Ok.IsEnabled = OkButton_IsEnabled();
             }
-            catch (StationException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (StationException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
@@ -92,10 +89,7 @@ namespace PL
                 path.Remove(window.stationToRemove);
                 Ok.IsEnabled = OkButton_IsEnabled();
             }
-            catch (StationException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (StationException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
