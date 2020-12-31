@@ -86,6 +86,7 @@
     <Compile Include="Lines\LineStationDetails.xaml.cs">
       <DependentUpon>LineStationDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lines\PathIsNotEmpty_RemoveLineStations.cs" />
     <Compile Include="Lines\RemoveLineStation.xaml.cs">
       <DependentUpon>RemoveLineStation.xaml</DependentUpon>
     </Compile>
@@ -97,6 +98,7 @@
     <Compile Include="Stations\EditStation.xaml.cs">
       <DependentUpon>EditStation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Stations\IDToName_Station.cs" />
     <Compile Include="Stations\IntToString_StationID.cs" />
     <Compile Include="Stations\StationsList.xaml.cs">
       <DependentUpon>StationsList.xaml</DependentUpon>

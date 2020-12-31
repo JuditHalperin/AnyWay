@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Lines" Height="450" Width="800">
     <Window.Resources>
-        <local:idToNameOfStation x:Key="idToNameOfStation"/>
+        <local:IDToName_Station x:Key="IDToName_Station"/>
         <DataTemplate x:Key="LineStations">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
                     <ColumnDefinition Width="300"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="ID" Grid.Column="0" Content="{Binding Path=ID}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label x:Name="Name" Grid.Column="1" Content="{Binding Path=ID, Converter={StaticResource idToNameOfStation}}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Label x:Name="Name" Grid.Column="1" Content="{Binding Path=ID, Converter={StaticResource IDToName_Station}}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>

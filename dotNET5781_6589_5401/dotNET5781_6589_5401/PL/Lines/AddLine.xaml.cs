@@ -33,6 +33,7 @@ namespace PL
             bl = BlFactory.GetBl();
             RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
             LineStations.ItemsSource = path;
+            RemoveStation.DataContext = path;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -52,14 +53,9 @@ namespace PL
                 bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
                 Close();
             }
-            catch (InvalidInputException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch(LineException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }            
+            catch (StationException ex) { MessageBox.Show(ex.Message); }
+
         }
 
         private void AddStation_Click(object sender, RoutedEventArgs e)

@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using BLAPI;
 using PO;
 using BO;
-using System.Globalization;
 
 namespace PL
 {
@@ -104,18 +103,6 @@ namespace PL
         {
             new ManagerWindow(username).Show();
             Close();
-        }
-    }
-    public class idToNameOfStation : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return BlFactory.GetBl().getStation((int)value).Name;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }
