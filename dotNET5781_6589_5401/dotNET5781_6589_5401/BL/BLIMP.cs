@@ -364,6 +364,7 @@ namespace BL
         {
             return new Line()
             {
+                ThisSerial = lineB.ThisSerial,
                 NumberLine = lineB.NumberLine,
                 Region = (Regions)lineB.Region
             };
@@ -406,6 +407,8 @@ namespace BL
         /// <param name="line">using path</param>
         void convertLineToLineStationsDO(BO.Line line)
         {
+            foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.NumberLine).ToList())
+                dal.removeLineStation(lineStation);
             foreach (BO.LineStation station in line.Path)
                 addOrUpdateLineStation(station);
         }
@@ -813,7 +816,9 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.PathIndex);
+                BO.LineStation station = GetLineStations(item=> item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
+                if (station == null)
+                    throw new BO.StationException("");
                 IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
@@ -821,7 +826,7 @@ namespace BL
                     updateLineStation(lineStations.ElementAt(i));
                 }
             }
-            catch (BO.BusException) { }
+            catch (BO.StationException) { }
             finally
             {
                 try
