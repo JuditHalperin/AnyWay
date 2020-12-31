@@ -25,7 +25,7 @@ namespace PL
     {
         static IBL bl;
 
-        ObservableCollection<Station> path = new ObservableCollection<Station>();
+        ObservableCollection<Station> path;
 
         public EditLine(BO.Line line)
         {
@@ -33,9 +33,10 @@ namespace PL
             bl = BlFactory.GetBl();
 
             DataContext = line;
-            path = (ObservableCollection<Station>)bl.convertToStationsList(line.Path);
+            RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
+            RegionsList.SelectedItem = line.Region;
+            path = new ObservableCollection<Station>(bl.convertToStationsList(line.Path));
             LineStations.ItemsSource = path;
-            Ok.IsEnabled = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

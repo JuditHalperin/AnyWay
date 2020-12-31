@@ -35,7 +35,6 @@ namespace PL
             RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
             StationsList.ItemsSource = bl.GetStations();
             ChosenStations.ItemsSource = path;
-            Ok.IsEnabled = false;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
