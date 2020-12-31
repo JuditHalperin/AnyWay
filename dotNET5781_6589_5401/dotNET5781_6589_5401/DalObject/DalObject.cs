@@ -48,7 +48,10 @@ namespace DL
         }
         public User getUser(string username)
         {
-            return DataSource.Users.Find(item => item.Username == username).Clone();       
+            User user= DataSource.Users.Find(item => item.Username == username);
+            if (user == null)
+                return null;
+            return user.Clone();
         }
         public IEnumerable<User> GetUsers()
         {
@@ -173,7 +176,10 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            return DataSource.Stations.Find(item => item.ID == id).Clone();
+            Station station= DataSource.Stations.Find(item => item.ID == id);
+            if (station == null)
+                return null;
+            return station.Clone();
         }
         public IEnumerable<Station> GetStations()
         {
@@ -219,7 +225,10 @@ namespace DL
         }
         public LineStation getLineStation(int numberLine, int id)
         {
-            return DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id).Clone();                   
+            LineStation lineStation= DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id);
+            if (lineStation == null)
+                return null;
+            return lineStation.Clone();
         }
         public IEnumerable<LineStation> GetLineStations()
         {
@@ -264,7 +273,10 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            return DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID)).Clone();
+            TwoFollowingStations twoFollowingStations= DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID));
+            if (twoFollowingStations == null)
+                return null;
+            return twoFollowingStations.Clone();
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
@@ -358,7 +370,10 @@ namespace DL
         }
         public DrivingLine getDrivingLine(int numberLine, DateTime start)
         {
-            return DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start).Clone();
+            DrivingLine drivingLine= DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start);
+            if (drivingLine == null)
+                return null;
+            return drivingLine.Clone();
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
         {
