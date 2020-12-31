@@ -407,7 +407,7 @@ namespace BL
         /// <param name="line">using path</param>
         void convertLineToLineStationsDO(BO.Line line)
         {
-            foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.NumberLine).ToList())
+            foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                 dal.removeLineStation(lineStation);
             foreach (BO.LineStation station in line.Path)
                 addOrUpdateLineStation(station);
@@ -462,6 +462,8 @@ namespace BL
             {
                 dal.updateLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
+                foreach (BO.LineStation lineStation in line.Path)
+                    lineStation.NumberLine = line.ThisSerial;
                 convertLineToLineStationsDO(line);
             }
             catch (LineException ex)
@@ -493,8 +495,8 @@ namespace BL
         {
             try
             {
-                return from line in dal.GetLines()
-                       select convertToLineBO(line);
+                return (from line in dal.GetLines()
+                       select convertToLineBO(line)).OrderBy(item=>item.ThisSerial);
             }
             catch (LineException ex)
             {
