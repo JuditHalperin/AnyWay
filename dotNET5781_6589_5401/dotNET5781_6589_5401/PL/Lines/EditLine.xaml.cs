@@ -72,7 +72,12 @@ namespace PL
                     throw new StationException("There are no more stations to add.");
                 AddLineStation window = new AddLineStation(path);
                 window.ShowDialog();
-                path.Add(window.stationToAdd);
+                int index = window.indexInPath - 1;
+                if (index > path.Count())
+                    index = path.Count();
+                else if (index < 0)
+                    index = 0;
+                path.Insert(index, window.stationToAdd);
                 Ok.IsEnabled = OkButton_IsEnabled();
             }
             catch (StationException ex) { MessageBox.Show(ex.Message); }
