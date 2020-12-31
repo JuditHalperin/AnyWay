@@ -149,7 +149,7 @@ namespace DL
         }
         public bool LinesIsEmpty()
         {
-            return DataSource.Lines.Count() > 0;
+            return DataSource.Lines.Count() == 0;
         }
 
         #endregion
@@ -201,7 +201,7 @@ namespace DL
         }
         public bool StationsIsEmpty()
         {
-            return DataSource.Stations.Count() > 0;
+            return DataSource.Stations.Count() == 0;
         }
 
         #endregion
