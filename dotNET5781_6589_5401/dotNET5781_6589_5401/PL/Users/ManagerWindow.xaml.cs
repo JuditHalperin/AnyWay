@@ -36,9 +36,9 @@ namespace PL
         {
             if (bl.GetBuses().Count() == 0) AddFirstBus.Visibility = Visibility.Visible;
             else ShowBuses.Visibility = Visibility.Visible;
-            if (bl.GetLines().Count() == 0) AddFirstLine.Visibility = Visibility.Visible;
+            if (bl.GetLines().ToList().Count() == 0) AddFirstLine.Visibility = Visibility.Visible;
             else ShowLines.Visibility = Visibility.Visible;
-            if (bl.GetStations().Count() == 0) AddFirstStation.Visibility = Visibility.Visible;
+            if (bl.GetStations().ToList().Count() == 0) AddFirstStation.Visibility = Visibility.Visible;
             else ShowStations.Visibility = Visibility.Visible;
 
             //if (bl.NoBuses()) AddFirstBus.Visibility = Visibility.Visible;

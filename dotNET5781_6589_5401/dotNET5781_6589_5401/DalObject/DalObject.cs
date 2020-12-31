@@ -98,7 +98,7 @@ namespace DL
         public IEnumerable<Bus> GetBuses()
         {
             return from item in DataSource.Buses
-                   select item.Clone();
+                   select item.Clone();           
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
