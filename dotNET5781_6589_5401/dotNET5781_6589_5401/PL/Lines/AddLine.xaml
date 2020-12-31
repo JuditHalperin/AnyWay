@@ -23,10 +23,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="LineNumber" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
-                <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" ItemsSource="{Binding}" Width="70" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Line number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBox x:Name="LineNumber" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
+                <Label Content="Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Width="70" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -38,10 +38,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Stations:" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <ComboBox Name="StationsList" ItemsSource="{Binding}" Grid.Column="1" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="StationsList_SelectionChanged"/>
+                    <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ComboBox Name="StationsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Column="1" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="StationsList_SelectionChanged"/>
                 </Grid>
-                <ListBox x:Name="ChosenStations" Grid.Row="1" ItemsSource="{Binding Path=ID}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ListBox x:Name="ChosenStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding Path=ID}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -49,8 +49,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Cancel" Content="Cancel" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
-            <Button x:Name="Ok" Content="Ok" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
+            <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+            <Button x:Name="Ok" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
         </Grid>
     </Grid>
 </Window>

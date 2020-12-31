@@ -23,10 +23,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Line number:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="LineNumber" Grid.Row="1" Text="{Binding Path=NumberLine}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
-                <Label Content="Regions:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" ItemsSource="{Binding}" SelectedItem="{Binding Path=Region}" Width="70" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Line number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBox x:Name="LineNumber" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Text="{Binding Path=NumberLine}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
+                <Label Content="Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" SelectedItem="{Binding Path=Region}" Width="70" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -34,15 +34,15 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Stations:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <ListBox x:Name="LineStations" Grid.Row="1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="AddStation" Content="Add station" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
-                    <Button x:Name="RemoveStation" Content="Remove station" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
+                    <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
+                    <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove station" Grid.Column="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -51,8 +51,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Cancel" Content="Cancel" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
-            <Button x:Name="Ok" Content="Ok" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
+            <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+            <Button x:Name="Ok" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
         </Grid>
     </Grid>
 </Window>
