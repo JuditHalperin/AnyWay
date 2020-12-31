@@ -11,7 +11,7 @@ namespace DS
     public static class DataSource
     {
         public static List<User> Users;
-        public static List<Bus> Buses = new List<Bus>();
+		public static List<Bus> Buses;
 		public static List<Line> Lines;
 		public static List<Station> Stations;
         public static List<LineStation> LineStations;
@@ -656,12 +656,13 @@ namespace DS
 					});
 				}
 			} // line stations
+			Buses = new List<Bus>();
 			for (int i = 0; i < 10; i++)
 			{
 				string tmp = Convert.ToString(rand.Next(1000000, 10000000));
 				tmp = tmp.Insert(2, "-");
 				tmp = tmp.Insert(6, "-");
-				new Bus()
+				Buses.Add(new Bus()
 				{
 					LicensePlate = tmp,
 					StartOfWork = new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
@@ -669,14 +670,14 @@ namespace DS
 					TotalKms = rand.Next(20000, 50000),
 					KmsSinceFuel = rand.Next(0, 1200),
 					KmsSinceService = rand.Next(0, 20000)
-				};
+				});			
 			} // 10 buses before 2018
 			for (int i = 0; i < 10; i++)
 			{
 				string tmp = Convert.ToString(rand.Next(10000000, 100000000));
 				tmp = tmp.Insert(3, "-");
 				tmp = tmp.Insert(6, "-");
-				new Bus()
+				Buses.Add(new Bus()
 				{
 					LicensePlate = tmp,
 					StartOfWork = new DateTime(rand.Next(2018, DateTime.Now.Year), rand.Next(1, 13), rand.Next(1, 29)),
@@ -684,7 +685,7 @@ namespace DS
 					TotalKms = rand.Next(20000, 50000),
 					KmsSinceFuel = rand.Next(0, 1200),
 					KmsSinceService = rand.Next(0, 20000)
-				};
+				});
 			} //10 buses after 2018
 			DrivingBuses = new List<DrivingBus>();
 			DrivingLines = new List<DrivingLine>();
