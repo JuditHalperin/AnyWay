@@ -31,7 +31,6 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             administrativePrivileges = a;
-            Ok.IsEnabled = false;
         }
 
         private void NewAccount_PreviewMouseDown(object sender, MouseButtonEventArgs e)
