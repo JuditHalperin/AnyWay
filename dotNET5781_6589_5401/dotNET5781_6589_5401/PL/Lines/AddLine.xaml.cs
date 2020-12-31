@@ -32,6 +32,7 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
+            LineStations.ItemsSource = path;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
