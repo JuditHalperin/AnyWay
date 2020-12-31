@@ -42,6 +42,7 @@ namespace BLAPI
         IEnumerable<Line> GetLines();
         IEnumerable<Line> GetLines(Predicate<Line> condition);
         bool canChangeLine(Line line);
+        bool LinesIsEmpty();
 
         #endregion
 
@@ -54,6 +55,7 @@ namespace BLAPI
         IEnumerable<Station> GetStations();
         IEnumerable<Station> GetStations(Predicate<Station> condition);
         bool canChangeStation(Station station);
+        bool StationsIsEmpty();
 
         #endregion
 
