@@ -34,12 +34,12 @@ namespace PL
             username = name;
 
             ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
-            selectionChanged();
+            ListOfLines.SelectedIndex = 0;
         }
 
-        private void selectionChanged()
+        private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if((BO.Line)ListOfLines.SelectedItem == null)
+            if ((BO.Line)ListOfLines.SelectedItem == null)
                 ListOfLines.SelectedIndex = 0;
             DataContext = (BO.Line)ListOfLines.SelectedItem;
             NumberOfStations.Content = ((BO.Line)ListOfLines.SelectedItem).Path.Count();
@@ -53,11 +53,6 @@ namespace PL
                 LineStations.Visibility = Visibility.Hidden;
                 NoStations.Visibility = Visibility.Visible;
             }
-        }
-
-        private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectionChanged();
         }
         
         private void AddLine_Click(object sender, RoutedEventArgs e)
