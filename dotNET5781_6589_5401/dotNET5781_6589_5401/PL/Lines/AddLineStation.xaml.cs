@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using BLAPI;
 using BO;
+using PO;
 
 namespace PL
 {
@@ -24,6 +25,7 @@ namespace PL
     {
         static IBL bl;
         public Station stationToAdd;
+        public int indexInPath;
 
         public AddLineStation(ObservableCollection<Station> path)
         {
@@ -41,7 +43,30 @@ namespace PL
         private void LineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             stationToAdd = (Station)LineStations.SelectedItem;
+        }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
             Close();
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (index.Text.Length == 0 || !int.TryParse(index.Text, out indexInPath))
+                    throw new InvalidInputException("Invalid format of index.");
+                if (stationToAdd == null)
+                    throw new InvalidInputException("No station selected.");
+                Close();
+            }
+            catch (InvalidInputException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (LineException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
