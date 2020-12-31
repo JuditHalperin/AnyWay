@@ -24,9 +24,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <TextBox x:Name="LineNumber" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Text="{Binding Path=NumberLine}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
+                <TextBox x:Name="LineNumber" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Text="{Binding Path=NumberLine, Mode=OneWay}" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
                 <Label Content="Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" SelectedItem="{Binding Path=Region}" Width="70" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" SelectedItem="{Binding Path=Region, Mode=OneWay}" Width="70" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -35,7 +35,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
