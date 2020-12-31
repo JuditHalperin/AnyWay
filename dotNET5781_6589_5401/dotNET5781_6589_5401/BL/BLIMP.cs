@@ -446,6 +446,8 @@ namespace BL
             try
             {
                 dal.removeLine(convertToLineDO(line));
+                foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
+                    dal.removeLineStation(lineStation);
             }
             catch (LineException ex)
             {
