@@ -26,7 +26,7 @@ namespace PL
     /// </summary>
     public class AllTextBoxAreFull : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             foreach (object val in values)
                 if (string.IsNullOrEmpty(val as string))
@@ -34,7 +34,7 @@ namespace PL
             return true;
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
