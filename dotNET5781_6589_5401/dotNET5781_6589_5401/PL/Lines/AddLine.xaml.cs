@@ -52,6 +52,7 @@ namespace PL
                 if (path.Count() < 2)
                     throw new InvalidInputException("A line path should contain at least 2 stations.");
                 bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
+                Close();
             }
             catch (InvalidInputException ex)
             {

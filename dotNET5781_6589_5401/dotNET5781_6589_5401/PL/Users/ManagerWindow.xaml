@@ -15,9 +15,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Username" Content="{Binding Username}" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100"/>
-        <Button x:Name="ShowBuses" Content="Buses" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="30" Width="100" VerticalAlignment="Center" Click="ShowBuses_Click"/>
-        <Button x:Name="ShowLines" Content="Lines" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="30" Width="100" VerticalAlignment="Center" Click="ShowLines_Click"/>
-        <Button x:Name="ShowStations" Content="Stations" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="30" Width="100" VerticalAlignment="Center" Click="ShowStations_Click"/>
+        <Button x:Name="ShowBuses" Content="Buses" Visibility="Hidden" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="30" Width="100" VerticalAlignment="Center" Click="ShowBuses_Click"/>
+        <Button x:Name="ShowLines" Content="Lines" Visibility="Hidden" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="30" Width="100" VerticalAlignment="Center" Click="ShowLines_Click"/>
+        <Button x:Name="ShowStations" Content="Stations" Visibility="Hidden" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="30" Width="100" VerticalAlignment="Center" Click="ShowStations_Click"/>
+        <Button x:Name="AddFirstBus" Content="Add first bus" Visibility="Hidden" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="30" Width="100" VerticalAlignment="Center" Click="AddFirstBus_Click"/>
+        <Button x:Name="AddFirstLine" Content="Add first line" Visibility="Hidden" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="30" Width="100" VerticalAlignment="Center" Click="AddFirstLine_Click"/>
+        <Button x:Name="AddFirstStation" Content="Add first station" Visibility="Hidden" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="30" Width="100" VerticalAlignment="Center" Click="AddFirstStation_Click"/>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

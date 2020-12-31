@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL
 {
@@ -19,11 +22,31 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        static IBL bl;
 
         public ManagerWindow(string username)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
             Username.Content = username;
+            enableButtons();
+        }
+
+        private void enableButtons()
+        {
+            if (bl.GetBuses().Count() == 0) AddFirstBus.Visibility = Visibility.Visible;
+            else ShowBuses.Visibility = Visibility.Visible;
+            if (bl.GetLines().Count() == 0) AddFirstLine.Visibility = Visibility.Visible;
+            else ShowLines.Visibility = Visibility.Visible;
+            if (bl.GetStations().Count() == 0) AddFirstStation.Visibility = Visibility.Visible;
+            else ShowStations.Visibility = Visibility.Visible;
+
+            //if (bl.NoBuses()) AddFirstBus.Visibility = Visibility.Visible;
+            //else ShowBuses.Visibility = Visibility.Visible;
+            //if (bl.NoLines()) AddFirstLine.Visibility = Visibility.Visible;
+            //else ShowLines.Visibility = Visibility.Visible;
+            //if (bl.NoStations()) AddFirstStation.Visibility = Visibility.Visible;
+            //else ShowStations.Visibility = Visibility.Visible;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
@@ -42,6 +65,24 @@ namespace PL
         {
             new StationsList((string)Username.Content).Show();
             Close();
+        }
+        
+        private void AddFirstBus_Click(object sender, RoutedEventArgs e)
+        {
+            new AddBus().ShowDialog();
+            enableButtons(); // refresh
+        }
+
+        private void AddFirstLine_Click(object sender, RoutedEventArgs e)
+        {
+            new AddLine().ShowDialog();
+            enableButtons(); // refresh
+        }
+
+        private void AddFirstStation_Click(object sender, RoutedEventArgs e)
+        {
+            new AddStation().ShowDialog();
+            enableButtons(); // refresh
         }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
