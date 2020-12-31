@@ -28,6 +28,7 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            DataContext = lineStation;
         }
     }
 }
