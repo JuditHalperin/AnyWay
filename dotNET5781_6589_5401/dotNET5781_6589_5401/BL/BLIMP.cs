@@ -811,7 +811,7 @@ namespace BL
         /// <param name="lineStation">station in line</param>
         public void addLineStation(BO.LineStation lineStation)
         {
-            try // if the line station exists
+            try
             {
                 BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.PathIndex);
                 IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
