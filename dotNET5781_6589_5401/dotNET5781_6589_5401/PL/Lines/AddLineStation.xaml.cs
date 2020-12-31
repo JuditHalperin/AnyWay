@@ -32,7 +32,7 @@ namespace PL
             LineStations.ItemsSource = bl.GetStations(item => // all stations that this line does not stop at
             {
                 foreach (Station station in path)
-                    if (station.ID == item.ID)
+                    if (station!=null && station.ID == item.ID)
                         return false;
                 return true;
             }).ToList();
