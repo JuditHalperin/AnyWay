@@ -95,7 +95,7 @@ namespace PL
             int count = 0;
             for (int i = 0; i <= 9; i++)
             {
-                String str1 = i.ToString();
+                string str1 = i.ToString();
                 if (password.Contains(str1))
                 {
                     count = 1;
@@ -123,7 +123,7 @@ namespace PL
             for (int i = 65; i <= 90; i++)
             {
                 char c = (char)i;
-                String str1 = c.ToString();
+                string str1 = c.ToString();
                 if (password.Contains(str1))
                 {
                     count = 1;
@@ -137,7 +137,7 @@ namespace PL
             for (int i = 90; i <= 122; i++)
             {
                 char c = (char)i;
-                String str1 = c.ToString();
+                string str1 = c.ToString();
 
                 if (password.Contains(str1))
                 {
