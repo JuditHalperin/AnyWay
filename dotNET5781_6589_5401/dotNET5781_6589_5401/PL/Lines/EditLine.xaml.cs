@@ -24,14 +24,12 @@ namespace PL
     public partial class EditLine : Window
     {
         static IBL bl;
-
         ObservableCollection<Station> path;
 
         public EditLine(BO.Line line)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-
             DataContext = line;
             RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
             RegionsList.SelectedItem = line.Region;
@@ -68,18 +66,30 @@ namespace PL
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            AddLineStation window = new AddLineStation(path);
-            window.ShowDialog();
-            path.Add(window.stationToAdd);
-            Ok.IsEnabled = OkButton_IsEnabled();
+            try
+            {
+                if (path.Count() == bl.GetStations().Count())
+                    throw new StationException("There are no more stations to add.");
+                AddLineStation window = new AddLineStation(path);
+                window.ShowDialog();
+                path.Add(window.stationToAdd);
+                Ok.IsEnabled = OkButton_IsEnabled();
+            }
+            catch (StationException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
-            RemoveLineStation window = new RemoveLineStation(path);
-            window.ShowDialog();
-            path.Remove(window.stationToRemove);
-            Ok.IsEnabled = OkButton_IsEnabled();
+            try
+            {
+                if (path.Count() == 0)
+                    throw new StationException("There are no stations to remove.");
+                RemoveLineStation window = new RemoveLineStation(path);
+                window.ShowDialog();
+                path.Remove(window.stationToRemove);
+                Ok.IsEnabled = OkButton_IsEnabled();
+            }
+            catch (StationException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)

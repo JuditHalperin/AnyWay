@@ -24,7 +24,6 @@ namespace PL
     public partial class LinesList : Window
     {
         static IBL bl;
-
         string username;
 
         public LinesList(string name)
@@ -32,7 +31,6 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             username = name;
-
             ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
             ListOfLines.SelectedIndex = 0;
         }
@@ -83,7 +81,13 @@ namespace PL
                 if(!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to remove a line if it is driving.");
                 bl.removeLine((BO.Line)ListOfLines.SelectedItem);
-                ListOfLines.ItemsSource = bl.GetLines();
+                if (!bl.LinesIsEmpty())
+                    ListOfLines.ItemsSource = bl.GetLines();
+                else
+                {
+                    new ManagerWindow(username).Show();
+                    Close();
+                }
             }
             catch (LineException ex)
             {

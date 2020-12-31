@@ -31,7 +31,6 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             username = name;
-
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
             ListOfStations.SelectedIndex = 0;
         }
@@ -83,7 +82,13 @@ namespace PL
                 if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
                 bl.removeStation((Station)ListOfStations.SelectedItem);
-                ListOfStations.ItemsSource = bl.GetStations();
+                if (!bl.StationsIsEmpty())
+                    ListOfStations.ItemsSource = bl.GetStations();
+                else
+                {
+                    new ManagerWindow(username).Show();
+                    Close();
+                }
             }
 
             catch (StationException ex)
