@@ -10,8 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Choose station to remove:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <ComboBox Name="LineStations" Grid.Row="1" ItemsSource="{Binding}" Width="300" HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}" VerticalAlignment="Top" SelectionChanged="LineStations_SelectionChanged"/>
+        <Button x:Name="Cancel" Content="Cancel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Cancel_Click"/>
     </Grid>
 </Window>

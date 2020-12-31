@@ -35,5 +35,10 @@ namespace PL
             stationToRemove = (Station)LineStations.SelectedItem;
             Close();
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
