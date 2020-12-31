@@ -11,7 +11,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Choose station to add:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Label Content="Choose station to add:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <ComboBox Name="LineStations" Grid.Row="1" ItemsSource="{Binding}" Width="300" HorizontalAlignment="Center" Style="{StaticResource ComboBoxStyle}" VerticalAlignment="Top" SelectionChanged="LineStations_SelectionChanged"/>
     </Grid>
 </Window>
