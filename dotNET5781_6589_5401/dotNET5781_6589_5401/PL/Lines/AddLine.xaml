@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Column="0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
-            <Button x:Name="Ok" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
+            <Button x:Name="Ok" Content="Ok" IsEnabled="False" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
         </Grid>
     </Grid>
 </Window>
