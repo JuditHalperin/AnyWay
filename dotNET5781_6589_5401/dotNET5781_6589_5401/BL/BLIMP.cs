@@ -462,6 +462,8 @@ namespace BL
             {
                 dal.updateLine(convertToLineDO(line));
                 convertLineToFollowingStationDO(line);
+                foreach (BO.LineStation lineStation in line.Path)
+                    lineStation.NumberLine = line.ThisSerial;
                 convertLineToLineStationsDO(line);
             }
             catch (LineException ex)
@@ -493,8 +495,8 @@ namespace BL
         {
             try
             {
-                return from line in dal.GetLines()
-                       select convertToLineBO(line);
+                return (from line in dal.GetLines()
+                       select convertToLineBO(line)).OrderBy(item=>item.ThisSerial);
             }
             catch (LineException ex)
             {
