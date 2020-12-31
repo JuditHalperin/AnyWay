@@ -31,6 +31,7 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             administrativePrivileges = a;
+            Ok.IsEnabled = false;
         }
 
         private void NewAccount_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -67,6 +68,19 @@ namespace PL
         {
             new Main().Show();
             Close();
-        }
+        }       
+
+        /// <summary>
+        /// enable to press 'Ok' when all fields are full
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Ok_IsEnabled(object sender, RoutedEventArgs e)
+        {
+            if (Username.Text.Length > 0 && Password.Password.Length > 0)
+                Ok.IsEnabled = true;
+            else
+                Ok.IsEnabled = false;
+        }       
     }
 }

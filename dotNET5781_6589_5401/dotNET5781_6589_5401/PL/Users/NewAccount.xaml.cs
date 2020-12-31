@@ -31,6 +31,7 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             administrativePrivileges = a;
+            Ok.IsEnabled = false;
             if (!a)
             {
                 ManagingCode.Visibility = Visibility.Hidden;
@@ -146,5 +147,19 @@ namespace PL
 
             return "Valid";
         }
+
+
+        /// <summary>
+        /// enable to press 'Ok' when all fields are full
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Ok_IsEnabled(object sender, RoutedEventArgs e)
+        {
+            if (Username.Text.Length > 0 && Password.Password.Length > 0 && ManagingCode.Password.Length > 0)
+                Ok.IsEnabled = true;
+            else
+                Ok.IsEnabled = false;
+        }        
     }
 }
