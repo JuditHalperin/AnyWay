@@ -32,16 +32,18 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <ComboBox Name="StationsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Column="1" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="StationsList_SelectionChanged"/>
+                    <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
+                    <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove station" Grid.Column="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
                 </Grid>
-                <ListBox x:Name="ChosenStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding Path=ID}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

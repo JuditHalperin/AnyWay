@@ -31,10 +31,7 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-
             RegionsList.ItemsSource = new List<Regions> { Regions.General, Regions.North, Regions.South, Regions.Center, Regions.Jerusalem };
-            StationsList.ItemsSource = bl.GetStations();
-            ChosenStations.ItemsSource = path;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -64,15 +61,20 @@ namespace PL
             }
         }
 
-        private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            if (path.Contains((Station)StationsList.SelectedItem))
-                MessageBox.Show($"Station {((Station)StationsList.SelectedItem).ID} is already in the path.");
-            else
-            {
-                path.Add((Station)StationsList.SelectedItem);
-                Ok.IsEnabled = OkButton_IsEnabled();
-            }
+            AddLineStation window = new AddLineStation(path);
+            window.ShowDialog();
+            path.Add(window.stationToAdd);
+            Ok.IsEnabled = OkButton_IsEnabled();
+        }
+
+        private void RemoveStation_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveLineStation window = new RemoveLineStation(path);
+            window.ShowDialog();
+            path.Remove(window.stationToRemove);
+            Ok.IsEnabled = OkButton_IsEnabled();
         }
 
         private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
@@ -85,6 +87,7 @@ namespace PL
             if (LineNumber.Text.Length == 0 || path.Count() < 2)
                 return false;
             return true;
-        }       
+        }
+
     }
 }

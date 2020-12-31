@@ -33,20 +33,11 @@ namespace PL
         }
 
         private void enableButtons()
-        {
-            if (bl.GetBuses().Count() == 0) AddFirstBus.Visibility = Visibility.Visible;
-            else ShowBuses.Visibility = Visibility.Visible;
-            if (bl.GetLines().ToList().Count() == 0) AddFirstLine.Visibility = Visibility.Visible;
+        {            
+            if (bl.LinesIsEmpty()) AddFirstLine.Visibility = Visibility.Visible;
             else ShowLines.Visibility = Visibility.Visible;
-            if (bl.GetStations().ToList().Count() == 0) AddFirstStation.Visibility = Visibility.Visible;
+            if (bl.StationsIsEmpty()) AddFirstStation.Visibility = Visibility.Visible;
             else ShowStations.Visibility = Visibility.Visible;
-
-            //if (bl.NoBuses()) AddFirstBus.Visibility = Visibility.Visible;
-            //else ShowBuses.Visibility = Visibility.Visible;
-            //if (bl.NoLines()) AddFirstLine.Visibility = Visibility.Visible;
-            //else ShowLines.Visibility = Visibility.Visible;
-            //if (bl.NoStations()) AddFirstStation.Visibility = Visibility.Visible;
-            //else ShowStations.Visibility = Visibility.Visible;
         }
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
