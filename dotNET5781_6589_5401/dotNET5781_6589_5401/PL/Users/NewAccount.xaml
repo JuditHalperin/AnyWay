@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Ok" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
+            <Button x:Name="Ok" Content="Ok" IsEnabled="False" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
             <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Column="0" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
         </Grid>
         <Label Content="Username:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>

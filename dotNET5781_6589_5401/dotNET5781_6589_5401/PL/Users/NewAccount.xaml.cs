@@ -31,7 +31,6 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             administrativePrivileges = a;
-            Ok.IsEnabled = false;
             if (!a)
             {
                 ManagingCode.Visibility = Visibility.Hidden;

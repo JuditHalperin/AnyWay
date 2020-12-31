@@ -31,9 +31,9 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             gettingChanged = description;
-            Title = "Change" + gettingChanged;
-            LabelOldPassword.Content = "Old" + gettingChanged + ":";
-            LabelNewPassword.Content = "New" + gettingChanged + ":";
+            Title = "Change " + gettingChanged;
+            LabelOldPassword.Content = "Old " + gettingChanged + ":";
+            LabelNewPassword.Content = "New " + gettingChanged + ":";
             user = bl.getUser(username);
         }
 
@@ -149,6 +149,19 @@ namespace PL
                 return "Password should contain at least one lowercase letter.";
 
             return "Valid";
+        }
+
+        /// <summary>
+        /// enable to press 'Ok' when all fields are full
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Ok_IsEnabled(object sender, RoutedEventArgs e)
+        {
+            if (OldPassword.Password.Length > 0 && NewPassword.Password.Length > 0)
+                Ok.IsEnabled = true;
+            else
+                Ok.IsEnabled = false;
         }
     }
 }
