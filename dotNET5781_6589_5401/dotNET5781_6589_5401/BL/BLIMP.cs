@@ -407,7 +407,7 @@ namespace BL
         /// <param name="line">using path</param>
         void convertLineToLineStationsDO(BO.Line line)
         {
-            foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.NumberLine).ToList())
+            foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                 dal.removeLineStation(lineStation);
             foreach (BO.LineStation station in line.Path)
                 addOrUpdateLineStation(station);
