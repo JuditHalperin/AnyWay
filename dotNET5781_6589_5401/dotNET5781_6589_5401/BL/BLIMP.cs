@@ -530,6 +530,10 @@ namespace BL
                 return true;
             return false;
         }
+        public bool LinesIsEmpty()
+        {
+            return dal.LinesIsEmpty();
+        }
 
         #endregion
 
@@ -713,6 +717,10 @@ namespace BL
             if (drivingLinesAtStation.Count() == 0)
                 return true;
             return false;
+        }
+        public bool StationsIsEmpty()
+        {
+            return dal.StationsIsEmpty();
         }
 
         #endregion

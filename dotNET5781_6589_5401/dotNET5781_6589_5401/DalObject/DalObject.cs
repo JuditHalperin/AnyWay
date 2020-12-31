@@ -147,6 +147,10 @@ namespace DL
                     where condition(item)
                     select item.Clone()).OrderBy(item => item.NumberLine);           
         }
+        public bool LinesIsEmpty()
+        {
+            return DataSource.Lines.Count() > 0;
+        }
 
         #endregion
 
@@ -194,6 +198,10 @@ namespace DL
             return (from item in DataSource.Stations
                     where condition(item)
                     select item.Clone()).OrderBy(item => item.ID); ;           
+        }
+        public bool StationsIsEmpty()
+        {
+            return DataSource.Stations.Count() > 0;
         }
 
         #endregion
