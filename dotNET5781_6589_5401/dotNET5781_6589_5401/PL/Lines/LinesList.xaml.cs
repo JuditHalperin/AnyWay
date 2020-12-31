@@ -34,12 +34,13 @@ namespace PL
             username = name;
 
             ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
-            ListOfLines.SelectedIndex = 0;
             selectionChanged();
         }
 
         private void selectionChanged()
         {
+            if((BO.Line)ListOfLines.SelectedItem == null)
+                ListOfLines.SelectedIndex = 0;
             DataContext = (BO.Line)ListOfLines.SelectedItem;
             NumberOfStations.Content = ((BO.Line)ListOfLines.SelectedItem).Path.Count();
             if ((int)NumberOfStations.Content > 0)
@@ -62,6 +63,7 @@ namespace PL
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
             new AddLine().ShowDialog();
+            ListOfLines.ItemsSource = bl.GetLines();
         }
 
         private void EditLine_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,7 @@ namespace PL
                 if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to edit a line if it is driving.");
                 new EditLine((BO.Line)ListOfLines.SelectedItem).ShowDialog();
+                ListOfLines.ItemsSource = bl.GetLines();
             }
             catch (LineException ex)
             {
@@ -85,6 +88,7 @@ namespace PL
                 if(!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to remove a line if it is driving.");
                 bl.removeLine((BO.Line)ListOfLines.SelectedItem);
+                ListOfLines.ItemsSource = bl.GetLines();
             }
             catch (LineException ex)
             {
