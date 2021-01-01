@@ -25,11 +25,11 @@ namespace BL
 
         int calculateDistance(BO.Station first, BO.Station second)
         {
-            return (int) (new GeoCoordinate(first.Latitude, first.Longitude).GetDistanceTo(new GeoCoordinate(second.Latitude, second.Longitude))*1.5);
+            return (int)(new GeoCoordinate(first.Latitude, first.Longitude).GetDistanceTo(new GeoCoordinate(second.Latitude, second.Longitude)) * 1.5);
         }
         int calculateTime(int distance)
         {
-            return (int) (distance * 0.001); // valocity of 60 km per hour
+            return (int)(distance * 0.001); // valocity of 60 km per hour
         }
         void addOrUpdateTwoFollowingStations(TwoFollowingStations followingStations)
         {
@@ -148,7 +148,7 @@ namespace BL
             {
                 return from item in GetUsers()
                        where condition(item)
-                       select item;              
+                       select item;
             }
             catch (BO.UserException ex)
             {
@@ -176,7 +176,7 @@ namespace BL
                 KmsSinceService = bus.KmsSinceService,
                 LastService = bus.LastService
             };
-        }       
+        }
         /// <summary>
         /// Func that converts bus of DO to bus of BO
         /// </summary>
@@ -251,7 +251,7 @@ namespace BL
             {
                 throw new BO.BusException(ex.Message, ex);
             }
-        }        
+        }
         /// <summary>
         /// Return bus according to the key of bus= license plate.
         /// </summary>
@@ -350,7 +350,7 @@ namespace BL
                 throw new BO.BusException(ex.Message);
             }
         }
-        
+
         #endregion
 
         #region Lines
@@ -378,7 +378,7 @@ namespace BL
         {
             return new BO.Line()
             {
-                ThisSerial=lineD.ThisSerial,
+                ThisSerial = lineD.ThisSerial,
                 NumberLine = lineD.NumberLine,
                 Region = (BO.Regions)lineD.Region,
                 Path = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex)
@@ -391,7 +391,6 @@ namespace BL
         void convertLineToFollowingStationDO(BO.Line line)
         {
             for (int i = 0; i < line.Path.Count() - 1; i++)
-            {             
                 addOrUpdateTwoFollowingStations(new TwoFollowingStations()
                 {
                     FirstStationID = line.Path.ElementAt(i).ID,
@@ -399,7 +398,6 @@ namespace BL
                     LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations,
                     TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations
                 });
-            }
         }
         /// <summary>
         /// Take from the path of line data about line stations.
@@ -409,8 +407,8 @@ namespace BL
         {
             foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                 dal.removeLineStation(lineStation);
-            foreach (BO.LineStation station in line.Path)
-                addOrUpdateLineStation(station);
+            foreach (BO.LineStation lineStation in line.Path)
+                addOrUpdateLineStation(lineStation);
         }
         /// <summary>
         /// Add line from the data.
@@ -472,7 +470,7 @@ namespace BL
             {
                 throw new BO.LineException(ex.Message, ex);
             }
-        }       
+        }
         /// <summary>
         /// Return line according it key = the serial.
         /// </summary>
@@ -498,7 +496,7 @@ namespace BL
             try
             {
                 return (from line in dal.GetLines()
-                       select convertToLineBO(line)).OrderBy(item=>item.ThisSerial);
+                        select convertToLineBO(line)).OrderBy(item => item.ThisSerial);
             }
             catch (LineException ex)
             {
@@ -516,7 +514,7 @@ namespace BL
             {
                 return from item in GetLines()
                        where condition(item)
-                       select item;                
+                       select item;
             }
             catch (BO.LineException ex)
             {
@@ -588,7 +586,7 @@ namespace BL
         void stationToFollowingStationAndLineStation(BO.Station station)
         {
             IEnumerable<BO.Station> stations = GetStations(item => item.ID != station.ID);
-            if(stations != null)
+            if (stations != null)
                 foreach (BO.Station otherStation in stations)
                 {
                     TwoFollowingStations followingStations = new TwoFollowingStations()
@@ -600,7 +598,7 @@ namespace BL
                     followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
                     addOrUpdateTwoFollowingStations(followingStations);
                 }
-        }      
+        }
         /// <summary>
         /// Add station to the saved data.
         /// </summary>
@@ -700,7 +698,7 @@ namespace BL
             {
                 return from item in GetStations()
                        where condition(item)
-                       select item;              
+                       select item;
             }
             catch (BO.StationException ex)
             {
@@ -776,7 +774,7 @@ namespace BL
             if (lineStationN != null)
                 lineStationB.NextStationID = lineStationN.ID;
             else // if it is the last line station
-                    lineStationB.NextStationID = -1; 
+                lineStationB.NextStationID = -1;
             return lineStationB;
         }
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
@@ -827,7 +825,7 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = GetLineStations(item=> item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
+                BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
                 if (station == null)
                     throw new BO.StationException("");
                 IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
