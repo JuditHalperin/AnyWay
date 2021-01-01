@@ -29,7 +29,7 @@ namespace PL
         public StationsList(string name)
         {
             InitializeComponent();
-            bl = BlFactory.GetBl();
+            bl = BlFactory.GetBl()
             username = name;
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
             ListOfStations.SelectedIndex = 0;
