@@ -88,7 +88,7 @@ namespace PL
                     throw new StationException("There are no stations to remove.");
                 RemoveLineStation window = new RemoveLineStation(path);
                 window.ShowDialog();
-                if (window.ToRemove)
+                if (window.StationToRemove != null)
                 {
                     path.Remove(window.StationToRemove);
                     Ok.IsEnabled = OkButton_IsEnabled();
