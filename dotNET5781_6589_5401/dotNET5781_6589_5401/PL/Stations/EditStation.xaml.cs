@@ -51,8 +51,7 @@ namespace PL
                 int distanceToPreviousLocation = 0;
                 if (latitude != ((Station)DataContext).Latitude || longitude != ((Station)DataContext).Longitude)
                 {
-                    DistanceToOldStation window = new DistanceToOldStation();
-                    window.ShowDialog();
+                    new DistanceToOldStation().ShowDialog();
                     distanceToPreviousLocation = DistanceToOldStation.Distance;
                 }
 
