@@ -31,15 +31,41 @@ namespace PL
             Station station = bl.getStation(lineStation.ID);
             DataContext = lineStation;
             location.DataContext = $"({station.Latitude}°N, {station.Longitude}°E)";
-            if(lineStation.PathIndex>1)
+            if (lineStation.PreviousStationID != -1) 
             {
-                Station preStation= bl.getStation(lineStation.PreviousStationID);
-                //LineStation preLineStation = bl.getLineStation(lineStation.NumberLine, preStation.ID);
-                preDistance.DataContext = lineStation.LengthFromPreviousStations;
-                preTime.DataContext = lineStation.TimeFromPreviousStations;
-                preLocation.DataContext=$"({preStation.Latitude}°N, {preStation.Longitude}°E)";
+                Station preStation = bl.getStation(lineStation.PreviousStationID);
+                preName.DataContext = preStation.Name;
+                preID.DataContext = preStation.ID;
+                preDistance.DataContext = $"{lineStation.LengthFromPreviousStations / 1000.0}Km";
+                preTime.DataContext = $"{lineStation.TimeFromPreviousStations / 60:00}:{lineStation.TimeFromPreviousStations % 60:00}:00";
+                preLocation.DataContext = $"({preStation.Latitude}°N, {preStation.Longitude}°E)";
             }
-            Station p
+            else//This the first station in the path;
+            {
+                preName.Content = "-";
+                preID.Content = "-";
+                preDistance.Content = "-";
+                preTime.Content = "-";
+                preLocation.Content = "-";
+            }
+            if (lineStation.NextStationID != -1)
+            {
+                Station nextStation = bl.getStation(lineStation.NextStationID);
+                LineStation nextLineStation = bl.getLineStation(lineStation.NumberLine, nextStation.ID);
+                nextName.DataContext = nextStation.Name;
+                nextID.DataContext = nextStation.ID;
+                nextDistance.DataContext = $"{nextLineStation.LengthFromPreviousStations / 1000.0}Km";
+                nextTime.DataContext = $"{nextLineStation.TimeFromPreviousStations/60:00}:{nextLineStation.TimeFromPreviousStations % 60:00}:00";
+                nextLocation.DataContext = $"({nextStation.Latitude}°N, {nextStation.Longitude}°E)";
+            }
+            else//This the last station in the path
+            {
+                nextName.Content="-";
+                nextID.Content = "-";
+                nextDistance.Content = "-";
+                nextTime.Content = "-";
+                nextLocation.Content = "-";
+            }
         }
     }
 }
