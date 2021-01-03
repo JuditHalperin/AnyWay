@@ -18,17 +18,16 @@ using BO;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for DistanceToPreviousStation.xaml
+    /// Interaction logic for DistanceBetweenStations.xaml
     /// </summary>
-    public partial class DistanceToPreviousStation : Window
+    public partial class DistanceBetweenStations : Window
     {
         static IBL bl;
         public bool validClosed = false;
-        public bool canceled = false;
         int firstStationID;
         int secondStationID;
 
-        public DistanceToPreviousStation(int previousStationID, int thisStationID)
+        public DistanceBetweenStations(int previousStationID, int thisStationID)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
@@ -56,8 +55,6 @@ namespace PL
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            validClosed = true;
-            canceled = true;
             Close();
         }
     }

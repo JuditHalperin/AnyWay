@@ -52,11 +52,9 @@ namespace PL
                 if (latitude != ((Station)DataContext).Latitude || longitude != ((Station)DataContext).Longitude)
                 {
                     DistanceToOldStation window = new DistanceToOldStation();
-                    while (!window.valid)
-                    {
-                        window = new DistanceToOldStation();
-                        window.ShowDialog();
-                    }
+                    window.ShowDialog();
+                    if (!window.valid)
+                        return;
                     distanceToPreviousLocation = window.Distance;
                 }
 
