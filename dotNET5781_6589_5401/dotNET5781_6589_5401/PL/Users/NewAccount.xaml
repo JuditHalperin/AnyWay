@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-          Title="New account" Height="400" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+          Title="New Account" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <local:AllTextBoxAreFull x:Key="AllTextBoxAreFull"/>
     </Window.Resources>
@@ -15,11 +15,19 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="DownGrid" Grid.Row="6">
+        <Label Content="Username:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="Ok_IsEnabled"/>
+        <Label Content="Password:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <PasswordBox x:Name="Password" Grid.Row="3" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
+        <Label Content="Managing code:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <PasswordBox x:Name="ManagingCode" Grid.Row="5" Width="100" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
+        <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelToClickStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
+        <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -27,12 +35,5 @@
             <Button x:Name="Ok" Content="Ok" IsEnabled="False" Style="{StaticResource ButtonStyle}" Grid.Column="1" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Ok_Click"/>
             <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Column="0" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
         </Grid>
-        <Label Content="Username:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="Ok_IsEnabled"/>
-        <Label Content="Password:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <PasswordBox x:Name="Password" Grid.Row="3" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
-        <Label Content="Managing code:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="12"/>
-        <PasswordBox x:Name="ManagingCode" Grid.Row="4" Width="100" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" PasswordChanged="Ok_IsEnabled"/>
-        <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelToClickStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
     </Grid>
 </Window>

@@ -34,6 +34,7 @@ namespace PL
             InitializeComponent();
             //bl = BlFactory.GetBl();
             //ManagerWindow managerWindow = new ManagerWindow(username); // open when 'cancel' is clicked
+            //MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
 
             //BusesList.ItemsSource = bl.GetBuses();
             //RemoveBusButton.DataContext = bl.GetBuses();

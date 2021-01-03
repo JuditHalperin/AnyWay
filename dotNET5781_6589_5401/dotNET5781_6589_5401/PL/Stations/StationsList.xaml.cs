@@ -30,6 +30,7 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             username = name;
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
             ListOfStations.SelectedIndex = 0;

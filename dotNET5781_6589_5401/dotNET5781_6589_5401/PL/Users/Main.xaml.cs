@@ -27,6 +27,7 @@ namespace PL
             NotifyingDateTime dateTime = new NotifyingDateTime();
             Time.DataContext = dateTime;
             dateTime.worker.RunWorkerAsync();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void SignInAsManager_Click(object sender, RoutedEventArgs e)

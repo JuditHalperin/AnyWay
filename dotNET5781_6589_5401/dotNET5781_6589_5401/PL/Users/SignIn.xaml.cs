@@ -31,6 +31,7 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             administrativePrivileges = a;
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void NewAccount_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -52,15 +53,8 @@ namespace PL
                     Close();
                 }
             }
-            catch (UserException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (InvalidInputException ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
+            catch (UserException ex) { MessageBox.Show(ex.Message); }           
+            catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }            
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

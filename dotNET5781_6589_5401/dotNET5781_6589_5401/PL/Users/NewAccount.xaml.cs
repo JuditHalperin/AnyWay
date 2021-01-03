@@ -30,6 +30,7 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             administrativePrivileges = a;
             if (!a)
             {

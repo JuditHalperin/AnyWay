@@ -29,6 +29,7 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             username = name;
             ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
             ListOfLines.SelectedIndex = 0;
