@@ -918,14 +918,11 @@ namespace BL
         /// <returns>station in line</returns>
         public BO.LineStation getLineStation(int numberLine, int id)
         {
-            try
-            {
-                return convertToLineStationBO(dal.getLineStation(numberLine, id));
-            }
-            catch (StationException ex)
-            {
-                throw new BO.StationException(ex.Message, ex);
-            }
+            LineStation lineStation= dal.getLineStation(numberLine, id);
+            if (lineStation == null)
+                return null;
+            return convertToLineStationBO(lineStation);
+
         }
         public IEnumerable<BO.LineStation> GetLineStations()
         {
