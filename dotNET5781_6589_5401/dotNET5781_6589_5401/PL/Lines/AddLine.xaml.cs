@@ -69,21 +69,32 @@ namespace PL
                 if (window.ToAdd)
                 {
                     int index = window.IndexInPath - 1;
-                    if (index > path.Count())
-                        index = path.Count();
-                    else if (index < 0)
-                        index = 0;
+                    if (index > path.Count()) index = path.Count();
+                    else if (index < 0) index = 0;
+
                     if (index != 0 && !bl.TwoFollowingStationsExist(path[index - 1].ID, window.StationToAdd.ID))
                     {
-                        DistanceToPreviousStation innerWindow = new DistanceToPreviousStation(path[index - 1].ID, window.StationToAdd.ID);
+                        DistanceBetweenStations innerWindow = new DistanceBetweenStations(path[index - 1].ID, window.StationToAdd.ID);
                         while (!innerWindow.validClosed)
                         {
-                            innerWindow = new DistanceToPreviousStation(path[index - 1].ID, window.StationToAdd.ID);
+                            innerWindow = new DistanceBetweenStations(path[index - 1].ID, window.StationToAdd.ID);
                             innerWindow.ShowDialog();
                         }
                         if (innerWindow.canceled)
                             return;
                     }
+                    if (index != path.Count() && !bl.TwoFollowingStationsExist(window.StationToAdd.ID, path[index].ID))
+                    {
+                        DistanceBetweenStations innerWindow = new DistanceBetweenStations(window.StationToAdd.ID, path[index].ID);
+                        while (!innerWindow.validClosed)
+                        {
+                            innerWindow = new DistanceBetweenStations(window.StationToAdd.ID, path[index].ID);
+                            innerWindow.ShowDialog();
+                        }
+                        if (innerWindow.canceled)
+                            return;
+                    }
+
                     path.Insert(index, window.StationToAdd);
                     Ok.IsEnabled = OkButton_IsEnabled();
                 }

@@ -18,9 +18,9 @@ using BO;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for DistanceToPreviousStation.xaml
+    /// Interaction logic for DistanceBetweenStations.xaml
     /// </summary>
-    public partial class DistanceToPreviousStation : Window
+    public partial class DistanceBetweenStations : Window
     {
         static IBL bl;
         public bool validClosed = false;
@@ -28,7 +28,7 @@ namespace PL
         int firstStationID;
         int secondStationID;
 
-        public DistanceToPreviousStation(int previousStationID, int thisStationID)
+        public DistanceBetweenStations(int previousStationID, int thisStationID)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
