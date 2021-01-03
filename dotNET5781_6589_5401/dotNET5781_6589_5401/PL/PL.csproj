@@ -95,6 +95,9 @@
     <Compile Include="Stations\AddStation.xaml.cs">
       <DependentUpon>AddStation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Stations\DistanceToOldStation.xaml.cs">
+      <DependentUpon>DistanceToOldStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Stations\EditStation.xaml.cs">
       <DependentUpon>EditStation.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Stations\AddStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Stations\DistanceToOldStation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
