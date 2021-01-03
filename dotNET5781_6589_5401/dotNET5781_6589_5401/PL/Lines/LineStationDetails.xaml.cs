@@ -28,7 +28,9 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            Station station = bl.getStation(lineStation.ID);
             DataContext = lineStation;
+            location.DataContext = $"({station.Latitude}°N, {station.Longitude}°E)";
         }
     }
 }
