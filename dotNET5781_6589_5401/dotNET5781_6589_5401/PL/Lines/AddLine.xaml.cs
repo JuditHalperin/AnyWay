@@ -75,23 +75,15 @@ namespace PL
                     if (index != 0 && !bl.TwoFollowingStationsExist(path[index - 1].ID, window.StationToAdd.ID))
                     {
                         DistanceBetweenStations innerWindow = new DistanceBetweenStations(path[index - 1].ID, window.StationToAdd.ID);
-                        while (!innerWindow.validClosed)
-                        {
-                            innerWindow = new DistanceBetweenStations(path[index - 1].ID, window.StationToAdd.ID);
-                            innerWindow.ShowDialog();
-                        }
-                        if (innerWindow.canceled)
-                            return;
+                        innerWindow.ShowDialog();
+                        if (!innerWindow.validClosed)
+                            return;                        
                     }
                     if (index != path.Count() && !bl.TwoFollowingStationsExist(window.StationToAdd.ID, path[index].ID))
                     {
                         DistanceBetweenStations innerWindow = new DistanceBetweenStations(window.StationToAdd.ID, path[index].ID);
-                        while (!innerWindow.validClosed)
-                        {
-                            innerWindow = new DistanceBetweenStations(window.StationToAdd.ID, path[index].ID);
-                            innerWindow.ShowDialog();
-                        }
-                        if (innerWindow.canceled)
+                        innerWindow.ShowDialog();
+                        if (!innerWindow.validClosed)
                             return;
                     }
 

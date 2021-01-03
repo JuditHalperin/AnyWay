@@ -24,7 +24,6 @@ namespace PL
     {
         static IBL bl;
         public bool validClosed = false;
-        public bool canceled = false;
         int firstStationID;
         int secondStationID;
 
@@ -56,8 +55,6 @@ namespace PL
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            validClosed = true;
-            canceled = true;
             Close();
         }
     }

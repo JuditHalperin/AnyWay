@@ -39,7 +39,7 @@ namespace PL
                 preTime.DataContext = lineStation.TimeFromPreviousStations;
                 preLocation.DataContext=$"({preStation.Latitude}°N, {preStation.Longitude}°E)";
             }
-            Station p
+            //Station p
         }
     }
 }
