@@ -31,6 +31,15 @@ namespace PL
             Station station = bl.getStation(lineStation.ID);
             DataContext = lineStation;
             location.DataContext = $"({station.Latitude}°N, {station.Longitude}°E)";
+            if(lineStation.PathIndex>1)
+            {
+                Station preStation= bl.getStation(lineStation.PreviousStationID);
+                //LineStation preLineStation = bl.getLineStation(lineStation.NumberLine, preStation.ID);
+                preDistance.DataContext = lineStation.LengthFromPreviousStations;
+                preTime.DataContext = lineStation.TimeFromPreviousStations;
+                preLocation.DataContext=$"({preStation.Latitude}°N, {preStation.Longitude}°E)";
+            }
+            Station p
         }
     }
 }
