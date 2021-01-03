@@ -21,6 +21,13 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Label Content="Name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -35,21 +42,40 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            </Grid>
-            <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-            </Grid>
-        <Label/>
+            <Label Content="Previous station:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Distance to the station" Style="{StaticResource LabelTitleStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Time to the station:" Style="{StaticResource LabelTitleStyle}" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelTitleStyle}" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Next station:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Distance from the station" Style="{StaticResource LabelTitleStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Time from the station:" Style="{StaticResource LabelTitleStyle}" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="{Binding}" Style="{StaticResource LabelTitleStyle}" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

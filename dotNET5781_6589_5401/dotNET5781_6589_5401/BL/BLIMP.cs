@@ -953,6 +953,26 @@ namespace BL
             }
         }
 
+        public void updateTwoFollowingStation(int firstID, int secondID, int length)
+        {
+            if (dal.getTwoFollowingStations(firstID, secondID) != null)
+                throw new BO.StationException("The data already exist");
+
+            dal.updateTwoFollowingStations(new TwoFollowingStations()
+            {
+                FirstStationID = firstID,
+                SecondStationID = secondID,
+                LengthBetweenStations = length,
+                TimeBetweenStations = calculateTime(length)
+            });
+        }
+        public bool TwoFollowingStationsExist(int firstID, int secondID)
+        {
+            if (dal.getTwoFollowingStations(firstID, secondID) == null)
+                return false;
+            return true;
+        }
+
         #endregion
 
         #region DrivingBuses

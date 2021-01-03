@@ -68,6 +68,8 @@ namespace BLAPI
         LineStation getLineStation(int numberLine, int id);
         IEnumerable<LineStation> GetLineStations();
         IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition);
+        void updateTwoFollowingStation(int firstID, int secondID, int length);
+        bool TwoFollowingStationsExist(int firstID, int secondID);
 
         #endregion
 
