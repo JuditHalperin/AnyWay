@@ -50,7 +50,7 @@ namespace BLAPI
 
         void addStation(Station station);
         void removeStation(Station station);
-        void updateStation(Station station);
+        void updateStation(Station station, int distanceFromPreviousLocation);
         Station getStation(int id);
         IEnumerable<Station> GetStations();
         IEnumerable<Station> GetStations(Predicate<Station> condition);
