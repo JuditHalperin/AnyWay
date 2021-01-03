@@ -22,11 +22,6 @@ namespace BL
         #endregion
 
         #region Help functions
-
-        int calculateDistance(BO.Station first, BO.Station second)
-        {
-            return (int)(new GeoCoordinate(first.Latitude, first.Longitude).GetDistanceTo(new GeoCoordinate(second.Latitude, second.Longitude)) * 1.5);
-        }
         int calculateTime(int distance)
         {
             return (int)(distance * 0.001); // valocity of 60 km per hour
@@ -583,20 +578,20 @@ namespace BL
         /// Take data from statin about following stations.
         /// </summary>
         /// <param name="station">data about station.</param>
-        void stationToFollowingStationAndLineStation(BO.Station station)
+        void stationToFollowingStation(BO.Station station, int distanceFromPreviousLocation)
         {
             IEnumerable<BO.Station> stations = GetStations(item => item.ID != station.ID);
             if (stations != null)
                 foreach (BO.Station otherStation in stations)
                 {
-                    TwoFollowingStations followingStations = new TwoFollowingStations()
+                    try
                     {
-                        FirstStationID = station.ID,
-                        SecondStationID = otherStation.ID,
-                        LengthBetweenStations = calculateDistance(station, otherStation),
-                    };
-                    followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
-                    addOrUpdateTwoFollowingStations(followingStations);
+                        TwoFollowingStations followingStations = dal.getTwoFollowingStations(station.ID, otherStation.ID);
+                        followingStations.LengthBetweenStations += distanceFromPreviousLocation;
+                        followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
+                        dal.updateTwoFollowingStations(followingStations);
+                    }
+                    catch (StationException) { }
                 }
         }
         /// <summary>
@@ -608,7 +603,6 @@ namespace BL
             try
             {
                 dal.addStation(convertToStationDO(station));
-                stationToFollowingStationAndLineStation(station);
             }
             catch (StationException ex)
             {
@@ -643,12 +637,13 @@ namespace BL
         /// update data about station.
         /// </summary>
         /// <param name="station">Updated station</param>
-        public void updateStation(BO.Station station)
+        public void updateStation(BO.Station station, int distanceFromPreviousLocation)
         {
             try
             {
                 dal.updateStation(convertToStationDO(station));
-                stationToFollowingStationAndLineStation(station);
+                if(distanceFromPreviousLocation != 0)
+                    stationToFollowingStation(station, distanceFromPreviousLocation);
             }
             catch (StationException ex)
             {
@@ -780,6 +775,7 @@ namespace BL
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
             List<BO.LineStation> lineStations = new List<BO.LineStation>();
+            TwoFollowingStations followingStations;
             lineStations.Add(new BO.LineStation()
             {
                 ID = path.ElementAt(0).ID,
@@ -791,25 +787,28 @@ namespace BL
             });
             for (int i = 1; i < path.Count() - 1; i++)
             {
+                followingStations = dal.getTwoFollowingStations(path.ElementAt(i).ID, path.ElementAt(i - 1).ID);
                 lineStations.Add(new BO.LineStation()
                 {
                     ID = path.ElementAt(i).ID,
                     PathIndex = i + 1,
                     NextStationID = path.ElementAt(i + 1).ID,
                     PreviousStationID = path.ElementAt(i - 1).ID,
-                    LengthFromPreviousStations = calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)),
-                    TimeFromPreviousStations = calculateTime(calculateDistance(path.ElementAt(i - 1), path.ElementAt(i)))
+                    LengthFromPreviousStations = followingStations.LengthBetweenStations,
+                    TimeFromPreviousStations = followingStations.TimeBetweenStations
                 });
             }
+            followingStations = dal.getTwoFollowingStations(path.ElementAt(path.Count() - 1).ID, path.ElementAt(path.Count() - 2).ID);
             lineStations.Add(new BO.LineStation()
             {
+                
                 ID = path.ElementAt(path.Count() - 1).ID,
                 PathIndex = path.Count(),
                 NextStationID = -1,
                 PreviousStationID = path.ElementAt(path.Count() - 2).ID,
-                LengthFromPreviousStations = calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)),
-                TimeFromPreviousStations = calculateTime(calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)))
-            });
+                LengthFromPreviousStations = followingStations.LengthBetweenStations,
+                TimeFromPreviousStations = followingStations.TimeBetweenStations
+            }); ;
             return lineStations;
         }
         public IEnumerable<BO.Station> convertToStationsList(IEnumerable<BO.LineStation> path)
