@@ -29,7 +29,7 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            Username.Content = username;
+            Username.Content = $"Hi, {username}!";
             enableButtons();
         }
 
