@@ -804,7 +804,7 @@ namespace BL
             lineStations.Add(new BO.LineStation()
             {
                 ID = path.ElementAt(path.Count() - 1).ID,
-                PathIndex = path.Count() - 1,
+                PathIndex = path.Count(),
                 NextStationID = -1,
                 PreviousStationID = path.ElementAt(path.Count() - 2).ID,
                 LengthFromPreviousStations = calculateDistance(path.ElementAt(path.Count() - 2), path.ElementAt(path.Count() - 1)),
