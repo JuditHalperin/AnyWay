@@ -22,6 +22,7 @@ namespace PL
     public partial class DistanceToOldStation : Window
     {
         public int Distance = 0;
+        public bool valid = false;
 
         public DistanceToOldStation()
         {
@@ -39,13 +40,12 @@ namespace PL
                     throw new InvalidInputException("Worng format of distance.");
                 if (Distance == 0 || Distance < -240000 || Distance > 240000) // outside of Israel
                     throw new InvalidInputException("Invalid length.");
+                valid = true;
                 Close();
             }
             catch(InvalidInputException ex)
             { 
                 MessageBox.Show(ex.Message);
-                new DistanceToOldStation().ShowDialog();
-                Close();
             }
         }
     }
