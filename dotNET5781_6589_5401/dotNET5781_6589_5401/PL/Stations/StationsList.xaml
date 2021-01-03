@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Stations" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Stations" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" d:DesignWidth="926.4">
     <Window.Resources>
         <local:IntToString_StationID x:Key="IntToString_StationID"/>
         <DataTemplate x:Key="LineStations">
@@ -38,7 +38,7 @@
             <Image x:Name="Back" Source="BackButton.png" Width="35" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Back_MouseDown"/>
             <Label Content="Station:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <ComboBox x:Name="ListOfStations" Style="{StaticResource ComboBoxStyle}" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" SelectionChanged="StationsList_SelectionChanged"/>
-            <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
+            <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add Station" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Click="AddStation_Click"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -53,13 +53,15 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Latitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Latitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Longitude:" Grid.Row="2" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Longitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button x:Name="EditStation" Content="Edit" Style="{StaticResource ButtonStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditStation_Click"/>
-                <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveStation_Click"/>
+                <Button x:Name="SetDistances" Content="Set Distances" Width="110" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Click="SetDistances_Click"/>
+                <Button x:Name="EditStation" Content="Edit" Style="{StaticResource ButtonStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Click="EditStation_Click"/>
+                <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Click="RemoveStation_Click"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -75,10 +77,10 @@
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Line serial number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Content="Index in the path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Content="Privios station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Content="Next station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Line Serial Number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Index in the Path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Previous Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Next Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>
                 <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" BorderThickness="0" Grid.Row="2" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoLines" Style="{StaticResource LabelTitleStyle}" Content="No lines stop at this station." Grid.Row="2" Visibility="Hidden"/>

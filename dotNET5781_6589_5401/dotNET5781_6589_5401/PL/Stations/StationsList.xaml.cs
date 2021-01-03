@@ -61,6 +61,11 @@ namespace PL
             ListOfStations.ItemsSource = bl.GetStations();
         }
 
+        private void SetDistances_Click(object sender, RoutedEventArgs e)
+        {
+            new SetDistances((Station)ListOfStations.SelectedItem).ShowDialog();
+        }
+
         private void EditStation_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -102,6 +107,6 @@ namespace PL
         {
             new ManagerWindow(username).Show();
             Close();
-        }
+        }        
     }
 }
