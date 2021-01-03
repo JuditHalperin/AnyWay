@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Edit Line" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:PathIsNotEmpty_RemoveLineStations x:Key="PathIsNotEmpty_RemoveLineStations"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
@@ -42,7 +45,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
-                    <Button x:Name="RemoveStation" Style="{StaticResource ButtonStyle}" Content="Remove station" Grid.Column="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
+                    <Button x:Name="RemoveStation" IsEnabled="{Binding Path=Count, Converter={StaticResource PathIsNotEmpty_RemoveLineStations}}" Style="{StaticResource ButtonStyle}" Content="Remove station" Grid.Column="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
                 </Grid>
             </Grid>
         </Grid>

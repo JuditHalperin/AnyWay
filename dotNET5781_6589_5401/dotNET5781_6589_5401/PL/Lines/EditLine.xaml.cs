@@ -35,6 +35,7 @@ namespace PL
             RegionsList.SelectedItem = line.Region;
             path = new ObservableCollection<Station>(bl.convertToStationsList(line.Path));
             LineStations.ItemsSource = path;
+            RemoveStation.DataContext = path;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -96,9 +97,7 @@ namespace PL
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                if (path.Count() == 0)
-                    throw new StationException("There are no stations to remove.");
+            {              
                 RemoveLineStation window = new RemoveLineStation(path);
                 window.ShowDialog();
                 int index = path.IndexOf(window.StationToRemove);
