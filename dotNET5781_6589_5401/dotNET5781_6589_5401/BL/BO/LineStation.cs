@@ -13,7 +13,7 @@ namespace BO
         public int PreviousStationID { get; set; }
         public int NextStationID { get; set; }
         public int LengthFromPreviousStations { get; set; }
-        public int TimeFromPreviousStations { get; set; }
+        public int TimeFromPreviousStations { get; set; }//in seconds
         public override string ToString() => ID.ToString();
     }
 }
