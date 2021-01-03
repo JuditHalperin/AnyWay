@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Lines" Height="450" Width="800">
+        Title="Lines" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <local:IDToName_Station x:Key="IDToName_Station"/>
         <DataTemplate x:Key="LineStations">

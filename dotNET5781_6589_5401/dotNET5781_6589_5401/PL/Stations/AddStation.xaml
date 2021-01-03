@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Add Station" Height="300" Width="600">
+        Title="Add Station" Height="300" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <local:AllTextBoxAreFull x:Key="AllTextBoxAreFull"/>
     </Window.Resources>

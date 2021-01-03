@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Buses" Height="450" Width="800">
+        Title="Buses" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <!--<Window.Resources>
         <local:
         <local:intToBool_remove x:Key="intToBool_remove"/>
