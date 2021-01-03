@@ -77,6 +77,9 @@
     <Compile Include="Lines\AddLineStation.xaml.cs">
       <DependentUpon>AddLineStation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lines\DistanceToPreviousStation.xaml.cs">
+      <DependentUpon>DistanceToPreviousStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Lines\EditLine.xaml.cs">
       <DependentUpon>EditLine.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lines\AddLineStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lines\DistanceToPreviousStation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

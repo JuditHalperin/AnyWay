@@ -51,8 +51,9 @@ namespace PL
                 int distanceToPreviousLocation = 0;
                 if (latitude != ((Station)DataContext).Latitude || longitude != ((Station)DataContext).Longitude)
                 {
-                    new DistanceToOldStation().ShowDialog();
-                    distanceToPreviousLocation = DistanceToOldStation.Distance;
+                    DistanceToOldStation window = new DistanceToOldStation();
+                    window.ShowDialog();
+                    distanceToPreviousLocation = window.Distance;
                 }
 
                 bl.updateStation(new Station { ID = int.Parse(IDLabel.Content.ToString()), Name = NameTextBox.Text, Latitude = latitude, Longitude = longitude }, distanceToPreviousLocation);
