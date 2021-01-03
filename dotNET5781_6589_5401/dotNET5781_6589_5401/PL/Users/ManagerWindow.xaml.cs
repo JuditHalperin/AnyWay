@@ -23,13 +23,14 @@ namespace PL
     public partial class ManagerWindow : Window
     {
         static IBL bl;
-
+        string tempUsername;
         public ManagerWindow(string username)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             Username.Content = $"Hi, {username}!";
+            tempUsername = username;
             enableButtons();
         }
 
@@ -66,13 +67,13 @@ namespace PL
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new LinesList((string)Username.Content).Show();
+            new LinesList(tempUsername).Show();
             Close();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new StationsList((string)Username.Content).Show();
+            new StationsList(tempUsername).Show();
             Close();
         }
         

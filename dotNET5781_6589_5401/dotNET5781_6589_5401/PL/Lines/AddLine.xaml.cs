@@ -72,14 +72,14 @@ namespace PL
                     if (index > path.Count()) index = path.Count();
                     else if (index < 0) index = 0;
 
-                    if (index != 0 && !bl.TwoFollowingStationsExist(path[index - 1].ID, window.StationToAdd.ID))
+                    if (index != 0 && !bl.getTwoFollowingStations(path[index - 1].ID, window.StationToAdd.ID))
                     {
                         DistanceBetweenStations innerWindow = new DistanceBetweenStations(path[index - 1].ID, window.StationToAdd.ID);
                         innerWindow.ShowDialog();
                         if (!innerWindow.validClosed)
                             return;                        
                     }
-                    if (index != path.Count() && !bl.TwoFollowingStationsExist(window.StationToAdd.ID, path[index].ID))
+                    if (index != path.Count() && !bl.getTwoFollowingStations(window.StationToAdd.ID, path[index].ID))
                     {
                         DistanceBetweenStations innerWindow = new DistanceBetweenStations(window.StationToAdd.ID, path[index].ID);
                         innerWindow.ShowDialog();
@@ -103,7 +103,7 @@ namespace PL
                 int index = path.IndexOf(window.StationToRemove);
                 if (index != -1) // selected
                 {
-                    if (index != 0 && index != path.Count() - 1 && !bl.TwoFollowingStationsExist(path[index - 1].ID, path[index + 1].ID))
+                    if (index != 0 && index != path.Count() - 1 && !bl.getTwoFollowingStations(path[index - 1].ID, path[index + 1].ID))
                     {
                         DistanceBetweenStations innerWindow = new DistanceBetweenStations(path[index - 1].ID, path[index + 1].ID);
                         innerWindow.ShowDialog();
