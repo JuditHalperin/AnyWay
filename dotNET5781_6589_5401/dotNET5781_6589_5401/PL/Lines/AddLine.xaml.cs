@@ -102,8 +102,17 @@ namespace PL
                     throw new StationException("There are no stations to remove.");
                 RemoveLineStation window = new RemoveLineStation(path);
                 window.ShowDialog();
-                if (window.StationToRemove != null)
+                int index = path.IndexOf(window.StationToRemove);
+                if (index != -1) // selected
                 {
+                    if (index != 0 && index != path.Count() - 1 && !bl.TwoFollowingStationsExist(path[index - 1].ID, path[index + 1].ID))
+                    {
+                        DistanceBetweenStations innerWindow = new DistanceBetweenStations(path[index - 1].ID, path[index + 1].ID);
+                        innerWindow.ShowDialog();
+                        if (!innerWindow.validClosed)
+                            return;
+                    }
+
                     path.Remove(window.StationToRemove);
                     Ok.IsEnabled = OkButton_IsEnabled();
                 }
