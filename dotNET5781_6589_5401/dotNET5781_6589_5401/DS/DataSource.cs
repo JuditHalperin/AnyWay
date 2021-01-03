@@ -631,7 +631,7 @@ namespace DS
                             GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
                             GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
                             twoFollowingStations.LengthBetweenStations = (int)(positionThisStation.GetDistanceTo(positionSecondStation) * 1.5);
-                            twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations * 0.001);
+                            twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations / 1000.0 / rand.Next(30, 61) * 3600);
                             FollowingStations.Add(twoFollowingStations);
                         }
             } // following stations
