@@ -37,8 +37,8 @@ namespace PL
             {
                 if (!int.TryParse(DistanceTextBox.Text, out Distance))
                     throw new InvalidInputException("Worng format of distance.");
-                if (Distance == 0 && (Distance < -240000 || Distance > 240000)) // outside of Israel
-                    throw new InvalidInputException("Invalid distance.");
+                if (Distance == 0 || Distance < -240000 || Distance > 240000) // outside of Israel
+                    throw new InvalidInputException("Invalid length.");
                 Close();
             }
             catch(InvalidInputException ex)

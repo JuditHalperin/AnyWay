@@ -5,15 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DistanceToOldStation" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Distance To Old Station" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:AllTextBoxAreFull x:Key="AllTextBoxAreFull"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Massage" Content="{Binding}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <TextBox x:Name="DistanceTextBox" MaxLength="7" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="Ok" Content="Ok" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Ok_Click"/>
+        <Button x:Name="Ok" Content="Ok" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Ok_Click">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource AllTextBoxAreFull}">
+                    <Binding ElementName="DistanceTextBox" Path="Text"/>
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
     </Grid>
 </Window>
