@@ -39,11 +39,7 @@ namespace PL
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                int id;
-                if (!int.TryParse(IDLabel.Content.ToString(), out id))
-                    throw new InvalidInputException("Invalid format of station ID.");
-
+            {       
                 double latitude = Convert.ToDouble(LatitudeTextBox.Text);
                 if (latitude < 31 || latitude > 33.3)
                     throw new InvalidInputException("Latitude should be between 31°N to 33.3°N.");
@@ -52,13 +48,20 @@ namespace PL
                 if (longitude < 34.3 || longitude > 35.5)
                     throw new InvalidInputException("Longitude should be between 34.3°E to 35.5°E.");
 
-                bl.updateStation(new Station { ID = id, Name = NameTextBox.Text, Latitude = latitude, Longitude = longitude });
+                int distanceToPreviousLocation = 0;
+                if (latitude != ((Station)DataContext).Latitude || longitude != ((Station)DataContext).Longitude)
+                {
+                    DistanceToOldStation window = new DistanceToOldStation();
+                    window.ShowDialog();
+                    distanceToPreviousLocation = DistanceToOldStation.Distance;
+                }
+
+                bl.updateStation(new Station { ID = int.Parse(IDLabel.Content.ToString()), Name = NameTextBox.Text, Latitude = latitude, Longitude = longitude }, distanceToPreviousLocation);
                 Close();
             }
             catch (InvalidInputException ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
             catch (FormatException)
             {

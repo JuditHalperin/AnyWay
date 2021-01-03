@@ -1,0 +1,19 @@
+﻿<Window x:Class="PL.DistanceToOldStation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="DistanceToOldStation" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="Massage" Content="{Binding}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="DistanceTextBox" MaxLength="7" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Ok" Content="Ok" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Ok_Click"/>
+    </Grid>
+</Window>
