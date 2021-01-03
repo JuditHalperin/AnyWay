@@ -73,6 +73,8 @@ namespace PL
                         index = path.Count();
                     else if (index < 0)
                         index = 0;
+                    if (index != 0 && !bl.TwoFollowingStationsExist(path[index - 1].ID, window.StationToAdd.ID))
+                        new DistanceToPreviousStation(path[index - 1].ID, window.StationToAdd.ID).ShowDialog();
                     path.Insert(index, window.StationToAdd);
                     Ok.IsEnabled = OkButton_IsEnabled();
                 }

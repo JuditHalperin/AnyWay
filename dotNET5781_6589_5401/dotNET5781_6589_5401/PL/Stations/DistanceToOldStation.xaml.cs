@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class DistanceToOldStation : Window
     {
-        static public int Distance = 0;
+        public int Distance = 0;
 
         public DistanceToOldStation()
         {
