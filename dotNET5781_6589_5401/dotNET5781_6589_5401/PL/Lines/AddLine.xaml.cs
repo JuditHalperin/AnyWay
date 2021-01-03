@@ -97,9 +97,7 @@ namespace PL
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                if (path.Count() == 0)
-                    throw new StationException("There are no stations to remove.");
+            {              
                 RemoveLineStation window = new RemoveLineStation(path);
                 window.ShowDialog();
                 int index = path.IndexOf(window.StationToRemove);
