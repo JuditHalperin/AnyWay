@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DistanceToPreviousStation" Height="450" Width="800">
+        Title="Distance To Previous Station" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:AllTextBoxAreFull x:Key="AllTextBoxAreFull"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="Massage" Content="{Binding}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="DistanceTextBox" MaxLength="7" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Ok" Content="Ok" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Ok_Click">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource AllTextBoxAreFull}">
+                        <Binding ElementName="DistanceTextBox" Path="Text"/>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+            <Button x:Name="Cancel" Content="Cancel" Grid.Column="0" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+        </Grid>
     </Grid>
 </Window>

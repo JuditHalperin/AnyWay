@@ -953,18 +953,19 @@ namespace BL
             }
         }
 
-        public void updateTwoFollowingStation(int firstID, int secondID, int length)
-        {
-            if (dal.getTwoFollowingStations(firstID, secondID) != null)
-                throw new BO.StationException("The data already exist");
-
-            dal.updateTwoFollowingStations(new TwoFollowingStations()
+        public void addTwoFollowingStation(int firstID, int secondID, int length)
+        {            
+            try
             {
-                FirstStationID = firstID,
-                SecondStationID = secondID,
-                LengthBetweenStations = length,
-                TimeBetweenStations = calculateTime(length)
-            });
+                dal.addTwoFollowingStations(new TwoFollowingStations()
+                {
+                    FirstStationID = firstID,
+                    SecondStationID = secondID,
+                    LengthBetweenStations = length,
+                    TimeBetweenStations = calculateTime(length)
+                });
+            }
+            catch (StationException ex) { throw new BO.StationException(ex.Message, ex); }                     
         }
         public bool TwoFollowingStationsExist(int firstID, int secondID)
         {

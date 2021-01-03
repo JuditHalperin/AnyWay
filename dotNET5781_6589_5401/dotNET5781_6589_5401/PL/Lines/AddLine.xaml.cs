@@ -74,7 +74,16 @@ namespace PL
                     else if (index < 0)
                         index = 0;
                     if (index != 0 && !bl.TwoFollowingStationsExist(path[index - 1].ID, window.StationToAdd.ID))
-                        new DistanceToPreviousStation(path[index - 1].ID, window.StationToAdd.ID).ShowDialog();
+                    {
+                        DistanceToPreviousStation innerWindow = new DistanceToPreviousStation(path[index - 1].ID, window.StationToAdd.ID);
+                        while (!innerWindow.validClosed)
+                        {
+                            innerWindow = new DistanceToPreviousStation(path[index - 1].ID, window.StationToAdd.ID);
+                            innerWindow.ShowDialog();
+                        }
+                        if (innerWindow.canceled)
+                            return;
+                    }
                     path.Insert(index, window.StationToAdd);
                     Ok.IsEnabled = OkButton_IsEnabled();
                 }
