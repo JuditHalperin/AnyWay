@@ -60,6 +60,7 @@ namespace BLAPI
         #endregion
 
         #region LineStations
+
         IEnumerable<LineStation> convertToLineStationsList(IEnumerable<Station> path);
         IEnumerable<Station> convertToStationsList(IEnumerable<LineStation> path);
         void addLineStation(LineStation lineStation);
@@ -68,8 +69,12 @@ namespace BLAPI
         LineStation getLineStation(int numberLine, int id);
         IEnumerable<LineStation> GetLineStations();
         IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition);
-        void addTwoFollowingStation(int firstID, int secondID, int length);
-        bool TwoFollowingStationsExist(int firstID, int secondID);
+
+        #endregion
+
+        #region TwoFollowingStations
+        void addTwoFollowingStations(int firstID, int secondID, int length);
+        bool getTwoFollowingStations(int firstID, int secondID);
 
         #endregion
 

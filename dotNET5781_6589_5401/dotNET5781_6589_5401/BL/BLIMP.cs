@@ -951,8 +951,12 @@ namespace BL
             }
         }
 
-        public void addTwoFollowingStation(int firstID, int secondID, int length)
-        {            
+        #endregion
+
+        #region TwoFollowingStations
+
+        public void addTwoFollowingStations(int firstID, int secondID, int length)
+        {
             try
             {
                 dal.addTwoFollowingStations(new TwoFollowingStations()
@@ -963,9 +967,9 @@ namespace BL
                     TimeBetweenStations = calculateTime(length)
                 });
             }
-            catch (StationException ex) { throw new BO.StationException(ex.Message, ex); }                     
+            catch (StationException ex) { throw new BO.StationException(ex.Message, ex); }
         }
-        public bool TwoFollowingStationsExist(int firstID, int secondID)
+        public bool getTwoFollowingStations(int firstID, int secondID)
         {
             if (dal.getTwoFollowingStations(firstID, secondID) == null)
                 return false;
