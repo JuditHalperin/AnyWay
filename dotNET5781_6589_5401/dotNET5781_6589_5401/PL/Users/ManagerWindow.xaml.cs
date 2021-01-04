@@ -103,12 +103,12 @@ namespace PL
 
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("password", (string)Username.Content).ShowDialog();
+            new ChangePassword("password", tempUsername).ShowDialog();
         }
 
         private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("managing code", (string)Username.Content).ShowDialog();
+            new ChangePassword("managing code", tempUsername).ShowDialog();
         }
     }
 }
