@@ -7,7 +7,7 @@
         mc:Ignorable="d"
           Title="Main" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="SignInAsManager" Style="{StaticResource ButtonStyle}" Content="Manager" Width="100" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SignInAsManager_Click" FontSize="16" Background="#FFFCF9EC"/>
+        <Button x:Name="SignInAsManager" Style="{StaticResource ButtonStyle}" Content="Manager" Width="200" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SignInAsManager_Click" FontSize="25" Background="#FFFCF9EC"/>
         <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalContentAlignment="Right" FontSize="12"/>
         <Grid.Background>
             <ImageBrush ImageSource="pictureBus.jpg" Stretch="UniformToFill"/>
