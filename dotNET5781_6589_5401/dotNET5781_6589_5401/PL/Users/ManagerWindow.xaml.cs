@@ -29,9 +29,20 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            Username.Content = $"Hi, {username}!";
+            
+            Username.Content = $"{BestWishesByTime()}, {username}";
             tempUsername = username;
             enableButtons();
+        }
+        private string BestWishesByTime()
+        {
+            if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour < 12)
+                return "Good Morning";
+            if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+                return "Good afternoon";
+            if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 21)
+                return "good evening";
+            return "Good night";
         }
 
         private void enableButtons()
