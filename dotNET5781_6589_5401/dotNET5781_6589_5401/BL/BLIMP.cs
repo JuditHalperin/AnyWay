@@ -528,9 +528,9 @@ namespace BL
                 return true;
             return false;
         }
-        public bool LinesIsEmpty()
+        public int countLines()
         {
-            return dal.LinesIsEmpty();
+            return dal.countLines();
         }
 
         #endregion
@@ -716,9 +716,9 @@ namespace BL
                 return true;
             return false;
         }
-        public bool StationsIsEmpty()
+        public int countStations()
         {
-            return dal.StationsIsEmpty();
+            return dal.countStations();
         }
 
         #endregion

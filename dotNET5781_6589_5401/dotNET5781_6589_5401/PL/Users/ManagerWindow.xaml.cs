@@ -47,7 +47,7 @@ namespace PL
 
         private void enableButtons()
         {
-            if (bl.LinesIsEmpty())
+            if (bl.countLines() == 0)
             {
                 AddFirstLine.Visibility = Visibility.Visible;
                 ShowLines.Visibility = Visibility.Hidden;
@@ -58,7 +58,7 @@ namespace PL
                 ShowLines.Visibility = Visibility.Visible;
             }
 
-            if (bl.StationsIsEmpty())
+            if (bl.countStations() == 0)
             {
                 AddFirstStation.Visibility = Visibility.Visible;
                 ShowStations.Visibility = Visibility.Hidden;

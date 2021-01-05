@@ -88,7 +88,7 @@ namespace PL
                 if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
                     throw new StationException("Impossible to remove a station if there are driving lines that stop there.");
                 bl.removeStation((Station)ListOfStations.SelectedItem);
-                if (!bl.StationsIsEmpty())
+                if (bl.countStations() > 0)
                     ListOfStations.ItemsSource = bl.GetStations();
                 else
                 {
@@ -107,6 +107,12 @@ namespace PL
         {
             new ManagerWindow(username).Show();
             Close();
-        }        
+        }
+
+        private void LinesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new LinesList(username, ((LineStation)LinesAtStation.SelectedItem).NumberLine).Show();
+            Close();
+        }
     }
 }

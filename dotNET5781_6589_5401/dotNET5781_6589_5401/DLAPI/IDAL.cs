@@ -38,7 +38,7 @@ namespace DLAPI
         Line getLine(int serial);
         IEnumerable<Line> GetLines();
         IEnumerable<Line> GetLines(Predicate<Line> condition);
-        bool LinesIsEmpty();
+        int countLines();
 
         #endregion
 
@@ -50,7 +50,7 @@ namespace DLAPI
         Station getStation(int id);
         IEnumerable<Station> GetStations();
         IEnumerable<Station> GetStations(Predicate<Station> condition);
-        bool StationsIsEmpty();
+        int countStations();
 
         #endregion
 
