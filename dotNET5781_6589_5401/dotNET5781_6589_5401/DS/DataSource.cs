@@ -693,9 +693,9 @@ namespace DS
                 DrivingLines.Add(new DrivingLine()
                 {
                     NumberLine = line.ThisSerial,
-                    Start = new DateTime(2000, 1, 1, 7 + dl, (dl % 2) * 30, 0),
+                    Start = new TimeSpan(7 + dl, (dl % 2) * 30, 0),
                     Frequency = (15 + (dl % 3) * 5),
-                    End = new DateTime(2000, 1, 1, 24 - dl, (dl % 2) * 30, 0)
+                    End = new TimeSpan(24 - dl, (dl % 2) * 30, 0)
                 });
                 dl++;
             }
