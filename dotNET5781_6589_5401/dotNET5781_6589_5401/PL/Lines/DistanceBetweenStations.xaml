@@ -15,21 +15,21 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="Massage" Content="{Binding}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="DistanceTextBox" MaxLength="7" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="Massage" Content="{Binding}" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="DistanceTextBox" Style="{StaticResource TextBoxStyle}"  MaxLength="7" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Ok" Content="Ok" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Ok_Click">
+            <Button x:Name="Ok" Content="Ok" Style="{StaticResource ButtonStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Click="Ok_Click">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource AllTextBoxAreFull}">
                         <Binding ElementName="DistanceTextBox" Path="Text"/>
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>
-            <Button x:Name="Cancel" Content="Cancel" Grid.Column="0" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
+            <Button x:Name="Cancel" Content="Cancel" Style="{StaticResource ButtonStyle}" Grid.Column="0" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Cancel_Click"/>
         </Grid>
     </Grid>
 </Window>
