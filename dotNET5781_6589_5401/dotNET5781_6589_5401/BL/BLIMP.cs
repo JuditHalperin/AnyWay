@@ -979,6 +979,22 @@ namespace BL
 
         #endregion
 
+        #region Trip
+
+        BO.DrivingBus trip_DOToBO(DrivingLine tripDO)
+        {
+            BO.DrivingBus tripBO = new BO.DrivingBus()
+            {
+                Line = tripDO.NumberLine,
+                Start = tripDO.Start,
+            };
+
+            DateTime.Now;
+
+        }
+
+        #endregion
+
         #region DrivingBuses
 
         /// <summary>

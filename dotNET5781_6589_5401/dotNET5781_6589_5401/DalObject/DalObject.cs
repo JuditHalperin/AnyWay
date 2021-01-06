@@ -303,53 +303,53 @@ namespace DL
 
         #endregion
 
-        #region DrivingBuses
+        //#region DrivingBuses
 
-        public void addDrivingBus(DrivingBus drivingBus)
-        {
-            try 
-            {
-                getBus(drivingBus.LicensePlate); // check if the bus exists
-                drivingBus.ThisSerial = DataSource.serial++;
-                DataSource.DrivingBuses.Add(drivingBus.Clone());
-            }
-            catch (BusException ex)
-            { 
-                throw new BusException(ex.Message); 
-            }           
-        }
-        public void removeDrivingBus(DrivingBus drivingBus)
-        {
-            DrivingBus d = DataSource.DrivingBuses.Find(item => item.ThisSerial == drivingBus.ThisSerial && item.LicensePlate == drivingBus.LicensePlate && item.Line == drivingBus.Line && item.Start == drivingBus.Start);
-            if (d == null)
-                throw new BusException("The driving bus does not exist.");
-            DataSource.DrivingBuses.Remove(d); // remove the old driving bus
-        }
-        public void updateDrivingBus(DrivingBus drivingBus)
-        {
-            removeDrivingBus(drivingBus); // remove the old driving bus
-            DataSource.DrivingBuses.Add(drivingBus.Clone()); // add the updated driving bus  
-        }
-        public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
-        {
-            DrivingBus drivingBus = DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start);
-            if (drivingBus == null)
-                return null;
-            return drivingBus.Clone();
-        }
-        public IEnumerable<DrivingBus> GetDrivingBuses()
-        {
-            return from item in DataSource.DrivingBuses
-                   select item.Clone();
-        }
-        public IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition)
-        {
-            return from item in DataSource.DrivingBuses
-                   where condition(item)
-                   select item.Clone();
-        }
+        //public void addDrivingBus(DrivingBus drivingBus)
+        //{
+        //    try 
+        //    {
+        //        getBus(drivingBus.LicensePlate); // check if the bus exists
+        //        drivingBus.ThisSerial = DataSource.serial++;
+        //        DataSource.DrivingBuses.Add(drivingBus.Clone());
+        //    }
+        //    catch (BusException ex)
+        //    { 
+        //        throw new BusException(ex.Message); 
+        //    }           
+        //}
+        //public void removeDrivingBus(DrivingBus drivingBus)
+        //{
+        //    DrivingBus d = DataSource.DrivingBuses.Find(item => item.ThisSerial == drivingBus.ThisSerial && item.LicensePlate == drivingBus.LicensePlate && item.Line == drivingBus.Line && item.Start == drivingBus.Start);
+        //    if (d == null)
+        //        throw new BusException("The driving bus does not exist.");
+        //    DataSource.DrivingBuses.Remove(d); // remove the old driving bus
+        //}
+        //public void updateDrivingBus(DrivingBus drivingBus)
+        //{
+        //    removeDrivingBus(drivingBus); // remove the old driving bus
+        //    DataSource.DrivingBuses.Add(drivingBus.Clone()); // add the updated driving bus  
+        //}
+        //public DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start)
+        //{
+        //    DrivingBus drivingBus = DataSource.DrivingBuses.Find(item => item.ThisSerial == thisSerial && item.LicensePlate == licensePlate && item.Line == line && item.Start == start);
+        //    if (drivingBus == null)
+        //        return null;
+        //    return drivingBus.Clone();
+        //}
+        //public IEnumerable<DrivingBus> GetDrivingBuses()
+        //{
+        //    return from item in DataSource.DrivingBuses
+        //           select item.Clone();
+        //}
+        //public IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition)
+        //{
+        //    return from item in DataSource.DrivingBuses
+        //           where condition(item)
+        //           select item.Clone();
+        //}
 
-        #endregion
+        //#endregion
 
         #region DrivingLines
 

@@ -8,11 +8,8 @@ namespace BO
 {
     public class DrivingBus
     {
-        public int ThisSerial { get; set; }
-        public string LicensePlate { get; set; }
         public int Line { get; set; }
         public DateTime Start { get; set; }
-        public DateTime ActualStart { get; set; }
         public int PreviousStationID { get; set; }
         public DateTime PreviousStationTime { get; set; }
         public DateTime NextStationTime { get; set; }
