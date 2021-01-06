@@ -8,8 +8,8 @@ namespace BO
 {
     public class DrivingBus
     {
-        public int Line { get; set; }
-        public TimeSpan Start { get; set; }
+        public int NumberLine { get; set; }
+        public DateTime Start { get; set; }
         public int PreviousStationID { get; set; }
         public TimeSpan PreviousStationTime { get; set; }
         public TimeSpan NextStationTime { get; set; }

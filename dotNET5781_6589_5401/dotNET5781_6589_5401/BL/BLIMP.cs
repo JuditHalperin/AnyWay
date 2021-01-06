@@ -992,23 +992,42 @@ namespace BL
             return duration;
         }
 
-        int getPreviousStation(Line line, int time)
+        int getPreviousStationIndex(BO.Line line, TimeSpan timeOfTrip, out int previousStationTime)
         {
-
+            previousStationTime = 0;
+            int secondsOfTrip = (int)timeOfTrip.TotalSeconds;
+            if(duration(line.ThisSerial) > secondsOfTrip)
+                return 0; // not found
+            int time = 1; // because time to previous of the first is -1
+            foreach (BO.LineStation lineStation in line.Path)
+            {
+                time += lineStation.TimeFromPreviousStations;
+                if (time >= secondsOfTrip)
+                {
+                    previousStationTime = time - secondsOfTrip;
+                    return lineStation.PathIndex - 1;
+                }
+            }
+            return 0; // not found
         }
 
-        BO.DrivingBus trip_DOToBO(DrivingLine tripDO)
+        BO.DrivingBus trip_DOToBO(int serial, DateTime start)
         {
-            BO.DrivingBus tripBO = new BO.DrivingBus()
+            BO.Line line = getLine(serial);
+            int previousStationTime;
+            int index = getPreviousStationIndex(line, DateTime.Now - start, out previousStationTime);
+            if (index == 0)
+                return null;
+
+            int nextStationTime = line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime;
+            return new BO.DrivingBus()
             {
-                Line = tripDO.NumberLine,
-                Start = tripDO.Start,
+                NumberLine = serial,
+                Start = start,
+                PreviousStationID = line.Path.ElementAt(index - 1).ID,
+                PreviousStationTime = new TimeSpan(previousStationTime / 3600, previousStationTime % 3600 / 60, previousStationTime % 3600 % 60),
+                NextStationTime = new TimeSpan(nextStationTime / 3600, nextStationTime % 3600 / 60, nextStationTime % 3600 % 60)
             };
-
-            while()
-            {
-
-            }
         }
 
         #endregion
