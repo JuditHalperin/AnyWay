@@ -981,6 +981,22 @@ namespace BL
 
         #region Trip
 
+        int duration(int serial)
+        {
+            BO.Line line = getLine(serial);
+            if (line == null)
+                return 0;
+            int duration = 1; // because time to previous of the first is -1
+            foreach (BO.LineStation lineStation in line.Path)
+                duration += lineStation.TimeFromPreviousStations;
+            return duration;
+        }
+
+        int getPreviousStation(Line line, int time)
+        {
+
+        }
+
         BO.DrivingBus trip_DOToBO(DrivingLine tripDO)
         {
             BO.DrivingBus tripBO = new BO.DrivingBus()
@@ -989,8 +1005,10 @@ namespace BL
                 Start = tripDO.Start,
             };
 
-            DateTime.Now;
+            while()
+            {
 
+            }
         }
 
         #endregion
