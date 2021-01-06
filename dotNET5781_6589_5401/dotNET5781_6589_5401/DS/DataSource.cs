@@ -16,7 +16,6 @@ namespace DS
 		public static List<Station> Stations;
         public static List<LineStation> LineStations;
 		public static List<TwoFollowingStations> FollowingStations;
-		public static List<DrivingBus> DrivingBuses;
 		public static List<DrivingLine> DrivingLines;
 		public static string ManagingCode = "123456";
 		public static int serial = 1;
@@ -687,8 +686,19 @@ namespace DS
                     KmsSinceService = rand.Next(0, 20000)
                 });
             } //10 buses after 2018
-            DrivingBuses = new List<DrivingBus>();
             DrivingLines = new List<DrivingLine>();
+            int dl = 0;
+            foreach(Line line in Lines)
+            {
+                DrivingLines.Add(new DrivingLine()
+                {
+                    NumberLine = line.ThisSerial,
+                    Start = new DateTime(2000, 1, 1, 7 + dl, (dl % 2) * 30, 0),
+                    Frequency = (15 + (dl % 3) * 5),
+                    End = new DateTime(2000, 1, 1, 24 - dl, (dl % 2) * 30, 0)
+                });
+                dl++;
+            }
         }
 	}
 }
