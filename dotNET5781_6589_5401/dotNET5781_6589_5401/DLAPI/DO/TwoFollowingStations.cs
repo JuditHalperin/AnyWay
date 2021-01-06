@@ -10,8 +10,8 @@ namespace DO
     {
         public int FirstStationID { get; set; }
         public int SecondStationID { get; set; }
-        public int LengthBetweenStations { get; set; } // meters
-        public int TimeBetweenStations { get; set; } // minutes     
+        public int LengthBetweenStations { get; set; }
+        public int TimeBetweenStations { get; set; }   
         public override string ToString() => this.ToStringProperty();
     }
 }

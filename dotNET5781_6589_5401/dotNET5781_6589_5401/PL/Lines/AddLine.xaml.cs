@@ -62,7 +62,7 @@ namespace PL
         {
             try
             {
-                if (path.Count() == bl.GetStations().Count())
+                if (path.Count() == bl.countStations())
                     throw new StationException("There are no more stations to add.");
                 AddLineStation window = new AddLineStation(path);
                 window.ShowDialog();

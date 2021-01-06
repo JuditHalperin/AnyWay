@@ -25,14 +25,25 @@ namespace PL
         static IBL bl;
         string username;
 
-        public LinesList(string name)
+        public LinesList(string name, int serial = -1)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             username = name;
-            ListOfLines.ItemsSource = bl.GetLines(); // it is possible to open this window only when there are lines
-            ListOfLines.SelectedIndex = 0;
+            List<BO.Line> lines = bl.GetLines().ToList();
+            ListOfLines.ItemsSource = lines; // it is possible to open this window only when there are lines
+            if (serial == -1)
+                ListOfLines.SelectedIndex = 0;
+            else
+            {
+                for (int i = 0; i < bl.countLines(); i++)
+                    if (lines[i].ThisSerial == serial)
+                    {
+                        ListOfLines.SelectedIndex = i;
+                        break;
+                    }
+            }
         }
 
         private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,7 +92,7 @@ namespace PL
                 if(!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to remove a line if it is driving.");
                 bl.removeLine((BO.Line)ListOfLines.SelectedItem);
-                if (!bl.LinesIsEmpty())
+                if (bl.countLines() > 0)
                     ListOfLines.ItemsSource = bl.GetLines();
                 else
                 {

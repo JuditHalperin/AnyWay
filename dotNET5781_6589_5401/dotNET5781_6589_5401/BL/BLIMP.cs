@@ -11,6 +11,7 @@ namespace BL
     public sealed class BLIMP : IBL
     {
         readonly IDAL dal = DalFactory.GetDal();
+
         private Random rand = new Random(DateTime.Now.Millisecond);
 
         #region Singelton
@@ -528,9 +529,9 @@ namespace BL
                 return true;
             return false;
         }
-        public bool LinesIsEmpty()
+        public int countLines()
         {
-            return dal.LinesIsEmpty();
+            return dal.countLines();
         }
 
         #endregion
@@ -716,9 +717,9 @@ namespace BL
                 return true;
             return false;
         }
-        public bool StationsIsEmpty()
+        public int countStations()
         {
-            return dal.StationsIsEmpty();
+            return dal.countStations();
         }
 
         #endregion
