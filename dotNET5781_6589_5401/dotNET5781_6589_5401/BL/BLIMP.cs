@@ -11,6 +11,7 @@ namespace BL
     public sealed class BLIMP : IBL
     {
         readonly IDAL dal = DalFactory.GetDal();
+
         private Random rand = new Random(DateTime.Now.Millisecond);
 
         #region Singelton
