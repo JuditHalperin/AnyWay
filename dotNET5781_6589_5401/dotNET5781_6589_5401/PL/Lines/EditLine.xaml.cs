@@ -24,6 +24,7 @@ namespace PL
     public partial class EditLine : Window
     {
         static IBL bl;
+
         ObservableCollection<Station> path;
 
         public EditLine(BO.Line line)

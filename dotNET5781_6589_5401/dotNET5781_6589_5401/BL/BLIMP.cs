@@ -1011,7 +1011,7 @@ namespace BL
             return 0; // not found
         }
 
-        BO.DrivingBus trip_DOToBO(int serial, DateTime start)
+        public BO.DrivingBus trip_DOToBO(int serial, DateTime start)
         {
             BO.Line line = getLine(serial);
             int previousStationTime;
