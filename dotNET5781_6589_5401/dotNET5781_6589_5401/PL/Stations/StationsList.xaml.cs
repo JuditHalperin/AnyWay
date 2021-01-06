@@ -63,7 +63,18 @@ namespace PL
 
         private void SetDistances_Click(object sender, RoutedEventArgs e)
         {
-            new SetDistances((Station)ListOfStations.SelectedItem).ShowDialog();
+            IEnumerable<Station> stations = bl.GetStations(item => // all stations that have no distance to current station
+            {
+                if (item.ID == ((Station)ListOfStations.SelectedItem).ID || bl.getTwoFollowingStations(item.ID, ((Station)ListOfStations.SelectedItem).ID))
+                    return false;
+                return true;
+            });
+
+
+            if (stations.Count() == 0)
+                MessageBox.Show("You have set the distance to all existing stations.");
+            else
+                new SetDistances((Station)ListOfStations.SelectedItem, stations).ShowDialog();
         }
 
         private void EditStation_Click(object sender, RoutedEventArgs e)
