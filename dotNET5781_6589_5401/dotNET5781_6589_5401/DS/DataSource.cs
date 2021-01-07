@@ -49,8 +49,14 @@ namespace DS
 					Username = "a",
 					Password = "a",
 					IsManager = true
-				}
-			}; // users
+				},
+                new User()
+                {
+                    Username = "z",
+                    Password = "z",
+                    IsManager = false
+                }
+            }; // users
             Stations = new List<Station>()
             {
                 new Station

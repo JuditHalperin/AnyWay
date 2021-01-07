@@ -52,6 +52,11 @@ namespace PL
                     new ManagerWindow(Username.Text).Show();
                     Close();
                 }
+                else
+                {
+                    new PassengerWindow(Username.Text).Show();
+                    Close();
+                }
             }
             catch (UserException ex) { MessageBox.Show(ex.Message); }           
             catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }            

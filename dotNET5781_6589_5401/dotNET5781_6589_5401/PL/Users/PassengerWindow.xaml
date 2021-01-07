@@ -1,0 +1,30 @@
+﻿<Window x:Class="PL.PassengerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="PassengerWindow" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="Username" Content="{Binding}" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="250" FontSize="20"/>
+        <Button x:Name="AskTrips" Content="Trip" Style="{StaticResource ButtonStyle}" Grid.Row="0" Height="60" Width="200" VerticalAlignment="Center" Click="ShowLines_Click" FontSize="30"/>
+        <Button x:Name="ShowLines" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="60" Width="200" VerticalAlignment="Center" Click="ShowLines_Click" FontSize="30"/>
+        <Button x:Name="ShowStations" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="60" Width="200" VerticalAlignment="Center" Click="ShowStations_Click" FontSize="30"/>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="SignOut" Content="Sign out" Style="{StaticResource LabelToClickStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown" FontSize="22"/>
+            <Label x:Name="ChangePassword" Content="Change password" Style="{StaticResource LabelToClickStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangePassword_PreviewMouseDown" FontSize="22"/>
+        </Grid>
+    </Grid>
+</Window>
+

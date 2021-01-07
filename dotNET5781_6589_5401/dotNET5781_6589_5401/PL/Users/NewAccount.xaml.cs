@@ -34,7 +34,7 @@ namespace PL
             administrativePrivileges = a;
             if (!a)
             {
-                ManagingCode.Visibility = Visibility.Hidden;
+                LabelOfManagingCode.Visibility = Visibility.Hidden;
                 ManagingCode.Visibility = Visibility.Hidden;
             }
         }
@@ -43,7 +43,7 @@ namespace PL
         {
             try
             {
-                if (bl.getManagingCode() != ManagingCode.Password)
+                if (administrativePrivileges && bl.getManagingCode() != ManagingCode.Password)
                     throw new InvalidInputException("Incorrect managing code.");
 
                 string message = validPassword(Password.Password);
@@ -53,7 +53,10 @@ namespace PL
                 else
                 {
                     bl.addUser(new User() { Username = Username.Text, Password = Password.Password, IsManager = administrativePrivileges });
-                    new ManagerWindow(Username.Text).Show();
+                    if (administrativePrivileges)
+                        new ManagerWindow(Username.Text).Show();
+                    else
+                        new PassengerWindow(Username.Text).Show();
                     Close();
                     return;
                 }
@@ -156,7 +159,7 @@ namespace PL
         /// <param name="e"></param>
         private void Ok_IsEnabled(object sender, RoutedEventArgs e)
         {
-            if (Username.Text.Length > 0 && Password.Password.Length > 0 && ManagingCode.Password.Length > 0)
+            if (Username.Text.Length > 0 && Password.Password.Length > 0 && (!administrativePrivileges || ManagingCode.Password.Length > 0))
                 Ok.IsEnabled = true;
             else
                 Ok.IsEnabled = false;
