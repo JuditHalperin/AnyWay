@@ -25,19 +25,22 @@ namespace PL
         static IBL bl;
 
         string username;
-        
+
         bool administrativePrivileges;
 
-        public StationsList(string name,bool a=true)
+        public StationsList(string name, bool a = true)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
             username = name;
+            administrativePrivileges = a;
+
             ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
             ListOfStations.SelectedIndex = 0;
-            administrativePrivileges = a;
-            if(!administrativePrivileges)
+
+            if (!administrativePrivileges)
             {
                 SetDistances.Visibility = Visibility.Hidden;
                 EditStation.Visibility = Visibility.Hidden;
@@ -45,7 +48,7 @@ namespace PL
                 AddStation.Visibility = Visibility.Hidden;
             }
         }
-    
+
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((Station)ListOfStations.SelectedItem == null)
@@ -103,7 +106,7 @@ namespace PL
         }
 
         private void RemoveStation_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             try
             {
                 if (!bl.canChangeStation((Station)ListOfStations.SelectedItem))
@@ -135,7 +138,7 @@ namespace PL
 
         private void LinesAtStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new LinesList(username, ((LineStation)LinesAtStation.SelectedItem).NumberLine,administrativePrivileges).Show();
+            new LinesList(username, ((LineStation)LinesAtStation.SelectedItem).NumberLine, administrativePrivileges).Show();
             Close();
         }
     }

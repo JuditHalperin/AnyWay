@@ -28,12 +28,14 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Image x:Name="Back" Source="BackButton.png" Width="35" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="27,7,0,7.6"/>
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -47,9 +49,9 @@
             <ComboBox Name="SourseStation" Grid.Row="1" Grid.Column="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
             <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
         </Grid>
-        <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label x:Name="SameStation" Content="Choose two different stations." Visibility="Hidden" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Grid x:Name="Titles" Grid.Row="2" HorizontalAlignment="Center" Visibility="Hidden">
+        <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="SameStation" Content="Choose two different stations." Visibility="Hidden" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid x:Name="Titles" Grid.Row="3" HorizontalAlignment="Center" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
@@ -61,6 +63,6 @@
             <Label Content="Time of Journey" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Label Content="Total Time" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
-        <ListBox x:Name="Trips" Visibility="Hidden" Grid.Row="3" ItemTemplate="{StaticResource TripDetails}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Style="{StaticResource ListBoxStyle}" BorderThickness="0" />
+        <ListBox x:Name="Trips" Visibility="Hidden" Grid.Row="4" ItemTemplate="{StaticResource TripDetails}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Style="{StaticResource ListBoxStyle}" BorderThickness="0" />
     </Grid>
 </Window>

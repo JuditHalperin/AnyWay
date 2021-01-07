@@ -23,25 +23,28 @@ namespace PL
     public partial class PassengerWindow : Window
     {
         static IBL bl;
+
         string tempUsername;
+
         public PassengerWindow(string username)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
 
-            Username.Content = $"{BestWishesByTime()}, {username}";
             tempUsername = username;
+            Username.Content = $"{BestWishesByTime()}, {username}";
             enableButtons();
         }
+
         private string BestWishesByTime()
         {
             if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour < 12)
                 return "Good Morning";
             if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
-                return "Good afternoon";
+                return "Good Afternoon";
             if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 21)
-                return "good evening";
+                return "Good Evening";
             return "Good night";
         }
 
@@ -62,18 +65,23 @@ namespace PL
             }
             else
                 ShowStations.Content = "Stations";
+        }
 
+        private void Trips_Click(object sender, RoutedEventArgs e)
+        {
+            new Trip(tempUsername).Show();
+            Close();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new LinesList(tempUsername, -1, false).Show();//-1 is defualt in the window.
+            new LinesList(tempUsername, -1, false).Show(); // -1 is defualt in the window
             Close();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new StationsList(tempUsername,false).Show();
+            new StationsList(tempUsername, false).Show();
             Close();
         }
 
@@ -86,7 +94,7 @@ namespace PL
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             new ChangePassword("password", tempUsername).ShowDialog();
-        }
+        }     
     }
 }
 

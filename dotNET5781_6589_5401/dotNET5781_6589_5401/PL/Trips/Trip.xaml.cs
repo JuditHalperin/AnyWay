@@ -24,16 +24,21 @@ namespace PL
     {
         static IBL bl;
 
+        string username;
+
         public Station Targrt;
 
-        public Trip()
+        public Trip(string name)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
+            username = name;
+
             IEnumerable<Station> stations = bl.GetStations();
             SourseStation.ItemsSource = stations;
             TargetStation.ItemsSource = stations;
-            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void visibilities(object sender, SelectionChangedEventArgs e)
@@ -65,6 +70,12 @@ namespace PL
                         Trips.Visibility = Visibility.Visible;                        
                     }                    
                 }
-        }      
+        }
+
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new PassengerWindow(username).Show();
+            Close();
+        }
     }
 }

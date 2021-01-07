@@ -24,16 +24,16 @@ namespace PL
     {
         static IBL bl;
 
-        string tempUsername;
+        string name;
 
         public ManagerWindow(string username)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-            
+
+            name = username;
             Username.Content = $"{BestWishesByTime()}, {username}";
-            tempUsername = username;
             enableButtons();
         }
         private string BestWishesByTime()
@@ -74,19 +74,19 @@ namespace PL
 
         private void ShowBuses_Click(object sender, RoutedEventArgs e)
         {
-            new BusesList((string)Username.Content).Show();
+            new BusesList(name).Show();
             Close();
         }
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
-            new LinesList(tempUsername).Show();
+            new LinesList(name).Show();
             Close();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            new StationsList(tempUsername).Show();
+            new StationsList(name).Show();
             Close();
         }
         
@@ -116,12 +116,12 @@ namespace PL
 
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("password", tempUsername).ShowDialog();
+            new ChangePassword("password", name).ShowDialog();
         }
 
         private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("managing code", tempUsername).ShowDialog();
+            new ChangePassword("managing code", name).ShowDialog();
         }
     }
 }

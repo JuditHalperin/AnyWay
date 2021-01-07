@@ -23,30 +23,34 @@ namespace PL
     public partial class LinesList : Window
     {
         static IBL bl;
+
         string username;
+
         bool administrativePrivileges;
 
-        public LinesList(string name, int serial = -1,bool a=true)
+        public LinesList(string name, int serial = -1, bool a = true)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
             username = name;
+            administrativePrivileges = a;
+
             List<BO.Line> lines = bl.GetLines().ToList();
             ListOfLines.ItemsSource = lines; // it is possible to open this window only when there are lines
+            
             if (serial == -1)
                 ListOfLines.SelectedIndex = 0;
             else
-            {
                 for (int i = 0; i < bl.countLines(); i++)
                     if (lines[i].ThisSerial == serial)
                     {
                         ListOfLines.SelectedIndex = i;
                         break;
                     }
-            }
-            administrativePrivileges = a;
-            if(!administrativePrivileges)
+            
+            if (!administrativePrivileges)
             {
                 EditLine.Visibility = Visibility.Hidden;
                 RemoveLine.Visibility = Visibility.Hidden;
@@ -71,7 +75,7 @@ namespace PL
                 NoStations.Visibility = Visibility.Visible;
             }
         }
-        
+
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
             new AddLine().ShowDialog();
@@ -97,7 +101,7 @@ namespace PL
         {
             try
             {
-                if(!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
+                if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to remove a line if it is driving.");
                 bl.removeLine((BO.Line)ListOfLines.SelectedItem);
                 if (bl.countLines() > 0)
@@ -117,7 +121,7 @@ namespace PL
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
-        }     
+        }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {

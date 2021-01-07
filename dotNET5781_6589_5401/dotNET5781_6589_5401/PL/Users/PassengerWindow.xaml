@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Username" Content="{Binding}" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="250" FontSize="20"/>
-        <Button x:Name="AskTrips" Content="Trip" Style="{StaticResource ButtonStyle}" Grid.Row="0" Height="60" Width="200" VerticalAlignment="Center" Click="ShowLines_Click" FontSize="30"/>
+        <Button x:Name="AskTrips" Content="Trip" Style="{StaticResource ButtonStyle}" Grid.Row="0" Height="60" Width="200" VerticalAlignment="Center" FontSize="30" Click="Trips_Click"/>
         <Button x:Name="ShowLines" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="60" Width="200" VerticalAlignment="Center" Click="ShowLines_Click" FontSize="30"/>
         <Button x:Name="ShowStations" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="60" Width="200" VerticalAlignment="Center" Click="ShowStations_Click" FontSize="30"/>
         <Grid Grid.Row="4">
