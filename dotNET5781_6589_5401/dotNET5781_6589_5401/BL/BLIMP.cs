@@ -26,7 +26,7 @@ namespace BL
         #region Help functions
         int calculateTime(int distance)
         {
-            return (int)((distance/1000.0/rand.Next(30,61))*3600); // valocity of 30-60 km per hour
+            return (int)((distance / 1000.0 / rand.Next(30, 61)) * 3600); // valocity of 30-60 km per hour
         }
         void addOrUpdateTwoFollowingStations(TwoFollowingStations followingStations)
         {
@@ -307,7 +307,7 @@ namespace BL
         public bool canChangeBus(BO.Bus bus)
         {
             //if (GetDrivingBuses(item => item.LicensePlate == bus.LicensePlate) == null)
-                return true;
+            return true;
             //return false;
         }
         /// <summary>
@@ -526,7 +526,7 @@ namespace BL
         public bool canChangeLine(BO.Line line)
         {
             //if (GetDrivingLines(item => item.NumberLine == line.ThisSerial).Count() == 0)
-                return true;
+            return true;
             //return false;
         }
         public int countLines()
@@ -644,7 +644,7 @@ namespace BL
             try
             {
                 dal.updateStation(convertToStationDO(station));
-                if(distanceFromPreviousLocation != 0)
+                if (distanceFromPreviousLocation != 0)
                     stationToFollowingStation(station, distanceFromPreviousLocation);
             }
             catch (StationException ex)
@@ -714,7 +714,7 @@ namespace BL
             //                                                    where drivingLine.NumberLine == lineStation.NumberLine
             //                                                    select drivingLine;
             //if (drivingLinesAtStation.Count() == 0)
-                return true;
+            return true;
             //return false;
         }
         public int countStations()
@@ -803,7 +803,7 @@ namespace BL
             followingStations = dal.getTwoFollowingStations(path.ElementAt(path.Count() - 1).ID, path.ElementAt(path.Count() - 2).ID);
             lineStations.Add(new BO.LineStation()
             {
-                
+
                 ID = path.ElementAt(path.Count() - 1).ID,
                 PathIndex = path.Count(),
                 NextStationID = -1,
@@ -920,7 +920,7 @@ namespace BL
         /// <returns>station in line</returns>
         public BO.LineStation getLineStation(int numberLine, int id)
         {
-            LineStation lineStation= dal.getLineStation(numberLine, id);
+            LineStation lineStation = dal.getLineStation(numberLine, id);
             if (lineStation == null)
                 return null;
             return convertToLineStationBO(lineStation);
@@ -996,7 +996,7 @@ namespace BL
         {
             previousStationTime = 0;
             int secondsOfTrip = (int)timeOfTrip.TotalSeconds;
-            if(duration(line.ThisSerial) < secondsOfTrip)
+            if (duration(line.ThisSerial) < secondsOfTrip)
                 return 0; // not found
             int time = 1; // because time to previous of the first is -1
             foreach (BO.LineStation lineStation in line.Path)
@@ -1029,17 +1029,32 @@ namespace BL
                 NextStationTime = new TimeSpan(nextStationTime / 3600, nextStationTime % 3600 / 60, nextStationTime % 3600 % 60)
             };
         }
-
-        public IEnumerable<BO.DrivingBus> GetTripsOfLine(int serial)
+        public IEnumerable<BO.DrivingBus> GetTripsOfLine_Present(int serial)
         {
             List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
             foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
-                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                for (TimeSpan i = DateTime.Now.TimeOfDay; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                 {
                     BO.DrivingBus trip = getTrip(serial, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
                     if (trip != null)
                         trips.Add(trip);
                 }
+            return trips;
+        }
+
+        public IEnumerable<BO.DrivingBus> GetTripsOfLine_Future(int serial)
+        {
+            List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
+            foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
+                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                    trips.Add(new BO.DrivingBus()
+                    {
+                        NumberLine = drivingLine.NumberLine,
+                        Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds),
+                        PreviousStationID = -1,
+                        PreviousStationTime = new TimeSpan(0),
+                        NextStationTime = i - DateTime.Now.TimeOfDay
+                    });
             return trips;
         }
 
@@ -1054,6 +1069,26 @@ namespace BL
                         trips.Add(trip);
                 }
             return trips;
+        }
+
+        public IEnumerable<BO.DrivingBus> getUserTrips(Station source, Station target)
+        {
+            List<BO.Line> lines = new List<BO.Line>();
+            foreach (Line line in dal.GetLines().ToList())
+                if (dal.getLineStation(line.ThisSerial, source.ID) != null && dal.getLineStation(line.ThisSerial, target.ID) != null)
+                    lines.Add(getLine(line.ThisSerial));
+
+            List<BO.DrivingBus> allTrips = new List<BO.DrivingBus>();
+            foreach (BO.Line line in lines)
+            {
+                foreach (BO.DrivingBus trip in GetTripsOfLine_Present(line.ThisSerial))
+                    if (dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source.ID).PathIndex)
+                        allTrips.Add(trip);
+                foreach (BO.DrivingBus trip in GetTripsOfLine_Future(line.ThisSerial))
+                    allTrips.Add(trip);
+            }
+
+            return allTrips;
         }
 
         #endregion
