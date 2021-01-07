@@ -1105,7 +1105,14 @@ namespace BL
             }
             return time;
         }
-
+        public TimeSpan durationTripBetweenStations(int serial, int source, int target)
+        {
+            BO.Line line = getLine(serial);
+            int duration = 0;
+            for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++)
+                duration += line.Path.ElementAt(i).TimeFromPreviousStations;
+            return new TimeSpan(duration / 3600, duration % 3600 / 60, duration % 3600 % 60);
+        }
         #endregion
 
         #region DrivingBuses
