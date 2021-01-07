@@ -1091,6 +1091,21 @@ namespace BL
             return allTrips;
         }
 
+        TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
+        {
+            int index = 1;
+            TimeSpan time = trip.NextStationTime;
+            if (trip.PreviousStationID != -1)
+                index = dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex + 1;                
+            BO.Line line = getLine(trip.NumberLine);
+            for (int i = index + 1; i <= dal.getLineStation(trip.NumberLine, targetStationID).PathIndex; i++)
+            {
+                int timeTmp = line.Path.ElementAt(index).TimeFromPreviousStations;
+                time += new TimeSpan(timeTmp / 3600, timeTmp % 3600 / 60, timeTmp % 3600 % 60);
+            }
+            return time;
+        }
+
         #endregion
 
         #region DrivingBuses
