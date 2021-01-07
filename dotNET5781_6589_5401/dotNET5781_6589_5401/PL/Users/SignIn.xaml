@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-          Title="Sign In" WindowState="Maximized" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+          Title="Sign In" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <local:AllTextBoxAreFull x:Key="AllTextBoxAreFull"/>
     </Window.Resources>

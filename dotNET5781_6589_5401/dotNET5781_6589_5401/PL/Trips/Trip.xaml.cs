@@ -26,8 +26,6 @@ namespace PL
 
         string username;
 
-        public Station Targrt;
-
         public Trip(string name)
         {
             InitializeComponent();
@@ -54,7 +52,18 @@ namespace PL
                 else
                 {
                     SameStation.Visibility = Visibility.Hidden;
-                    IEnumerable<DrivingBus> trips = bl.getPassengerTrips(((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID);
+
+                    var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                let totalTime = bl.timeToTargetStation(drivingBus, ((Station)TargetStation.SelectedItem).ID)                     
+                                select new // anonymous variable for PL trip
+                                {
+                                    Line = drivingBus.NumberLine,
+                                    TimeTillArrival = (totalTime - timeOfJourney).ToString(@"hh\:mm\:ss"),
+                                    TimeOfJourney = timeOfJourney,
+                                    TotalTime = totalTime.ToString(@"hh\:mm\:ss")
+                                };
+
                     if (trips.Count() == 0)
                     {
                         NoLines.Visibility = Visibility.Visible;
@@ -63,8 +72,7 @@ namespace PL
                     }
                     else
                     {
-                        Targrt = (Station)TargetStation.SelectedItem;
-                        Trips.ItemsSource = trips; 
+                        Trips.ItemsSource = trips.OrderBy(item => item.TotalTime);
                         NoLines.Visibility = Visibility.Hidden;
                         Titles.Visibility = Visibility.Visible;
                         Trips.Visibility = Visibility.Visible;                        

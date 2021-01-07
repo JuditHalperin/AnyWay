@@ -1093,8 +1093,8 @@ namespace BL
 
         public TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
         {
-            int index = 1;
             TimeSpan time = trip.NextStationTime;
+            int index = 1;
             if (trip.PreviousStationID != -1)
                 index = dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex + 1;                
             BO.Line line = getLine(trip.NumberLine);

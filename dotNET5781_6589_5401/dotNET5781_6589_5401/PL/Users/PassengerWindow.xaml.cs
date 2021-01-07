@@ -45,7 +45,7 @@ namespace PL
                 return "Good Afternoon";
             if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 21)
                 return "Good Evening";
-            return "Good night";
+            return "Good Night";
         }
 
         private void enableButtons()
