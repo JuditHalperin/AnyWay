@@ -15,13 +15,13 @@ namespace PlConsole
         {
             bl = BlFactory.GetBl();
 
-            if(bl.GetLines().Count() == 0)
-                Console.WriteLine("jjj");
-            Console.WriteLine("oof");
+            //if(bl.GetTrips().Count() == 0)
+               // Console.WriteLine("jjj");
 
-            foreach (var i in bl.GetTrips())
+
+            foreach (var i in bl.GetTripsOfLine(1))
             {
-                Console.WriteLine(i);
+                Console.WriteLine(i.NumberLine);
             }
             Console.Read();
         }

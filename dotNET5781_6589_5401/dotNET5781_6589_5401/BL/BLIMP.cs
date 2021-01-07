@@ -1034,11 +1034,11 @@ namespace BL
         {
             List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
             foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
-                for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                 {
                     BO.DrivingBus trip = getTrip(serial, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
                     if (trip != null)
-                        trips.Append(trip);
+                        trips.Add(trip);
                 }
             return trips;
         }
@@ -1047,11 +1047,11 @@ namespace BL
         {
             List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
             foreach (DrivingLine drivingLine in dal.GetDrivingLines().ToList())
-                for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                 {
                     BO.DrivingBus trip = getTrip(drivingLine.NumberLine, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
                     if (trip != null)
-                        trips.Append(trip);
+                        trips.Add(trip);
                 }
             return trips;
         }
