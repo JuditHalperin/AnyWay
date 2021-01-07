@@ -1071,7 +1071,7 @@ namespace BL
             return trips;
         }
 
-        public IEnumerable<BO.DrivingBus> getUserTrips(Station source, Station target)
+        public IEnumerable<BO.DrivingBus> getPassengerTrips(Station source, Station target)
         {
             List<BO.Line> lines = new List<BO.Line>();
             foreach (Line line in dal.GetLines().ToList())
