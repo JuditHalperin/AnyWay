@@ -24,7 +24,7 @@
         <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="Ok_IsEnabled"/>
         <Label Content="Password:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <PasswordBox x:Name="Password" Grid.Row="3" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
-        <Label Content="Managing code:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Label Name="LabelOfManagingCode" Content="Managing code:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         <PasswordBox x:Name="ManagingCode" Grid.Row="5" Width="100" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
         <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelToClickStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
         <Grid Grid.Row="7">

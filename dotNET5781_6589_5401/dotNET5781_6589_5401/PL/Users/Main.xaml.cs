@@ -35,5 +35,11 @@ namespace PL
             new SignIn(true).Show();
             Close();
         }
+
+        private void SignInAsPassenger_Click(object sender, RoutedEventArgs e)
+        {
+            new SignIn(false).Show();
+            Close();
+        }
     }
 }

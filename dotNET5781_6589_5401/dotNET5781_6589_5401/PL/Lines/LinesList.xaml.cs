@@ -24,8 +24,9 @@ namespace PL
     {
         static IBL bl;
         string username;
+        bool administrativePrivileges;
 
-        public LinesList(string name, int serial = -1)
+        public LinesList(string name, int serial = -1,bool a=true)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
@@ -43,6 +44,13 @@ namespace PL
                         ListOfLines.SelectedIndex = i;
                         break;
                     }
+            }
+            administrativePrivileges = a;
+            if(!administrativePrivileges)
+            {
+                EditLine.Visibility = Visibility.Hidden;
+                RemoveLine.Visibility = Visibility.Hidden;
+                AddLine.Visibility = Visibility.Hidden;
             }
         }
 
@@ -113,7 +121,10 @@ namespace PL
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ManagerWindow(username).Show();
+            if (administrativePrivileges)
+                new ManagerWindow(username).Show();
+            else
+                new PassengerWindow(username).Show();
             Close();
         }
     }
