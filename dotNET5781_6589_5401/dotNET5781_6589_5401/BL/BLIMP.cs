@@ -1071,18 +1071,18 @@ namespace BL
             return trips;
         }
 
-        public IEnumerable<BO.DrivingBus> getPassengerTrips(Station source, Station target)
+        public IEnumerable<BO.DrivingBus> getPassengerTrips(int source, int target)
         {
             List<BO.Line> lines = new List<BO.Line>();
             foreach (Line line in dal.GetLines().ToList())
-                if (dal.getLineStation(line.ThisSerial, source.ID) != null && dal.getLineStation(line.ThisSerial, target.ID) != null)
+                if (dal.getLineStation(line.ThisSerial, source) != null && dal.getLineStation(line.ThisSerial, target) != null)
                     lines.Add(getLine(line.ThisSerial));
 
             List<BO.DrivingBus> allTrips = new List<BO.DrivingBus>();
             foreach (BO.Line line in lines)
             {
                 foreach (BO.DrivingBus trip in GetTripsOfLine_Present(line.ThisSerial))
-                    if (dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source.ID).PathIndex)
+                    if (dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
                         allTrips.Add(trip);
                 foreach (BO.DrivingBus trip in GetTripsOfLine_Future(line.ThisSerial))
                     allTrips.Add(trip);
@@ -1091,7 +1091,7 @@ namespace BL
             return allTrips;
         }
 
-        TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
+        public TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
         {
             int index = 1;
             TimeSpan time = trip.NextStationTime;
