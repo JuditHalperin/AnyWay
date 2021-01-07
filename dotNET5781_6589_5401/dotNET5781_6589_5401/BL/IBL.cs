@@ -78,27 +78,27 @@ namespace BLAPI
 
         #endregion
 
-        #region DrivingBuses
+        //#region DrivingBuses
 
-        void addDrivingBus(DrivingBus drivingBus);
-        void removeDrivingBus(DrivingBus drivingBus);
-        void updateDrivingBus(DrivingBus drivingBus);
-        DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        IEnumerable<DrivingBus> GetDrivingBuses();
-        IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
+        //void addDrivingBus(DrivingBus drivingBus);
+        //void removeDrivingBus(DrivingBus drivingBus);
+        //void updateDrivingBus(DrivingBus drivingBus);
+        //DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
+        //IEnumerable<DrivingBus> GetDrivingBuses();
+        //IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
 
-        #endregion
+        //#endregion
 
-        #region DrivingLines
+        //#region DrivingLines
 
-        void addDrivingLine(DrivingLine drivingLine);
-        void removeDrivingLine(DrivingLine drivingLine);
-        void updateDrivingLine(DrivingLine drivingLine);
-        DrivingLine getDrivingLine(int numberLine, DateTime start);
-        IEnumerable<DrivingLine> GetDrivingLines();
-        IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
+        //void addDrivingLine(DrivingLine drivingLine);
+        //void removeDrivingLine(DrivingLine drivingLine);
+        //void updateDrivingLine(DrivingLine drivingLine);
+        //DrivingLine getDrivingLine(int numberLine, DateTime start);
+        //IEnumerable<DrivingLine> GetDrivingLines();
+        //IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 
-        #endregion
+        //#endregion
 
         #region ManagingCode
 

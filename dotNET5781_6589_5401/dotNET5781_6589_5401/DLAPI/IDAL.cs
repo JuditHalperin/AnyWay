@@ -76,16 +76,16 @@ namespace DLAPI
 
         #endregion
 
-        #region DrivingBuses
+        //#region DrivingBuses
 
-        void addDrivingBus(DrivingBus drivingBus);
-        void removeDrivingBus(DrivingBus drivingBus);
-        void updateDrivingBus(DrivingBus drivingBus);
-        DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        IEnumerable<DrivingBus> GetDrivingBuses();
-        IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
+        //void addDrivingBus(DrivingBus drivingBus);
+        //void removeDrivingBus(DrivingBus drivingBus);
+        //void updateDrivingBus(DrivingBus drivingBus);
+        //DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
+        //IEnumerable<DrivingBus> GetDrivingBuses();
+        //IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
 
-        #endregion
+        //#endregion
 
         #region DrivingLines
 

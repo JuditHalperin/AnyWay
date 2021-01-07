@@ -384,7 +384,7 @@ namespace DL
         }
         public DrivingLine getDrivingLine(int numberLine, DateTime start)
         {
-            DrivingLine drivingLine= DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start);
+            DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == new TimeSpan(start.Hour, start.Minute, start.Second));
             if (drivingLine == null)
                 return null;
             return drivingLine.Clone();
