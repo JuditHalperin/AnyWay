@@ -78,6 +78,13 @@ namespace BLAPI
 
         #endregion
 
+        #region Trips
+
+        IEnumerable<DrivingBus> GetTripsOfLine(int serial);
+        IEnumerable<DrivingBus> GetTrips();
+
+        #endregion
+
         //#region DrivingBuses
 
         //void addDrivingBus(DrivingBus drivingBus);

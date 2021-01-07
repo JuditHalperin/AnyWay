@@ -15,8 +15,11 @@ namespace PlConsole
         {
             bl = BlFactory.GetBl();
 
-            Console.Write("Please enter how many days back: ");
-            foreach(var i in bl.GetLineStations())
+            if(bl.GetTrips().Count() == 0)
+                Console.WriteLine("jjj");
+
+
+            foreach (var i in bl.GetTrips())
             {
                 Console.WriteLine(i);
             }
