@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows.Data;
 using BLAPI;
-using BO;
 
 namespace PL
 {
-    class CalculateTotalTime : IValueConverter
+    class CalculateTimeTillArrival : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return BlFactory.GetBl().timeToTargetStation((DrivingBus)value, ((Station)parameter).ID);
+            return BlFactory.GetBl().getStation((int)value).Name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

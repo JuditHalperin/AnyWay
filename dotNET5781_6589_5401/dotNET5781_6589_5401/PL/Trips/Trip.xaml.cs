@@ -24,6 +24,8 @@ namespace PL
     {
         static IBL bl;
 
+        public Station Targrt;
+
         public Trip()
         {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace PL
             TargetStation.ItemsSource = stations;
         }
 
-        private void visibilities()
+        private void visibilities(object sender, SelectionChangedEventArgs e)
         {
             if (SourseStation.SelectedItem != null && TargetStation.SelectedItem != null)
                 if (((Station)SourseStation.SelectedItem).ID == ((Station)TargetStation.SelectedItem).ID)
@@ -56,10 +58,11 @@ namespace PL
                     }
                     else
                     {
+                        Targrt = (Station)TargetStation.SelectedItem;
+                        Trips.ItemsSource = trips; 
                         NoLines.Visibility = Visibility.Hidden;
                         Titles.Visibility = Visibility.Visible;
-                        Trips.Visibility = Visibility.Visible;
-                        Trips.ItemsSource = trips;
+                        Trips.Visibility = Visibility.Visible;                        
                     }                    
                 }
         }      
