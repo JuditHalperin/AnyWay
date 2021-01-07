@@ -112,6 +112,7 @@
     <Compile Include="Stations\StationsList.xaml.cs">
       <DependentUpon>StationsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Trips\CalculateTotalTime.cs" />
     <Compile Include="Trips\Trip.xaml.cs">
       <DependentUpon>Trip.xaml</DependentUpon>
     </Compile>

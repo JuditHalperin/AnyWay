@@ -60,7 +60,6 @@ namespace PL
                         Titles.Visibility = Visibility.Visible;
                         Trips.Visibility = Visibility.Visible;
                         Trips.ItemsSource = trips;
-                        TripDetails.TotalTime.Content = bl.timeToTargetStation(, (Station)TargetStation.SelectedItem);
                     }                    
                 }
         }      

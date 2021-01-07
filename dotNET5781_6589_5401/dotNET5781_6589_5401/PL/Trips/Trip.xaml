@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Trip" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
+        <local:CalculateTotalTime x:Key="CalculateTotalTime"/>
         <DataTemplate x:Key="TripDetails">
             <Grid HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -18,7 +19,7 @@
                 <Label x:Name="Line" Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Column="0" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label x:Name="TimeTillArrival" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="1" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label x:Name="TimeOfJourney" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="2" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="TotalTime" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="TotalTime" Content="{Binding Converter={StaticResource CalculateTotalTime}}" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
