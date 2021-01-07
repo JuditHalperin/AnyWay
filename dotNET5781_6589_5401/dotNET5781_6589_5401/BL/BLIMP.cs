@@ -1091,7 +1091,7 @@ namespace BL
             return allTrips;
         }
 
-        TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
+        public TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
         {
             int index = 1;
             TimeSpan time = trip.NextStationTime;
