@@ -981,7 +981,7 @@ namespace BL
 
         #region Trip
 
-        int duration(int serial)
+        private int duration(int serial)
         {
             BO.Line line = getLine(serial);
             if (line == null)
@@ -992,7 +992,7 @@ namespace BL
             return duration;
         }
 
-        int getPreviousStationIndex(BO.Line line, TimeSpan timeOfTrip, out int previousStationTime)
+        private int getPreviousStationIndex(BO.Line line, TimeSpan timeOfTrip, out int previousStationTime)
         {
             previousStationTime = 0;
             int secondsOfTrip = (int)timeOfTrip.TotalSeconds;
@@ -1011,7 +1011,7 @@ namespace BL
             return 0; // not found
         }
 
-        public BO.DrivingBus trip_DOToBO(int serial, DateTime start)
+        private BO.DrivingBus getTrip(int serial, DateTime start)
         {
             BO.Line line = getLine(serial);
             int previousStationTime;
@@ -1028,6 +1028,32 @@ namespace BL
                 PreviousStationTime = new TimeSpan(previousStationTime / 3600, previousStationTime % 3600 / 60, previousStationTime % 3600 % 60),
                 NextStationTime = new TimeSpan(nextStationTime / 3600, nextStationTime % 3600 / 60, nextStationTime % 3600 % 60)
             };
+        }
+
+        public IEnumerable<BO.DrivingBus> GetTripsOfLine(int serial)
+        {
+            List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
+            foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
+                for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                {
+                    BO.DrivingBus trip = getTrip(serial, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
+                    if (trip != null)
+                        trips.Append(trip);
+                }
+            return trips;
+        }
+
+        public IEnumerable<BO.DrivingBus> GetTrips()
+        {
+            List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
+            foreach (DrivingLine drivingLine in dal.GetDrivingLines().ToList())
+                for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                {
+                    BO.DrivingBus trip = getTrip(drivingLine.NumberLine, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
+                    if (trip != null)
+                        trips.Append(trip);
+                }
+            return trips;
         }
 
         #endregion
