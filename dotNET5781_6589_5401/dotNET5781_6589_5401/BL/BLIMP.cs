@@ -996,7 +996,7 @@ namespace BL
         {
             previousStationTime = 0;
             int secondsOfTrip = (int)timeOfTrip.TotalSeconds;
-            if(duration(line.ThisSerial) > secondsOfTrip)
+            if(duration(line.ThisSerial) < secondsOfTrip)
                 return 0; // not found
             int time = 1; // because time to previous of the first is -1
             foreach (BO.LineStation lineStation in line.Path)

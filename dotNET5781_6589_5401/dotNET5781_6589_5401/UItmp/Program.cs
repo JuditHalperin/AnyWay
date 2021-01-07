@@ -19,7 +19,7 @@ namespace PlConsole
                // Console.WriteLine("jjj");
 
 
-            foreach (var i in bl.GetTripsOfLine(1))
+            foreach (var i in bl.GetTrips())
             {
                 Console.WriteLine(i.NumberLine);
             }
