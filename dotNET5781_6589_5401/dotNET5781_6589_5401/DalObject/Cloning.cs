@@ -77,19 +77,19 @@ namespace DL
         /// </summary>
         /// <param name="original">Copy from this</param>
         /// <returns>Return the copy DrivingBus</returns>
-        internal static DrivingBus Clone(this DrivingBus original)
-        {
-            DrivingBus target = new DrivingBus();
-            target.ThisSerial = original.ThisSerial;
-            target.Line = original.Line;
-            target.LicensePlate = original.LicensePlate;
-            target.ActualStart = original.ActualStart;
-            target.Start = original.Start;
-            target.PreviousStationID = original.PreviousStationID;
-            target.PreviousStationTime = original.PreviousStationTime;
-            target.NextStationTime = original.NextStationTime;
-            return target;
-        }
+        //internal static DrivingBus Clone(this DrivingBus original)
+        //{
+        //    DrivingBus target = new DrivingBus();
+        //    target.ThisSerial = original.ThisSerial;
+        //    target.Line = original.Line;
+        //    target.LicensePlate = original.LicensePlate;
+        //    target.ActualStart = original.ActualStart;
+        //    target.Start = original.Start;
+        //    target.PreviousStationID = original.PreviousStationID;
+        //    target.PreviousStationTime = original.PreviousStationTime;
+        //    target.NextStationTime = original.NextStationTime;
+        //    return target;
+        //}
 
         /// <summary>
         /// Cloning DrivingLine

@@ -306,9 +306,9 @@ namespace BL
         /// <returns></returns>
         public bool canChangeBus(BO.Bus bus)
         {
-            if (GetDrivingBuses(item => item.LicensePlate == bus.LicensePlate) == null)
+            //if (GetDrivingBuses(item => item.LicensePlate == bus.LicensePlate) == null)
                 return true;
-            return false;
+            //return false;
         }
         /// <summary>
         /// fuel the bus
