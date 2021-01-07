@@ -15,9 +15,9 @@ namespace PlConsole
         {
             bl = BlFactory.GetBl();
 
-            if(bl.GetTrips().Count() == 0)
+            if(bl.GetLines().Count() == 0)
                 Console.WriteLine("jjj");
-
+            Console.WriteLine("oof");
 
             foreach (var i in bl.GetTrips())
             {
