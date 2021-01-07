@@ -23,7 +23,6 @@ namespace PL
         public Main()
         {
             InitializeComponent();
-
             NotifyingDateTime dateTime = new NotifyingDateTime();
             Time.DataContext = dateTime;
             dateTime.worker.RunWorkerAsync();

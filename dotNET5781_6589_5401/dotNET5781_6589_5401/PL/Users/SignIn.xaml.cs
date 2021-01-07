@@ -48,15 +48,11 @@ namespace PL
                 if (user.Password != Password.Password || user.IsManager != administrativePrivileges)
                     throw new InvalidInputException("Incorrect password or administrative privileges.");
                 if (administrativePrivileges)
-                {
                     new ManagerWindow(Username.Text).Show();
-                    Close();
-                }
                 else
-                {
                     new PassengerWindow(Username.Text).Show();
                     Close();
-                }
+                Close();
             }
             catch (UserException ex) { MessageBox.Show(ex.Message); }           
             catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }            

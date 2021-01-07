@@ -62,14 +62,8 @@ namespace PL
                 }
             }
 
-            catch (InvalidInputException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            catch (UserException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }            
+            catch (UserException ex) { MessageBox.Show(ex.Message); }            
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

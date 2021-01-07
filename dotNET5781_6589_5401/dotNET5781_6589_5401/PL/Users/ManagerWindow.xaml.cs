@@ -23,7 +23,9 @@ namespace PL
     public partial class ManagerWindow : Window
     {
         static IBL bl;
+
         string tempUsername;
+
         public ManagerWindow(string username)
         {
             InitializeComponent();
@@ -39,10 +41,10 @@ namespace PL
             if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour < 12)
                 return "Good Morning";
             if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
-                return "Good afternoon";
+                return "Good Afternoon";
             if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 21)
-                return "good evening";
-            return "Good night";
+                return "Good Evening";
+            return "Good Night";
         }
 
         private void enableButtons()

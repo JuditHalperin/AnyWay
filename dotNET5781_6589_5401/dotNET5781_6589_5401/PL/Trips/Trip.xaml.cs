@@ -30,10 +30,10 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
-
             IEnumerable<Station> stations = bl.GetStations();
             SourseStation.ItemsSource = stations;
             TargetStation.ItemsSource = stations;
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void visibilities(object sender, SelectionChangedEventArgs e)
