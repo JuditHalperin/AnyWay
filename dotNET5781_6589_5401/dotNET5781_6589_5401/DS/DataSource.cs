@@ -688,7 +688,6 @@ namespace DS
             } //10 buses after 2018
             DrivingLines = new List<DrivingLine>();
             int dl = 0;
-            int dl = 0;
             foreach (Line line in Lines)
             {
                 DrivingLines.Add(new DrivingLine()
