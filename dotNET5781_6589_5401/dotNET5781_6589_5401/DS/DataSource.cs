@@ -688,17 +688,19 @@ namespace DS
             } //10 buses after 2018
             DrivingLines = new List<DrivingLine>();
             int dl = 0;
-            foreach(Line line in Lines)
+            int dl = 0;
+            foreach (Line line in Lines)
             {
                 DrivingLines.Add(new DrivingLine()
                 {
                     NumberLine = line.ThisSerial,
-                    Start = new TimeSpan(11,00,00),
-                    Frequency = 15,
-                    End = new TimeSpan(12, 00, 00)
+                    Start = new TimeSpan(7 + dl, (dl % 2) * 30, 0),
+                    Frequency = (15 + (dl % 3) * 5),
+                    End = new TimeSpan(24 - dl, (dl % 2) * 30, 0)
                 });
                 dl++;
             }
+        }
         }
 	}
 }
