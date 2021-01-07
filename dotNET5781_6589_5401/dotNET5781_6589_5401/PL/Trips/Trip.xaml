@@ -1,0 +1,62 @@
+﻿<Window x:Class="PL.Trip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Trip" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate x:Key="TripDetails">
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="Line" Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Column="0" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="TimeTillArrival" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="1" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="TimeOfJourney" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="2" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="TotalTime" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Sourse Station:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Target Station:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <ComboBox Name="SourseStation" Grid.Row="1" Grid.Column="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
+            <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
+        </Grid>
+        <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="SameStation" Content="Choose two different stations." Visibility="Hidden" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid x:Name="Titles" Grid.Row="2" HorizontalAlignment="Center" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Line Number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Time Till Arrival" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Time of Journey" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Total Time" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+        <ListBox x:Name="Trips" Visibility="Hidden" Grid.Row="3" ItemTemplate="{StaticResource TripDetails}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Style="{StaticResource ListBoxStyle}" BorderThickness="0" />
+    </Grid>
+</Window>
