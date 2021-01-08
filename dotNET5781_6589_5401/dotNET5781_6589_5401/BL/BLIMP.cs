@@ -1105,6 +1105,7 @@ namespace BL
             }
             return time;
         }
+
         public TimeSpan durationTripBetweenStations(int serial, int source, int target)
         {
             BO.Line line = getLine(serial);
@@ -1113,6 +1114,7 @@ namespace BL
                 duration += line.Path.ElementAt(i).TimeFromPreviousStations;
             return new TimeSpan(duration / 3600, duration % 3600 / 60, duration % 3600 % 60);
         }
+
         #endregion
 
         #region DrivingBuses

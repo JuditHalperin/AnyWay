@@ -30,8 +30,10 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="Back" Source="BackButton.png" Width="35" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="27,7,0,7.6"/>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0" Background="#FFEEF5FF">
+            <Image x:Name="Back" Source="BackButton.png" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="12,7,0,7.6"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="#FFEEF5FF">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -40,13 +42,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Sourse Station:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="Target Station:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Name="SourseStation" Grid.Row="1" Grid.Column="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
-            <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
+            <Label Content="Sourse Station:" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Target Station:" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <ComboBox Name="SourseStation" Grid.Row="1" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
+            <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
         </Grid>
-        <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label x:Name="SameStation" Content="Choose two different stations." Visibility="Hidden" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="SameStation" Content="Choose two different stations." Visibility="Hidden" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Grid x:Name="Titles" Grid.Row="2" HorizontalAlignment="Center" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="170"/>

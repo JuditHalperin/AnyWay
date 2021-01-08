@@ -48,6 +48,7 @@
     <Compile Include="BO\DrivingBus.cs" />
     <Compile Include="BO\Enums.cs" />
     <Compile Include="BO\Exceptions.cs" />
+    <Compile Include="BO\ExtensionTime.cs" />
     <Compile Include="BO\Line.cs" />
     <Compile Include="BO\LineStation.cs" />
     <Compile Include="BO\Station.cs" />

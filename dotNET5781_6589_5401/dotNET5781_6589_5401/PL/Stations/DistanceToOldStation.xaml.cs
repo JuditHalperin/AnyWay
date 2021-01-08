@@ -28,8 +28,8 @@ namespace PL
         {
             InitializeComponent();
             Massage.Content = "You have changed the location of the station. \n" +
-                "Please enter the distance to the old location: \n" +
-                "(use + or - to mark the direction)";
+                "Enter the distance to the old location: \n" +
+                "(use + or - to for direction)";
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
