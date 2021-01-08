@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\BusIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -112,9 +112,6 @@
     <Compile Include="Stations\StationsList.xaml.cs">
       <DependentUpon>StationsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Trips\CalculateTimeOfJourney.cs" />
-    <Compile Include="Trips\CalculateTimeTillArrival.cs" />
-    <Compile Include="Trips\CalculateTotalTime.cs" />
     <Compile Include="Trips\Trip.xaml.cs">
       <DependentUpon>Trip.xaml</DependentUpon>
     </Compile>
@@ -260,28 +257,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\BusIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Lines\BackButton.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\busesAndCar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Stations\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\pictureBus.jpg" />
+    <Resource Include="Images\BackgroundMain.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Users\pictureBus.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Trips\BackButton.png" />
+    <Resource Include="Images\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

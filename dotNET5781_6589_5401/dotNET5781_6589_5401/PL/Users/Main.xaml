@@ -15,7 +15,7 @@
         <Button x:Name="SignInAsPassenger" Style="{StaticResource ButtonStyle}" Content="Passenger" Width="200" Height="70" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Background="#FFFCF9EC" Click="SignInAsPassenger_Click"/>
         <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalContentAlignment="Right" FontSize="12"/>
         <Grid.Background>
-            <ImageBrush ImageSource="pictureBus.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="PL/Images/BackgroundMain.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
     </Grid>
 </Window>
