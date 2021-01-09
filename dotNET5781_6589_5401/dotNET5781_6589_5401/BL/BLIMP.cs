@@ -26,7 +26,7 @@ namespace BL
         #region Help functions
         int calculateTime(int distance)
         {
-            return (int)((distance / 1000.0 / rand.Next(30, 61)) * 3600); // valocity of 30-60 km per hour
+            return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); // valocity of 30-60 km per hour
         }
         void addOrUpdateTwoFollowingStations(TwoFollowingStations followingStations)
         {
