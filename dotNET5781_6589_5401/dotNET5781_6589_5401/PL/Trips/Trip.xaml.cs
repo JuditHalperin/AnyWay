@@ -59,7 +59,8 @@ namespace PL
 
                     var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
                                 let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                let totalTime = bl.timeToTargetStation(drivingBus, ((Station)TargetStation.SelectedItem).ID)                     
+                                let totalTime = bl.totalTime(drivingBus, ((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                where totalTime.Seconds != -1 // not relevant
                                 select new // anonymous variable for PL trip
                                 {
                                     Line = drivingBus.NumberLine,
