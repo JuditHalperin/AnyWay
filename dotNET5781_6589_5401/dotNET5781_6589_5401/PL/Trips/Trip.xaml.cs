@@ -64,9 +64,9 @@ namespace PL
                                 select new // anonymous variable for PL trip
                                 {
                                     Line = drivingBus.NumberLine,
-                                    TimeTillArrival = (totalTime - timeOfJourney).ToString(@"hh\:mm\:ss"),
-                                    TimeOfJourney = timeOfJourney.ToString(@"hh\:mm\:ss"),
-                                    TotalTime = totalTime.ToString(@"hh\:mm\:ss")
+                                    TimeTillArrival = (totalTime - timeOfJourney), //.ToString(@"hh\:mm\:ss"),
+                                    TimeOfJourney = timeOfJourney,
+                                    TotalTime = totalTime
                                 };
 
                     if (trips.Count() == 0)
