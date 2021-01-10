@@ -65,7 +65,7 @@ namespace PL
                                 {
                                     Line = drivingBus.NumberLine,
                                     TimeTillArrival = (totalTime - timeOfJourney).ToString(@"hh\:mm\:ss"),
-                                    TimeOfJourney = timeOfJourney,
+                                    TimeOfJourney = timeOfJourney.ToString(@"hh\:mm\:ss"),
                                     TotalTime = totalTime.ToString(@"hh\:mm\:ss")
                                 };
 
