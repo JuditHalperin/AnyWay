@@ -140,11 +140,8 @@ namespace DL
         }
         public void updateBus(Bus bus)
         {
-            Bus b = DataSource.Buses.Find(item => item.LicensePlate == bus.LicensePlate);
-            if (b == null)
-                throw new BusException("The bus does not exist.");
-            DataSource.Buses.Remove(b); // remove the old bus
-            DataSource.Buses.Add(bus.Clone()); // add the updated bus            
+            removeBus(getBus(bus.LicensePlate));
+            addBus(bus);
         }
         public Bus getBus(string licensePlate)
         {
@@ -193,11 +190,8 @@ namespace DL
         }
         public void updateLine(Line line)
         {
-            Line l = DataSource.Lines.Find(item => item.ThisSerial == line.ThisSerial);
-            if (l == null)
-                throw new LineException("The line does not exist.");
-            DataSource.Lines.Remove(l); // remove the old line
-            DataSource.Lines.Add(line.Clone()); // add the updated line  
+            removeLine(getLine(line.NumberLine));
+            addLine(line);
         }
         public Line getLine(int serial)
         {
@@ -247,11 +241,8 @@ namespace DL
         }
         public void updateStation(Station station)
         {
-            Station s = DataSource.Stations.Find(item => item.ID == station.ID);
-            if (s == null)
-                throw new LineException("The station does not exist.");
-            DataSource.Stations.Remove(s); // remove the old station
-            DataSource.Stations.Add(station.Clone()); // add the updated station
+            removeStation(getStation(station.ID));
+            addStation(station);
         }
         public Station getStation(int id)
         {
@@ -312,8 +303,8 @@ namespace DL
         }
         public void updateLineStation(LineStation lineStation)
         {
-            removeLineStation(lineStation); // remove the old line station=delete according the key.
-            DataSource.LineStations.Add(lineStation.Clone()); // add the updated line station
+            removeLineStation(getLineStation(station.ID));
+            addLineStation(lineStation);
         }
         public LineStation getLineStation(int numberLine, int id)
         {
