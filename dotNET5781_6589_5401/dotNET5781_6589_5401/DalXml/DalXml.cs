@@ -155,9 +155,15 @@ namespace DL
 
         public int addLine(Line line)
         {
-            line.ThisSerial = DataSource.serial++;
-            DataSource.Lines.Add(line.Clone());
-            return line.ThisSerial;
+            XElement rootElem = XMLTools.LoadListFromXMLElement(linesPath);
+
+            rootElem.Add(new XElement("Line",
+                                   new XElement("ThisSerial", line.ThisSerial),//serial?
+                                   new XElement("NumberLine", line.NumberLine),
+                                   new XElement("Region", line.Region)));
+
+            XMLTools.SaveListToXMLElement(rootElem, linesPath);
+            return line.ThisSerial;//
         }
         public void removeLine(Line line)
         {
@@ -200,9 +206,22 @@ namespace DL
 
         public void addStation(Station station)
         {
-            if (DataSource.Stations.Exists(item => item.ID == station.ID))
+            XElement rootElem = XMLTools.LoadListFromXMLElement(stationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where Convert.ToInt32(i.Element("ID").Value) == station.ID
+                             select i).FirstOrDefault();
+
+            if (item != null)
                 throw new StationException("The station already exists.");
-            DataSource.Stations.Add(station.Clone());
+
+            rootElem.Add(new XElement("Station",
+                                   new XElement("ID", station.ID),
+                                   new XElement("Name", station.Name),
+                                   new XElement("Latitude", station.Latitude),
+                                   new XElement("Longitude", station.Longitude)));
+
+            XMLTools.SaveListToXMLElement(rootElem, stationsPath);
         }
         public void removeStation(Station station)
         {
@@ -252,17 +271,29 @@ namespace DL
 
         public void addLineStation(LineStation lineStation)
         {
-            try // check if the station exists
-            {
-                getStation(lineStation.ID);
-            }
-            catch (StationException ex)
-            {
-                throw new StationException(ex.Message);
-            }
-            if (DataSource.LineStations.Exists(item => item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID))
+            XElement rootElem = XMLTools.LoadListFromXMLElement(stationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where Convert.ToInt32(i.Element("ID").Value) == lineStation.ID
+                             select i).FirstOrDefault();
+
+            if (item == null)
+                throw new StationException("The ID not exists."); 
+            rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
+
+            item = (from i in rootElem.Elements()
+                             where Convert.ToInt32(i.Element("ID").Value) == lineStation.ID && Convert.ToInt32(i.Element("NumberLine").Value) == lineStation.NumberLine
+                    select i).FirstOrDefault();
+
+            if (item != null)
                 throw new StationException("The line station already exists.");
-            DataSource.LineStations.Add(lineStation.Clone());
+
+            rootElem.Add(new XElement("LineStation",
+                                   new XElement("ID", lineStation.ID),
+                                   new XElement("NumberLine", lineStation.NumberLine),
+                                   new XElement("PathIndex", lineStation.PathIndex)));
+
+            XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
         }
         public void removeLineStation(LineStation lineStation)
         {
@@ -301,13 +332,37 @@ namespace DL
 
         public void addTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            if (!DataSource.Stations.Exists(item => item.ID == twoFollowingStations.FirstStationID) || !DataSource.Stations.Exists(item => item.ID == twoFollowingStations.SecondStationID))
+            XElement rootElem = XMLTools.LoadListFromXMLElement(stationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where Convert.ToInt32(i.Element("ID").Value) == twoFollowingStations.FirstStationID
+                             select i).FirstOrDefault();
+
+            if (item == null)
                 throw new StationException("At least one of the station does not exist.");
-            if (twoFollowingStations.FirstStationID == twoFollowingStations.SecondStationID)
-                throw new StationException("Two identical stations.");
-            if (DataSource.FollowingStations.Exists(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID)))
-                throw new StationException("The two following stations already exist.");
-            DataSource.FollowingStations.Add(twoFollowingStations.Clone());
+            item = (from i in rootElem.Elements()
+                    where Convert.ToInt32(i.Element("ID").Value) == twoFollowingStations.SecondStationID
+                    select i).FirstOrDefault();
+
+            if (item == null)
+                throw new StationException("At least one of the station does not exist.");
+            rootElem = XMLTools.LoadListFromXMLElement(followingStationsPath);
+
+            item = (from i in rootElem.Elements()
+                    where (Convert.ToInt32(i.Element("FirstStationID").Value) == twoFollowingStations.FirstStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == twoFollowingStations.SecondStationID) || (Convert.ToInt32(i.Element("FirstStationID").Value) == twoFollowingStations.SecondStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == twoFollowingStations.FirstStationID)
+                    select i).FirstOrDefault();
+
+            if (item != null)
+                throw new StationException("The following stations already exists.");
+
+            rootElem.Add(new XElement("LineStation",
+                                   new XElement("FirstStationID", twoFollowingStations.FirstStationID),
+                                   new XElement("SecondStationID", twoFollowingStations.SecondStationID),
+                                   new XElement("LengthBetweenStations", twoFollowingStations.LengthBetweenStations),
+                                   new XElement("TimeBetweenStations", twoFollowingStations.TimeBetweenStations)));
+
+            XMLTools.SaveListToXMLElement(rootElem, followingStationsPath);
+            
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
@@ -349,6 +404,29 @@ namespace DL
 
         public void addDrivingLine(DrivingLine drivingLine)
         {
+            XElement rootElem = XMLTools.LoadListFromXMLElement(stationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where Convert.ToInt32(i.Element("ID").Value) == drivingLine.ID
+                             select i).FirstOrDefault();
+
+            if (item == null)
+                throw new StationException("The ID not exists.");
+            rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
+
+            item = (from i in rootElem.Elements()
+                    where Convert.ToInt32(i.Element("ID").Value) == drivingLine.ID && Convert.ToInt32(i.Element("NumberLine").Value) == lineStation.NumberLine
+                    select i).FirstOrDefault();
+
+            if (item != null)
+                throw new StationException("The line station already exists.");
+
+            rootElem.Add(new XElement("LineStation",
+                                   new XElement("ID", drivingLine.ID),
+                                   new XElement("NumberLine", drivingLine.NumberLine),
+                                   new XElement("PathIndex", drivingLine.PathIndex)));
+
+            XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
             try
             {
                 getLine(drivingLine.NumberLine); // check if the line exists
