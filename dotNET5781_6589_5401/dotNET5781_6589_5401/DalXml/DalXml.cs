@@ -54,57 +54,62 @@ namespace DL
         }
         public void removeUser(User user)
         {
-            XElement usersRootElem = XMLTools.LoadListFromXMLElement(usersPath);
+            XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
 
-            XElement per = (from p in personsRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == id
-                            select p).FirstOrDefault();
+            XElement item = (from i in rootElem.Elements()
+                             where i.Element("Username").Value == user.Username
+                             select i).FirstOrDefault();
 
-            if (per != null)
+            if (item != null)
             {
-                per.Remove();
-                XMLTools.SaveListToXMLElement(personsRootElem, personsPath);
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, usersPath);
             }
             else
-                throw new DO.BadPersonIdException(id, $"bad person id: {id}");
-
-
-
-
-            try
-            {
-                DataSource.Users.RemoveAll(item => item.Username == user.Username);
-            }
-            catch (ArgumentNullException)
-            {
                 throw new UserException("The user does not exist.");
-            }
         }
         public void updateUser(User user)
         {
-            User u = DataSource.Users.Find(item => item.Username == user.Username);
-            if (u == null)
-                throw new UserException("The user does not exist.");
-            DataSource.Users.Remove(u); // remove the old user
-            DataSource.Users.Add(user.Clone()); // add the updated user
+            removeUser(getUser(user.Username));
+            addUser(user);            
         }
         public User getUser(string username)
         {
-            User user = DataSource.Users.Find(item => item.Username == username);
-            if (user == null)
-                return null;
-            return user.Clone();
+            User item = (from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+                         where i.Element("Username").Value == username
+                         select new User()
+                         {
+                             Username = i.Element("Username").Value,
+                             Password = i.Element("Password").Value,
+                             IsManager = bool.Parse(i.Element("IsManager").Value)
+                         }).FirstOrDefault();
+
+            if (item == null)
+                throw new UserException("The user does not exist.");
+
+            return item;
         }
         public IEnumerable<User> GetUsers()
         {
-            return from item in DataSource.Users
-                   select item.Clone();
+            return from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+                   select new User()
+                   {
+                       Username = i.Element("Username").Value,
+                       Password = i.Element("Password").Value,
+                       IsManager = bool.Parse(i.Element("IsManager").Value)
+                   };
         }
         public IEnumerable<User> GetUsers(Predicate<User> condition)
         {
-            return from item in DataSource.Users
+            return from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+                   let item = new User()
+                   {
+                       Username = i.Element("Username").Value,
+                       Password = i.Element("Password").Value,
+                       IsManager = bool.Parse(i.Element("IsManager").Value)
+                   }
                    where condition(item)
-                   select item.Clone();
+                   select item;
         }
 
         #endregion
