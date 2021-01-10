@@ -1091,28 +1091,33 @@ namespace BL
         {
             DO.LineStation sourceStation = dal.getLineStation(trip.NumberLine, source);
             DO.LineStation targetStation = dal.getLineStation(trip.NumberLine, target);
-            DO.LineStation previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
+            DO.LineStation previousStation = new DO.LineStation();
 
-            if (previousStation.ID != -1 && (previousStation.PathIndex >= targetStation.PathIndex || previousStation.PathIndex <= sourceStation.PathIndex))
-                return new TimeSpan(-1, -1, -1); // if it passed the source or the target stations
-            
+            if (trip.PreviousStationID != -1)
+            {
+                previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
+                if (previousStation.ID != -1 && (previousStation.PathIndex >= targetStation.PathIndex || previousStation.PathIndex <= sourceStation.PathIndex))
+                    return new TimeSpan(-1, -1, -1); // if it passed the source or the target stations
+            }
+
             TimeSpan time = trip.NextStationTime;
-            int index = 1;
-            if (previousStation.ID != -1)
-                index += previousStation.PathIndex;
 
-            BO.Line line = getLine(trip.NumberLine);
-            for (int i = index; i < sourceStation.PathIndex; i++)
-                time += line.Path.ElementAt(index).TimeFromPreviousStations.ToTimeSpan();
-            
+            if (trip.PreviousStationID != -1)
+            {
+                int index = previousStation.PathIndex + 1;
+                List<BO.LineStation> path = (List<BO.LineStation>)getLine(trip.NumberLine).Path;
+                for (int i = index; i < sourceStation.PathIndex; i++)
+                    time += path[index].TimeFromPreviousStations.ToTimeSpan();
+            }
+
             return time;
         }
         public TimeSpan durationTripBetweenStations(int serial, int source, int target)
         {
-            BO.Line line = getLine(serial);
             int duration = 0;
+            List<BO.LineStation> path = (List<BO.LineStation>)getLine(serial).Path;
             for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++) 
-                duration += line.Path.ElementAt(i).TimeFromPreviousStations;
+                duration += path[i].TimeFromPreviousStations;
             return duration.ToTimeSpan();
         }
         private int duration(int serial)
