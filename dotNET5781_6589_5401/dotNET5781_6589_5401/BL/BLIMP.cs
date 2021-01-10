@@ -975,9 +975,9 @@ namespace BL
         {
             try
             {
-                BO.Line line = getLine(serial);
+                List<BO.LineStation> path = getLine(serial).Path.ToList();
                 int previousStationTime;
-                int index = getPreviousStationIndex(line, DateTime.Now - start, out previousStationTime);
+                int index = getPreviousStationIndex(path, DateTime.Now - start, out previousStationTime);
                 if (index == 0)
                     return null;
 
@@ -985,9 +985,9 @@ namespace BL
                 {
                     NumberLine = serial,
                     Start = start,
-                    PreviousStationID = line.Path.ElementAt(index - 1).ID,
+                    PreviousStationID = path[index - 1].ID,
                     PreviousStationTime = previousStationTime.ToTimeSpan(),
-                    NextStationTime = (line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime).ToTimeSpan()
+                    NextStationTime = (path[index].TimeFromPreviousStations - previousStationTime).ToTimeSpan()
                 };
             }
             catch (BO.LineException ex)
@@ -1105,7 +1105,7 @@ namespace BL
             if (trip.PreviousStationID != -1)
             {
                 int index = previousStation.PathIndex + 1;
-                List<BO.LineStation> path = (List<BO.LineStation>)getLine(trip.NumberLine).Path;
+                List<BO.LineStation> path = getLine(trip.NumberLine).Path.ToList();
                 for (int i = index; i < sourceStation.PathIndex; i++)
                     time += path[index].TimeFromPreviousStations.ToTimeSpan();
             }
@@ -1115,27 +1115,26 @@ namespace BL
         public TimeSpan durationTripBetweenStations(int serial, int source, int target)
         {
             int duration = 0;
-            List<BO.LineStation> path = (List<BO.LineStation>)getLine(serial).Path;
+            List<BO.LineStation> path = getLine(serial).Path.ToList();
             for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++) 
                 duration += path[i].TimeFromPreviousStations;
             return duration.ToTimeSpan();
         }
-        private int duration(int serial)
+        private int duration(IEnumerable<BO.LineStation> path)
         {
-            BO.Line line = getLine(serial); // definitely exists
             int duration = 1; // because time to previous of the first is -1
-            foreach (BO.LineStation lineStation in line.Path)
+            foreach (BO.LineStation lineStation in path)
                 duration += lineStation.TimeFromPreviousStations;
             return duration;
         }
-        private int getPreviousStationIndex(BO.Line line, TimeSpan timeOfTrip, out int previousStationTime)
+        private int getPreviousStationIndex(IEnumerable<BO.LineStation> path, TimeSpan timeOfTrip, out int previousStationTime)
         {
             previousStationTime = 0;
             int secondsOfTrip = (int)timeOfTrip.TotalSeconds;
-            if (duration(line.ThisSerial) < secondsOfTrip)
+            if (duration(path) < secondsOfTrip)
                 return 0; // not found
             int time = 1; // because time to previous of the first is -1
-            foreach (BO.LineStation lineStation in line.Path)
+            foreach (BO.LineStation lineStation in path)
             {
                 time += lineStation.TimeFromPreviousStations;
                 if (time >= secondsOfTrip)
