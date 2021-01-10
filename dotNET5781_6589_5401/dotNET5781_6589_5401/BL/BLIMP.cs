@@ -984,15 +984,19 @@ namespace BL
 
         private int duration(int serial)
         {
-            BO.Line line = getLine(serial);
-            if (line == null)
+            try
+            {
+                BO.Line line = getLine(serial);
+                int duration = 1; // because time to previous of the first is -1
+                foreach (BO.LineStation lineStation in line.Path)
+                    duration += lineStation.TimeFromPreviousStations;
+                return duration;
+            }
+            catch (BO.LineException) // line does not exist
+            {
                 return 0;
-            int duration = 1; // because time to previous of the first is -1
-            foreach (BO.LineStation lineStation in line.Path)
-                duration += lineStation.TimeFromPreviousStations;
-            return duration;
+            }            
         }
-
         private int getPreviousStationIndex(BO.Line line, TimeSpan timeOfTrip, out int previousStationTime)
         {
             previousStationTime = 0;
@@ -1011,67 +1015,104 @@ namespace BL
             }
             return 0; // not found
         }
-
         private DrivingBus getTrip(int serial, DateTime start)
         {
-            BO.Line line = getLine(serial);
-            int previousStationTime;
-            int index = getPreviousStationIndex(line, DateTime.Now - start, out previousStationTime);
-            if (index == 0)
-                return null;
-
-            int nextStationTime = line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime;
-            return new DrivingBus()
+            try
             {
-                NumberLine = serial,
-                Start = start,
-                PreviousStationID = line.Path.ElementAt(index - 1).ID,
-                PreviousStationTime = previousStationTime.ToTimeSpan(),
-                NextStationTime = nextStationTime.ToTimeSpan()
-            };
+                BO.Line line = getLine(serial);
+                int previousStationTime;
+                int index = getPreviousStationIndex(line, DateTime.Now - start, out previousStationTime);
+                if (index == 0)
+                    return null;
+
+                int nextStationTime = line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime;
+                return new DrivingBus()
+                {
+                    NumberLine = serial,
+                    Start = start,
+                    PreviousStationID = line.Path.ElementAt(index - 1).ID,
+                    PreviousStationTime = previousStationTime.ToTimeSpan(),
+                    NextStationTime = nextStationTime.ToTimeSpan()
+                };
+            }
+            catch (BO.LineException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+
         }
         public IEnumerable<DrivingBus> GetTripsOfLine_Present(int serial)
         {
-            List<DrivingBus> trips = new List<DrivingBus>();
-            foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
-                for (TimeSpan i = DateTime.Now.TimeOfDay; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                {
-                    DrivingBus trip = getTrip(serial, i.ToDateTime());
-                    if (trip != null)
-                        trips.Add(trip);
-                }
-            return trips;
-        }
+            try
+            {
+                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
+                if (drivingLines.Count() == 0)
+                    throw new BO.TripException("No trips exist.");
 
+                List<DrivingBus> trips = new List<DrivingBus>();
+                foreach (DrivingLine drivingLine in drivingLines)
+                    for (TimeSpan i = DateTime.Now.TimeOfDay; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                    {
+                        DrivingBus trip = getTrip(serial, i.ToDateTime());
+                        if (trip != null)
+                            trips.Add(trip);
+                    }
+                return trips;
+            }
+            catch (BO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
         public IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial)
         {
-            List<DrivingBus> trips = new List<DrivingBus>();
-            foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
-                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                    trips.Add(new DrivingBus()
-                    {
-                        NumberLine = drivingLine.NumberLine,
-                        Start = i.ToDateTime(),
-                        PreviousStationID = -1,
-                        PreviousStationTime = new TimeSpan(0),
-                        NextStationTime = i - DateTime.Now.TimeOfDay
-                    });
-            return trips;
-        }
+            try
+            {
+                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
+                if (drivingLines.Count() == 0)
+                    throw new BO.TripException("No trips exist.");
 
+                List<DrivingBus> trips = new List<DrivingBus>();
+                foreach (DrivingLine drivingLine in drivingLines)
+                    for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                        trips.Add(new DrivingBus()
+                        {
+                            NumberLine = drivingLine.NumberLine,
+                            Start = i.ToDateTime(),
+                            PreviousStationID = -1,
+                            PreviousStationTime = new TimeSpan(0),
+                            NextStationTime = i - DateTime.Now.TimeOfDay
+                        });
+                return trips;
+            }
+            catch (BO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
         public IEnumerable<DrivingBus> GetTrips()
         {
-            List<DrivingBus> trips = new List<DrivingBus>();
-            foreach (DrivingLine drivingLine in dal.GetDrivingLines().ToList())
-                for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                {
-                    DrivingBus trip = getTrip(drivingLine.NumberLine, i.ToDateTime());
-                    if (trip != null)
-                        trips.Add(trip);
-                }
-            return trips;
-        }
+            try
+            {
+                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines().ToList();
+                if (drivingLines.Count() == 0)
+                    throw new BO.TripException("No trips exist.");
 
+                List<DrivingBus> trips = new List<DrivingBus>();
+                foreach (DrivingLine drivingLine in drivingLines)
+                    for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                    {
+                        DrivingBus trip = getTrip(drivingLine.NumberLine, i.ToDateTime());
+                        if (trip != null)
+                            trips.Add(trip);
+                    }
+                return trips;
+            }
+            catch (BO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
         public IEnumerable<DrivingBus> getPassengerTrips(int source, int target)
         {
             List<BO.Line> lines = new List<BO.Line>();
@@ -1091,7 +1132,6 @@ namespace BL
 
             return allTrips;
         }
-
         public TimeSpan timeToTargetStation(DrivingBus trip, int targetStationID)
         {
             TimeSpan time = trip.NextStationTime;
@@ -1106,7 +1146,6 @@ namespace BL
             }
             return time;
         }
-
         public TimeSpan durationTripBetweenStations(int serial, int source, int target)
         {
             BO.Line line = getLine(serial);

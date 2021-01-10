@@ -122,7 +122,7 @@ namespace DL
             Line l = DataSource.Lines.Find(item => item.ThisSerial == line.ThisSerial);
             if (l == null)
                 throw new LineException("The line does not exist.");
-            DataSource.Lines.Remove(l); // remove the old line
+            DataSource.Lines.Remove(l);
         }
         public void updateLine(Line line)
         {
@@ -364,21 +364,21 @@ namespace DL
                 throw new LineException(ex.Message);
             }
             if (DataSource.DrivingLines.Exists(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start))
-                throw new LineException("The driving line already exists.");
+                throw new TripException("The driving line already exists.");
             DataSource.DrivingLines.Add(drivingLine.Clone());
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
             DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
             if (d == null)
-                throw new LineException("The driving line does not exist.");
-            DataSource.DrivingLines.Remove(d); // remove the old driving line
+                throw new TripException("The driving line does not exist.");
+            DataSource.DrivingLines.Remove(d);
         }
         public void updateDrivingLine(DrivingLine drivingLine)
         {
             DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
             if (d == null)
-                throw new LineException("The driving line does not exist.");           
+                throw new TripException("The driving line does not exist.");           
             DataSource.DrivingLines.Remove(d); // remove the old driving line
             DataSource.DrivingLines.Add(drivingLine.Clone()); // add the updated driving line  
         }

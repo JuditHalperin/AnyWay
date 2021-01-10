@@ -42,4 +42,13 @@ namespace DO
         public UserException(string message, Exception inner) : base(message, inner) { }
         protected UserException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
+
+    [Serializable]
+    public class TripException : Exception
+    {
+        public TripException() : base() { }
+        public TripException(string message) : base(message) { }
+        public TripException(string message, Exception inner) : base(message, inner) { }
+        protected TripException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
 }
