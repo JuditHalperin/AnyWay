@@ -5,6 +5,7 @@ using System.Device.Location;
 using BLAPI;
 using DLAPI;
 using DO;
+using BO;
 
 namespace BL
 {
@@ -34,7 +35,7 @@ namespace BL
             {
                 dal.addTwoFollowingStations(followingStations);
             }
-            catch (StationException)
+            catch (DO.StationException)
             {
                 dal.updateTwoFollowingStations(followingStations);
             }
@@ -60,9 +61,9 @@ namespace BL
         /// </summary>
         /// <param name="user">user of BO</param>
         /// <returns>user of DO</returns>
-        User convertToUserDO(BO.User user)
+        DO.User convertToUserDO(BO.User user)
         {
-            return new User()
+            return new DO.User()
             {
                 Username = user.Username,
                 Password = user.Password,
@@ -74,7 +75,7 @@ namespace BL
         /// </summary>
         /// <param name="user">user of DO</param>
         /// <returns>user of BO</returns>
-        BO.User convertToUserBO(User user)
+        BO.User convertToUserBO(DO.User user)
         {
             return new BO.User()
             {
@@ -89,7 +90,7 @@ namespace BL
             {
                 dal.addUser(convertToUserDO(user));
             }
-            catch (UserException ex)
+            catch (DO.UserException ex)
             {
                 throw new BO.UserException(ex.Message, ex);
             }
@@ -100,7 +101,7 @@ namespace BL
             {
                 dal.removeUser(convertToUserDO(user));
             }
-            catch (UserException ex)
+            catch (DO.UserException ex)
             {
                 throw new BO.UserException(ex.Message, ex);
             }
@@ -111,7 +112,7 @@ namespace BL
             {
                 dal.updateUser(convertToUserDO(user));
             }
-            catch (UserException ex)
+            catch (DO.UserException ex)
             {
                 throw new BO.UserException(ex.Message, ex);
             }
@@ -122,7 +123,7 @@ namespace BL
             {
                 return convertToUserBO(dal.getUser(username));
             }
-            catch (UserException ex)
+            catch (DO.UserException ex)
             {
                 throw new BO.UserException(ex.Message, ex);
             }
@@ -134,7 +135,7 @@ namespace BL
                 return from user in dal.GetUsers()
                        select convertToUserBO(user);
             }
-            catch (UserException ex)
+            catch (DO.UserException ex)
             {
                 throw new BO.UserException(ex.Message, ex);
             }
@@ -162,9 +163,9 @@ namespace BL
         /// </summary>
         /// <param name="bus">bus of BO</param>
         /// <returns>bus of DO</returns>
-        Bus convertToBusDO(BO.Bus bus)
+        DO.Bus convertToBusDO(BO.Bus bus)
         {
-            return new Bus()
+            return new DO.Bus()
             {
                 LicensePlate = bus.LicensePlate,
                 StartOfWork = bus.StartOfWork,
@@ -179,7 +180,7 @@ namespace BL
         /// </summary>
         /// <param name="bus">bus of DO</param>
         /// <returns>bus of BO</returns>
-        BO.Bus convertToBusBO(Bus bus)
+        BO.Bus convertToBusBO(DO.Bus bus)
         {
             BO.Bus busB = new BO.Bus()
             {
@@ -214,7 +215,7 @@ namespace BL
             {
                 dal.addBus(convertToBusDO(bus));
             }
-            catch (BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message, ex);
             }
@@ -229,7 +230,7 @@ namespace BL
             {
                 dal.removeBus(convertToBusDO(bus));
             }
-            catch (BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message, ex);
             }
@@ -244,7 +245,7 @@ namespace BL
             {
                 dal.updateBus(convertToBusDO(bus));
             }
-            catch (BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message, ex);
             }
@@ -260,7 +261,7 @@ namespace BL
             {
                 return convertToBusBO(dal.getBus(licensePlate));
             }
-            catch (BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message, ex);
             }
@@ -276,7 +277,7 @@ namespace BL
                 return from bus in dal.GetBuses()
                        select convertToBusBO(bus);
             }
-            catch (BusException ex)
+            catch (DO.BusException ex)
             {
                 throw new BO.BusException(ex.Message, ex);
             }
@@ -357,13 +358,13 @@ namespace BL
         /// </summary>
         /// <param name="bus">line of BO</param>
         /// <returns>line of DO</returns>
-        Line convertToLineDO(BO.Line lineB)
+        DO.Line convertToLineDO(BO.Line lineB)
         {
-            return new Line()
+            return new DO.Line()
             {
                 ThisSerial = lineB.ThisSerial,
                 NumberLine = lineB.NumberLine,
-                Region = (Regions)lineB.Region
+                Region = (DO.Regions)lineB.Region
             };
         }
         /// <summary>
@@ -371,7 +372,7 @@ namespace BL
         /// </summary>
         /// <param name="bus">line of DO</param>
         /// <returns>line of BO</returns>
-        BO.Line convertToLineBO(Line lineD)
+        BO.Line convertToLineBO(DO.Line lineD)
         {
             return new BO.Line()
             {
@@ -402,7 +403,7 @@ namespace BL
         /// <param name="line">using path</param>
         void convertLineToLineStationsDO(BO.Line line)
         {
-            foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
+            foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                 dal.removeLineStation(lineStation);
             foreach (BO.LineStation lineStation in line.Path)
                 addOrUpdateLineStation(lineStation);
@@ -427,7 +428,7 @@ namespace BL
             {
                 throw new BO.LineException(ex.Message);
             }
-            catch (LineException ex)
+            catch (DO.LineException ex)
             {
                 throw new BO.LineException(ex.Message, ex);
             }
@@ -441,10 +442,10 @@ namespace BL
             try
             {
                 dal.removeLine(convertToLineDO(line));
-                foreach (LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
+                foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                     dal.removeLineStation(lineStation);
             }
-            catch (LineException ex)
+            catch (DO.LineException ex)
             {
                 throw new BO.LineException(ex.Message, ex);
             }
@@ -463,7 +464,7 @@ namespace BL
                     lineStation.NumberLine = line.ThisSerial;
                 convertLineToLineStationsDO(line);
             }
-            catch (LineException ex)
+            catch (DO.LineException ex)
             {
                 throw new BO.LineException(ex.Message, ex);
             }
@@ -479,7 +480,7 @@ namespace BL
             {
                 return convertToLineBO(dal.getLine(serial));
             }
-            catch (LineException ex)
+            catch (DO.LineException ex)
             {
                 throw new BO.LineException(ex.Message, ex);
             }
@@ -495,7 +496,7 @@ namespace BL
                 return (from line in dal.GetLines()
                         select convertToLineBO(line)).OrderBy(item => item.ThisSerial);
             }
-            catch (LineException ex)
+            catch (DO.LineException ex)
             {
                 throw new BO.LineException(ex.Message, ex);
             }
@@ -543,9 +544,9 @@ namespace BL
         /// </summary>
         /// <param name="stationB">station of BO</param>
         /// <returns>station of DO</returns>
-        Station convertToStationDO(BO.Station stationB)
+        DO.Station convertToStationDO(BO.Station stationB)
         {
-            return new Station()
+            return new DO.Station()
             {
                 ID = stationB.ID,
                 Name = stationB.Name,
@@ -558,7 +559,7 @@ namespace BL
         /// </summary>
         /// <param name="stationD">station of DO</param>
         /// <returns>station of BO</returns>
-        BO.Station convertToStationBO(Station stationD)
+        BO.Station convertToStationBO(DO.Station stationD)
         {
             try
             {
@@ -593,7 +594,7 @@ namespace BL
                         followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
                         dal.updateTwoFollowingStations(followingStations);
                     }
-                    catch (StationException) { }
+                    catch (DO.StationException) { }
                 }
         }
         /// <summary>
@@ -606,7 +607,7 @@ namespace BL
             {
                 dal.addStation(convertToStationDO(station));
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -625,7 +626,7 @@ namespace BL
                 foreach (TwoFollowingStations followingStations in dal.GetFollowingStations(item => item.FirstStationID == station.ID || item.SecondStationID == station.ID).ToList())
                     dal.removeTwoFollowingStations(followingStations);
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -647,7 +648,7 @@ namespace BL
                 if (distanceFromPreviousLocation != 0)
                     stationToFollowingStation(station, distanceFromPreviousLocation);
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -663,7 +664,7 @@ namespace BL
             {
                 return convertToStationBO(dal.getStation(id));
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -679,7 +680,7 @@ namespace BL
                 return from station in dal.GetStations()
                        select convertToStationBO(station);
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -731,9 +732,9 @@ namespace BL
         /// </summary>
         /// <param name="lineStationB">line station of BO</param>
         /// <returns>line station of DO</returns>
-        LineStation convertToLineStationDO(BO.LineStation lineStationB)
+        DO.LineStation convertToLineStationDO(BO.LineStation lineStationB)
         {
-            return new LineStation()
+            return new DO.LineStation()
             {
                 ID = lineStationB.ID,
                 NumberLine = lineStationB.NumberLine,
@@ -745,7 +746,7 @@ namespace BL
         /// </summary>
         /// <param name="lineStationD">line station of DO</param>
         /// <returns>line station of BO</returns>
-        BO.LineStation convertToLineStationBO(LineStation lineStationD)
+        BO.LineStation convertToLineStationBO(DO.LineStation lineStationD)
         {
             BO.LineStation lineStationB = new BO.LineStation()
             {
@@ -753,7 +754,7 @@ namespace BL
                 ID = lineStationD.ID,
                 PathIndex = lineStationD.PathIndex
             };
-            LineStation lineStationP = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex - 1).FirstOrDefault();
+            DO.LineStation lineStationP = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex - 1).FirstOrDefault();
             if (lineStationP != null)
             {
                 TwoFollowingStations followingStations = dal.getTwoFollowingStations(lineStationB.ID, lineStationP.ID);
@@ -767,7 +768,7 @@ namespace BL
                 lineStationB.LengthFromPreviousStations = -1;
                 lineStationB.TimeFromPreviousStations = -1;
             }
-            LineStation lineStationN = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex + 1).FirstOrDefault();
+            DO.LineStation lineStationN = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex + 1).FirstOrDefault();
             if (lineStationN != null)
                 lineStationB.NextStationID = lineStationN.ID;
             else // if it is the last line station
@@ -843,7 +844,7 @@ namespace BL
                 {
                     dal.addLineStation(convertToLineStationDO(lineStation));
                 }
-                catch (StationException ex)
+                catch (DO.StationException ex)
                 {
                     throw new BO.StationException(ex.Message, ex);
                 }
@@ -865,7 +866,7 @@ namespace BL
                     updateLineStation(lineStations.ElementAt(i));
                 }
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -903,7 +904,7 @@ namespace BL
                     dal.updateLineStation(convertToLineStationDO(lineStation));
                 }
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -920,7 +921,7 @@ namespace BL
         /// <returns>station in line</returns>
         public BO.LineStation getLineStation(int numberLine, int id)
         {
-            LineStation lineStation = dal.getLineStation(numberLine, id);
+            DO.LineStation lineStation = dal.getLineStation(numberLine, id);
             if (lineStation == null)
                 return null;
             return convertToLineStationBO(lineStation);
@@ -933,7 +934,7 @@ namespace BL
                 return from lineStation in dal.GetLineStations()
                        select convertToLineStationBO(lineStation);
             }
-            catch (StationException ex)
+            catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
             }
@@ -968,7 +969,7 @@ namespace BL
                     TimeBetweenStations = calculateTime(length)
                 });
             }
-            catch (StationException ex) { throw new BO.StationException(ex.Message, ex); }
+            catch (DO.StationException ex) { throw new BO.StationException(ex.Message, ex); }
         }
         public bool getTwoFollowingStations(int firstID, int secondID)
         {
@@ -979,7 +980,7 @@ namespace BL
 
         #endregion
 
-        #region Trip
+        #region DrivingBuses
 
         private int duration(int serial)
         {
@@ -1011,7 +1012,7 @@ namespace BL
             return 0; // not found
         }
 
-        private BO.DrivingBus getTrip(int serial, DateTime start)
+        private DrivingBus getTrip(int serial, DateTime start)
         {
             BO.Line line = getLine(serial);
             int previousStationTime;
@@ -1020,37 +1021,37 @@ namespace BL
                 return null;
 
             int nextStationTime = line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime;
-            return new BO.DrivingBus()
+            return new DrivingBus()
             {
                 NumberLine = serial,
                 Start = start,
                 PreviousStationID = line.Path.ElementAt(index - 1).ID,
-                PreviousStationTime = new TimeSpan(previousStationTime / 3600, previousStationTime % 3600 / 60, previousStationTime % 3600 % 60),
-                NextStationTime = new TimeSpan(nextStationTime / 3600, nextStationTime % 3600 / 60, nextStationTime % 3600 % 60)
+                PreviousStationTime = previousStationTime.ToTimeSpan(),
+                NextStationTime = nextStationTime.ToTimeSpan()
             };
         }
-        public IEnumerable<BO.DrivingBus> GetTripsOfLine_Present(int serial)
+        public IEnumerable<DrivingBus> GetTripsOfLine_Present(int serial)
         {
-            List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
+            List<DrivingBus> trips = new List<DrivingBus>();
             foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
                 for (TimeSpan i = DateTime.Now.TimeOfDay; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                 {
-                    BO.DrivingBus trip = getTrip(serial, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
+                    DrivingBus trip = getTrip(serial, i.ToDateTime());
                     if (trip != null)
                         trips.Add(trip);
                 }
             return trips;
         }
 
-        public IEnumerable<BO.DrivingBus> GetTripsOfLine_Future(int serial)
+        public IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial)
         {
-            List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
+            List<DrivingBus> trips = new List<DrivingBus>();
             foreach (DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == serial).ToList())
                 for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                    trips.Add(new BO.DrivingBus()
+                    trips.Add(new DrivingBus()
                     {
                         NumberLine = drivingLine.NumberLine,
-                        Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds),
+                        Start = i.ToDateTime(),
                         PreviousStationID = -1,
                         PreviousStationTime = new TimeSpan(0),
                         NextStationTime = i - DateTime.Now.TimeOfDay
@@ -1058,40 +1059,40 @@ namespace BL
             return trips;
         }
 
-        public IEnumerable<BO.DrivingBus> GetTrips()
+        public IEnumerable<DrivingBus> GetTrips()
         {
-            List<BO.DrivingBus> trips = new List<BO.DrivingBus>();
+            List<DrivingBus> trips = new List<DrivingBus>();
             foreach (DrivingLine drivingLine in dal.GetDrivingLines().ToList())
                 for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                 {
-                    BO.DrivingBus trip = getTrip(drivingLine.NumberLine, new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, i.Hours, i.Minutes, i.Seconds));
+                    DrivingBus trip = getTrip(drivingLine.NumberLine, i.ToDateTime());
                     if (trip != null)
                         trips.Add(trip);
                 }
             return trips;
         }
 
-        public IEnumerable<BO.DrivingBus> getPassengerTrips(int source, int target)
+        public IEnumerable<DrivingBus> getPassengerTrips(int source, int target)
         {
             List<BO.Line> lines = new List<BO.Line>();
-            foreach (Line line in dal.GetLines().ToList())
+            foreach (DO.Line line in dal.GetLines().ToList())
                 if (dal.getLineStation(line.ThisSerial, source) != null && dal.getLineStation(line.ThisSerial, target) != null)
                     lines.Add(getLine(line.ThisSerial));
 
-            List<BO.DrivingBus> allTrips = new List<BO.DrivingBus>();
+            List<DrivingBus> allTrips = new List<DrivingBus>();
             foreach (BO.Line line in lines)
             {
-                foreach (BO.DrivingBus trip in GetTripsOfLine_Present(line.ThisSerial))
+                foreach (DrivingBus trip in GetTripsOfLine_Present(line.ThisSerial))
                     if (dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
                         allTrips.Add(trip);
-                foreach (BO.DrivingBus trip in GetTripsOfLine_Future(line.ThisSerial))
+                foreach (DrivingBus trip in GetTripsOfLine_Future(line.ThisSerial))
                     allTrips.Add(trip);
             }
 
             return allTrips;
         }
 
-        public TimeSpan timeToTargetStation(BO.DrivingBus trip, int targetStationID)
+        public TimeSpan timeToTargetStation(DrivingBus trip, int targetStationID)
         {
             TimeSpan time = trip.NextStationTime;
             int index = 1;
@@ -1101,7 +1102,7 @@ namespace BL
             for (int i = index + 1; i <= dal.getLineStation(trip.NumberLine, targetStationID).PathIndex; i++)
             {
                 int timeTmp = line.Path.ElementAt(index).TimeFromPreviousStations;
-                time += new TimeSpan(timeTmp / 3600, timeTmp % 3600 / 60, timeTmp % 3600 % 60);
+                time += timeTmp.ToTimeSpan();
             }
             return time;
         }
@@ -1112,7 +1113,7 @@ namespace BL
             int duration = 0;
             for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++)
                 duration += line.Path.ElementAt(i).TimeFromPreviousStations;
-            return new TimeSpan(duration / 3600, duration % 3600 / 60, duration % 3600 % 60);
+            return duration.ToTimeSpan();
         }
 
         #endregion
