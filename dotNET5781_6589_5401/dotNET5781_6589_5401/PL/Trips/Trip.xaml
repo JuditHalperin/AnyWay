@@ -62,6 +62,6 @@
             <Label Content="Time of Journey" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Total Time" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <ListBox x:Name="Trips" Visibility="Hidden" Grid.Row="3" ItemTemplate="{StaticResource TripDetails}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ListBoxStyle}" BorderThickness="0"/>
+        <ListBox x:Name="Trips" Visibility="Hidden" Grid.Row="3" ItemTemplate="{StaticResource TripDetails}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource ListBoxStyle}" BorderThickness="0"/>
     </Grid>
 </Window>
