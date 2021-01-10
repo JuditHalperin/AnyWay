@@ -334,7 +334,7 @@ namespace DL
         }
         public void updateLineStation(LineStation lineStation)
         {
-            removeLineStation(getLineStation(station.ID));
+            removeLineStation(getLineStation(lineStation.NumberLine, lineStation.ID));
             addLineStation(lineStation);
         }
         public LineStation getLineStation(int numberLine, int id)
@@ -370,12 +370,14 @@ namespace DL
 
             if (item == null)
                 throw new StationException("At least one of the station does not exist.");
+
             item = (from i in rootElem.Elements()
                     where Convert.ToInt32(i.Element("ID").Value) == twoFollowingStations.SecondStationID
                     select i).FirstOrDefault();
 
             if (item == null)
                 throw new StationException("At least one of the station does not exist.");
+            
             rootElem = XMLTools.LoadListFromXMLElement(followingStationsPath);
 
             item = (from i in rootElem.Elements()
@@ -412,11 +414,8 @@ namespace DL
         }
         public void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            TwoFollowingStations f = DataSource.FollowingStations.Find(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID));
-            if (f == null)
-                throw new StationException("The two following stations do not exist.");
-            DataSource.FollowingStations.Remove(f); // remove the old two following stations
-            DataSource.FollowingStations.Add(twoFollowingStations.Clone()); // add the updated two following stations
+            removeTwoFollowingStations(getTwoFollowingStations(twoFollowingStations.FirstStationID, twoFollowingStations.SecondStationID));
+            addTwoFollowingStations(twoFollowingStations);
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
@@ -496,13 +495,10 @@ namespace DL
         }
         public void updateDrivingLine(DrivingLine drivingLine)
         {
-            DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
-            if (d == null)
-                throw new TripException("The driving line does not exist.");
-            DataSource.DrivingLines.Remove(d); // remove the old driving line
-            DataSource.DrivingLines.Add(drivingLine.Clone()); // add the updated driving line  
+            removeDrivingLine(getDrivingLine(drivingLine.NumberLine, drivingLine.Start));
+            addDrivingLine(drivingLine);
         }
-        public DrivingLine getDrivingLine(int numberLine, DateTime start)
+        public DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
             DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == new TimeSpan(start.Hour, start.Minute, start.Second));
             if (drivingLine == null)
@@ -527,7 +523,7 @@ namespace DL
 
         public string getManagingCode()
         {
-            return DataSource.ManagingCode;
+            return XMLTools.LoadListFromXMLElement(managingCodePath).Elements().ToString();
         }
         public void updateManagingCode(string code)
         {
