@@ -32,6 +32,10 @@ namespace PL
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
 
+            NotifyingDateTime dateTime = new NotifyingDateTime();
+            Time.DataContext = dateTime;
+            dateTime.worker.RunWorkerAsync();
+
             tempUsername = username;
             Username.Content = $"{BestWishesByTime()}, {username}";
             enableButtons();

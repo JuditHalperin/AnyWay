@@ -31,7 +31,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#FFEEF5FF">
-            <Image x:Name="Back" Source="PL/Images/BackButton.png" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="12,7,0,7.6"/>
+            <Image x:Name="Back" Source="BackButton.png" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="12,7,0,7.6"/>
+            <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="12"/>
         </Grid>
         <Grid Grid.Row="1" Background="#FFEEF5FF">
             <Grid.RowDefinitions>

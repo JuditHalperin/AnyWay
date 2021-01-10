@@ -30,6 +30,9 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            NotifyingDateTime dateTime = new NotifyingDateTime();
+            Time.DataContext = dateTime;
+            dateTime.worker.RunWorkerAsync();
             administrativePrivileges = a;
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }

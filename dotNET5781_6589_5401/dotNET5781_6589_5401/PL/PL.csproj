@@ -257,16 +257,25 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\busesAndCar.png" />
+    <Resource Include="Images\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\BackButton.png" />
+    <Resource Include="Images\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BackgroundMain.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Icon.ico" />
+    <Resource Include="Users\BackgroundMain.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Lines\BackButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Stations\BackButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Trips\BackButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
