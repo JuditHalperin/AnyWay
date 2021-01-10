@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using DLAPI;
 using DO;
-using DS;
 
-namespace DL
+namespace DalXml
 {
-    public sealed class DalObject : IDAL
+    public sealed class DalXml : IDAL
     {
-        #region Singelton
+        #region singelton
 
-        static readonly DalObject instance = new DalObject();
-        public static DalObject Instance => instance;
-        static DalObject() { }
-        DalObject() { }
+        static readonly DalXml instance = new DalXml();
+        public static DalXml Instance => instance;
+        static DalXml() { }
+        DalXml() { }
 
         #endregion
 
@@ -31,9 +30,9 @@ namespace DL
         {
             try
             {
-                DataSource.Users.RemoveAll(item=>item.Username==user.Username);
+                DataSource.Users.RemoveAll(item => item.Username == user.Username);
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 throw new UserException("The user does not exist.");
             }
@@ -48,7 +47,7 @@ namespace DL
         }
         public User getUser(string username)
         {
-            User user= DataSource.Users.Find(item => item.Username == username);
+            User user = DataSource.Users.Find(item => item.Username == username);
             if (user == null)
                 return null;
             return user.Clone();
@@ -98,7 +97,7 @@ namespace DL
         public IEnumerable<Bus> GetBuses()
         {
             return from item in DataSource.Buses
-                   select item.Clone();           
+                   select item.Clone();
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
@@ -134,7 +133,7 @@ namespace DL
         }
         public Line getLine(int serial)
         {
-            return DataSource.Lines.Find(item => item.ThisSerial == serial).Clone();               
+            return DataSource.Lines.Find(item => item.ThisSerial == serial).Clone();
         }
         public IEnumerable<Line> GetLines()
         {
@@ -145,7 +144,7 @@ namespace DL
         {
             return (from item in DataSource.Lines
                     where condition(item)
-                    select item.Clone()).OrderBy(item => item.NumberLine);           
+                    select item.Clone()).OrderBy(item => item.NumberLine);
         }
         public int countLines()
         {
@@ -183,7 +182,7 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            Station station= DataSource.Stations.Find(item => item.ID == id);
+            Station station = DataSource.Stations.Find(item => item.ID == id);
             if (station == null)
                 return null;
             return station.Clone();
@@ -197,7 +196,7 @@ namespace DL
         {
             return (from item in DataSource.Stations
                     where condition(item)
-                    select item.Clone()).OrderBy(item => item.ID); ;           
+                    select item.Clone()).OrderBy(item => item.ID); ;
         }
         public int countStations()
         {
@@ -236,7 +235,7 @@ namespace DL
         }
         public LineStation getLineStation(int numberLine, int id)
         {
-            LineStation lineStation= DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id);
+            LineStation lineStation = DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id);
             if (lineStation == null)
                 return null;
             return lineStation.Clone();
@@ -244,13 +243,13 @@ namespace DL
         public IEnumerable<LineStation> GetLineStations()
         {
             return from item in DataSource.LineStations
-                   select item.Clone();           
+                   select item.Clone();
         }
         public IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition)
         {
             return (from item in DataSource.LineStations
-                   where condition(item)
-                   select item.Clone()).OrderBy(item => item.PathIndex);      
+                    where condition(item)
+                    select item.Clone()).OrderBy(item => item.PathIndex);
         }
 
         #endregion
@@ -259,7 +258,7 @@ namespace DL
 
         public void addTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            if(!DataSource.Stations.Exists(item => item.ID == twoFollowingStations.FirstStationID) || !DataSource.Stations.Exists(item => item.ID == twoFollowingStations.SecondStationID))
+            if (!DataSource.Stations.Exists(item => item.ID == twoFollowingStations.FirstStationID) || !DataSource.Stations.Exists(item => item.ID == twoFollowingStations.SecondStationID))
                 throw new StationException("At least one of the station does not exist.");
             if (twoFollowingStations.FirstStationID == twoFollowingStations.SecondStationID)
                 throw new StationException("Two identical stations.");
@@ -278,13 +277,13 @@ namespace DL
         {
             TwoFollowingStations f = DataSource.FollowingStations.Find(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID));
             if (f == null)
-                throw new StationException("The two following stations do not exist.");            
+                throw new StationException("The two following stations do not exist.");
             DataSource.FollowingStations.Remove(f); // remove the old two following stations
             DataSource.FollowingStations.Add(twoFollowingStations.Clone()); // add the updated two following stations
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            TwoFollowingStations twoFollowingStations= DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID));
+            TwoFollowingStations twoFollowingStations = DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID));
             if (twoFollowingStations == null)
                 return null;
             return twoFollowingStations.Clone();
@@ -292,13 +291,13 @@ namespace DL
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
             return (from item in DataSource.FollowingStations
-                   select item.Clone()).OrderBy(item => item.TimeBetweenStations);
+                    select item.Clone()).OrderBy(item => item.TimeBetweenStations);
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
             return (from item in DataSource.FollowingStations
-                   where condition(item)
-                   select item.Clone()).OrderBy(item => item.TimeBetweenStations);       
+                    where condition(item)
+                    select item.Clone()).OrderBy(item => item.TimeBetweenStations);
         }
 
         #endregion      
@@ -307,7 +306,7 @@ namespace DL
 
         public void addDrivingLine(DrivingLine drivingLine)
         {
-            try 
+            try
             {
                 getLine(drivingLine.NumberLine); // check if the line exists
             }
@@ -330,7 +329,7 @@ namespace DL
         {
             DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
             if (d == null)
-                throw new TripException("The driving line does not exist.");           
+                throw new TripException("The driving line does not exist.");
             DataSource.DrivingLines.Remove(d); // remove the old driving line
             DataSource.DrivingLines.Add(drivingLine.Clone()); // add the updated driving line  
         }
@@ -350,7 +349,7 @@ namespace DL
         {
             return from item in DataSource.DrivingLines
                    where condition(item)
-                   select item.Clone();           
+                   select item.Clone();
         }
 
         #endregion
