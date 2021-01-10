@@ -84,7 +84,7 @@ namespace BLAPI
         //IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial);
         //IEnumerable<DrivingBus> GetTrips();
         IEnumerable<DrivingBus> getPassengerTrips(int source, int target);
-        TimeSpan totalTime(DrivingBus trip, int sourceStationID, int targetStationID);
+        TimeSpan timeTillArrivalToSource(DrivingBus trip, int sourceStationID, int targetStationID);
         TimeSpan durationTripBetweenStations(int serial, int source, int target);
 
         #endregion

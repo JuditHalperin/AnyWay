@@ -58,15 +58,15 @@ namespace PL
                     SameStation.Visibility = Visibility.Hidden;
 
                     var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                let timeTillArrival = bl.timeTillArrivalToSource(drivingBus, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
                                 let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                let totalTime = bl.totalTime(drivingBus, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                where totalTime.Seconds != -1 // not relevant
+                                where timeTillArrival.Seconds != -1 // not relevant
                                 select new // anonymous variable for PL trip
                                 {
                                     Line = drivingBus.NumberLine,
-                                    TimeTillArrival = (totalTime - timeOfJourney), //.ToString(@"hh\:mm\:ss"),
-                                    TimeOfJourney = timeOfJourney,
-                                    TotalTime = totalTime
+                                    TimeTillArrival = timeTillArrival.ToString(@"hh\:mm\:ss"),
+                                    TimeOfJourney = timeOfJourney.ToString(@"hh\:mm\:ss"),
+                                    TotalTime = (timeTillArrival + timeOfJourney).ToString(@"hh\:mm\:ss")
                                 };
 
                     if (trips.Count() == 0)
@@ -77,7 +77,7 @@ namespace PL
                     }
                     else
                     {
-                        Trips.ItemsSource = trips.OrderBy(item => item.TotalTime);
+                        Trips.ItemsSource = trips.Take(10).OrderBy(item => item.TotalTime); // show first 10 results
                         NoLines.Visibility = Visibility.Hidden;
                         Titles.Visibility = Visibility.Visible;
                         Trips.Visibility = Visibility.Visible;                        

@@ -1139,7 +1139,7 @@ namespace BL
 
             return allTrips;
         }
-        public TimeSpan totalTime(DrivingBus trip, int sourceStationID, int targetStationID)
+        public TimeSpan timeTillArrivalToSource(DrivingBus trip, int sourceStationID, int targetStationID)
         {
             if (trip.PreviousStationID != -1 && (dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex >= dal.getLineStation(trip.NumberLine, targetStationID).PathIndex || dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex <= dal.getLineStation(trip.NumberLine, sourceStationID).PathIndex))
                 return new TimeSpan(-1, -1, -1); // if it passed the source or the target
