@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using DLAPI;
 using DO;
 
@@ -35,35 +36,41 @@ namespace DL
 
         public void addUser(User user)
         {
-            XElement usersRootElem = XMLTools.LoadListFromXMLElement(personsPath);
+            XElement usersRootElem = XMLTools.LoadListFromXMLElement(usersPath);
 
-            XElement per1 = (from p in personsRootElem.Elements()
-                             where int.Parse(p.Element("ID").Value) == person.ID
-                             select p).FirstOrDefault();
+            XElement item = (from i in usersRootElem.Elements()
+                             where i.Element("Username").Value == user.Username
+                             select i).FirstOrDefault();
 
-            if (per1 != null)
-                throw new DO.BadPersonIdException(person.ID, "Duplicate person ID");
-
-            XElement personElem = new XElement("Person",
-                                   new XElement("ID", person.ID),
-                                   new XElement("Name", person.Name),
-                                   new XElement("Street", person.Street),
-                                   new XElement("HouseNumber", person.HouseNumber.ToString()),
-                                   new XElement("City", person.City),
-                                   new XElement("BirthDate", person.BirthDate),
-                                   new XElement("PersonalStatus", person.PersonalStatus.ToString()));
-
-            personsRootElem.Add(personElem);
-
-            XMLTools.SaveListToXMLElement(personsRootElem, personsPath);
-
-
-            if (DataSource.Users.Exists(item => item.Username == user.Username))
+            if (item != null)
                 throw new UserException("The user already exists.");
-            DataSource.Users.Add(user.Clone());
+
+            usersRootElem.Add(new XElement("User",
+                                   new XElement("Username", user.Username),
+                                   new XElement("Password", user.Password),
+                                   new XElement("IsManager", user.IsManager)));
+
+            XMLTools.SaveListToXMLElement(usersRootElem, usersPath);            
         }
         public void removeUser(User user)
         {
+            XElement usersRootElem = XMLTools.LoadListFromXMLElement(personsPath);
+
+            XElement per = (from p in personsRootElem.Elements()
+                            where int.Parse(p.Element("ID").Value) == id
+                            select p).FirstOrDefault();
+
+            if (per != null)
+            {
+                per.Remove();
+                XMLTools.SaveListToXMLElement(personsRootElem, personsPath);
+            }
+            else
+                throw new DO.BadPersonIdException(id, $"bad person id: {id}");
+
+
+
+
             try
             {
                 DataSource.Users.RemoveAll(item => item.Username == user.Username);
