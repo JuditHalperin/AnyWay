@@ -981,14 +981,13 @@ namespace BL
                 if (index == 0)
                     return null;
 
-                int nextStationTime = line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime;
                 return new DrivingBus()
                 {
                     NumberLine = serial,
                     Start = start,
                     PreviousStationID = line.Path.ElementAt(index - 1).ID,
                     PreviousStationTime = previousStationTime.ToTimeSpan(),
-                    NextStationTime = nextStationTime.ToTimeSpan()
+                    NextStationTime = (line.Path.ElementAt(index).TimeFromPreviousStations - previousStationTime).ToTimeSpan()
                 };
             }
             catch (BO.LineException ex)
@@ -1090,15 +1089,22 @@ namespace BL
         }
         public TimeSpan timeTillArrivalToSource(DrivingBus trip, int source, int target)
         {
-            if (trip.PreviousStationID != -1 && (dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex >= dal.getLineStation(trip.NumberLine, target).PathIndex || dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex <= dal.getLineStation(trip.NumberLine, source).PathIndex))
-                return new TimeSpan(-1, -1, -1); // if it passed the source or the target
+            DO.LineStation sourceStation = dal.getLineStation(trip.NumberLine, source);
+            DO.LineStation targetStation = dal.getLineStation(trip.NumberLine, target);
+            DO.LineStation previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
+
+            if (previousStation.ID != -1 && (previousStation.PathIndex >= targetStation.PathIndex || previousStation.PathIndex <= sourceStation.PathIndex))
+                return new TimeSpan(-1, -1, -1); // if it passed the source or the target stations
+            
             TimeSpan time = trip.NextStationTime;
             int index = 1;
-            if (trip.PreviousStationID != -1)
-                index = dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex + 1;
+            if (previousStation.ID != -1)
+                index += previousStation.PathIndex;
+
             BO.Line line = getLine(trip.NumberLine);
-            for (int i = index; i < dal.getLineStation(trip.NumberLine, source).PathIndex; i++)
+            for (int i = index; i < sourceStation.PathIndex; i++)
                 time += line.Path.ElementAt(index).TimeFromPreviousStations.ToTimeSpan();
+            
             return time;
         }
         public TimeSpan durationTripBetweenStations(int serial, int source, int target)
@@ -1111,18 +1117,11 @@ namespace BL
         }
         private int duration(int serial)
         {
-            try
-            {
-                BO.Line line = getLine(serial);
-                int duration = 1; // because time to previous of the first is -1
-                foreach (BO.LineStation lineStation in line.Path)
-                    duration += lineStation.TimeFromPreviousStations;
-                return duration;
-            }
-            catch (BO.LineException) // line does not exist
-            {
-                return 0;
-            }
+            BO.Line line = getLine(serial); // definitely exists
+            int duration = 1; // because time to previous of the first is -1
+            foreach (BO.LineStation lineStation in line.Path)
+                duration += lineStation.TimeFromPreviousStations;
+            return duration;
         }
         private int getPreviousStationIndex(BO.Line line, TimeSpan timeOfTrip, out int previousStationTime)
         {
