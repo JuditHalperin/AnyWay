@@ -1124,7 +1124,7 @@ namespace BL
         {
             List<BO.Line> lines = new List<BO.Line>();
             foreach (DO.Line line in dal.GetLines().ToList())
-                if (dal.getLineStation(line.ThisSerial, source) != null && dal.getLineStation(line.ThisSerial, target) != null)
+                if (dal.getLineStation(line.ThisSerial, source) != null && dal.getLineStation(line.ThisSerial, target) != null && dal.getLineStation(line.ThisSerial, target).PathIndex > dal.getLineStation(line.ThisSerial, source).PathIndex) 
                     lines.Add(getLine(line.ThisSerial));
 
             List<DrivingBus> allTrips = new List<DrivingBus>();
