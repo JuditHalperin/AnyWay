@@ -5,7 +5,7 @@ using System.Text;
 using DLAPI;
 using DO;
 
-namespace DalXml
+namespace DL
 {
     public sealed class DalXml : IDAL
     {
@@ -18,10 +18,46 @@ namespace DalXml
 
         #endregion
 
+        #region DS XML Files
+
+        string usersPath = @"UsersXml.xml"; // XElement
+        string busesPath = @"BusesXml.xml"; // XMLSerializer
+        string linesPath = @"LinesXml.xml"; // XMLSerializer
+        string stationsPath = @"StationsXml.xml"; // XMLSerializer
+        string lineStationsPath = @"LineStationsXml.xml"; // XMLSerializer
+        string followingStationsPath = @"FollowingStationsXml.xml"; // XMLSerializer
+        string drivingLinesPath = @"DrivingLinesXml.xml"; // XMLSerializer
+        string managingCodePath = @"ManagingCodeXml.xml"; // XMLSerializer
+
+        #endregion
+
         #region Users
 
         public void addUser(User user)
         {
+            XElement usersRootElem = XMLTools.LoadListFromXMLElement(personsPath);
+
+            XElement per1 = (from p in personsRootElem.Elements()
+                             where int.Parse(p.Element("ID").Value) == person.ID
+                             select p).FirstOrDefault();
+
+            if (per1 != null)
+                throw new DO.BadPersonIdException(person.ID, "Duplicate person ID");
+
+            XElement personElem = new XElement("Person",
+                                   new XElement("ID", person.ID),
+                                   new XElement("Name", person.Name),
+                                   new XElement("Street", person.Street),
+                                   new XElement("HouseNumber", person.HouseNumber.ToString()),
+                                   new XElement("City", person.City),
+                                   new XElement("BirthDate", person.BirthDate),
+                                   new XElement("PersonalStatus", person.PersonalStatus.ToString()));
+
+            personsRootElem.Add(personElem);
+
+            XMLTools.SaveListToXMLElement(personsRootElem, personsPath);
+
+
             if (DataSource.Users.Exists(item => item.Username == user.Username))
                 throw new UserException("The user already exists.");
             DataSource.Users.Add(user.Clone());
