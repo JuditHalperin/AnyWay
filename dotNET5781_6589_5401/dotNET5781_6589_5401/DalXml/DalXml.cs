@@ -21,14 +21,16 @@ namespace DL
 
         #region DS XML Files
 
-        string usersPath = @"UsersXml.xml"; // XElement
-        string busesPath = @"BusesXml.xml"; // XMLSerializer
-        string linesPath = @"LinesXml.xml"; // XMLSerializer
-        string stationsPath = @"StationsXml.xml"; // XMLSerializer
-        string lineStationsPath = @"LineStationsXml.xml"; // XMLSerializer
-        string followingStationsPath = @"FollowingStationsXml.xml"; // XMLSerializer
-        string drivingLinesPath = @"DrivingLinesXml.xml"; // XMLSerializer
-        string managingCodePath = @"ManagingCodeXml.xml"; // XMLSerializer
+        // all XElement:
+
+        string usersPath = @"UsersXml.xml";
+        string busesPath = @"BusesXml.xml";
+        string linesPath = @"LinesXml.xml";
+        string stationsPath = @"StationsXml.xml";
+        string lineStationsPath = @"LineStationsXml.xml";
+        string followingStationsPath = @"FollowingStationsXml.xml";
+        string drivingLinesPath = @"DrivingLinesXml.xml";
+        string managingCodePath = @"ManagingCodeXml.xml";
 
         #endregion
 

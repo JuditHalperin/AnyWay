@@ -27,7 +27,6 @@ namespace BLAPI
         Bus getBus(string licensePlate);
         IEnumerable<Bus> GetBuses();
         IEnumerable<Bus> GetBuses(Predicate<Bus> condition);
-        bool canChangeBus(Bus bus);
         void fuelBus(Bus bus);
         void serviceBus(Bus bus);
 
@@ -78,7 +77,7 @@ namespace BLAPI
 
         #endregion
 
-        #region Trips
+        #region DrivingBuses
 
         //IEnumerable<DrivingBus> GetTripsOfLine_Present(int serial);
         //IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial);
@@ -88,17 +87,6 @@ namespace BLAPI
         TimeSpan durationTripBetweenStations(int serial, int source, int target);
 
         #endregion
-
-        //#region DrivingBuses
-
-        //void addDrivingBus(DrivingBus drivingBus);
-        //void removeDrivingBus(DrivingBus drivingBus);
-        //void updateDrivingBus(DrivingBus drivingBus);
-        //DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        //IEnumerable<DrivingBus> GetDrivingBuses();
-        //IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
-
-        //#endregion
 
         //#region DrivingLines
 

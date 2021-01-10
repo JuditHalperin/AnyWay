@@ -92,7 +92,7 @@ namespace DLAPI
         void addDrivingLine(DrivingLine drivingLine);
         void removeDrivingLine(DrivingLine drivingLine);
         void updateDrivingLine(DrivingLine drivingLine);
-        DrivingLine getDrivingLine(int numberLine, DateTime start);
+        DrivingLine getDrivingLine(int numberLine, TimeSpan start);
         IEnumerable<DrivingLine> GetDrivingLines();
         IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 

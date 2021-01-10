@@ -77,8 +77,10 @@ namespace DL
         }
         public void removeBus(Bus bus)
         {
-            if (!DataSource.Buses.Remove(bus))
+            Bus b = DataSource.Buses.Find(item => item.LicensePlate == bus.LicensePlate);
+            if (b == null)
                 throw new BusException("The bus does not exist.");
+            DataSource.Buses.Remove(b);
         }
         public void updateBus(Bus bus)
         {
@@ -334,9 +336,9 @@ namespace DL
             DataSource.DrivingLines.Remove(d); // remove the old driving line
             DataSource.DrivingLines.Add(drivingLine.Clone()); // add the updated driving line  
         }
-        public DrivingLine getDrivingLine(int numberLine, DateTime start)
+        public DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
-            DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == new TimeSpan(start.Hour, start.Minute, start.Second));
+            DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == start);
             if (drivingLine == null)
                 return null;
             return drivingLine.Clone();
