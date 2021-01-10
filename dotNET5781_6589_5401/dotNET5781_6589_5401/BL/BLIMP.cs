@@ -1156,7 +1156,7 @@ namespace BL
         {
             BO.Line line = getLine(serial);
             int duration = 0;
-            for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++)
+            for (int i = dal.getLineStation(serial, source).PathIndex - 1; i < dal.getLineStation(serial, target).PathIndex - 1; i++) 
                 duration += line.Path.ElementAt(i).TimeFromPreviousStations;
             return duration.ToTimeSpan();
         }
