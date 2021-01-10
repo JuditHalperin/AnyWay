@@ -17,10 +17,10 @@ namespace BL
 
         #region Singelton
 
-        //static readonly BLIMP instance = new BLIMP();
-        //public static BLIMP Instance => instance;
-        //static BLIMP() { }
-        //BLIMP() { }
+        static readonly BLIMP instance = new BLIMP();
+        public static BLIMP Instance => instance;
+        static BLIMP() { }
+        BLIMP() { }
 
         #endregion
 
