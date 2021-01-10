@@ -350,16 +350,16 @@ namespace DL
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            XElement rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
+            XElement rootElem = XMLTools.LoadListFromXMLElement(followingStationsPath);
 
             XElement item = (from i in rootElem.Elements()
-                             where int.Parse(i.Element("NumberLine").Value) == lineStation.NumberLine && int.Parse(i.Element("ID").Value) == lineStation.ID
+                             where int.Parse(i.Element("FirstStationID").Value) == twoFollowingStations.FirstStationID && int.Parse(i.Element("SecondStationID").Value) == twoFollowingStations.SecondStationID
                              select i).FirstOrDefault();
 
             if (item != null)
             {
                 item.Remove();
-                XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
+                XMLTools.SaveListToXMLElement(rootElem, followingStationsPath);
             }
             else
                 throw new StationException("The two following stations do not exist.");
@@ -411,10 +411,19 @@ namespace DL
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
-            DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
-            if (d == null)
+            XElement rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where int.Parse(i.Element("NumberLine").Value) == drivingLine.NumberLine && TimeSpan.Parse(i.Element("Start").Value) == drivingLine.Start
+                             select i).FirstOrDefault();
+
+            if (item != null)
+            {
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, drivingLinesPath);
+            }
+            else
                 throw new TripException("The driving line does not exist.");
-            DataSource.DrivingLines.Remove(d);
         }
         public void updateDrivingLine(DrivingLine drivingLine)
         {
