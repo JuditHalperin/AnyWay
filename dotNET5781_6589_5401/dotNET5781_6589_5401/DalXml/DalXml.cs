@@ -36,25 +36,25 @@ namespace DL
 
         public void addUser(User user)
         {
-            XElement usersRootElem = XMLTools.LoadListFromXMLElement(usersPath);
+            XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
 
-            XElement item = (from i in usersRootElem.Elements()
+            XElement item = (from i in rootElem.Elements()
                              where i.Element("Username").Value == user.Username
                              select i).FirstOrDefault();
 
             if (item != null)
                 throw new UserException("The user already exists.");
 
-            usersRootElem.Add(new XElement("User",
+            rootElem.Add(new XElement("User",
                                    new XElement("Username", user.Username),
                                    new XElement("Password", user.Password),
                                    new XElement("IsManager", user.IsManager)));
 
-            XMLTools.SaveListToXMLElement(usersRootElem, usersPath);            
+            XMLTools.SaveListToXMLElement(rootElem, usersPath);            
         }
         public void removeUser(User user)
         {
-            XElement usersRootElem = XMLTools.LoadListFromXMLElement(personsPath);
+            XElement usersRootElem = XMLTools.LoadListFromXMLElement(usersPath);
 
             XElement per = (from p in personsRootElem.Elements()
                             where int.Parse(p.Element("ID").Value) == id
