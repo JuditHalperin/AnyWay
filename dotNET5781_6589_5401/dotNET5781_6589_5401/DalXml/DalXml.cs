@@ -54,57 +54,62 @@ namespace DL
         }
         public void removeUser(User user)
         {
-            XElement usersRootElem = XMLTools.LoadListFromXMLElement(usersPath);
+            XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
 
-            XElement per = (from p in personsRootElem.Elements()
-                            where int.Parse(p.Element("ID").Value) == id
-                            select p).FirstOrDefault();
+            XElement item = (from i in rootElem.Elements()
+                             where i.Element("Username").Value == user.Username
+                             select i).FirstOrDefault();
 
-            if (per != null)
+            if (item != null)
             {
-                per.Remove();
-                XMLTools.SaveListToXMLElement(personsRootElem, personsPath);
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, usersPath);
             }
             else
-                throw new DO.BadPersonIdException(id, $"bad person id: {id}");
-
-
-
-
-            try
-            {
-                DataSource.Users.RemoveAll(item => item.Username == user.Username);
-            }
-            catch (ArgumentNullException)
-            {
                 throw new UserException("The user does not exist.");
-            }
         }
         public void updateUser(User user)
         {
-            User u = DataSource.Users.Find(item => item.Username == user.Username);
-            if (u == null)
-                throw new UserException("The user does not exist.");
-            DataSource.Users.Remove(u); // remove the old user
-            DataSource.Users.Add(user.Clone()); // add the updated user
+            removeUser(getUser(user.Username));
+            addUser(user);            
         }
         public User getUser(string username)
         {
-            User user = DataSource.Users.Find(item => item.Username == username);
-            if (user == null)
-                return null;
-            return user.Clone();
+            User item = (from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+                         where i.Element("Username").Value == username
+                         select new User()
+                         {
+                             Username = i.Element("Username").Value,
+                             Password = i.Element("Password").Value,
+                             IsManager = bool.Parse(i.Element("IsManager").Value)
+                         }).FirstOrDefault();
+
+            if (item == null)
+                throw new UserException("The user does not exist.");
+
+            return item;
         }
         public IEnumerable<User> GetUsers()
         {
-            return from item in DataSource.Users
-                   select item.Clone();
+            return from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+                   select new User()
+                   {
+                       Username = i.Element("Username").Value,
+                       Password = i.Element("Password").Value,
+                       IsManager = bool.Parse(i.Element("IsManager").Value)
+                   };
         }
         public IEnumerable<User> GetUsers(Predicate<User> condition)
         {
-            return from item in DataSource.Users
+            return from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+                   let item = new User()
+                   {
+                       Username = i.Element("Username").Value,
+                       Password = i.Element("Password").Value,
+                       IsManager = bool.Parse(i.Element("IsManager").Value)
+                   }
                    where condition(item)
-                   select item.Clone();
+                   select item;
         }
 
         #endregion
@@ -119,16 +124,24 @@ namespace DL
         }
         public void removeBus(Bus bus)
         {
-            if (!DataSource.Buses.Remove(bus))
+            XElement rootElem = XMLTools.LoadListFromXMLElement(busesPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where i.Element("LicensePlate").Value == bus.LicensePlate
+                             select i).FirstOrDefault();
+
+            if (item != null)
+            {
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, busesPath);
+            }
+            else
                 throw new BusException("The bus does not exist.");
         }
         public void updateBus(Bus bus)
         {
-            Bus b = DataSource.Buses.Find(item => item.LicensePlate == bus.LicensePlate);
-            if (b == null)
-                throw new BusException("The bus does not exist.");
-            DataSource.Buses.Remove(b); // remove the old bus
-            DataSource.Buses.Add(bus.Clone()); // add the updated bus            
+            removeBus(getBus(bus.LicensePlate));
+            addBus(bus);
         }
         public Bus getBus(string licensePlate)
         {
@@ -167,18 +180,24 @@ namespace DL
         }
         public void removeLine(Line line)
         {
-            Line l = DataSource.Lines.Find(item => item.ThisSerial == line.ThisSerial);
-            if (l == null)
+            XElement rootElem = XMLTools.LoadListFromXMLElement(linesPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where int.Parse(i.Element("ThisSerial").Value) == line.ThisSerial
+                             select i).FirstOrDefault();
+
+            if (item != null)
+            {
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, linesPath);
+            }
+            else
                 throw new LineException("The line does not exist.");
-            DataSource.Lines.Remove(l);
         }
         public void updateLine(Line line)
         {
-            Line l = DataSource.Lines.Find(item => item.ThisSerial == line.ThisSerial);
-            if (l == null)
-                throw new LineException("The line does not exist.");
-            DataSource.Lines.Remove(l); // remove the old line
-            DataSource.Lines.Add(line.Clone()); // add the updated line  
+            removeLine(getLine(line.NumberLine));
+            addLine(line);
         }
         public Line getLine(int serial)
         {
@@ -225,22 +244,24 @@ namespace DL
         }
         public void removeStation(Station station)
         {
-            try
+            XElement rootElem = XMLTools.LoadListFromXMLElement(stationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where int.Parse(i.Element("ID").Value) == station.ID
+                             select i).FirstOrDefault();
+
+            if (item != null)
             {
-                DataSource.Stations.RemoveAll(item => item.ID == station.ID);
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, stationsPath);
             }
-            catch (ArgumentNullException)
-            {
+            else
                 throw new StationException("The station does not exist.");
-            }
         }
         public void updateStation(Station station)
         {
-            Station s = DataSource.Stations.Find(item => item.ID == station.ID);
-            if (s == null)
-                throw new LineException("The station does not exist.");
-            DataSource.Stations.Remove(s); // remove the old station
-            DataSource.Stations.Add(station.Clone()); // add the updated station
+            removeStation(getStation(station.ID));
+            addStation(station);
         }
         public Station getStation(int id)
         {
@@ -297,15 +318,24 @@ namespace DL
         }
         public void removeLineStation(LineStation lineStation)
         {
-            LineStation l = DataSource.LineStations.Find(item => item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID);
-            if (l == null)
-                throw new StationException("The line station does not exist.");
-            DataSource.LineStations.Remove(l); // remove the old line station            
+            XElement rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where int.Parse(i.Element("NumberLine").Value) == lineStation.NumberLine && int.Parse(i.Element("ID").Value) == lineStation.ID
+                             select i).FirstOrDefault();
+
+            if (item != null)
+            {
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
+            }
+            else
+                throw new StationException("The line station does not exist.");           
         }
         public void updateLineStation(LineStation lineStation)
         {
-            removeLineStation(lineStation); // remove the old line station=delete according the key.
-            DataSource.LineStations.Add(lineStation.Clone()); // add the updated line station
+            removeLineStation(getLineStation(station.ID));
+            addLineStation(lineStation);
         }
         public LineStation getLineStation(int numberLine, int id)
         {
@@ -366,10 +396,19 @@ namespace DL
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
-            TwoFollowingStations f = DataSource.FollowingStations.Find(item => (item.FirstStationID == twoFollowingStations.FirstStationID && item.SecondStationID == twoFollowingStations.SecondStationID) || (item.FirstStationID == twoFollowingStations.SecondStationID && item.SecondStationID == twoFollowingStations.FirstStationID));
-            if (f == null)
+            XElement rootElem = XMLTools.LoadListFromXMLElement(followingStationsPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where int.Parse(i.Element("FirstStationID").Value) == twoFollowingStations.FirstStationID && int.Parse(i.Element("SecondStationID").Value) == twoFollowingStations.SecondStationID
+                             select i).FirstOrDefault();
+
+            if (item != null)
+            {
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, followingStationsPath);
+            }
+            else
                 throw new StationException("The two following stations do not exist.");
-            DataSource.FollowingStations.Remove(f); // remove the old two following stations
         }
         public void updateTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
@@ -441,10 +480,19 @@ namespace DL
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
-            DrivingLine d = DataSource.DrivingLines.Find(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start);
-            if (d == null)
+            XElement rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
+
+            XElement item = (from i in rootElem.Elements()
+                             where int.Parse(i.Element("NumberLine").Value) == drivingLine.NumberLine && TimeSpan.Parse(i.Element("Start").Value) == drivingLine.Start
+                             select i).FirstOrDefault();
+
+            if (item != null)
+            {
+                item.Remove();
+                XMLTools.SaveListToXMLElement(rootElem, drivingLinesPath);
+            }
+            else
                 throw new TripException("The driving line does not exist.");
-            DataSource.DrivingLines.Remove(d);
         }
         public void updateDrivingLine(DrivingLine drivingLine)
         {
