@@ -8,6 +8,6 @@ namespace BLAPI
 {
     public static class BlFactory
     {
-        public static IBL GetBl() => new BL.BLIMP();
+        public static IBL GetBl() => BL.BLIMP.Instance;
     }
 }
