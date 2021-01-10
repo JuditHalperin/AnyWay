@@ -1148,7 +1148,7 @@ namespace BL
             if (trip.PreviousStationID != -1)
                 index = dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex + 1;
             BO.Line line = getLine(trip.NumberLine);
-            for (int i = index; i <= dal.getLineStation(trip.NumberLine, targetStationID).PathIndex - 1; i++)
+            for (int i = index; i < dal.getLineStation(trip.NumberLine, sourceStationID).PathIndex; i++)
                 time += line.Path.ElementAt(index).TimeFromPreviousStations.ToTimeSpan();
             return time;
         }
