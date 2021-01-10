@@ -1148,7 +1148,7 @@ namespace BL
             if (trip.PreviousStationID != -1)
                 index = dal.getLineStation(trip.NumberLine, trip.PreviousStationID).PathIndex + 1;
             BO.Line line = getLine(trip.NumberLine);
-            for (int i = index; i <= dal.getLineStation(trip.NumberLine, targetStationID).PathIndex - 1; i++)
+            for (int i = index; i < dal.getLineStation(trip.NumberLine, sourceStationID).PathIndex; i++)
                 time += line.Path.ElementAt(index).TimeFromPreviousStations.ToTimeSpan();
             return time;
         }
@@ -1156,7 +1156,7 @@ namespace BL
         {
             BO.Line line = getLine(serial);
             int duration = 0;
-            for (int i = dal.getLineStation(serial, source).PathIndex - 1; i < dal.getLineStation(serial, target).PathIndex - 1; i++) 
+            for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++) 
                 duration += line.Path.ElementAt(i).TimeFromPreviousStations;
             return duration.ToTimeSpan();
         }
