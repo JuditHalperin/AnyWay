@@ -43,9 +43,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Sourse Station:" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Source Station:" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Label Content="Target Station:" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Name="SourseStation" Grid.Row="1" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
+            <ComboBox Name="SourceStation" Grid.Row="1" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
             <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="visibilities"/>
         </Grid>
         <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>

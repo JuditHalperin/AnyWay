@@ -39,14 +39,14 @@ namespace PL
             username = name;
 
             IEnumerable<Station> stations = bl.GetStations();
-            SourseStation.ItemsSource = stations;
+            SourceStation.ItemsSource = stations;
             TargetStation.ItemsSource = stations;
         }
 
         private void visibilities(object sender, SelectionChangedEventArgs e)
         {
-            if (SourseStation.SelectedItem != null && TargetStation.SelectedItem != null)
-                if (((Station)SourseStation.SelectedItem).ID == ((Station)TargetStation.SelectedItem).ID)
+            if (SourceStation.SelectedItem != null && TargetStation.SelectedItem != null)
+                if (((Station)SourceStation.SelectedItem).ID == ((Station)TargetStation.SelectedItem).ID)
                 {
                     SameStation.Visibility = Visibility.Visible;
                     NoLines.Visibility = Visibility.Hidden;
@@ -57,9 +57,9 @@ namespace PL
                 {
                     SameStation.Visibility = Visibility.Hidden;
 
-                    var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                let totalTime = bl.totalTime(drivingBus, ((Station)SourseStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                    var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                let totalTime = bl.totalTime(drivingBus, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
                                 where totalTime.Seconds != -1 // not relevant
                                 select new // anonymous variable for PL trip
                                 {
