@@ -57,6 +57,7 @@ namespace PL
             if (bl.countLines() == 0)
             {
                 ShowLines.Content = "No lines";
+                LinesSchedule.Visibility = Visibility.Hidden;
                 ShowLines.IsEnabled = false;
             }
             else
@@ -88,6 +89,11 @@ namespace PL
             new StationsList(tempUsername, false).Show();
             Close();
         }
+        private void LinesSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            new TripsList(tempUsername, -1, false).Show();
+            Close();
+        }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -98,7 +104,8 @@ namespace PL
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             new ChangePassword("password", tempUsername).ShowDialog();
-        }     
+        }
+
     }
 }
 

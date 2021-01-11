@@ -61,6 +61,7 @@ namespace PL
             else
             {
                 AddFirstLine.Visibility = Visibility.Hidden;
+                LinesSchedule.Visibility = Visibility.Hidden;
                 ShowLines.Visibility = Visibility.Visible;
             }
 
@@ -111,6 +112,11 @@ namespace PL
             new AddStation().ShowDialog();
             enableButtons(); // refresh
         }
+        private void LinesSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            new TripsList(tempUsername).Show();
+            Close();
+        }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -127,5 +133,6 @@ namespace PL
         {
             new ChangePassword("managing code", tempUsername).ShowDialog();
         }
+
     }
 }
