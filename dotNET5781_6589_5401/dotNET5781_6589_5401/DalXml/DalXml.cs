@@ -77,7 +77,7 @@ namespace DL
         }
         public User getUser(string username)
         {
-            User item = (from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
+            return (from i in XMLTools.LoadListFromXMLElement(usersPath).Elements()
                          where i.Element("Username").Value == username
                          select new User()
                          {
@@ -85,11 +85,6 @@ namespace DL
                              Password = i.Element("Password").Value,
                              IsManager = bool.Parse(i.Element("IsManager").Value)
                          }).FirstOrDefault();
-
-            if (item == null)
-                throw new UserException("The user does not exist.");
-
-            return item;
         }
         public IEnumerable<User> GetUsers()
         {
@@ -203,22 +198,46 @@ namespace DL
         }
         public Line getLine(int serial)
         {
-            return DataSource.Lines.Find(item => item.ThisSerial == serial).Clone();
+            return (from i in XMLTools.LoadListFromXMLElement(linesPath).Elements()
+                         where Convert.ToInt32(i.Element("ThisSerial").Value) == serial
+                         select new Line()
+                         {
+                             ThisSerial = serial,
+                             NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                             Region = (Regions)Enum.Parse(typeof(Regions),i.Element("Region").Value)
+                         }).FirstOrDefault();
+
         }
         public IEnumerable<Line> GetLines()
         {
-            return (from item in DataSource.Lines
-                    select item.Clone()).OrderBy(item => item.NumberLine);
+            return from i in XMLTools.LoadListFromXMLElement(linesPath).Elements()
+                   select new Line()
+                   {
+                       ThisSerial = Convert.ToInt32(i.Element("ThisSerial").Value),
+                       NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                       Region = (Regions)Enum.Parse(typeof(Regions), i.Element("Region").Value)
+                   };
         }
         public IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
-            return (from item in DataSource.Lines
-                    where condition(item)
-                    select item.Clone()).OrderBy(item => item.NumberLine);
+            return from i in XMLTools.LoadListFromXMLElement(linesPath).Elements()
+                   let item = new Line()
+                   {
+                       ThisSerial = Convert.ToInt32(i.Element("ThisSerial").Value),
+                       NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                       Region = (Regions)Enum.Parse(typeof(Regions), i.Element("Region").Value)
+                   }
+                   where condition(item)
+                   select item;
         }
         public int countLines()
         {
-            return DataSource.Lines.Count();
+            IEnumerable<Line> lines = from i in XMLTools.LoadListFromXMLElement(linesPath).Elements()
+                                      select new Line()
+                                      {
+                                          ThisSerial = Convert.ToInt32(i.Element("ThisSerial").Value)
+                                      };
+            return lines.Count();
         }
 
         #endregion
@@ -267,25 +286,48 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            Station station = DataSource.Stations.Find(item => item.ID == id);
-            if (station == null)
-                return null;
-            return station.Clone();
+            return (from i in XMLTools.LoadListFromXMLElement(stationsPath).Elements()
+                    where Convert.ToInt32(i.Element("ID").Value) == id
+                    select new Station()
+                    {
+                        ID = id,
+                        Name = i.Element("Name").Value,
+                        Latitude = Convert.ToDouble (i.Element("Latitude").Value),
+                        Longitude = Convert.ToDouble(i.Element("Longitude").Value)
+                    }).FirstOrDefault();
         }
         public IEnumerable<Station> GetStations()
         {
-            return (from item in DataSource.Stations
-                    select item.Clone()).OrderBy(item => item.ID);
+            return (from i in XMLTools.LoadListFromXMLElement(stationsPath).Elements()
+                    select new Station()
+                    {
+                        ID = Convert.ToInt32(i.Element("ID").Value),
+                        Name = i.Element("Name").Value,
+                        Latitude = Convert.ToDouble(i.Element("Latitude").Value),
+                        Longitude = Convert.ToDouble(i.Element("Longitude").Value)
+                    }).OrderBy(item => item.ID);
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
-            return (from item in DataSource.Stations
+            return (from i in XMLTools.LoadListFromXMLElement(stationsPath).Elements()
+                   let item = new Station()
+                   {
+                       ID = Convert.ToInt32(i.Element("ID").Value),
+                       Name = i.Element("Name").Value,
+                       Latitude = Convert.ToDouble(i.Element("Latitude").Value),
+                       Longitude = Convert.ToDouble(i.Element("Longitude").Value)
+                   }
                     where condition(item)
-                    select item.Clone()).OrderBy(item => item.ID); ;
+                    select item).OrderBy(item=>item.ID);
         }
         public int countStations()
         {
-            return DataSource.Stations.Count();
+            IEnumerable<Station> stations = from i in XMLTools.LoadListFromXMLElement(stationsPath).Elements()
+                                            select new Station()
+                                            {
+                                                ID = Convert.ToInt32(i.Element("ID").Value),
+                                            };
+            return stations.Count();
         }
 
         #endregion
@@ -341,21 +383,36 @@ namespace DL
         }
         public LineStation getLineStation(int numberLine, int id)
         {
-            LineStation lineStation = DataSource.LineStations.Find(item => item.NumberLine == numberLine && item.ID == id);
-            if (lineStation == null)
-                return null;
-            return lineStation.Clone();
+            return (from i in XMLTools.LoadListFromXMLElement(lineStationsPath).Elements()
+                    where int.Parse(i.Element("NumberLine").Value) == numberLine && int.Parse(i.Element("ID").Value) == id
+                    select new LineStation()
+                    {
+                        ID = id,
+                        NumberLine = numberLine,
+                        PathIndex = Convert.ToInt32(i.Element("PathIndex").Value)
+                    }).FirstOrDefault();
         }
         public IEnumerable<LineStation> GetLineStations()
         {
-            return from item in DataSource.LineStations
-                   select item.Clone();
+            return  from i in XMLTools.LoadListFromXMLElement(lineStationsPath).Elements()
+                    select new LineStation()
+                    {
+                        ID = Convert.ToInt32(i.Element("ID").Value),
+                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                        PathIndex = Convert.ToInt32(i.Element("PathIndex").Value)
+                    };
         }
         public IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition)
         {
-            return (from item in DataSource.LineStations
+            return (from i in XMLTools.LoadListFromXMLElement(lineStationsPath).Elements()
+                    let item = new LineStation()
+                    {
+                        ID = Convert.ToInt32(i.Element("ID").Value),
+                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                        PathIndex = Convert.ToInt32(i.Element("PathIndex").Value)
+                    }
                     where condition(item)
-                    select item.Clone()).OrderBy(item => item.PathIndex);
+                    select item).OrderBy(item => item.PathIndex);
         }
 
         #endregion
@@ -421,21 +478,39 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            TwoFollowingStations twoFollowingStations = DataSource.FollowingStations.Find(item => (item.FirstStationID == firstStationID && item.SecondStationID == secondStationID) || (item.FirstStationID == secondStationID && item.SecondStationID == firstStationID));
-            if (twoFollowingStations == null)
-                return null;
-            return twoFollowingStations.Clone();
+            return (from i in XMLTools.LoadListFromXMLElement(followingStationsPath).Elements()
+                    where (Convert.ToInt32(i.Element("FirstStationID").Value) == firstStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == secondStationID) || (Convert.ToInt32(i.Element("FirstStationID").Value) == secondStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == firstStationID)
+                    select new TwoFollowingStations()
+                    {
+                        FirstStationID = firstStationID,
+                        SecondStationID = secondStationID,
+                        LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
+                        TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
+                    }).FirstOrDefault();
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
-            return (from item in DataSource.FollowingStations
-                    select item.Clone()).OrderBy(item => item.TimeBetweenStations);
+            return (from i in XMLTools.LoadListFromXMLElement(followingStationsPath).Elements()
+                    select new TwoFollowingStations()
+                    {
+                        FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
+                        SecondStationID = Convert.ToInt32(i.Element("SecondStationID").Value),
+                        LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
+                        TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
+                    }).OrderBy(item => item.TimeBetweenStations);
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
-            return (from item in DataSource.FollowingStations
+            return (from i in XMLTools.LoadListFromXMLElement(followingStationsPath).Elements()
+                    let item = new TwoFollowingStations()
+                    {
+                        FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
+                        SecondStationID = Convert.ToInt32(i.Element("SecondStationID").Value),
+                        LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
+                        TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
+                    }
                     where condition(item)
-                    select item.Clone()).OrderBy(item => item.TimeBetweenStations);
+                    select item).OrderBy(item => item.TimeBetweenStations);
         }
 
         #endregion      
@@ -444,40 +519,28 @@ namespace DL
 
         public void addDrivingLine(DrivingLine drivingLine)
         {
-            XElement rootElem = XMLTools.LoadListFromXMLElement(stationsPath);
+            XElement rootElem = XMLTools.LoadListFromXMLElement(linesPath);
 
             XElement item = (from i in rootElem.Elements()
-                             where Convert.ToInt32(i.Element("ID").Value) == drivingLine.ID
+                             where Convert.ToInt32(i.Element("ThisSerial").Value) == drivingLine.NumberLine
                              select i).FirstOrDefault();
 
             if (item == null)
-                throw new StationException("The ID not exists.");
-            rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
-
+                throw new StationException("The Line not exists.");
+            rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
             item = (from i in rootElem.Elements()
-                    where Convert.ToInt32(i.Element("ID").Value) == drivingLine.ID && Convert.ToInt32(i.Element("NumberLine").Value) == lineStation.NumberLine
+                    where Convert.ToInt32(i.Element("NumberLine").Value) == drivingLine.NumberLine && i.Element("Start").Value == drivingLine.Start.ToString()
                     select i).FirstOrDefault();
-
             if (item != null)
-                throw new StationException("The line station already exists.");
+                throw new StationException("The driving line already exists.");
 
-            rootElem.Add(new XElement("LineStation",
-                                   new XElement("ID", drivingLine.ID),
+            rootElem.Add(new XElement("DrivingLine",
                                    new XElement("NumberLine", drivingLine.NumberLine),
-                                   new XElement("PathIndex", drivingLine.PathIndex)));
+                                   new XElement("Start", drivingLine.Start),
+                                   new XElement("Frequency", drivingLine.Frequency),
+                                   new XElement("End", drivingLine.End)));
 
             XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
-            try
-            {
-                getLine(drivingLine.NumberLine); // check if the line exists
-            }
-            catch (LineException ex)
-            {
-                throw new LineException(ex.Message);
-            }
-            if (DataSource.DrivingLines.Exists(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start))
-                throw new TripException("The driving line already exists.");
-            DataSource.DrivingLines.Add(drivingLine.Clone());
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
@@ -502,21 +565,39 @@ namespace DL
         }
         public DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
-            DrivingLine drivingLine = DataSource.DrivingLines.Find(item => item.NumberLine == numberLine && item.Start == new TimeSpan(start.Hour, start.Minute, start.Second));
-            if (drivingLine == null)
-                return null;
-            return drivingLine.Clone();
+            return (from i in XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements()
+                    where Convert.ToInt32(i.Element("NumberLine").Value) == numberLine && i.Element("Start").Value == start.ToString()
+                    select new DrivingLine()
+                    {
+                        NumberLine = numberLine,
+                        Start = start,
+                        Frequency = Convert.ToInt32(i.Element("Frequency").Value),
+                        End = TimeSpan.Parse(i.Element("End").Value)
+                    }).FirstOrDefault();
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
         {
-            return from item in DataSource.DrivingLines
-                   select item.Clone();
+            return  from i in XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements()
+                    select new DrivingLine()
+                    {
+                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                        Start = TimeSpan.Parse(i.Element("Start").Value),
+                        Frequency = Convert.ToInt32(i.Element("Frequency").Value),
+                        End = TimeSpan.Parse(i.Element("End").Value)
+                    };
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
         {
-            return from item in DataSource.DrivingLines
+            return from i in XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements()
+                   let item = new DrivingLine()
+                   {
+                       NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                       Start = TimeSpan.Parse(i.Element("Start").Value),
+                       Frequency = Convert.ToInt32(i.Element("Frequency").Value),
+                       End = TimeSpan.Parse(i.Element("End").Value)
+                   }
                    where condition(item)
-                   select item.Clone();
+                   select item;
         }
 
         #endregion
