@@ -112,6 +112,11 @@ namespace PL
             new AddStation().ShowDialog();
             enableButtons(); // refresh
         }
+        private void LinesSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            new TripsList(tempUsername).Show();
+            Close();
+        }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -129,10 +134,5 @@ namespace PL
             new ChangePassword("managing code", tempUsername).ShowDialog();
         }
 
-        private void LinesSchedule_Click(object sender, RoutedEventArgs e)
-        {
-            new TripsList(tempUsername).Show();
-            Close();
-        }
     }
 }

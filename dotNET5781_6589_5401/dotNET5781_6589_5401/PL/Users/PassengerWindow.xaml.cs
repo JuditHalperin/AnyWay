@@ -89,6 +89,11 @@ namespace PL
             new StationsList(tempUsername, false).Show();
             Close();
         }
+        private void LinesSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            new TripsList(tempUsername, -1, false).Show();
+            Close();
+        }
 
         private void SignOut_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -101,11 +106,6 @@ namespace PL
             new ChangePassword("password", tempUsername).ShowDialog();
         }
 
-        private void LinesSchedule_Click(object sender, RoutedEventArgs e)
-        {
-            new TripsList(tempUsername,-1,false).Show();
-            Close();
-        }
     }
 }
 
