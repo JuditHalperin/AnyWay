@@ -512,13 +512,13 @@ namespace BL
         /// <summary>
         /// impossible to change a line if it is driving
         /// </summary>
-        /// <param name="station"></param>
+        /// <param name="line"></param>
         /// <returns></returns>
         public bool canChangeLine(BO.Line line)
         {
-            //if (GetDrivingLines(item => item.NumberLine == line.ThisSerial).Count() == 0)
-            return true;
-            //return false;
+            if (GetTripsOfLine_Present(line.ThisSerial) == null)
+                return true;
+            return false;
         }
         public int countLines()
         {
@@ -700,13 +700,11 @@ namespace BL
         /// <returns></returns>
         public bool canChangeStation(BO.Station station)
         {
-            //IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
-            //                                                    from lineStation in GetLineStations(l => l.ID == station.ID)
-            //                                                    where drivingLine.NumberLine == lineStation.NumberLine
-            //                                                    select drivingLine;
-            //if (drivingLinesAtStation.Count() == 0)
+            foreach (DrivingLine drivingLine in dal.GetDrivingLines())
+                if (GetTripsOfLine_Present(drivingLine.NumberLine) != null)
+                    if (dal.getLineStation(drivingLine.NumberLine, station.ID) != null)
+                        return false;
             return true;
-            //return false;
         }
         public int countStations()
         {
@@ -850,6 +848,11 @@ namespace BL
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
                 IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex);
+                if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
+                {
+                    removeLine(getLine(lineStation.NumberLine));
+                    return;
+                }
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
                     lineStations.ElementAt(i).PathIndex--;
@@ -1030,75 +1033,65 @@ namespace BL
             List<DrivingBus> allTrips = new List<DrivingBus>();
             foreach (BO.Line line in lines)
             {
-                foreach (DrivingBus trip in GetTripsOfLine_Present(line.ThisSerial))
-                    if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
+                IEnumerable<DrivingBus> present = GetTripsOfLine_Present(line.ThisSerial);
+                if (present != null)
+                    foreach (DrivingBus trip in present)
+                        if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
+                            allTrips.Add(trip);
+
+                IEnumerable<DrivingBus> future = GetTripsOfLine_Future(line.ThisSerial);
+                if(future != null)
+                    foreach (DrivingBus trip in future)
                         allTrips.Add(trip);
-                foreach (DrivingBus trip in GetTripsOfLine_Future(line.ThisSerial))
-                    allTrips.Add(trip);
             }
 
             return allTrips;
         }
         private IEnumerable<DrivingBus> GetTripsOfLine_Present(int serial)
         {
-            try
-            {
-                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
-                if (drivingLines.Count() == 0)
-                    throw new BO.TripException("No trips exist.");
+            List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
+            if (drivingLines.Count() == 0)
+                return null;
 
-                List<DrivingBus> trips = new List<DrivingBus>();
-                foreach (DrivingLine drivingLine in drivingLines)
-                    for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                    {
-                        DrivingBus trip = getTrip(serial, i.ToDateTime());
-                        if (trip != null)
-                            trips.Add(trip);
-                    }
-                return trips;
-            }
-            catch (BO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message, ex);
-            }
+            List<DrivingBus> trips = new List<DrivingBus>();
+            foreach (DrivingLine drivingLine in drivingLines)
+                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                {
+                    DrivingBus trip = getTrip(serial, i.ToDateTime());
+                    if (trip != null)
+                        trips.Add(trip);
+                }
+            return trips;
         }
         private IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial)
         {
-            try
-            {
-                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
-                if (drivingLines.Count() == 0)
-                    throw new BO.TripException("No trips exist.");
+            List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
+            if (drivingLines.Count() == 0)
+                return null;
 
-                List<DrivingBus> trips = new List<DrivingBus>();
-                foreach (DrivingLine drivingLine in drivingLines)
-                    for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                        trips.Add(new DrivingBus()
-                        {
-                            NumberLine = drivingLine.NumberLine,
-                            Start = i.ToDateTime(),
-                            PreviousStationID = -1,
-                            PreviousStationTime = new TimeSpan(0),
-                            NextStationTime = i - DateTime.Now.TimeOfDay
-                        });
-                return trips;
-            }
-            catch (BO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message, ex);
-            }
+            List<DrivingBus> trips = new List<DrivingBus>();
+            foreach (DrivingLine drivingLine in drivingLines)
+                for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                    trips.Add(new DrivingBus()
+                    {
+                        NumberLine = drivingLine.NumberLine,
+                        Start = i.ToDateTime(),
+                        PreviousStationID = -1,
+                        PreviousStationTime = new TimeSpan(0),
+                        NextStationTime = i - DateTime.Now.TimeOfDay
+                    });
+            return trips;
         }
         public TimeSpan timeTillArrivalToSource(DrivingBus trip, int source, int target)
         {
             DO.LineStation sourceStation = dal.getLineStation(trip.NumberLine, source);
-            DO.LineStation targetStation = dal.getLineStation(trip.NumberLine, target);
             DO.LineStation previousStation = new DO.LineStation();
 
             if (trip.PreviousStationID != -1)
             {
                 previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
-                if (previousStation.ID != -1 && (previousStation.PathIndex >= targetStation.PathIndex || previousStation.PathIndex <= sourceStation.PathIndex))
-                    return new TimeSpan(-1, -1, -1); // if it passed the source or the target stations
+                if (previousStation.ID != -1 && previousStation.PathIndex <= sourceStation.PathIndex)
+                    return new TimeSpan(-1, -1, -1); // if it passed the source station
             }
 
             TimeSpan time = trip.NextStationTime;
@@ -1158,105 +1151,105 @@ namespace BL
 
         #region DrivingLines
 
-        ///// <summary>
-        ///// Func that converts driving line of BO to driving line of DO
-        ///// </summary>
-        ///// <param name="drivingLine">driving line of BO</param>
-        ///// <returns>driving line of DO</returns>
-        //DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
-        //{
-        //    return new DrivingLine()
-        //    {
-        //        NumberLine = drivingLine.NumberLine,
-        //        Start = drivingLine.Start,
-        //        End = drivingLine.End,
-        //        Frequency = drivingLine.Frequency
-        //    };
-        //}
-        ///// <summary>
-        ///// Func that converts driving line of DO to driving line of BO
-        ///// </summary>
-        ///// <param name="drivingLine">driving line of DO</param>
-        ///// <returns>driving line of BO</returns>
-        //BO.DrivingLine convertToDrivingLineBO(DrivingLine drivingLine)
-        //{
-        //    return new BO.DrivingLine()
-        //    {
-        //        NumberLine = drivingLine.NumberLine,
-        //        Start = drivingLine.Start,
-        //        Frequency = drivingLine.Frequency,
-        //        End = drivingLine.End
-        //    };
-        //}
-        //public void addDrivingLine(BO.DrivingLine drivingLine)
-        //{
-        //    try
-        //    {
-        //        dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public void removeDrivingLine(BO.DrivingLine drivingLine)
-        //{
-        //    try
-        //    {
-        //        dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public void updateDrivingLine(BO.DrivingLine drivingLine)
-        //{
-        //    try
-        //    {
-        //        dal.updateDrivingLine(convertToDrivingLineDO(drivingLine));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
-        //{
-        //    try
-        //    {
-        //        return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public IEnumerable<BO.DrivingLine> GetDrivingLines()
-        //{
-        //    try
-        //    {
-        //        return from drivingLine in dal.GetDrivingLines()
-        //               select convertToDrivingLineBO(drivingLine);
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
-        //{
-        //    try
-        //    {
-        //        return from item in GetDrivingLines()
-        //               where condition(item)
-        //               select item;
-        //    }
-        //    catch (BO.LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message);
-        //    }
-        //}
+        /// <summary>
+        /// Func that converts driving line of BO to driving line of DO
+        /// </summary>
+        /// <param name="drivingLine">driving line of BO</param>
+        /// <returns>driving line of DO</returns>
+        DO.DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
+        {
+            return new DO.DrivingLine()
+            {
+                NumberLine = drivingLine.NumberLine,
+                Start = drivingLine.Start,
+                End = drivingLine.End,
+                Frequency = drivingLine.Frequency
+            };
+        }
+        /// <summary>
+        /// Func that converts driving line of DO to driving line of BO
+        /// </summary>
+        /// <param name="drivingLine">driving line of DO</param>
+        /// <returns>driving line of BO</returns>
+        BO.DrivingLine convertToDrivingLineBO(DO.DrivingLine drivingLine)
+        {
+            return new BO.DrivingLine()
+            {
+                NumberLine = drivingLine.NumberLine,
+                Start = drivingLine.Start,
+                Frequency = drivingLine.Frequency,
+                End = drivingLine.End
+            };
+        }
+        public void addDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public void removeDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public void updateDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.updateDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
+        {
+            try
+            {
+                return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public IEnumerable<BO.DrivingLine> GetDrivingLines()
+        {
+            try
+            {
+                return from drivingLine in dal.GetDrivingLines()
+                       select convertToDrivingLineBO(drivingLine);
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
+        {
+            try
+            {
+                return from item in GetDrivingLines()
+                       where condition(item)
+                       select item;
+            }
+            catch (BO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message);
+            }
+        }
 
         #endregion
 
