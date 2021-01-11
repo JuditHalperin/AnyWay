@@ -18,15 +18,15 @@ using BO;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for Trip.xaml
+    /// Interaction logic for PassengerTrip.xaml
     /// </summary>
-    public partial class Trip : Window
+    public partial class PassengerTrip : Window
     {
         static IBL bl;
 
         string username;
 
-        public Trip(string name)
+        public PassengerTrip(string name)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
@@ -80,8 +80,8 @@ namespace PL
                         Trips.ItemsSource = trips.Take(10).OrderBy(item => item.TotalTime); // show first 10 results
                         NoLines.Visibility = Visibility.Hidden;
                         Titles.Visibility = Visibility.Visible;
-                        Trips.Visibility = Visibility.Visible;                        
-                    }                    
+                        Trips.Visibility = Visibility.Visible;
+                    }
                 }
         }
 

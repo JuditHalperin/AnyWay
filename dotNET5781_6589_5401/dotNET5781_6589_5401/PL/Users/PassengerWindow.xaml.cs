@@ -73,7 +73,7 @@ namespace PL
 
         private void Trips_Click(object sender, RoutedEventArgs e)
         {
-            new Trip(tempUsername).Show();
+            new PassengerTrip(tempUsername).Show();
             Close();
         }
 
