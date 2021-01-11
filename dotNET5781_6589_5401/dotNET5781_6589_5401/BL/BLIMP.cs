@@ -377,13 +377,14 @@ namespace BL
         /// <param name="line">Using in the path of line.</param>
         void convertLineToFollowingStationDO(BO.Line line)
         {
-            for (int i = 0; i < line.Path.Count() - 1; i++)
+            List<BO.LineStation> path = line.Path.ToList();
+            for (int i = 0; i < path.Count() - 1; i++)
                 addOrUpdateTwoFollowingStations(new TwoFollowingStations()
                 {
-                    FirstStationID = line.Path.ElementAt(i).ID,
-                    SecondStationID = line.Path.ElementAt(i + 1).ID,
-                    LengthBetweenStations = line.Path.ElementAt(i + 1).LengthFromPreviousStations,
-                    TimeBetweenStations = line.Path.ElementAt(i + 1).TimeFromPreviousStations
+                    FirstStationID = path[i].ID,
+                    SecondStationID = path[i + 1].ID,
+                    LengthBetweenStations = path[i + 1].LengthFromPreviousStations,
+                    TimeBetweenStations = path[i + 1].TimeFromPreviousStations
                 });
         }
         /// <summary>
