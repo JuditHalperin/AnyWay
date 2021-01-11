@@ -66,5 +66,14 @@ namespace PL
             new AddTrip(((BO.Line)ListOfLines.SelectedItem).ThisSerial).ShowDialog();
             ListOfLines.ItemsSource = bl.GetLines();
         }
+
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (administrativePrivileges)
+                new ManagerWindow(username).Show();
+            else
+                new PassengerWindow(username).Show();
+            Close();
+        }
     }
 }

@@ -112,6 +112,9 @@
     <Compile Include="Stations\StationsList.xaml.cs">
       <DependentUpon>StationsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Trips\AddTrip.xaml.cs">
+      <DependentUpon>AddTrip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Trips\PassengerTrip.xaml.cs">
       <DependentUpon>PassengerTrip.xaml</DependentUpon>
     </Compile>
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Stations\StationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Trips\AddTrip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
