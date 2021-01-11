@@ -512,13 +512,13 @@ namespace BL
         /// <summary>
         /// impossible to change a line if it is driving
         /// </summary>
-        /// <param name="station"></param>
+        /// <param name="line"></param>
         /// <returns></returns>
         public bool canChangeLine(BO.Line line)
         {
-            //if (GetDrivingLines(item => item.NumberLine == line.ThisSerial).Count() == 0)
-            return true;
-            //return false;
+            if (GetTripsOfLine_Present(line.ThisSerial) == null)
+                return true;
+            return false;
         }
         public int countLines()
         {
@@ -700,13 +700,11 @@ namespace BL
         /// <returns></returns>
         public bool canChangeStation(BO.Station station)
         {
-            //IEnumerable<BO.DrivingLine> drivingLinesAtStation = from drivingLine in GetDrivingLines()
-            //                                                    from lineStation in GetLineStations(l => l.ID == station.ID)
-            //                                                    where drivingLine.NumberLine == lineStation.NumberLine
-            //                                                    select drivingLine;
-            //if (drivingLinesAtStation.Count() == 0)
+            foreach (DrivingLine drivingLine in dal.GetDrivingLines())
+                if (GetTripsOfLine_Present(drivingLine.NumberLine) != null)
+                    if (dal.getLineStation(drivingLine.NumberLine, station.ID) != null)
+                        return false;
             return true;
-            //return false;
         }
         public int countStations()
         {
@@ -1035,63 +1033,54 @@ namespace BL
             List<DrivingBus> allTrips = new List<DrivingBus>();
             foreach (BO.Line line in lines)
             {
-                foreach (DrivingBus trip in GetTripsOfLine_Present(line.ThisSerial))
-                    if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
+                IEnumerable<DrivingBus> present = GetTripsOfLine_Present(line.ThisSerial);
+                if (present != null)
+                    foreach (DrivingBus trip in present)
+                        if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
+                            allTrips.Add(trip);
+
+                IEnumerable<DrivingBus> future = GetTripsOfLine_Future(line.ThisSerial);
+                if(future != null)
+                    foreach (DrivingBus trip in future)
                         allTrips.Add(trip);
-                foreach (DrivingBus trip in GetTripsOfLine_Future(line.ThisSerial))
-                    allTrips.Add(trip);
             }
 
             return allTrips;
         }
         private IEnumerable<DrivingBus> GetTripsOfLine_Present(int serial)
         {
-            try
-            {
-                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
-                if (drivingLines.Count() == 0)
-                    throw new BO.TripException("No trips exist.");
+            List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
+            if (drivingLines.Count() == 0)
+                return null;
 
-                List<DrivingBus> trips = new List<DrivingBus>();
-                foreach (DrivingLine drivingLine in drivingLines)
-                    for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                    {
-                        DrivingBus trip = getTrip(serial, i.ToDateTime());
-                        if (trip != null)
-                            trips.Add(trip);
-                    }
-                return trips;
-            }
-            catch (BO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message, ex);
-            }
+            List<DrivingBus> trips = new List<DrivingBus>();
+            foreach (DrivingLine drivingLine in drivingLines)
+                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                {
+                    DrivingBus trip = getTrip(serial, i.ToDateTime());
+                    if (trip != null)
+                        trips.Add(trip);
+                }
+            return trips;
         }
         private IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial)
         {
-            try
-            {
-                List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
-                if (drivingLines.Count() == 0)
-                    throw new BO.TripException("No trips exist.");
+            List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
+            if (drivingLines.Count() == 0)
+                return null;
 
-                List<DrivingBus> trips = new List<DrivingBus>();
-                foreach (DrivingLine drivingLine in drivingLines)
-                    for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
-                        trips.Add(new DrivingBus()
-                        {
-                            NumberLine = drivingLine.NumberLine,
-                            Start = i.ToDateTime(),
-                            PreviousStationID = -1,
-                            PreviousStationTime = new TimeSpan(0),
-                            NextStationTime = i - DateTime.Now.TimeOfDay
-                        });
-                return trips;
-            }
-            catch (BO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message, ex);
-            }
+            List<DrivingBus> trips = new List<DrivingBus>();
+            foreach (DrivingLine drivingLine in drivingLines)
+                for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                    trips.Add(new DrivingBus()
+                    {
+                        NumberLine = drivingLine.NumberLine,
+                        Start = i.ToDateTime(),
+                        PreviousStationID = -1,
+                        PreviousStationTime = new TimeSpan(0),
+                        NextStationTime = i - DateTime.Now.TimeOfDay
+                    });
+            return trips;
         }
         public TimeSpan timeTillArrivalToSource(DrivingBus trip, int source, int target)
         {
