@@ -23,9 +23,7 @@ namespace PL
     public partial class LinesList : Window
     {
         static IBL bl;
-
         string username;
-
         bool administrativePrivileges;
 
         public LinesList(string name, int serial = -1, bool a = true)
