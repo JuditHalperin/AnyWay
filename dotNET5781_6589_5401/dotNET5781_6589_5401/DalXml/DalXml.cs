@@ -115,9 +115,9 @@ namespace DL
 
         public void addBus(Bus bus)
         {
-            if (DataSource.Buses.Exists(item => item.LicensePlate == bus.LicensePlate))
-                throw new BusException("The bus already exists.");
-            DataSource.Buses.Add(bus.Clone());
+            //if (DataSource.Buses.Exists(item => item.LicensePlate == bus.LicensePlate))
+            //    throw new BusException("The bus already exists.");
+            //DataSource.Buses.Add(bus.Clone());
         }
         public void removeBus(Bus bus)
         {
@@ -142,21 +142,24 @@ namespace DL
         }
         public Bus getBus(string licensePlate)
         {
-            Bus bus = DataSource.Buses.Find(item => item.LicensePlate == licensePlate);
-            if (bus == null)
-                return null;
-            return bus.Clone();
+            //Bus bus = DataSource.Buses.Find(item => item.LicensePlate == licensePlate);
+            //if (bus == null)
+            //    return null;
+            //return bus.Clone();
+            return null;
         }
         public IEnumerable<Bus> GetBuses()
         {
-            return from item in DataSource.Buses
-                   select item.Clone();
+            //return from item in DataSource.Buses
+            //       select item.Clone();
+            return null;
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
         {
-            return from item in DataSource.Buses
-                   where condition(item)
-                   select item.Clone();
+            //return from item in DataSource.Buses
+            //       where condition(item)
+            //       select item.Clone();
+            return null;
         }
 
         #endregion
@@ -526,13 +529,13 @@ namespace DL
                              select i).FirstOrDefault();
 
             if (item == null)
-                throw new StationException("The Line not exists.");
+                throw new TripException("The Line not exists.");
             rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
             item = (from i in rootElem.Elements()
                     where Convert.ToInt32(i.Element("NumberLine").Value) == drivingLine.NumberLine && i.Element("Start").Value == drivingLine.Start.ToString()
                     select i).FirstOrDefault();
             if (item != null)
-                throw new StationException("The driving line already exists.");
+                throw new TripException("The driving line already exists.");
 
             rootElem.Add(new XElement("DrivingLine",
                                    new XElement("NumberLine", drivingLine.NumberLine),
@@ -611,6 +614,40 @@ namespace DL
         public void updateManagingCode(string code)
         {
             DataSource.ManagingCode = code;
+            public void addUser(User user)
+            {
+                XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
+
+                XElement item = (from i in rootElem.Elements()
+                                 where i.Element("Username").Value == user.Username
+                                 select i).FirstOrDefault();
+
+                if (item != null)
+                    throw new UserException("The user already exists.");
+
+                rootElem.Add(new XElement("User",
+                                       new XElement("Username", user.Username),
+                                       new XElement("Password", user.Password),
+                                       new XElement("IsManager", user.IsManager)));
+
+                XMLTools.SaveListToXMLElement(rootElem, usersPath);
+            }
+            public void removeUser(User user)
+            {
+                XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
+
+                XElement item = (from i in rootElem.Elements()
+                                 where i.Element("Username").Value == user.Username
+                                 select i).FirstOrDefault();
+
+                if (item != null)
+                {
+                    item.Remove();
+                    XMLTools.SaveListToXMLElement(rootElem, usersPath);
+                }
+                else
+                    throw new UserException("The user does not exist.");
+            }
         }
 
         #endregion
