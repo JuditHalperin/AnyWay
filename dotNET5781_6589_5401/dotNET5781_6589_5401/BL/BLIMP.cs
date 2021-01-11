@@ -850,6 +850,11 @@ namespace BL
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
                 IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex);
+                if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
+                {
+                    removeLine(getLine(lineStation.NumberLine));
+                    return;
+                }
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
                     lineStations.ElementAt(i).PathIndex--;
@@ -1091,14 +1096,13 @@ namespace BL
         public TimeSpan timeTillArrivalToSource(DrivingBus trip, int source, int target)
         {
             DO.LineStation sourceStation = dal.getLineStation(trip.NumberLine, source);
-            DO.LineStation targetStation = dal.getLineStation(trip.NumberLine, target);
             DO.LineStation previousStation = new DO.LineStation();
 
             if (trip.PreviousStationID != -1)
             {
                 previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
-                if (previousStation.ID != -1 && (previousStation.PathIndex >= targetStation.PathIndex || previousStation.PathIndex <= sourceStation.PathIndex))
-                    return new TimeSpan(-1, -1, -1); // if it passed the source or the target stations
+                if (previousStation.ID != -1 && previousStation.PathIndex <= sourceStation.PathIndex)
+                    return new TimeSpan(-1, -1, -1); // if it passed the source station
             }
 
             TimeSpan time = trip.NextStationTime;
