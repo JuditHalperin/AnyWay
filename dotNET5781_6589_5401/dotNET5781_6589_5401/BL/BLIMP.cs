@@ -1214,7 +1214,7 @@ namespace BL
                 throw new BO.TripException(ex.Message, ex);
             }
         }
-        public BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
+        public BO.DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
             try
             {
