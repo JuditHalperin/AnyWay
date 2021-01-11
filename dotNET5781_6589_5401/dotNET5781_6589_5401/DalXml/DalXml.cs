@@ -612,42 +612,10 @@ namespace DL
             return XMLTools.LoadListFromXMLElement(managingCodePath).Elements().ToString();
         }
         public void updateManagingCode(string code)
-        {
-            DataSource.ManagingCode = code;
-            public void addUser(User user)
-            {
-                XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
-
-                XElement item = (from i in rootElem.Elements()
-                                 where i.Element("Username").Value == user.Username
-                                 select i).FirstOrDefault();
-
-                if (item != null)
-                    throw new UserException("The user already exists.");
-
-                rootElem.Add(new XElement("User",
-                                       new XElement("Username", user.Username),
-                                       new XElement("Password", user.Password),
-                                       new XElement("IsManager", user.IsManager)));
-
-                XMLTools.SaveListToXMLElement(rootElem, usersPath);
-            }
-            public void removeUser(User user)
-            {
-                XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
-
-                XElement item = (from i in rootElem.Elements()
-                                 where i.Element("Username").Value == user.Username
-                                 select i).FirstOrDefault();
-
-                if (item != null)
-                {
-                    item.Remove();
-                    XMLTools.SaveListToXMLElement(rootElem, usersPath);
-                }
-                else
-                    throw new UserException("The user does not exist.");
-            }
+        {          
+            XElement rootElem = XMLTools.LoadListFromXMLElement(managingCodePath);
+            rootElem.Elements().Remove();
+            rootElem.Add(code);
         }
 
         #endregion
