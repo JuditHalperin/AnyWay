@@ -700,7 +700,7 @@ namespace BL
         /// <returns></returns>
         public bool canChangeStation(BO.Station station)
         {
-            foreach (DrivingLine drivingLine in dal.GetDrivingLines())
+            foreach (DO.DrivingLine drivingLine in dal.GetDrivingLines())
                 if (GetTripsOfLine_Present(drivingLine.NumberLine) != null)
                     if (dal.getLineStation(drivingLine.NumberLine, station.ID) != null)
                         return false;
@@ -1009,7 +1009,7 @@ namespace BL
                     throw new BO.TripException("No trips exist.");
 
                 List<DrivingBus> trips = new List<DrivingBus>();
-                foreach (DrivingLine drivingLine in drivingLines)
+                foreach (DO.DrivingLine drivingLine in drivingLines)
                     for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                     {
                         DrivingBus trip = getTrip(drivingLine.NumberLine, i.ToDateTime());
@@ -1054,7 +1054,7 @@ namespace BL
                 return null;
 
             List<DrivingBus> trips = new List<DrivingBus>();
-            foreach (DrivingLine drivingLine in drivingLines)
+            foreach (DO.DrivingLine drivingLine in drivingLines)
                 for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                 {
                     DrivingBus trip = getTrip(serial, i.ToDateTime());
@@ -1070,7 +1070,7 @@ namespace BL
                 return null;
 
             List<DrivingBus> trips = new List<DrivingBus>();
-            foreach (DrivingLine drivingLine in drivingLines)
+            foreach (DO.DrivingLine drivingLine in drivingLines)
                 for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
                     trips.Add(new DrivingBus()
                     {
