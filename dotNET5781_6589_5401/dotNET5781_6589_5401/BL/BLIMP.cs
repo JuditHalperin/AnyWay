@@ -1151,105 +1151,105 @@ namespace BL
 
         #region DrivingLines
 
-        ///// <summary>
-        ///// Func that converts driving line of BO to driving line of DO
-        ///// </summary>
-        ///// <param name="drivingLine">driving line of BO</param>
-        ///// <returns>driving line of DO</returns>
-        //DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
-        //{
-        //    return new DrivingLine()
-        //    {
-        //        NumberLine = drivingLine.NumberLine,
-        //        Start = drivingLine.Start,
-        //        End = drivingLine.End,
-        //        Frequency = drivingLine.Frequency
-        //    };
-        //}
-        ///// <summary>
-        ///// Func that converts driving line of DO to driving line of BO
-        ///// </summary>
-        ///// <param name="drivingLine">driving line of DO</param>
-        ///// <returns>driving line of BO</returns>
-        //BO.DrivingLine convertToDrivingLineBO(DrivingLine drivingLine)
-        //{
-        //    return new BO.DrivingLine()
-        //    {
-        //        NumberLine = drivingLine.NumberLine,
-        //        Start = drivingLine.Start,
-        //        Frequency = drivingLine.Frequency,
-        //        End = drivingLine.End
-        //    };
-        //}
-        //public void addDrivingLine(BO.DrivingLine drivingLine)
-        //{
-        //    try
-        //    {
-        //        dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public void removeDrivingLine(BO.DrivingLine drivingLine)
-        //{
-        //    try
-        //    {
-        //        dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public void updateDrivingLine(BO.DrivingLine drivingLine)
-        //{
-        //    try
-        //    {
-        //        dal.updateDrivingLine(convertToDrivingLineDO(drivingLine));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
-        //{
-        //    try
-        //    {
-        //        return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public IEnumerable<BO.DrivingLine> GetDrivingLines()
-        //{
-        //    try
-        //    {
-        //        return from drivingLine in dal.GetDrivingLines()
-        //               select convertToDrivingLineBO(drivingLine);
-        //    }
-        //    catch (LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message, ex);
-        //    }
-        //}
-        //public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
-        //{
-        //    try
-        //    {
-        //        return from item in GetDrivingLines()
-        //               where condition(item)
-        //               select item;
-        //    }
-        //    catch (BO.LineException ex)
-        //    {
-        //        throw new BO.LineException(ex.Message);
-        //    }
-        //}
+        /// <summary>
+        /// Func that converts driving line of BO to driving line of DO
+        /// </summary>
+        /// <param name="drivingLine">driving line of BO</param>
+        /// <returns>driving line of DO</returns>
+        DO.DrivingLine convertToDrivingLineDO(BO.DrivingLine drivingLine)
+        {
+            return new DO.DrivingLine()
+            {
+                NumberLine = drivingLine.NumberLine,
+                Start = drivingLine.Start,
+                End = drivingLine.End,
+                Frequency = drivingLine.Frequency
+            };
+        }
+        /// <summary>
+        /// Func that converts driving line of DO to driving line of BO
+        /// </summary>
+        /// <param name="drivingLine">driving line of DO</param>
+        /// <returns>driving line of BO</returns>
+        BO.DrivingLine convertToDrivingLineBO(DO.DrivingLine drivingLine)
+        {
+            return new BO.DrivingLine()
+            {
+                NumberLine = drivingLine.NumberLine,
+                Start = drivingLine.Start,
+                Frequency = drivingLine.Frequency,
+                End = drivingLine.End
+            };
+        }
+        public void addDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public void removeDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.removeDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public void updateDrivingLine(BO.DrivingLine drivingLine)
+        {
+            try
+            {
+                dal.updateDrivingLine(convertToDrivingLineDO(drivingLine));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public BO.DrivingLine getDrivingLine(int numberLine, DateTime start)
+        {
+            try
+            {
+                return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public IEnumerable<BO.DrivingLine> GetDrivingLines()
+        {
+            try
+            {
+                return from drivingLine in dal.GetDrivingLines()
+                       select convertToDrivingLineBO(drivingLine);
+            }
+            catch (DO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message, ex);
+            }
+        }
+        public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
+        {
+            try
+            {
+                return from item in GetDrivingLines()
+                       where condition(item)
+                       select item;
+            }
+            catch (BO.TripException ex)
+            {
+                throw new BO.TripException(ex.Message);
+            }
+        }
 
         #endregion
 

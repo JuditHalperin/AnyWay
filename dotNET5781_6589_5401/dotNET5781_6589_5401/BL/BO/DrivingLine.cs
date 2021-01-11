@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DO
+namespace BO
 {
     public class DrivingLine
     {

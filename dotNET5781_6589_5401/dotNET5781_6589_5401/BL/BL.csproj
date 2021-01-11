@@ -46,6 +46,7 @@
     <Compile Include="BLIMP.cs" />
     <Compile Include="BO\Bus.cs" />
     <Compile Include="BO\DrivingBus.cs" />
+    <Compile Include="BO\DrivingLine.cs" />
     <Compile Include="BO\Enums.cs" />
     <Compile Include="BO\Exceptions.cs" />
     <Compile Include="BO\ExtensionTime.cs" />

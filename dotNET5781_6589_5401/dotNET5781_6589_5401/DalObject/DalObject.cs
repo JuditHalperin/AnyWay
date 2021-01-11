@@ -313,9 +313,9 @@ namespace DL
             {
                 getLine(drivingLine.NumberLine); // check if the line exists
             }
-            catch (LineException ex)
+            catch (TripException ex)
             {
-                throw new LineException(ex.Message);
+                throw new TripException(ex.Message);
             }
             if (DataSource.DrivingLines.Exists(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start))
                 throw new TripException("The driving line already exists.");
