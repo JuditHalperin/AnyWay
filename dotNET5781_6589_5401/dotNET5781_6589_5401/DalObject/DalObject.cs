@@ -136,7 +136,10 @@ namespace DL
         }
         public Line getLine(int serial)
         {
-            return DataSource.Lines.Find(item => item.ThisSerial == serial).Clone();               
+            Line l = DataSource.Lines.Find(item => item.ThisSerial == serial);
+            if (l == null)
+                return null;
+            return l.Clone();
         }
         public IEnumerable<Line> GetLines()
         {
