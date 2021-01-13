@@ -58,7 +58,8 @@ namespace PL
                 ListOfLines.SelectedIndex = 0;
             DataContext = (BO.Line)ListOfLines.SelectedItem;
 
-            //IEnumerable<DrivinLine> drivinLines = Get
+            IEnumerable<DrivingLine> drivinLines = bl.GetDrivingLines(((BO.Line)ListOfLines.SelectedItem).ThisSerial);
+
         }
 
         private void AddTrip_Click(object sender, RoutedEventArgs e)

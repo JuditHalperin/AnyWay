@@ -90,5 +90,11 @@ namespace PL
             new PassengerWindow(username).Show();
             Close();
         }
+
+        private void Trips_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(0, null), false);
+            Close();
+        }
     }
 }
