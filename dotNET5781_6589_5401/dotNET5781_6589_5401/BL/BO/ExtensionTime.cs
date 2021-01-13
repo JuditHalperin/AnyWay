@@ -8,9 +8,14 @@ namespace BO
 {
     public static class ExtensionTime
     {
-        public static TimeSpan ToTimeSpan(this int seconds)
+        public static TimeSpan SecondsToTimeSpan(this int seconds)
         {
             return new TimeSpan(seconds / 3600, seconds % 3600 / 60, seconds % 3600 % 60);
+        }
+
+        public static TimeSpan MinutesToTimeSpan(this int minutes)
+        {
+            return new TimeSpan(0, minutes, 0);
         }
 
         public static DateTime ToDateTime(this TimeSpan time)
