@@ -48,8 +48,8 @@ namespace PL
                         break;
                     }
 
-            if (!administrativePrivileges)
-                AddTrip.Visibility = Visibility.Hidden;
+            //if (!administrativePrivileges)
+            //    AddTrip.Visibility = Visibility.Hidden;
         }
 
         private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)

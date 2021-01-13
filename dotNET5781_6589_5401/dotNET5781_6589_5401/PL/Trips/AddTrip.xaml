@@ -5,16 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Add Trip" Height="400" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="{Binding}" Height="330" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="Line" Content="{Binding}" Style="{StaticResource LabelTitleStyle}" FontSize="17" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -24,7 +22,7 @@
             <Label Content="End:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Label Content="Frequency:" Style="{StaticResource LabelTitleStyle}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -32,27 +30,27 @@
             </Grid.ColumnDefinitions>
             <Grid x:Name="Start" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="StartHours" ItemsSource="{Binding}" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
-                <Label Content=":" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
-                <ComboBox x:Name="StartMinutes" ItemsSource="{Binding}" Grid.Column="2" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
+                <ComboBox x:Name="StartHours" ItemsSource="{Binding}" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"/>
+                <Label Content=":" FontSize="18" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                <ComboBox x:Name="StartMinutes" ItemsSource="{Binding}" Grid.Column="2" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"/>
             </Grid>
             <Grid x:Name="End" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="EndHours" ItemsSource="{Binding}" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
-                <Label Content=":" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
-                <ComboBox x:Name="EndMinutes" ItemsSource="{Binding}" Grid.Column="2" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
+                <ComboBox x:Name="EndHours" ItemsSource="{Binding}" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"/>
+                <Label Content=":" FontSize="18" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                <ComboBox x:Name="EndMinutes" ItemsSource="{Binding}" Grid.Column="2" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0"/>
             </Grid>
-            <TextBox x:Name="Frequency" Grid.Column="2" MaxLength="2" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" TextChanged="Ok_IsEnabled"/>
+            <TextBox x:Name="Frequency" Grid.Column="2" MaxLength="2" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TextBoxStyle}" TextChanged="Ok_IsEnabled"/>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
