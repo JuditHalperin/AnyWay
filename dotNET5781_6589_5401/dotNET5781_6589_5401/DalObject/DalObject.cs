@@ -312,13 +312,10 @@ namespace DL
 
         public void addDrivingLine(DrivingLine drivingLine)
         {
-            try 
+
+            if (getLine(drivingLine.NumberLine) == null)// check if the line exists
             {
-                getLine(drivingLine.NumberLine); // check if the line exists
-            }
-            catch (TripException ex)
-            {
-                throw new TripException(ex.Message);
+                throw new TripException("The line not exists.");
             }
             if (DataSource.DrivingLines.Exists(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start))
                 throw new TripException("The driving line already exists.");
