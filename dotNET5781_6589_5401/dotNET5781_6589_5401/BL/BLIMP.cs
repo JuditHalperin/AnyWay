@@ -765,38 +765,39 @@ namespace BL
         }
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
+            List<BO.Station> pathTemp = (List<BO.Station>)path;
             List<BO.LineStation> lineStations = new List<BO.LineStation>();
             TwoFollowingStations followingStations;
             lineStations.Add(new BO.LineStation()
             {
-                ID = path.ElementAt(0).ID,
+                ID = pathTemp[0].ID,
                 PathIndex = 1,
-                NextStationID = path.ElementAt(1).ID,
+                NextStationID = pathTemp[1].ID,
                 PreviousStationID = -1,
                 LengthFromPreviousStations = -1,
                 TimeFromPreviousStations = -1
             });
-            for (int i = 1; i < path.Count() - 1; i++)
+            for (int i = 1; i < pathTemp.Count() - 1; i++)
             {
-                followingStations = dal.getTwoFollowingStations(path.ElementAt(i).ID, path.ElementAt(i - 1).ID);
+                followingStations = dal.getTwoFollowingStations(pathTemp[i].ID, pathTemp[i - 1].ID);
                 lineStations.Add(new BO.LineStation()
                 {
-                    ID = path.ElementAt(i).ID,
+                    ID = pathTemp[i].ID,
                     PathIndex = i + 1,
-                    NextStationID = path.ElementAt(i + 1).ID,
-                    PreviousStationID = path.ElementAt(i - 1).ID,
+                    NextStationID = pathTemp[i + 1].ID,
+                    PreviousStationID = pathTemp[i - 1].ID,
                     LengthFromPreviousStations = followingStations.LengthBetweenStations,
                     TimeFromPreviousStations = followingStations.TimeBetweenStations
                 });
             }
-            followingStations = dal.getTwoFollowingStations(path.ElementAt(path.Count() - 1).ID, path.ElementAt(path.Count() - 2).ID);
+            followingStations = dal.getTwoFollowingStations(pathTemp[pathTemp.Count() - 1].ID, pathTemp[path.Count() - 2].ID);
             lineStations.Add(new BO.LineStation()
             {
 
-                ID = path.ElementAt(path.Count() - 1).ID,
-                PathIndex = path.Count(),
+                ID = pathTemp[pathTemp.Count() - 1].ID,
+                PathIndex = pathTemp.Count(),
                 NextStationID = -1,
-                PreviousStationID = path.ElementAt(path.Count() - 2).ID,
+                PreviousStationID = pathTemp[pathTemp.Count() - 2].ID,
                 LengthFromPreviousStations = followingStations.LengthBetweenStations,
                 TimeFromPreviousStations = followingStations.TimeBetweenStations
             }); ;
@@ -818,11 +819,11 @@ namespace BL
                 BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
                 if (station == null)
                     throw new BO.StationException("");
-                IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                List<BO.LineStation> lineStations = (List<BO.LineStation>)GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
-                    lineStations.ElementAt(i).PathIndex++;
-                    updateLineStation(lineStations.ElementAt(i));
+                    lineStations[i].PathIndex++;
+                    updateLineStation(lineStations[i]);
                 }
             }
             catch (BO.StationException) { }
@@ -847,7 +848,7 @@ namespace BL
             try
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
-                IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex);
+                List<BO.LineStation> lineStations = (List<BO.LineStation>)GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex);
                 if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
                 {
                     removeLine(getLine(lineStation.NumberLine));
@@ -855,8 +856,8 @@ namespace BL
                 }
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
-                    lineStations.ElementAt(i).PathIndex--;
-                    updateLineStation(lineStations.ElementAt(i));
+                    lineStations[i].PathIndex--;
+                    updateLineStation(lineStations[i]);
                 }
             }
             catch (DO.StationException ex)
@@ -877,17 +878,17 @@ namespace BL
                 {
                     if (lineStation.PathIndex != station.PathIndex) // if the index is updated
                     {
-                        IEnumerable<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                        List<BO.LineStation> lineStations = (List<BO.LineStation>)GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
                         if (station.PathIndex < lineStation.PathIndex) // need to increase the stations index that after the old station
                             for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
                             {
-                                lineStations.ElementAt(i).PathIndex--;
-                                updateLineStation(lineStations.ElementAt(i));
+                                lineStations[i].PathIndex--;
+                                updateLineStation(lineStations[i]);
                             }
                         for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                         {
-                            lineStations.ElementAt(i).PathIndex++;
-                            updateLineStation(lineStations.ElementAt(i));
+                            lineStations[i].PathIndex++;
+                            updateLineStation(lineStations[i]);
                         }
                     }
                 }
