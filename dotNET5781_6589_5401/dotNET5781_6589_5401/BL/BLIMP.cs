@@ -1216,39 +1216,22 @@ namespace BL
         }
         public BO.DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
-            try
-            {
-                return convertToDrivingLineBO(dal.getDrivingLine(numberLine, start));
-            }
-            catch (DO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message, ex);
-            }
+
+            DO.DrivingLine drivingLine= dal.getDrivingLine(numberLine, start);
+            if (drivingLine == null)
+                return null;
+            return convertToDrivingLineBO(drivingLine);
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines()
         {
-            try
-            {
                 return from drivingLine in dal.GetDrivingLines()
                        select convertToDrivingLineBO(drivingLine);
-            }
-            catch (DO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message, ex);
-            }
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
         {
-            try
-            {
                 return from item in GetDrivingLines()
                        where condition(item)
                        select item;
-            }
-            catch (BO.TripException ex)
-            {
-                throw new BO.TripException(ex.Message);
-            }
         }
 
         #endregion
