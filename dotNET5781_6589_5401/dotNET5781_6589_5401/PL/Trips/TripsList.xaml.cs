@@ -56,10 +56,21 @@ namespace PL
         {
             if ((BO.Line)ListOfLines.SelectedItem == null)
                 ListOfLines.SelectedIndex = 0;
+            
             DataContext = (BO.Line)ListOfLines.SelectedItem;
 
-            IEnumerable<DrivingLine> drivinLines = bl.GetDrivingLines(((BO.Line)ListOfLines.SelectedItem).ThisSerial);
-
+            IEnumerable<DrivingLine> drivinLines = bl.GetDrivingLines(item => item.NumberLine == ((BO.Line)ListOfLines.SelectedItem).ThisSerial);
+            if (drivinLines.Count() == 0)
+            {
+                NoTrips.Visibility = Visibility.Visible;
+                Trips.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                NoTrips.Visibility = Visibility.Hidden;
+                Trips.Visibility = Visibility.Visible;
+                Trips.ItemsSource = drivinLines;
+            }
         }
 
         private void AddTrip_Click(object sender, RoutedEventArgs e)

@@ -59,6 +59,7 @@ namespace PL
                 ShowLines.Content = "No lines";
                 LinesSchedule.Visibility = Visibility.Hidden;
                 ShowLines.IsEnabled = false;
+                LinesSchedule.IsEnabled = false;
             }
             else
                 ShowLines.Content = "Lines";
