@@ -30,9 +30,26 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="Hours" ItemsSource="{Binding}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" BorderThickness="0" Background="White"/>
-            <ComboBox x:Name="Minutes" ItemsSource="{Binding}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" BorderThickness="0" Background="White"/>
-
+            <Grid x:Name="Start" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="StartHours" ItemsSource="{Binding}" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
+                <Label Content=":" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                <ComboBox x:Name="StartMinutes" ItemsSource="{Binding}" Grid.Column="2" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
+            </Grid>
+            <Grid x:Name="End" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="EndHours" ItemsSource="{Binding}" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
+                <Label Content=":" Style="{StaticResource LabelDataStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                <ComboBox x:Name="EndMinutes" ItemsSource="{Binding}" Grid.Column="2" Style="{StaticResource ComboBoxStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="White"/>
+            </Grid>
             <TextBox x:Name="Frequency" Grid.Column="2" MaxLength="2" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" TextChanged="Ok_IsEnabled"/>
         </Grid>
         <Grid Grid.Row="3">

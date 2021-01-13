@@ -63,11 +63,13 @@ namespace PL
             if (drivinLines.Count() == 0)
             {
                 NoTrips.Visibility = Visibility.Visible;
+                Titles.Visibility = Visibility.Hidden;
                 Trips.Visibility = Visibility.Hidden;
             }
             else
             {
                 NoTrips.Visibility = Visibility.Hidden;
+                Titles.Visibility = Visibility.Visible;
                 Trips.Visibility = Visibility.Visible;
                 Trips.ItemsSource = drivinLines;
             }
