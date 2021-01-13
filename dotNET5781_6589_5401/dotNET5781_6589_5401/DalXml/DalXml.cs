@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 using DLAPI;
@@ -53,6 +54,11 @@ namespace DL
                                    new XElement("IsManager", user.IsManager)));
 
             XMLTools.SaveListToXMLElement(rootElem, usersPath);            
+        }
+        private static string hashPassword(string password)
+        {
+            SHA512 shaM = new SHA512Managed();
+            return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(passwordWithSalt)));
         }
         public void removeUser(User user)
         {
