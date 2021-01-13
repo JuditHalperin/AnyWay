@@ -88,16 +88,16 @@ namespace BLAPI
 
         #endregion
 
-        //#region DrivingLines
+        #region DrivingLines
 
-        //void addDrivingLine(DrivingLine drivingLine);
-        //void removeDrivingLine(DrivingLine drivingLine);
-        //void updateDrivingLine(DrivingLine drivingLine);
-        //DrivingLine getDrivingLine(int numberLine, DateTime start);
-        //IEnumerable<DrivingLine> GetDrivingLines();
-        //IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
+        void addDrivingLine(DrivingLine drivingLine);
+        void removeDrivingLine(DrivingLine drivingLine);
+        void updateDrivingLine(DrivingLine drivingLine);
+        DrivingLine getDrivingLine(int numberLine, TimeSpan start);
+        IEnumerable<DrivingLine> GetDrivingLines();
+        IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
 
-        //#endregion
+        #endregion
 
         #region ManagingCode
 
