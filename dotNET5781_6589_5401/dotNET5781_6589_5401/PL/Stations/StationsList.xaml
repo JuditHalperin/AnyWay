@@ -77,7 +77,7 @@
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Line Serial Number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Line Number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Index in the Path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Previous Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Next Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>

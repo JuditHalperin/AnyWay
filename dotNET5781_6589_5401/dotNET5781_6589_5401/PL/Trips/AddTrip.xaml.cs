@@ -68,14 +68,6 @@ namespace PL
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-      
-        private void Ok_IsEnabled(object sender, TextChangedEventArgs e)
-        {
-            if (Frequency.Text.Length > 0)
-                Ok.IsEnabled = true;
-            else
-                Ok.IsEnabled = false;
-        }      
+        }             
     }
 }
