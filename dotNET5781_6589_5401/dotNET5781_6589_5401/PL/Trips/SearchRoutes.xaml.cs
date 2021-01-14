@@ -33,21 +33,20 @@ namespace PL
             worker = new BackgroundWorker();
             worker.DoWork += RediscoverRoutes;
             worker.ProgressChanged += PresentRoutse;
-            worker.RunWorkerCompleted += done;
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerAsync();
 
             username = name;
 
             IEnumerable<Station> stations = bl.GetStations();
             SourceStation.ItemsSource = stations;
             TargetStation.ItemsSource = stations;
-            worker.RunWorkerAsync();
         }
 
         private void RediscoverRoutes(object sender, DoWorkEventArgs e)
         {
-            while (true) // while the selection is not changed
+            while (true)
             {
                 worker.ReportProgress(0);
                 Thread.Sleep(1000); // second
@@ -67,6 +66,7 @@ namespace PL
                 else // present routes
                 {
                     SameStation.Visibility = Visibility.Hidden;
+
                     var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
                                 let timeTillArrival = bl.timeTillArrivalToSource(drivingBus, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
                                 let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
@@ -93,18 +93,7 @@ namespace PL
                         Trips.Visibility = Visibility.Visible;
                     }
                 }
-        }
-
-        void done(object sender, RunWorkerCompletedEventArgs e)
-        {
-            return;
-        }
-
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            
-        }
+        }       
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {           
