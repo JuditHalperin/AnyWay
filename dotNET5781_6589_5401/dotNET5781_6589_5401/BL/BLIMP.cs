@@ -1231,9 +1231,9 @@ namespace BL
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
         {
-                return from item in GetDrivingLines()
+                return (from item in GetDrivingLines()
                        where condition(item)
-                       select item;
+                       select item).OrderBy(item => item.Start);
         }
         /// <summary>
         /// for show start time of line
