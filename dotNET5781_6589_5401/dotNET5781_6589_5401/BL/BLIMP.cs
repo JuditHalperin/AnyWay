@@ -1126,7 +1126,7 @@ namespace BL
                 time += lineStation.TimeFromPreviousStations;
                 if (time >= secondsOfTrip)
                 {
-                    previousStationTime = time - secondsOfTrip;
+                    previousStationTime = lineStation.TimeFromPreviousStations - (time - secondsOfTrip);
                     return lineStation.PathIndex - 1;//this the path index (count from 1) of previous station.
                 }
             }
