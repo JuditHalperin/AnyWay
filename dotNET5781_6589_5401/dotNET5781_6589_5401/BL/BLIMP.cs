@@ -1231,9 +1231,9 @@ namespace BL
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
         {
-                return from item in GetDrivingLines()
+                return (from item in GetDrivingLines()
                        where condition(item)
-                       select item;
+                       select item).OrderBy(item => item.Start);
         }
         /// <summary>
         /// for show start time of line
@@ -1242,7 +1242,7 @@ namespace BL
         /// <returns>list of start time</returns>
         public IEnumerable<TimeSpan> getTripsStart(int numberLine)
         {
-            IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == numberLine).OrderBy(item=>item.Start);
+            IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == numberLine);
             List<TimeSpan> tripsStart = new List<TimeSpan>();
             foreach(BO.DrivingLine drivingLine in drivingLines)
             {
