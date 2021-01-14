@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PL
@@ -31,10 +30,9 @@ namespace PL
             dateTime.worker.RunWorkerAsync();
 
             worker = new BackgroundWorker();
-            worker.DoWork += RediscoverRoutes;
-            worker.ProgressChanged += PresentRoutse;
+            worker.DoWork += CheckForUpdate;
+            worker.ProgressChanged += PresentRoutes;
             worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
 
             username = name;
@@ -44,7 +42,7 @@ namespace PL
             TargetStation.ItemsSource = stations;
         }
 
-        private void RediscoverRoutes(object sender, DoWorkEventArgs e)
+        private void CheckForUpdate(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
@@ -53,7 +51,7 @@ namespace PL
             }
         }
 
-        private void PresentRoutse(object sender, ProgressChangedEventArgs e)
+        private void PresentRoutes(object sender, ProgressChangedEventArgs e)
         {
             if (SourceStation.SelectedItem != null && TargetStation.SelectedItem != null) // both stations selected
                 if (((Station)SourceStation.SelectedItem).ID == ((Station)TargetStation.SelectedItem).ID) // same station
