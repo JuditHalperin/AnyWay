@@ -1091,14 +1091,14 @@ namespace BL
             }
 
             TimeSpan time = trip.NextStationTime;
-
+            int index = 1;
             if (trip.PreviousStationID != -1)
             {
-                int index = previousStation.PathIndex + 1;
-                List<BO.LineStation> path = getLine(trip.NumberLine).Path.ToList();
-                for (int i = index; i < sourceStation.PathIndex; i++)
-                    time += path[index].TimeFromPreviousStations.SecondsToTimeSpan();
+                index = previousStation.PathIndex + 1;
             }
+            List<BO.LineStation> path = getLine(trip.NumberLine).Path.ToList();
+            for (int i = index; i < sourceStation.PathIndex; i++)
+                time += path[index].TimeFromPreviousStations.SecondsToTimeSpan();
 
             return time;
         }
