@@ -74,7 +74,7 @@ namespace PL
 
         private void Trips_Click(object sender, RoutedEventArgs e)
         {
-            new PassengerTrip(tempUsername).Show();
+            new SearchRoutes(tempUsername).Show();
             Close();
         }
 
