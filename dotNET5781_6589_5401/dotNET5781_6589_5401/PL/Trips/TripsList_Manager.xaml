@@ -1,4 +1,4 @@
-﻿<Window x:Class="PL.TripsList"
+﻿<Window x:Class="PL.TripsList_Manager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,13 +10,13 @@
         <DataTemplate x:Key="LineTrips">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Start" Grid.Column="0" Content="{Binding Path=Start}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label x:Name="End" Grid.Column="1" Content="{Binding Path=End}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label x:Name="Frequency" Grid.Column="2" Content="{Binding Path=Frequency}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Label x:Name="Start" Grid.Column="0" Content="{Binding Path=Start}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label x:Name="End" Grid.Column="1" Content="{Binding Path=End}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label x:Name="Frequency" Grid.Column="2" Content="{Binding Path=Frequency}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -59,10 +59,21 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <ListBox x:Name="Trips" Style="{StaticResource ListBoxStyle}" Grid.Row="1" BorderThickness="0" ItemTemplate="{StaticResource LineTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Grid x:Name="Titles" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Start" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center"/>
+                    <Label Content="End" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center"/>
+                    <Label Content="Frequency" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center"/>
+                </Grid>
+                <ListBox x:Name="Trips" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" ItemTemplate="{StaticResource LineTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoTrips" Style="{StaticResource LabelTitleStyle}" Content="No trips for this line." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
         </Grid>

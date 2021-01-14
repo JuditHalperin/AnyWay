@@ -701,7 +701,7 @@ namespace DS
                     NumberLine = line.ThisSerial,
                     Start = new TimeSpan(7 + dl/2, (dl % 2) * 30, 0),
                     Frequency = (15 + (dl % 3) * 5),
-                    End = new TimeSpan(24 - dl, (dl % 2) * 30, 0)
+                    End = new TimeSpan(23 - dl, (dl % 2) * 30, 0)
                 });
                 dl++;
             }

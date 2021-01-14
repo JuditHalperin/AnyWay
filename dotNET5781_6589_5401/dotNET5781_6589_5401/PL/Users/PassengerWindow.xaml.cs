@@ -23,7 +23,6 @@ namespace PL
     public partial class PassengerWindow : Window
     {
         static IBL bl;
-
         string tempUsername;
 
         public PassengerWindow(string username)

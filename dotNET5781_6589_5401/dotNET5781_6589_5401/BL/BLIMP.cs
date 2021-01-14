@@ -987,8 +987,8 @@ namespace BL
                     NumberLine = serial,
                     Start = start,
                     PreviousStationID = path[index - 1].ID,
-                    PreviousStationTime = previousStationTime.ToTimeSpan(),
-                    NextStationTime = (path[index].TimeFromPreviousStations - previousStationTime).ToTimeSpan()
+                    PreviousStationTime = previousStationTime.SecondsToTimeSpan(),
+                    NextStationTime = (path[index].TimeFromPreviousStations - previousStationTime).SecondsToTimeSpan()
                 };
             }
             catch (BO.LineException ex)
@@ -1007,7 +1007,7 @@ namespace BL
 
                 List<DrivingBus> trips = new List<DrivingBus>();
                 foreach (DO.DrivingLine drivingLine in drivingLines)
-                    for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                    for (TimeSpan i = drivingLine.Start; i < drivingLine.End; i += drivingLine.Frequency.MinutesToTimeSpan())
                     {
                         DrivingBus trip = getTrip(drivingLine.NumberLine, i.ToDateTime());
                         if (trip != null)
@@ -1052,7 +1052,7 @@ namespace BL
 
             List<DrivingBus> trips = new List<DrivingBus>();
             foreach (DO.DrivingLine drivingLine in drivingLines)
-                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i += drivingLine.Frequency.MinutesToTimeSpan())
                 {
                     DrivingBus trip = getTrip(serial, i.ToDateTime());
                     if (trip != null)
@@ -1068,7 +1068,7 @@ namespace BL
 
             List<DrivingBus> trips = new List<DrivingBus>();
             foreach (DO.DrivingLine drivingLine in drivingLines)
-                for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i = i.Add(new TimeSpan(0, drivingLine.Frequency, 0)))
+                for (TimeSpan i = getClosestStart(drivingLine.Start, drivingLine.End, drivingLine.Frequency); i < drivingLine.End; i += drivingLine.Frequency.MinutesToTimeSpan())
                     trips.Add(new DrivingBus()
                     {
                         NumberLine = drivingLine.NumberLine,
@@ -1098,7 +1098,7 @@ namespace BL
                 int index = previousStation.PathIndex + 1;
                 List<BO.LineStation> path = getLine(trip.NumberLine).Path.ToList();
                 for (int i = index; i < sourceStation.PathIndex; i++)
-                    time += path[index].TimeFromPreviousStations.ToTimeSpan();
+                    time += path[index].TimeFromPreviousStations.SecondsToTimeSpan();
             }
 
             return time;
@@ -1109,7 +1109,7 @@ namespace BL
             List<BO.LineStation> path = getLine(serial).Path.ToList();
             for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++) 
                 duration += path[i].TimeFromPreviousStations;
-            return duration.ToTimeSpan();
+            return duration.SecondsToTimeSpan();
         }
         private int duration(IEnumerable<BO.LineStation> path)
         {
@@ -1136,9 +1136,9 @@ namespace BL
             }
             return 0; // not found
         }
-        private TimeSpan getClosestStart(TimeSpan start, TimeSpan end, int friquency)
+        private TimeSpan getClosestStart(TimeSpan start, TimeSpan end, int frequency)
         {
-            for (TimeSpan closestStart = start; closestStart <= end; closestStart += new TimeSpan(0, friquency, 0))
+            for (TimeSpan closestStart = start; closestStart <= end; closestStart += frequency.MinutesToTimeSpan())
                 if (closestStart >= DateTime.Now.TimeOfDay)
                     return closestStart;
             return end;

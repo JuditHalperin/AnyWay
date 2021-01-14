@@ -57,12 +57,14 @@ namespace PL
             {
                 AddFirstLine.Visibility = Visibility.Visible;
                 ShowLines.Visibility = Visibility.Hidden;
+                LinesSchedule.IsEnabled = false;
             }
             else
             {
                 AddFirstLine.Visibility = Visibility.Hidden;
                 LinesSchedule.Visibility = Visibility.Hidden;
                 ShowLines.Visibility = Visibility.Visible;
+                LinesSchedule.IsEnabled = true;
             }
 
             if (bl.countStations() == 0)
@@ -114,7 +116,7 @@ namespace PL
         }
         private void LinesSchedule_Click(object sender, RoutedEventArgs e)
         {
-            new TripsList(tempUsername).Show();
+            new TripsList_Manager(tempUsername).Show();
             Close();
         }
 
