@@ -62,7 +62,6 @@ namespace PL
             else
             {
                 AddFirstLine.Visibility = Visibility.Hidden;
-                LinesSchedule.Visibility = Visibility.Hidden;
                 ShowLines.Visibility = Visibility.Visible;
                 LinesSchedule.IsEnabled = true;
             }

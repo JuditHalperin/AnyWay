@@ -56,8 +56,8 @@ namespace PL
             if (bl.countLines() == 0)
             {
                 ShowLines.Content = "No lines";
-                LinesSchedule.Visibility = Visibility.Hidden;
                 ShowLines.IsEnabled = false;
+                AskTrips.IsEnabled = false;
                 LinesSchedule.IsEnabled = false;
             }
             else
@@ -91,7 +91,7 @@ namespace PL
         }
         private void LinesSchedule_Click(object sender, RoutedEventArgs e)
         {
-            new TripsList(tempUsername, -1, false).Show();
+            new TripsList_Passenger(tempUsername, -1, false).Show();
             Close();
         }
 
