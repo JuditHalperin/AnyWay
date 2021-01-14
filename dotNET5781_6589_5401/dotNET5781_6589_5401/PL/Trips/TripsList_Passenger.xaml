@@ -5,8 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="TripsList_Passenger" Height="450" Width="800">
+        Title="Trips" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FFEEF5FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1.3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Back" Source="BackButton.png" Width="35" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Back_MouseDown" />
+            <Label Content="Line:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ListOfLines" Style="{StaticResource ComboBoxStyle}" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="ListOfLines_SelectionChanged"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Region:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="{Binding Path=Region}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Start Time of Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ListBox x:Name="TripsStart" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Label x:Name="NoTrips" Style="{StaticResource LabelTitleStyle}" Content="No trips for this line." Grid.Row="1" Visibility="Hidden"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

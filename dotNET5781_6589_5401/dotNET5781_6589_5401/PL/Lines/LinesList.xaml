@@ -51,6 +51,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -58,8 +59,9 @@
                 <Label Content="{Binding Path=Region}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Number of Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label x:Name="NumberOfStations" Style="{StaticResource LabelDataStyle}" Content="{Binding}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button x:Name="EditLine" Style="{StaticResource ButtonStyle}" Content="Edit" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditLine_Click"/>
-                <Button x:Name="RemoveLine" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveLine_Click"/>
+                <Button x:Name="LineTrips" Style="{StaticResource ButtonStyle}" Content="Trips" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="LineTrips_Click"/>
+                <Button x:Name="EditLine" Style="{StaticResource ButtonStyle}" Content="Edit" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="EditLine_Click"/>
+                <Button x:Name="RemoveLine" Style="{StaticResource ButtonStyle}" Content="Remove" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Click="RemoveLine_Click"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

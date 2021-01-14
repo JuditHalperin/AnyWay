@@ -80,6 +80,15 @@ namespace PL
             ListOfLines.ItemsSource = bl.GetLines();
         }
 
+        private void LineTrips_Click(object sender, RoutedEventArgs e)
+        {
+            if (administrativePrivileges)
+                new TripsList_Manager(username, ((BO.Line)ListOfLines.SelectedItem).ThisSerial).Show();
+            else
+                new TripsList_Passenger(username, ((BO.Line)ListOfLines.SelectedItem).ThisSerial).Show();
+            Close();
+        }
+
         private void EditLine_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -128,6 +137,6 @@ namespace PL
             else
                 new PassengerWindow(username).Show();
             Close();
-        }
+        }       
     }
 }
