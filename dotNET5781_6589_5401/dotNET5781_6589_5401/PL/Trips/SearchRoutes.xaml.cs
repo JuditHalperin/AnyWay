@@ -47,7 +47,7 @@ namespace PL
 
         private void RediscoverRoutes(object sender, DoWorkEventArgs e)
         {
-            while (true) // while the selection is not changed
+            while (true) // while the window open.
             {
                 worker.ReportProgress(0);
                 Thread.Sleep(1000); // second
