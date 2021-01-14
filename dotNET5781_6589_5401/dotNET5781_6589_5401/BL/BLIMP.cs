@@ -760,7 +760,7 @@ namespace BL
         }
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
-            List<BO.Station> pathTemp = (List<BO.Station>)path;
+            List<BO.Station> pathTemp = path.ToList();
             List<BO.LineStation> lineStations = new List<BO.LineStation>();
             TwoFollowingStations followingStations;
             lineStations.Add(new BO.LineStation()
@@ -814,7 +814,7 @@ namespace BL
                 BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
                 if (station == null)
                     throw new BO.StationException("");
-                List<BO.LineStation> lineStations = (List<BO.LineStation>)GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
                     lineStations[i].PathIndex++;
@@ -843,7 +843,7 @@ namespace BL
             try
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
-                List<BO.LineStation> lineStations = (List<BO.LineStation>)GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex);
+                List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex).ToList();
                 if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
                 {
                     removeLine(getLine(lineStation.NumberLine));
@@ -873,7 +873,7 @@ namespace BL
                 {
                     if (lineStation.PathIndex != station.PathIndex) // if the index is updated
                     {
-                        List<BO.LineStation> lineStations = (List<BO.LineStation>)GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex);
+                        List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
                         if (station.PathIndex < lineStation.PathIndex) // need to increase the stations index that after the old station
                             for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
                             {
