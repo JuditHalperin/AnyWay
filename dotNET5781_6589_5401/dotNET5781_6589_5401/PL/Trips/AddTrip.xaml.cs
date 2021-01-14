@@ -33,13 +33,20 @@ namespace PL
             line = lineNumber;
             Title = "Add Trip - Line " + lineNumber;
 
-            StartHours.ItemsSource = Enumerable.Range(6, 18);
+            for (int i = 6; i < 24; i++)
+            {
+                StartHours.Items.Add(i.ToString("00"));
+                EndHours.Items.Add(i.ToString("00"));
+            }
             StartHours.SelectedIndex = 0;
-            EndHours.ItemsSource = Enumerable.Range(6, 18);
             EndHours.SelectedIndex = 0;
-            StartMinutes.ItemsSource = Enumerable.Range(0, 60);
+
+            for (int i = 0; i < 60; i++)
+            {
+                StartMinutes.Items.Add(i.ToString("00"));
+                EndMinutes.Items.Add(i.ToString("00"));
+            }
             StartMinutes.SelectedIndex = 0;
-            EndMinutes.ItemsSource = Enumerable.Range(0, 60);
             EndMinutes.SelectedIndex = 0;
         }
 
@@ -47,15 +54,18 @@ namespace PL
         {
             try
             {
-                TimeSpan start = new TimeSpan((int)StartHours.SelectedItem, (int)StartMinutes.SelectedItem, 0);
-                TimeSpan end = new TimeSpan((int)EndHours.SelectedItem, (int)EndMinutes.SelectedItem, 0);
+                TimeSpan start = new TimeSpan(Convert.ToInt32(StartHours.SelectedItem), Convert.ToInt32(StartMinutes.SelectedItem), 0);
+                TimeSpan end = new TimeSpan(Convert.ToInt32(EndHours.SelectedItem), Convert.ToInt32(EndMinutes.SelectedItem), 0);
                 int frequency = Convert.ToInt32(Frequency.Text);
 
                 if (start > end)
                     throw new InvalidInputException("The start time should be before the end time.");
 
-                if(start + frequency.MinutesToTimeSpan() > end)
-                    throw new InvalidInputException("In order to schedule one trip, choose zero as a frequency.");
+                if (start + frequency.MinutesToTimeSpan() > end) // one trip
+                {
+                    frequency = 0;
+                    end = start;
+                }
 
                 bl.addDrivingLine(new DrivingLine() { NumberLine = line, Start = start, End = end, Frequency = frequency });
                 Close();

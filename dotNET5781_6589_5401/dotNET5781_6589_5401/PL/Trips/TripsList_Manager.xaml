@@ -13,10 +13,12 @@
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="Start" Grid.Column="0" Content="{Binding Path=Start}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label x:Name="End" Grid.Column="1" Content="{Binding Path=End}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label x:Name="Frequency" Grid.Column="2" Content="{Binding Path=Frequency}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button x:Name="RemoveTrip" Grid.Column="3" Width="50" Content="Remove" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveTrip_Click"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -54,7 +56,7 @@
                 <Label Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Region:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Region}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button x:Name="AddTrip" Content="Add Trip" Style="{StaticResource ButtonStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Click="AddTrip_Click"/>
+                <Button x:Name="AddTrip" Content="Add Trip" Style="{StaticResource ButtonStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="AddTrip_Click"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

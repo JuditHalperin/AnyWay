@@ -76,10 +76,15 @@ namespace PL
             ListOfLines.ItemsSource = bl.GetLines();
         }
 
+        private void RemoveTrip_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {
             new ManagerWindow(username).Show();
             Close();
-        }
+        }        
     }
 }
