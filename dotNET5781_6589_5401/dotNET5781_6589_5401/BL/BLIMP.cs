@@ -1178,12 +1178,10 @@ namespace BL
         {
             try
             {
-                IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == drivingLine.NumberLine);
-                foreach(BO.DrivingLine dLine in drivingLines)
-                {
-                    if ((drivingLine.Start > dLine.Start && drivingLine.Start < dLine.End) || (drivingLine.End > dLine.Start && drivingLine.End < dLine.End))
+                foreach(BO.DrivingLine dLine in GetDrivingLines(item => item.NumberLine == drivingLine.NumberLine))
+                    if ((drivingLine.Start >= dLine.Start && drivingLine.Start <= dLine.End) || (drivingLine.End > dLine.Start && drivingLine.End < dLine.End))
                         throw new BO.TripException("Driving line times cannot be set at the times the line drive.");
-                }
+
                 dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
             }
             catch (DO.TripException ex)

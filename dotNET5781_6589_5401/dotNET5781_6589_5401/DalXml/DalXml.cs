@@ -334,7 +334,7 @@ namespace DL
             IEnumerable<Station> stations = from i in XMLTools.LoadListFromXMLElement(stationsPath).Elements()
                                             select new Station()
                                             {
-                                                ID = Convert.ToInt32(i.Element("ID").Value),
+                                                ID = Convert.ToInt32(i.Element("ID").Value)
                                             };
             return stations.Count();
         }
@@ -437,14 +437,14 @@ namespace DL
                              select i).FirstOrDefault();
 
             if (item == null)
-                throw new StationException("At least one of the station does not exist.");
+                throw new StationException("The first station does not exist.");
 
             item = (from i in rootElem.Elements()
                     where Convert.ToInt32(i.Element("ID").Value) == twoFollowingStations.SecondStationID
                     select i).FirstOrDefault();
 
             if (item == null)
-                throw new StationException("At least one of the station does not exist.");
+                throw new StationException("The second station does not exist.");
             
             rootElem = XMLTools.LoadListFromXMLElement(followingStationsPath);
 
@@ -461,8 +461,7 @@ namespace DL
                                    new XElement("LengthBetweenStations", twoFollowingStations.LengthBetweenStations),
                                    new XElement("TimeBetweenStations", twoFollowingStations.TimeBetweenStations)));
 
-            XMLTools.SaveListToXMLElement(rootElem, followingStationsPath);
-            
+            XMLTools.SaveListToXMLElement(rootElem, followingStationsPath);            
         }
         public void removeTwoFollowingStations(TwoFollowingStations twoFollowingStations)
         {
@@ -535,11 +534,14 @@ namespace DL
                              select i).FirstOrDefault();
 
             if (item == null)
-                throw new TripException("The Line not exists.");
+                throw new TripException("The line does not exist.");
+
             rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
+
             item = (from i in rootElem.Elements()
                     where Convert.ToInt32(i.Element("NumberLine").Value) == drivingLine.NumberLine && i.Element("Start").Value == drivingLine.Start.ToString()
                     select i).FirstOrDefault();
+
             if (item != null)
                 throw new TripException("The driving line already exists.");
 
