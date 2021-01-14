@@ -92,7 +92,7 @@ namespace PL
 
         private void Trips_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(0, null), false);
+            new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(Trips.SelectedItem, null), false).Show();
             Close();
         }
     }

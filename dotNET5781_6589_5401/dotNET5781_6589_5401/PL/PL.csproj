@@ -115,6 +115,7 @@
     <Compile Include="Trips\AddTrip.xaml.cs">
       <DependentUpon>AddTrip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Trips\NotDrivingNow_Remove.cs" />
     <Compile Include="Trips\SearchRoutes.xaml.cs">
       <DependentUpon>SearchRoutes.xaml</DependentUpon>
     </Compile>

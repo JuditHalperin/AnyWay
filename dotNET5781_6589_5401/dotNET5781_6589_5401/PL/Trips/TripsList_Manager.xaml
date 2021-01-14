@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Trips" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
+        <local:NotDrivingNow_Remove x:Key="NotDrivingNow_Remove"/>
         <DataTemplate x:Key="LineTrips">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -18,7 +19,14 @@
                 <Label x:Name="Start" Grid.Column="0" Content="{Binding Path=Start}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label x:Name="End" Grid.Column="1" Content="{Binding Path=End}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label x:Name="Frequency" Grid.Column="2" Content="{Binding Path=Frequency}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <Button x:Name="RemoveTrip" Grid.Column="3" Width="50" Content="Remove" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveTrip_Click"/>
+                <Button x:Name="RemoveTrip" Grid.Column="3" Width="50" Content="Remove" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveTrip_Click">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource NotDrivingNow_Remove}">
+                            <Binding Path="Start"/>
+                            <Binding Path="End"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
             </Grid>
         </DataTemplate>
     </Window.Resources>

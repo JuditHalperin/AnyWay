@@ -78,7 +78,12 @@ namespace PL
 
         private void RemoveTrip_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                bl.removeDrivingLine((DrivingLine)((Button)sender).DataContext);
+                ListOfLines.ItemsSource = bl.GetLines();
+            }
+            catch(TripException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
