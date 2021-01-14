@@ -33,6 +33,7 @@ namespace PL
             worker.DoWork += CheckForUpdate;
             worker.ProgressChanged += PresentRoutes;
             worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
             worker.RunWorkerAsync();
 
             username = name;
@@ -96,6 +97,7 @@ namespace PL
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {           
             new PassengerWindow(username).Show();
+            worker.CancelAsync();
             Close();
         }
 
