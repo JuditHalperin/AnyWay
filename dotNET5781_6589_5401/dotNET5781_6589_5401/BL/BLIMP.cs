@@ -1032,7 +1032,7 @@ namespace BL
                 IEnumerable<DrivingBus> present = GetTripsOfLine_Present(line.ThisSerial);
                 if (present != null)
                     foreach (DrivingBus trip in present)
-                        if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex <= dal.getLineStation(line.ThisSerial, source).PathIndex)
+                        if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex < dal.getLineStation(line.ThisSerial, source).PathIndex)
                             allTrips.Add(trip);
 
                 IEnumerable<DrivingBus> future = GetTripsOfLine_Future(line.ThisSerial);
@@ -1086,7 +1086,7 @@ namespace BL
             if (trip.PreviousStationID != -1)
             {
                 previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
-                if (previousStation.ID != -1 && previousStation.PathIndex <= sourceStation.PathIndex)
+                if (previousStation.ID != -1 && previousStation.PathIndex > sourceStation.PathIndex)
                     return new TimeSpan(-1, -1, -1); // if it passed the source station
             }
 
@@ -1127,7 +1127,7 @@ namespace BL
                 if (time >= secondsOfTrip)
                 {
                     previousStationTime = time - secondsOfTrip;
-                    return lineStation.PathIndex - 1;
+                    return lineStation.PathIndex - 1;//this the path index (count from 1) of previous station.
                 }
             }
             return 0; // not found
