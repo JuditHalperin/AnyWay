@@ -118,8 +118,11 @@
     <Compile Include="Trips\PassengerTrip.xaml.cs">
       <DependentUpon>PassengerTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Trips\TripsList.xaml.cs">
-      <DependentUpon>TripsList.xaml</DependentUpon>
+    <Compile Include="Trips\TripsList_Manager.xaml.cs">
+      <DependentUpon>TripsList_Manager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Trips\TripsList_Passenger.xaml.cs">
+      <DependentUpon>TripsList_Passenger.xaml</DependentUpon>
     </Compile>
     <Compile Include="Users\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
@@ -241,7 +244,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Trips\TripsList.xaml">
+    <Page Include="Trips\TripsList_Manager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Trips\TripsList_Passenger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
