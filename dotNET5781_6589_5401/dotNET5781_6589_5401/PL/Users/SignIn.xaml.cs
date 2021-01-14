@@ -48,6 +48,8 @@ namespace PL
             try
             {
                 User user = bl.getUser(Username.Text);
+                if (user == null)
+                    throw new InvalidInputException("The username not exist, you can to create new account.");
                 if (user.Password != Password.Password || user.IsManager != administrativePrivileges)
                     throw new InvalidInputException("Incorrect password or administrative privileges.");
                 if (administrativePrivileges)
