@@ -22,7 +22,7 @@ namespace PL
             line = lineNumber;
             Title = "Add Trip - Line " + lineNumber;
 
-            for (int i = 6; i < 24; i++)
+            for (int i = 6; i < 24; i++) // hours from 6 to 23
             {
                 StartHours.Items.Add(i.ToString("00"));
                 EndHours.Items.Add(i.ToString("00"));
@@ -30,7 +30,7 @@ namespace PL
             StartHours.SelectedIndex = 0;
             EndHours.SelectedIndex = 0;
 
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < 60; i++) // minutes from 0 to 59
             {
                 StartMinutes.Items.Add(i.ToString("00"));
                 EndMinutes.Items.Add(i.ToString("00"));
@@ -51,10 +51,10 @@ namespace PL
                     throw new InvalidInputException("The start time should be before the end time.");
 
                 if (start + frequency.MinutesToTimeSpan() > end) // one trip
-                {
                     frequency = 0;
+
+                if (frequency == 0)
                     end = start;
-                }
 
                 bl.addDrivingLine(new DrivingLine() { NumberLine = line, Start = start, End = end, Frequency = frequency });
                 Close();

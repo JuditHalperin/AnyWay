@@ -1179,8 +1179,8 @@ namespace BL
             try
             {
                 foreach(BO.DrivingLine dLine in GetDrivingLines(item => item.NumberLine == drivingLine.NumberLine))
-                    if ((drivingLine.Start >= dLine.Start && drivingLine.Start <= dLine.End) || (drivingLine.End > dLine.Start && drivingLine.End < dLine.End))
-                        throw new BO.TripException("Driving line times cannot be set at the times the line drive.");
+                    if ((drivingLine.Start >= dLine.Start && drivingLine.Start <= dLine.End) || (drivingLine.End > dLine.Start && drivingLine.End < dLine.End) || (drivingLine.Start <= dLine.Start && drivingLine.End >= dLine.End))
+                        throw new BO.TripException("A trip cannot overlap another trip of the line.");
 
                 dal.addDrivingLine(convertToDrivingLineDO(drivingLine));
             }
@@ -1237,15 +1237,14 @@ namespace BL
         /// <returns>list of start time</returns>
         public IEnumerable<TimeSpan> getTripsStart(int numberLine)
         {
-            IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == numberLine);
             List<TimeSpan> tripsStart = new List<TimeSpan>();
-            foreach(BO.DrivingLine drivingLine in drivingLines)
-            {
-                for (TimeSpan i = drivingLine.Start; i <= drivingLine.End; i += new TimeSpan(0, drivingLine.Frequency, 0))
-                    tripsStart.Add(i);            
-            }
+            foreach (BO.DrivingLine drivingLine in GetDrivingLines(item => item.NumberLine == numberLine))
+                if (drivingLine.Frequency == 0) // one trip
+                    tripsStart.Add(drivingLine.Start);
+                else // multiple trips
+                    for (TimeSpan i = drivingLine.Start; i <= drivingLine.End; i += drivingLine.Frequency.MinutesToTimeSpan())
+                    tripsStart.Add(i);
             return tripsStart;
-
         }
 
 
