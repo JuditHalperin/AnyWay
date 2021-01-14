@@ -45,8 +45,8 @@
             </Grid.ColumnDefinitions>
             <Label Content="Source Station:" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Label Content="Target Station:" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Name="SourceStation" Grid.Row="1" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="SelectionChanged"/>
-            <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="SelectionChanged"/>
+            <ComboBox Name="SourceStation" Grid.Row="1" Grid.Column="0" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox Name="TargetStation" Grid.Row="1" Grid.Column="1" Style="{StaticResource ComboBoxStyle}" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Grid>
         <Label x:Name="NoLines" Content="No results." Visibility="Hidden" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label x:Name="SameStation" Content="Choose two different stations." Visibility="Hidden" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
