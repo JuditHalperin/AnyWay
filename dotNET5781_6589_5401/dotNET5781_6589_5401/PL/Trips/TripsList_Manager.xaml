@@ -77,11 +77,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120"/>
                         <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="160"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Start" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Center"/>
                     <Label Content="End" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Center"/>
-                    <Label Content="Frequency" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center"/>
+                    <Label Content="Frequency (minutes)" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Center"/>
                 </Grid>
                 <ListBox x:Name="Trips" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" ItemTemplate="{StaticResource LineTrips}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoTrips" Style="{StaticResource LabelTitleStyle}" Content="No trips for this line." Grid.Row="1" Visibility="Hidden"/>

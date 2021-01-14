@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="Start:" Style="{StaticResource LabelTitleStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Label Content="End:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="Frequency:" Style="{StaticResource LabelTitleStyle}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Frequency: (minutes)" Style="{StaticResource LabelTitleStyle}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
