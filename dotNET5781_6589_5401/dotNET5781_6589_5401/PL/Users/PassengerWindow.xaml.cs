@@ -91,7 +91,7 @@ namespace PL
         }
         private void LinesSchedule_Click(object sender, RoutedEventArgs e)
         {
-            new TripsList_Passenger(tempUsername, -1, false).Show();
+            new TripsList_Passenger(tempUsername, -1).Show();
             Close();
         }
 

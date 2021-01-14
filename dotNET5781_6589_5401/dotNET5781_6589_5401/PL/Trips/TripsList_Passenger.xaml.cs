@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLAPI;
+using PO;
+using BO;
 
 namespace PL
 {
@@ -19,9 +22,56 @@ namespace PL
     /// </summary>
     public partial class TripsList_Passenger : Window
     {
-        public TripsList_Passenger()
+        static IBL bl;
+        string username;
+
+        public TripsList_Passenger(string name, int serial = -1)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
+            username = name;
+
+            List<BO.Line> lines = bl.GetLines().ToList();
+            ListOfLines.ItemsSource = lines; // it is possible to open this window only when there are lines
+
+            if (serial == -1)
+                ListOfLines.SelectedIndex = 0;
+            else
+                for (int i = 0; i < bl.countLines(); i++)
+                    if (lines[i].ThisSerial == serial)
+                    {
+                        ListOfLines.SelectedIndex = i;
+                        break;
+                    }
         }
+
+        private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((BO.Line)ListOfLines.SelectedItem == null)
+                ListOfLines.SelectedIndex = 0;
+
+            DataContext = (BO.Line)ListOfLines.SelectedItem;
+
+            IEnumerable<TimeSpan> tripsStart = bl.getTripsStart(((BO.Line)ListOfLines.SelectedItem).ThisSerial);
+            if (tripsStart.Count() == 0)
+            {
+                NoTrips.Visibility = Visibility.Visible;
+                TripsStart.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                NoTrips.Visibility = Visibility.Hidden;
+                TripsStart.Visibility = Visibility.Visible;
+                TripsStart.ItemsSource = tripsStart;
+            }
+        }
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new PassengerWindow(username).Show();
+            Close();
+        }
+
     }
 }
