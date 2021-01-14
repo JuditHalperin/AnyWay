@@ -18,15 +18,14 @@ using BO;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for PassengerTrip.xaml
+    /// Interaction logic for SearchRoutes.xaml
     /// </summary>
-    public partial class PassengerTrip : Window
+    public partial class SearchRoutes : Window
     {
         static IBL bl;
-
         string username;
 
-        public PassengerTrip(string name)
+        public SearchRoutes(string name)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
