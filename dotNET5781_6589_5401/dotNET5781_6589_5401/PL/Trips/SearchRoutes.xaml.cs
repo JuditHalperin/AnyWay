@@ -66,7 +66,7 @@ namespace PL
                     SameStation.Visibility = Visibility.Hidden;
 
                     var trips = from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                let timeTillArrival = bl.timeTillArrivalToSource(drivingBus, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                let timeTillArrival = bl.timeTillArrivalToSource(drivingBus, ((Station)SourceStation.SelectedItem).ID)
                                 let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
                                 where timeTillArrival.Seconds != -1 // not relevant
                                 select new // anonymous variable for PL trip
@@ -85,7 +85,7 @@ namespace PL
                     }
                     else // show first 10 sorted results
                     {
-                        Trips.ItemsSource = trips.Take(10).OrderBy(item => item.TotalTime);
+                        Trips.ItemsSource = trips.Take(10);
                         NoLines.Visibility = Visibility.Hidden;
                         Titles.Visibility = Visibility.Visible;
                         Trips.Visibility = Visibility.Visible;
