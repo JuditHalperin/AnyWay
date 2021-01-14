@@ -119,14 +119,10 @@ namespace BL
         }
         public BO.User getUser(string username)
         {
-            try
-            {
-                return convertToUserBO(dal.getUser(username));
-            }
-            catch (DO.UserException ex)
-            {
-                throw new BO.UserException(ex.Message, ex);
-            }
+            DO.User user= dal.getUser(username);
+            if (user == null)
+                return null;
+            return convertToUserBO(user);
         }
         public IEnumerable<BO.User> GetUsers()
         {
