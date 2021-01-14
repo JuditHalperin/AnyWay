@@ -95,6 +95,10 @@ namespace BL
                 throw new BO.UserException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Remove user, accordingly the username.
+        /// </summary>
+        /// <param name="user">user for remove.</param>
         public void removeUser(BO.User user)
         {
             try
@@ -106,6 +110,10 @@ namespace BL
                 throw new BO.UserException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Update the password for user.Username (=const)
+        /// </summary>
+        /// <param name="user">user with update password.</param>
         public void updateUser(BO.User user)
         {
             try
@@ -117,6 +125,11 @@ namespace BL
                 throw new BO.UserException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Return user accordingly the username. if it is not exist, return null.
+        /// </summary>
+        /// <param name="username">username of user that need return.</param>
+        /// <returns>user or null (-defualt)</returns>
         public BO.User getUser(string username)
         {
             DO.User user= dal.getUser(username);
@@ -126,28 +139,14 @@ namespace BL
         }
         public IEnumerable<BO.User> GetUsers()
         {
-            try
-            {
-                return from user in dal.GetUsers()
-                       select convertToUserBO(user);
-            }
-            catch (DO.UserException ex)
-            {
-                throw new BO.UserException(ex.Message, ex);
-            }
+            return from user in dal.GetUsers()
+                   select convertToUserBO(user);
         }
         public IEnumerable<BO.User> GetUsers(Predicate<BO.User> condition)
         {
-            try
-            {
-                return from item in GetUsers()
-                       where condition(item)
-                       select item;
-            }
-            catch (BO.UserException ex)
-            {
-                throw new BO.UserException(ex.Message);
-            }
+            return from item in GetUsers()
+                   where condition(item)
+                   select item;
         }
 
         #endregion
@@ -1236,6 +1235,24 @@ namespace BL
                        where condition(item)
                        select item;
         }
+        /// <summary>
+        /// for show start time of line
+        /// </summary>
+        /// <param name="numberLine">serial of line</param>
+        /// <returns>list of start time</returns>
+        public IEnumerable<TimeSpan> getTripsStart(int numberLine)
+        {
+            IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == numberLine);
+            List<TimeSpan> tripsStart = new List<TimeSpan>();
+            foreach(BO.DrivingLine drivingLine in drivingLines)
+            {
+                for (TimeSpan i = drivingLine.Start; i <= drivingLine.End; i += new TimeSpan(0, drivingLine.Frequency, 0))
+                    tripsStart.Add(i);            
+            }
+            return tripsStart;
+
+        }
+
 
         #endregion
 
