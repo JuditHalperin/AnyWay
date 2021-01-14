@@ -67,16 +67,16 @@ namespace PL
                     SameStation.Visibility = Visibility.Hidden;
 
                     var trips = (from DrivingBus drivingBus in bl.getPassengerTrips(((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                let timeTillArrival = bl.timeTillArrivalToSource(drivingBus, ((Station)SourceStation.SelectedItem).ID)
-                                let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
-                                where timeTillArrival.Seconds != -1 // not relevant
-                                select new // anonymous variable for PL trip
-                                {
-                                    Line = drivingBus.NumberLine,
-                                    TimeTillArrival = timeTillArrival.ToString(@"hh\:mm\:ss"),
-                                    TimeOfJourney = timeOfJourney.ToString(@"hh\:mm\:ss"),
-                                    TotalTime = (timeTillArrival + timeOfJourney).ToString(@"hh\:mm\:ss")
-                                }).ToList();
+                                 let timeTillArrival = bl.timeTillArrivalToSource(drivingBus, ((Station)SourceStation.SelectedItem).ID)
+                                 let timeOfJourney = bl.durationTripBetweenStations(drivingBus.NumberLine, ((Station)SourceStation.SelectedItem).ID, ((Station)TargetStation.SelectedItem).ID)
+                                 where timeTillArrival.Seconds != -1 // not relevant
+                                 select new // anonymous variable for PL trip
+                                 {
+                                     Line = drivingBus.NumberLine,
+                                     TimeTillArrival = timeTillArrival.ToString(@"hh\:mm\:ss"),
+                                     TimeOfJourney = timeOfJourney.ToString(@"hh\:mm\:ss"),
+                                     TotalTime = (timeTillArrival + timeOfJourney).ToString(@"hh\:mm\:ss")
+                                 }).ToList();
 
                     if (trips.Count() == 0)
                     {
@@ -86,16 +86,16 @@ namespace PL
                     }
                     else // show first 10 sorted results
                     {
-                        Trips.ItemsSource = trips.Take(10).OrderBy(item=>item.TimeTillArrival);
+                        Trips.ItemsSource = trips.OrderBy(item => item.TimeTillArrival).Take(10);
                         NoLines.Visibility = Visibility.Hidden;
                         Titles.Visibility = Visibility.Visible;
                         Trips.Visibility = Visibility.Visible;
                     }
                 }
-        }       
+        }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
-        {           
+        {
             new PassengerWindow(username).Show();
             worker.CancelAsync();
             Close();

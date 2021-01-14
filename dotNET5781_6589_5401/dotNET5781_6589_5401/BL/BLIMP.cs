@@ -1247,7 +1247,6 @@ namespace BL
             return tripsStart;
         }
 
-
         #endregion
 
         #region ManagingCode
