@@ -1242,7 +1242,7 @@ namespace BL
         /// <returns>list of start time</returns>
         public IEnumerable<TimeSpan> getTripsStart(int numberLine)
         {
-            IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == numberLine);
+            IEnumerable<BO.DrivingLine> drivingLines = GetDrivingLines(item => item.NumberLine == numberLine).OrderBy(item=>item.Start);
             List<TimeSpan> tripsStart = new List<TimeSpan>();
             foreach(BO.DrivingLine drivingLine in drivingLines)
             {
