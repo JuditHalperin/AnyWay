@@ -96,6 +96,7 @@ namespace BLAPI
         DrivingLine getDrivingLine(int numberLine, TimeSpan start);
         IEnumerable<DrivingLine> GetDrivingLines();
         IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition);
+        IEnumerable<TimeSpan> getTripsStart(int numberLine);
 
         #endregion
 
