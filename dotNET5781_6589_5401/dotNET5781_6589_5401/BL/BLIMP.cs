@@ -1086,7 +1086,7 @@ namespace BL
             if (trip.PreviousStationID != -1)
             {
                 previousStation = dal.getLineStation(trip.NumberLine, trip.PreviousStationID);
-                if (previousStation.ID != -1 && previousStation.PathIndex > sourceStation.PathIndex)
+                if (previousStation.PathIndex > sourceStation.PathIndex)
                     return new TimeSpan(-1, -1, -1); // if it passed the source station
             }
 
