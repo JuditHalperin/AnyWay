@@ -11,10 +11,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="Stations" Style="{StaticResource ComboBoxStyle}" Grid.Row="0" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="Stations_SelectionChanged"/>
-        <TextBox x:Name="Distance" Style="{StaticResource TextBoxStyle}" Grid.Row="1" MaxLength="6" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" TextChanged="Distance_TextChanged"/>
-        <Grid Grid.Row="2">
+        <Label Content="Choose the other station:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="Stations" Style="{StaticResource ComboBoxStyle}" Grid.Row="1" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="Stations_SelectionChanged"/>
+        <Label Content="Enter distance:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="Distance" Style="{StaticResource TextBoxStyle}" Grid.Row="3" MaxLength="6" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="Distance_TextChanged"/>
+        <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

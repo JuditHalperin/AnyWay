@@ -52,6 +52,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -66,9 +67,9 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="9*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" BorderThickness="0" ItemTemplate="{StaticResource LineStations}" ItemsSource="{Binding Path=Path}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="LineStations_MouseDoubleClick"/>
                 <Label x:Name="NoStations" Style="{StaticResource LabelTitleStyle}" Content="No stations at this line path." Grid.Row="1" Visibility="Hidden"/>
             </Grid>

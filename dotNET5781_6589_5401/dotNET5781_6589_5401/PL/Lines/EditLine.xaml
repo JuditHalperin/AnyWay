@@ -33,11 +33,11 @@
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
