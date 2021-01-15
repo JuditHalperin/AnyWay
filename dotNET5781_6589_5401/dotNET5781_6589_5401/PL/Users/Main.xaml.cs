@@ -40,5 +40,10 @@ namespace PL
             new SignIn(false).Show();
             Close();
         }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new About().ShowDialog();
+        }
     }
 }

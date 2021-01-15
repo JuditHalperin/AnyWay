@@ -8,7 +8,7 @@
         Title="PassengerWindow" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.3*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -16,18 +16,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="12"/>
-        <Label x:Name="Username" Content="{Binding}" Grid.Row="0" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="250" FontSize="20"/>
-        <Button x:Name="AskTrips" Content="Search Routes" Style="{StaticResource ButtonStyle}" Grid.Row="1" Height="60" Width="230" VerticalAlignment="Center" FontSize="30" Click="Trips_Click"/>
-        <Button x:Name="ShowLines" Style="{StaticResource ButtonStyle}" Grid.Row="2" Height="60" Width="230" VerticalAlignment="Center" Click="ShowLines_Click" FontSize="30"/>
-        <Button x:Name="ShowStations" Style="{StaticResource ButtonStyle}" Grid.Row="3" Height="60" Width="230" VerticalAlignment="Center" Click="ShowStations_Click" FontSize="30"/>
-        <Button x:Name="LinesSchedule" Content="Lines Schedule" Style="{StaticResource ButtonStyle}" Grid.Row="4" Height="60" Width="230" VerticalAlignment="Center" Click="LinesSchedule_Click" FontSize="30"/>
+        <Image Source="Logo.png" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="230" Margin="0,0,32.6,0"/>
+        <Label x:Name="Username" Content="{Binding}" Grid.Row="0" Style="{StaticResource LabelTitleStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20"/>
+        <Button x:Name="AskTrips" Content="Search Routes" Style="{StaticResource ButtonTitleStyle}" Grid.Row="1" Height="60" Width="250" VerticalAlignment="Center" Click="Trips_Click"/>
+        <Button x:Name="ShowLines" Style="{StaticResource ButtonTitleStyle}" Grid.Row="2" Height="60" Width="250" VerticalAlignment="Center" Click="ShowLines_Click"/>
+        <Button x:Name="ShowStations" Style="{StaticResource ButtonTitleStyle}" Grid.Row="3" Height="60" Width="250" VerticalAlignment="Center" Click="ShowStations_Click"/>
+        <Button x:Name="LinesSchedule" Content="Lines Schedule" Style="{StaticResource ButtonTitleStyle}" Grid.Row="4" Height="60" Width="250" VerticalAlignment="Center" Click="LinesSchedule_Click"/>
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="SignOut" Content="Sign out" Style="{StaticResource LabelToClickStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown" FontSize="22"/>
-            <Label x:Name="ChangePassword" Content="Change password" Style="{StaticResource LabelToClickStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangePassword_PreviewMouseDown" FontSize="22"/>
+            <Label x:Name="SignOut" Content="Sign out" Style="{StaticResource LabelToClickStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="SignOut_PreviewMouseDown" FontSize="18"/>
+            <Label x:Name="ChangePassword" Content="Change password" Style="{StaticResource LabelToClickStyle}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ChangePassword_PreviewMouseDown" FontSize="18"/>
         </Grid>
     </Grid>
 </Window>

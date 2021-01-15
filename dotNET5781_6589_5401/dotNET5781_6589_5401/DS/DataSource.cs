@@ -1,10 +1,8 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DO;
 
 namespace DS
 {
@@ -17,7 +15,7 @@ namespace DS
         public static List<LineStation> LineStations;
 		public static List<TwoFollowingStations> FollowingStations;
 		public static List<DrivingLine> DrivingLines;
-		public static string ManagingCode = "123456";
+		public static string ManagingCode = "AnyWay";
 		public static int serial = 1;
 		
 		private static Random rand = new Random(DateTime.Now.Millisecond); // for the constructor

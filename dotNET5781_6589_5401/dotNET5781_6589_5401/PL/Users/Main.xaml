@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-          Title="Main" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+          Title="Any Way" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="SignInAsManager" Style="{StaticResource ButtonStyle}" Content="Manager" Width="200" Height="70" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SignInAsManager_Click" FontSize="25" Background="#FFFCF9EC"/>
-        <Button x:Name="SignInAsPassenger" Style="{StaticResource ButtonStyle}" Content="Passenger" Width="200" Height="70" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Background="#FFFCF9EC" Click="SignInAsPassenger_Click"/>
-        <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalContentAlignment="Right" FontSize="12"/>
-        <Grid.Background>
-            <ImageBrush ImageSource="BackgroundMain.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" HorizontalContentAlignment="Right" FontSize="12"/>
+        <Image Source="Logo.png" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="300" Margin="0,0.2,20.6,0" MouseDown="Image_MouseDown"/>
+        <Button x:Name="SignInAsManager" Style="{StaticResource ButtonTitleStyle}" Content="Manager" Width="200" Height="70" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="SignInAsManager_Click"/>
+        <Button x:Name="SignInAsPassenger" Style="{StaticResource ButtonTitleStyle}" Content="Passenger" Width="200" Height="70" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" Click="SignInAsPassenger_Click"/>
     </Grid>
 </Window>

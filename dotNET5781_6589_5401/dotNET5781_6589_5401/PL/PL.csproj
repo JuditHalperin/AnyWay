@@ -37,6 +37,9 @@
   <PropertyGroup>
     <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -124,6 +127,9 @@
     </Compile>
     <Compile Include="Trips\TripsList_Passenger.xaml.cs">
       <DependentUpon>TripsList_Passenger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Users\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Users\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
@@ -253,6 +259,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Users\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Users\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -288,9 +298,6 @@
     <Resource Include="Images\BackgroundMain.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Users\BackgroundMain.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Lines\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +305,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Trips\BackButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Users\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

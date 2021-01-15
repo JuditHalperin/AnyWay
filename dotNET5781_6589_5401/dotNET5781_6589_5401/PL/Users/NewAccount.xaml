@@ -23,11 +23,11 @@
         </Grid.RowDefinitions>
         <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="12"/>
         <Label Content="Username:" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="2" Width="100" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="Ok_IsEnabled"/>
+        <TextBox x:Name="Username" Style="{StaticResource TextBoxStyle}" Grid.Row="2" Width="140" MaxLength="18" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="Ok_IsEnabled"/>
         <Label Content="Password:" Style="{StaticResource LabelTitleStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <PasswordBox x:Name="Password" Grid.Row="4" Width="100" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
+        <PasswordBox x:Name="Password" Grid.Row="4" Width="140" MaxLength="8" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
         <Label Name="LabelOfManagingCode" Content="Managing code:" Style="{StaticResource LabelTitleStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-        <PasswordBox x:Name="ManagingCode" Grid.Row="6" Width="100" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
+        <PasswordBox x:Name="ManagingCode" Grid.Row="6" Width="140" MaxLength="6" HorizontalAlignment="Center" VerticalAlignment="Top" PasswordChanged="Ok_IsEnabled"/>
         <Label x:Name="ExistingUser" Content="I already have an account" Style="{StaticResource LabelToClickStyle}" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="ExistingUser_PreviewMouseDown"/>
         <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>

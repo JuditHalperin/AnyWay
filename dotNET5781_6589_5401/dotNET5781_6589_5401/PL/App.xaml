@@ -7,9 +7,22 @@
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Background" Value="#FFD6F0F9"/>
+            <Setter Property="Background" Value="#FFD5EDFD"/>
             <Setter Property="Foreground" Value="#FF070720"/>
             <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="ButtonTitleStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Foreground" Value="#FF070720"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#FFFFE9A5"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFB39332"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="ListBoxStyle" TargetType="ListBox">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
@@ -25,7 +38,7 @@
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#FF16164E"/>
+            <Setter Property="Foreground" Value="#FF0D1A7C"/>
         </Style>
         <Style x:Key="LabelDataStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
@@ -35,16 +48,16 @@
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="SelectionBrush" Value="#FF1D1D7D"/>
+            <Setter Property="SelectionBrush" Value="#FF0D1A7C"/>
         </Style>
         <Style x:Key="LabelToClickStyle" TargetType="Label">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Foreground" Value="#FF0D1A7C"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#FF1554D3" />
+                    <Setter Property="Foreground" Value="#FF2035CA"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
