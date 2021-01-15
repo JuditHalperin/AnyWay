@@ -60,20 +60,24 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Region:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Region}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button x:Name="AddTrip" Content="Add Trip" Style="{StaticResource ButtonStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="AddTrip_Click"/>
+                <Label Content="Duration:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label x:Name="Duration" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button x:Name="AddTrip" Content="Add Trip" Style="{StaticResource ButtonStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Click="AddTrip_Click"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="6*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <Grid x:Name="Titles" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120"/>

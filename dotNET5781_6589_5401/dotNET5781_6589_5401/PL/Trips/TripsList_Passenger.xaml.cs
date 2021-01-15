@@ -1,19 +1,12 @@
-﻿using System;
+﻿using BLAPI;
+using BO;
+using PO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BLAPI;
-using PO;
-using BO;
 
 namespace PL
 {
@@ -37,7 +30,7 @@ namespace PL
 
             username = name;
 
-            List<BO.Line> lines = bl.GetLines().ToList();
+            List<Line> lines = bl.GetLines().ToList();
             ListOfLines.ItemsSource = lines; // it is possible to open this window only when there are lines
 
             if (serial == -1)
@@ -53,12 +46,13 @@ namespace PL
 
         private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((BO.Line)ListOfLines.SelectedItem == null)
+            if ((Line)ListOfLines.SelectedItem == null)
                 ListOfLines.SelectedIndex = 0;
 
-            DataContext = (BO.Line)ListOfLines.SelectedItem;
+            DataContext = (Line)ListOfLines.SelectedItem;
+            Duration.Content = bl.duration(((Line)ListOfLines.SelectedItem).Path).SecondsToTimeSpan();
 
-            IEnumerable<TimeSpan> tripsStart = bl.getTripsStart(((BO.Line)ListOfLines.SelectedItem).ThisSerial);
+            IEnumerable<TimeSpan> tripsStart = bl.getTripsStart(((Line)ListOfLines.SelectedItem).ThisSerial);
             if (tripsStart.Count() == 0)
             {
                 NoTrips.Visibility = Visibility.Visible;

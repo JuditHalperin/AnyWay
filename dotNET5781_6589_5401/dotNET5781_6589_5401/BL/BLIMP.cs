@@ -1107,7 +1107,7 @@ namespace BL
                 duration += path[i].TimeFromPreviousStations;
             return duration.SecondsToTimeSpan();
         }
-        private int duration(IEnumerable<BO.LineStation> path)
+        public int duration(IEnumerable<BO.LineStation> path)
         {
             int duration = 1; // because time to previous of the first is -1
             foreach (BO.LineStation lineStation in path)

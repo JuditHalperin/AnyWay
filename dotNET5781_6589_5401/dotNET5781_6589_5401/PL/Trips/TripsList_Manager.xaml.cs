@@ -49,8 +49,9 @@ namespace PL
                 ListOfLines.SelectedIndex = 0;
 
             DataContext = (Line)ListOfLines.SelectedItem;
+            Duration.Content = bl.duration(((Line)ListOfLines.SelectedItem).Path).SecondsToTimeSpan();
 
-            IEnumerable<DrivingLine> drivinLines = bl.GetDrivingLines(item => item.NumberLine == ((BO.Line)ListOfLines.SelectedItem).ThisSerial);
+            IEnumerable<DrivingLine> drivinLines = bl.GetDrivingLines(item => item.NumberLine == ((Line)ListOfLines.SelectedItem).ThisSerial);
             if (drivinLines.Count() == 0)
             {
                 NoTrips.Visibility = Visibility.Visible;

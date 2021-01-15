@@ -46,18 +46,21 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=NumberLine}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Label Content="Region:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Region}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label Content="Duration:" Style="{StaticResource LabelTitleStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label x:Name="Duration" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Start Time of Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Start of Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <ListBox x:Name="TripsStart" ItemTemplate="{StaticResource TripsStart}" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoTrips" Style="{StaticResource LabelTitleStyle}" Content="No trips for this line." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
