@@ -58,9 +58,9 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="6*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Start of Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Start of Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <ListBox x:Name="TripsStart" ItemTemplate="{StaticResource TripsStart}" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoTrips" Style="{StaticResource LabelTitleStyle}" Content="No trips for this line." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
