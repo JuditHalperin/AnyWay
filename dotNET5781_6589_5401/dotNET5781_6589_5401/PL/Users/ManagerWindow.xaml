@@ -21,7 +21,7 @@
         <Button x:Name="AddFirstLine" Content="Add first line" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="1" Height="60" Width="250" VerticalAlignment="Center" Click="AddFirstLine_Click"/>
         <Button x:Name="ShowStations" Content="Stations" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="2" Height="60" Width="250" VerticalAlignment="Center" Click="ShowStations_Click"/>
         <Button x:Name="AddFirstStation" Content="Add first station" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="2" Height="60" Width="250" VerticalAlignment="Center" Click="AddFirstStation_Click"/>
-        <Button x:Name="LinesSchedule" Content="Lines Schedule" Style="{StaticResource ButtonTitleStyle}" Grid.Row="3" Height="60" Width="250" VerticalAlignment="Center" Click="LinesSchedule_Click"/>
+        <Button x:Name="LinesSchedule" Content="Schedule" Style="{StaticResource ButtonTitleStyle}" Grid.Row="3" Height="60" Width="250" VerticalAlignment="Center" Click="LinesSchedule_Click"/>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

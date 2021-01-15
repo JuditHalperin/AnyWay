@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BLAPI;
+﻿using BLAPI;
 using PO;
-using BO;
+using System;
+using System.Windows;
+using System.Windows.Input;
 
 namespace PL
 {
@@ -127,12 +116,12 @@ namespace PL
 
         private void ChangePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("password", tempUsername).ShowDialog();
+            new ChangePassword("Password", tempUsername).ShowDialog();
         }
 
         private void ChangeCode_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            new ChangePassword("managing code", tempUsername).ShowDialog();
+            new ChangePassword("Managing Code", tempUsername).ShowDialog();
         }
 
     }
