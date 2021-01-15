@@ -1,5 +1,6 @@
 ﻿using BLAPI;
 using BO;
+using PO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -21,6 +22,10 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
+            NotifyingDateTime dateTime = new NotifyingDateTime();
+            Time.DataContext = dateTime;
+            dateTime.worker.RunWorkerAsync();
 
             username = name;
 

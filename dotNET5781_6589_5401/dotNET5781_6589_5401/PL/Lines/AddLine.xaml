@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Line number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <TextBox x:Name="LineNumber" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
                 <Label Content="Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Width="70" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -44,8 +44,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add station" Grid.Column="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
-                    <Button x:Name="RemoveStation" IsEnabled="{Binding Path=Count, Converter={StaticResource PathIsNotEmpty_RemoveLineStations}}" Style="{StaticResource ButtonStyle}" Content="Remove station" Grid.Column="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
+                    <Button x:Name="AddStation" Style="{StaticResource ButtonStyle}" Content="Add Station" Grid.Column="0" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="AddStation_Click"/>
+                    <Button x:Name="RemoveStation" IsEnabled="{Binding Path=Count, Converter={StaticResource PathIsNotEmpty_RemoveLineStations}}" Style="{StaticResource ButtonStyle}" Content="Remove Station" Grid.Column="1" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveStation_Click"/>
                 </Grid>
             </Grid>
         </Grid>

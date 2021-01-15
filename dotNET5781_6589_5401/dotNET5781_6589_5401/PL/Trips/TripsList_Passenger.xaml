@@ -6,6 +6,16 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Trips" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate x:Key="TripsStart">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="Start" Grid.Column="0" Height="30" Content="{Binding}" Style="{StaticResource LabelDataStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,6 +28,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
+            <Label x:Name="Time" Style="{StaticResource LabelTitleStyle}" Grid.Column="3" Content="{Binding Path=Now, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="12"/>
             <Image x:Name="Back" Source="BackButton.png" Width="35" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Back_MouseDown" />
             <Label Content="Line:" Style="{StaticResource LabelTitleStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <ComboBox x:Name="ListOfLines" Style="{StaticResource ComboBoxStyle}" Grid.Column="2" ItemsSource="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" SelectionChanged="ListOfLines_SelectionChanged"/>
@@ -47,7 +58,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Start Time of Trips:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <ListBox x:Name="TripsStart" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ListBox x:Name="TripsStart" ItemTemplate="{StaticResource TripsStart}" Style="{StaticResource ListBoxStyle}" Grid.Row="2" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 <Label x:Name="NoTrips" Style="{StaticResource LabelTitleStyle}" Content="No trips for this line." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
         </Grid>

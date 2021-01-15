@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BLAPI;
+﻿using BLAPI;
 using BO;
 using PO;
+using System.Windows;
+using System.Windows.Input;
 
 namespace PL
 {
@@ -30,11 +19,13 @@ namespace PL
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
             NotifyingDateTime dateTime = new NotifyingDateTime();
             Time.DataContext = dateTime;
             dateTime.worker.RunWorkerAsync();
+
             administrativePrivileges = a;
-            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         private void NewAccount_PreviewMouseDown(object sender, MouseButtonEventArgs e)

@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Station ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <Label Content="Station name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Content="Station Name:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Label Content="Latitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Label Content="Longitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <TextBox x:Name="IDTextBox" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Grid.Column="0" Width="70" MaxLength="5" HorizontalAlignment="Center" VerticalAlignment="Top"/>

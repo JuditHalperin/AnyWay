@@ -31,6 +31,10 @@ namespace PL
             bl = BlFactory.GetBl();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
 
+            NotifyingDateTime dateTime = new NotifyingDateTime();
+            Time.DataContext = dateTime;
+            dateTime.worker.RunWorkerAsync();
+
             username = name;
 
             List<BO.Line> lines = bl.GetLines().ToList();
