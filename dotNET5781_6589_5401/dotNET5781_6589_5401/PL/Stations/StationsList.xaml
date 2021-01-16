@@ -84,7 +84,7 @@
                     <Label Content="Next Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>
                 <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" BorderThickness="0" Grid.Row="2" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="LinesAtStation_MouseDoubleClick"/>
-                <Label x:Name="NoLines" Style="{StaticResource LabelTitleStyle}" Content="No lines stop at this station." Grid.Row="2" Visibility="Hidden"/>
+                <Label x:Name="NoLines" Style="{StaticResource LabelDataStyle}" Content="No lines stop at this station." Grid.Row="2" Visibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

@@ -71,7 +71,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Stations:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <ListBox x:Name="LineStations" Style="{StaticResource ListBoxStyle}" Grid.Row="1" BorderThickness="0" ItemTemplate="{StaticResource LineStations}" ItemsSource="{Binding Path=Path}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="LineStations_MouseDoubleClick"/>
-                <Label x:Name="NoStations" Style="{StaticResource LabelTitleStyle}" Content="No stations at this line path." Grid.Row="1" Visibility="Hidden"/>
+                <Label x:Name="NoStations" Style="{StaticResource LabelDataStyle}" Content="No stations at this line path." Grid.Row="1" Visibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>
