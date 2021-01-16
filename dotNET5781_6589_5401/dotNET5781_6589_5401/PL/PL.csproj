@@ -298,6 +298,12 @@
     <Resource Include="Images\BackgroundMain.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Users\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Lines\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
@@ -305,12 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Trips\BackButton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Users\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
