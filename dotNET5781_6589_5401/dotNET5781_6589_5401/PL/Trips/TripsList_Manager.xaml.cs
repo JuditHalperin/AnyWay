@@ -70,7 +70,7 @@ namespace PL
         private void AddTrip_Click(object sender, RoutedEventArgs e)
         {
             new AddTrip(((Line)ListOfLines.SelectedItem).ThisSerial).ShowDialog();
-            ListOfLines.ItemsSource = bl.GetLines();
+            ListOfLines_SelectionChanged(sender, null);
         }
 
         private void RemoveTrip_Click(object sender, RoutedEventArgs e)
@@ -78,9 +78,9 @@ namespace PL
             try
             {
                 bl.removeDrivingLine((DrivingLine)((Button)sender).DataContext);
-                ListOfLines.ItemsSource = bl.GetLines();
+                ListOfLines_SelectionChanged(sender, null);
             }
-            catch(TripException ex) { MessageBox.Show(ex.Message); }
+            catch (TripException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
