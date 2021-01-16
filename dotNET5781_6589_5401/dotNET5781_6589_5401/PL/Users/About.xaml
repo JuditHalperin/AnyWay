@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="About" Height="460" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="About" Height="430" Width="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,10 +16,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image Source="Logo.png" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="180" Margin="0,0.2,20.6,0"/>
-        <Label x:Name="Text1" Content="This program was created by" Grid.Row="1" FontSize="18" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label x:Name="Text2" Content="Asnat and Judit" Grid.Row="2" FontSize="18" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label x:Name="Text3" Content="As a Mini Project in Windows" Grid.Row="3" FontSize="18" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label x:Name="Text4" Content="2021" Grid.Row="4" FontSize="18" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="Text1" Content="This program was created by" Grid.Row="1" FontSize="16" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="Text2" Content="Asnat and Judit" Grid.Row="2" FontSize="16" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="Text3" Content="As a mini project in windows" Grid.Row="3" FontSize="16" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="Text4" Content="2021" Grid.Row="4" FontSize="16" Style="{StaticResource LabelTitleStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label x:Name="Thanks" Content="We thank Ari for the amazing logo." Grid.Row="5" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LabelDataStyle}"/>
     </Grid>
 </Window>
