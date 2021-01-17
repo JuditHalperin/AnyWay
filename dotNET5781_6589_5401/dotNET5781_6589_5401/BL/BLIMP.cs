@@ -132,7 +132,7 @@ namespace BL
         /// <returns>user or null (-defualt)</returns>
         public BO.User getUser(string username)
         {
-            DO.User user= dal.getUser(username);
+            DO.User user = dal.getUser(username);
             if (user == null)
                 return null;
             return convertToUserBO(user);

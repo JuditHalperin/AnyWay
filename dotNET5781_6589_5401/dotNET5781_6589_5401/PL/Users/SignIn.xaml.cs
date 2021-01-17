@@ -39,15 +39,17 @@ namespace PL
             try
             {
                 User user = bl.getUser(Username.Text);
+                
                 if (user == null)
-                    throw new InvalidInputException("The username not exist, you can to create new account.");
+                    throw new InvalidInputException("The username does not exist, you can create a new account.");
                 if (user.Password != Password.Password || user.IsManager != administrativePrivileges)
                     throw new InvalidInputException("Incorrect password or administrative privileges.");
+                
                 if (administrativePrivileges)
                     new ManagerWindow(Username.Text).Show();
                 else
                     new PassengerWindow(Username.Text).Show();
-                    Close();
+
                 Close();
             }
             catch (UserException ex) { MessageBox.Show(ex.Message); }           

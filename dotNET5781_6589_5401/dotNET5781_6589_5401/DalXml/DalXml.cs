@@ -47,7 +47,7 @@ namespace DL
                              select i).FirstOrDefault();
 
             if (item != null)
-                throw new UserException("The user already exists.");
+                throw new UserException("The username already exists.");
 
             rootElem.Add(new XElement("User",
                                    new XElement("Username", user.Username),

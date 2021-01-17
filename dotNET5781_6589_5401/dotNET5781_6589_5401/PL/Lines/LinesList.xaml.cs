@@ -90,7 +90,7 @@ namespace PL
         {
             try
             {
-                if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
+                if (!bl.canChangeLine((Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to edit a line if it is driving.");
                 new EditLine((Line)ListOfLines.SelectedItem).ShowDialog();
                 ListOfLines.ItemsSource = bl.GetLines();
@@ -125,6 +125,12 @@ namespace PL
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
+        }
+
+        private void LineStations_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
+            Close();
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)

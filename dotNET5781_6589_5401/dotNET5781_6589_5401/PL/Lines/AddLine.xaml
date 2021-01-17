@@ -29,7 +29,7 @@
                 <Label Content="Line Number:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <TextBox x:Name="LineNumber" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Width="70" MaxLength="3" HorizontalAlignment="Center" VerticalAlignment="Top" TextChanged="LineNumber_TextChanged"/>
                 <Label Content="Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Width="70" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <ComboBox Name="RegionsList" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Width="100" SelectedIndex="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

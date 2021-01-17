@@ -30,7 +30,7 @@ namespace PL
         {
             try
             {
-                if (gettingChanged == "password")
+                if (gettingChanged == "Password")
                 {
                     if (user.Password != OldPassword.Password)
                         throw new InvalidInputException("Incorrect old password.");
@@ -47,7 +47,7 @@ namespace PL
                     });
                 }
 
-                else if (gettingChanged == "managing code")
+                else if (gettingChanged == "Managing Code")
                 {
                     if (bl.getManagingCode() != OldPassword.Password)
                         throw new InvalidInputException("Incorrect old managing code.");

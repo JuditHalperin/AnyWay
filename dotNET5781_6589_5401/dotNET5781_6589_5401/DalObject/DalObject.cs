@@ -23,7 +23,7 @@ namespace DL
         public void addUser(User user)
         {
             if (DataSource.Users.Exists(item => item.Username == user.Username))
-                throw new UserException("The user already exists.");
+                throw new UserException("The username already exists.");
             DataSource.Users.Add(user.Clone());
         }
         public void removeUser(User user)
