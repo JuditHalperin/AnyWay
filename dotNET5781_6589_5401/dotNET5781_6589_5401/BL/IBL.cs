@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLAPI
 {
@@ -38,6 +39,7 @@ namespace BLAPI
         IEnumerable<Line> GetLines();
         IEnumerable<Line> GetLines(Predicate<Line> condition);
         int getLastStation(int serial);
+        IEnumerable<IGrouping<Regions, int>> GetLinesByRegion();
         bool canChangeLine(Line line);
         int countLines();
 

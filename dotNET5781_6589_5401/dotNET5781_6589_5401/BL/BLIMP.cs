@@ -520,6 +520,11 @@ namespace BL
                 throw new BO.LineException(ex.Message, ex);
             }
         }
+        public IEnumerable<IGrouping<BO.Regions, int>> GetLinesByRegion()
+        {
+            return from line in dal.GetLines()
+                   group line.ThisSerial by (BO.Regions)line.Region;
+        }
         /// <summary>
         /// impossible to change a line if it is driving
         /// </summary>
