@@ -19,7 +19,7 @@ namespace PL
 
         bool administrativePrivileges;
 
-        public StationsList(string name, bool a = true)
+        public StationsList(string name, bool a = true, int id = -1)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
@@ -27,9 +27,17 @@ namespace PL
 
             username = name;
             administrativePrivileges = a;
-
-            ListOfStations.ItemsSource = bl.GetStations(); // it is possible to open this window only when there are stations
-            ListOfStations.SelectedIndex = 0;
+            List<Station> stations = bl.GetStations().ToList();
+            ListOfStations.ItemsSource = stations; // it is possible to open this window only when there are stations
+            if (id == -1)
+                ListOfStations.SelectedIndex = 0;
+            else
+                for (int i = 0; i < bl.countLines(); i++)
+                    if (stations[i].ID == id)
+                    {
+                        ListOfStations.SelectedIndex = i;
+                        break;
+                    }
 
             if (!administrativePrivileges)
             {
