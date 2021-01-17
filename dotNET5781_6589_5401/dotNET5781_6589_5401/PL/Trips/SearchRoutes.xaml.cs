@@ -99,12 +99,15 @@ namespace PL
             new PassengerWindow(username).Show();
             worker.CancelAsync();
             Close();
-        }
+        }            
 
         private void Trips_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(Trips.SelectedItem, null), false).Show();
-            Close();
+            if (Trips.SelectedItem != null)
+            {
+                new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(Trips.SelectedItem, null), false).Show();
+                Close();
+            }
         }
     }
 }
