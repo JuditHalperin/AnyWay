@@ -122,6 +122,13 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// double click on station:
+        /// left button - open line station details
+        /// right button - open station details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
