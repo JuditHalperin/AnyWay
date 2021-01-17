@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="GroupByRegions" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Regions" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

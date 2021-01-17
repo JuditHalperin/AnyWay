@@ -1,8 +1,8 @@
 ﻿using BLAPI;
 using BO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace PL
@@ -24,6 +24,20 @@ namespace PL
 
             username = name;
             administrativePrivileges = a;
+
+            List<IGrouping<Regions, int>> groups = bl.GetLinesByRegion().ToList();
+            for (int i = 0; i < groups.Count(); i++)
+            {
+                Title = groups[i].Key;
+                DataContext = groups[i];
+            }
+            for ()
+        }
+
+        private void Lines_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new LinesList(username, (Line)(SelectedItem).ThisSerial, administrativePrivileges).Show();
+            Close();
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
