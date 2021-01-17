@@ -54,7 +54,6 @@
     <Compile Include="DO\Tools.cs" />
     <Compile Include="DO\TwoFollowingStations.cs" />
     <Compile Include="DO\User.cs" />
-    <Compile Include="IClonable.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
