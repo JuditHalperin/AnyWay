@@ -60,7 +60,7 @@ namespace PL
                 Close();
             }
             catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }
-            catch (FormatException ex) { MessageBox.Show(ex.Message); }
+            catch (FormatException) { MessageBox.Show("Invalid format."); }
             catch (TripException ex) { MessageBox.Show(ex.Message); }
         }
 
