@@ -99,7 +99,6 @@ namespace PL
             new PassengerWindow(username).Show();
             worker.CancelAsync();
             Close();
-            return;
         }            
 
         private void Trips_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -109,7 +108,6 @@ namespace PL
                 new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(Trips.SelectedItem, null), false).Show();
                 Close();
                 worker.CancelAsync();
-                return;
             }
         }
     }
