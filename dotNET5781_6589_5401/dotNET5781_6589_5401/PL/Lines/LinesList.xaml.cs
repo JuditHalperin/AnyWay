@@ -124,13 +124,13 @@ namespace PL
 
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
-        }
-
-        private void LineStations_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
-            Close();
+            if (e.ChangedButton == MouseButton.Left)
+                new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
+            else
+            {
+                new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
+                Close();
+            }
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
