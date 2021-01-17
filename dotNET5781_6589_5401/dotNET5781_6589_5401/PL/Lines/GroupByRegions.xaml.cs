@@ -1,27 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BLAPI;
+using BO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace PL.Lines
+namespace PL
 {
     /// <summary>
     /// Interaction logic for GroupByRegions.xaml
     /// </summary>
     public partial class GroupByRegions : Window
     {
-        public GroupByRegions()
+        static IBL bl;
+        string username;
+        bool administrativePrivileges;
+
+        public GroupByRegions(string name, bool a = true)
         {
             InitializeComponent();
+            bl = BlFactory.GetBl();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
+            username = name;
+            administrativePrivileges = a;
+        }
+
+        private void Back_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (administrativePrivileges)
+                new LinesList(username, -1, true).Show();
+            else
+                new LinesList(username, -1, false).Show();
+            Close();
         }
     }
 }

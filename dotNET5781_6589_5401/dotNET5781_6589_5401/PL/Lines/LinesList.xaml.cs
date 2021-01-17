@@ -26,7 +26,7 @@ namespace PL
             username = name;
             administrativePrivileges = a;
 
-            List<BO.Line> lines = bl.GetLines().ToList();
+            List<Line> lines = bl.GetLines().ToList();
             ListOfLines.ItemsSource = lines; // it is possible to open this window only when there are lines
             
             if (serial == -1)
@@ -49,10 +49,10 @@ namespace PL
 
         private void ListOfLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((BO.Line)ListOfLines.SelectedItem == null)
+            if ((Line)ListOfLines.SelectedItem == null)
                 ListOfLines.SelectedIndex = 0;
-            DataContext = (BO.Line)ListOfLines.SelectedItem;
-            NumberOfStations.Content = ((BO.Line)ListOfLines.SelectedItem).Path.Count();
+            DataContext = (Line)ListOfLines.SelectedItem;
+            NumberOfStations.Content = ((Line)ListOfLines.SelectedItem).Path.Count();
             if ((int)NumberOfStations.Content > 0)
             {
                 NoStations.Visibility = Visibility.Hidden;
@@ -71,12 +71,18 @@ namespace PL
             ListOfLines.ItemsSource = bl.GetLines();
         }
 
+        private void GroupByRegions_Click(object sender, RoutedEventArgs e)
+        {
+            new GroupByRegions(username, administrativePrivileges).Show();
+            Close();
+        }
+
         private void LineTrips_Click(object sender, RoutedEventArgs e)
         {
             if (administrativePrivileges)
-                new TripsList_Manager(username, ((BO.Line)ListOfLines.SelectedItem).ThisSerial).Show();
+                new TripsList_Manager(username, ((Line)ListOfLines.SelectedItem).ThisSerial).Show();
             else
-                new TripsList_Passenger(username, ((BO.Line)ListOfLines.SelectedItem).ThisSerial).Show();
+                new TripsList_Passenger(username, ((Line)ListOfLines.SelectedItem).ThisSerial).Show();
             Close();
         }
 
@@ -86,7 +92,7 @@ namespace PL
             {
                 if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to edit a line if it is driving.");
-                new EditLine((BO.Line)ListOfLines.SelectedItem).ShowDialog();
+                new EditLine((Line)ListOfLines.SelectedItem).ShowDialog();
                 ListOfLines.ItemsSource = bl.GetLines();
             }
             catch (LineException ex)
@@ -99,9 +105,9 @@ namespace PL
         {
             try
             {
-                if (!bl.canChangeLine((BO.Line)ListOfLines.SelectedItem))
+                if (!bl.canChangeLine((Line)ListOfLines.SelectedItem))
                     throw new LineException("Impossible to remove a line if it is driving.");
-                bl.removeLine((BO.Line)ListOfLines.SelectedItem);
+                bl.removeLine((Line)ListOfLines.SelectedItem);
                 if (bl.countLines() > 0)
                     ListOfLines.ItemsSource = bl.GetLines();
                 else
@@ -128,6 +134,6 @@ namespace PL
             else
                 new PassengerWindow(username).Show();
             Close();
-        }       
+        }        
     }
 }
