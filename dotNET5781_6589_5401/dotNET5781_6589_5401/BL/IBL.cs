@@ -40,7 +40,7 @@ namespace BLAPI
         IEnumerable<Line> GetLines(Predicate<Line> condition);
         int getLastStation(int serial);
         IEnumerable<IGrouping<Regions, int>> GetLinesByRegion();
-        bool canChangeLine(Line line);
+        bool canChangeLine(int line);
         int countLines();
 
         #endregion

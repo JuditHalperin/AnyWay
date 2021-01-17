@@ -530,9 +530,10 @@ namespace BL
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public bool canChangeLine(BO.Line line)
+        public bool canChangeLine(int line)
         {
-            if (GetTripsOfLine_Present(line.ThisSerial) == null)
+            IEnumerable<DrivingBus> drivingBuses = GetTripsOfLine_Present(line);
+            if (drivingBuses == null || drivingBuses.Count() == 0)
                 return true;
             return false;
         }
@@ -1072,7 +1073,7 @@ namespace BL
 
             List<DrivingBus> trips = new List<DrivingBus>();
             foreach (DO.DrivingLine drivingLine in drivingLines)
-                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay; i += drivingLine.Frequency.MinutesToTimeSpan())
+                for (TimeSpan i = drivingLine.Start; i < DateTime.Now.TimeOfDay && i < drivingLine.End; i += drivingLine.Frequency.MinutesToTimeSpan())
                 {
                     DrivingBus trip = getTrip(serial, i.ToDateTime());
                     if (trip != null)

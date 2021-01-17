@@ -90,7 +90,7 @@ namespace PL
         {
             try
             {
-                if (!bl.canChangeLine((Line)ListOfLines.SelectedItem))
+                if (!bl.canChangeLine(((Line)ListOfLines.SelectedItem).ThisSerial))
                     throw new LineException("Impossible to edit a line if it is driving.");
                 new EditLine((Line)ListOfLines.SelectedItem).ShowDialog();
                 ListOfLines.ItemsSource = bl.GetLines();
@@ -105,7 +105,7 @@ namespace PL
         {
             try
             {
-                if (!bl.canChangeLine((Line)ListOfLines.SelectedItem))
+                if (!bl.canChangeLine(((Line)ListOfLines.SelectedItem).ThisSerial))
                     throw new LineException("Impossible to remove a line if it is driving.");
                 bl.removeLine((Line)ListOfLines.SelectedItem);
                 if (bl.countLines() > 0)
@@ -129,7 +129,7 @@ namespace PL
 
         private void LineStations_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
+            //new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
             Close();
         }
 

@@ -24,6 +24,7 @@
                         <MultiBinding Converter="{StaticResource NotDrivingNow_Remove}">
                             <Binding Path="Start"/>
                             <Binding Path="End"/>
+                            <Binding Path="NumberLine"/>
                         </MultiBinding>
                     </Button.IsEnabled>
                 </Button>
