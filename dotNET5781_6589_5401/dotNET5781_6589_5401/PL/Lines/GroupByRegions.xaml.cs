@@ -3,8 +3,9 @@ using BO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-//General, North, South, Center, Jerusalem
+
 namespace PL
 {
     /// <summary>
@@ -27,16 +28,38 @@ namespace PL
 
             List<IGrouping<Regions, int>> groups = bl.GetLinesByRegion().ToList();
             for (int i = 0; i < groups.Count(); i++)
-            {
-                Title = groups[i].Key;
-                DataContext = groups[i];
-                NoLines.Visibility = not;
-            }
+                switch (groups[i].Key)
+                {
+                    case Regions.General:
+                        General.ItemsSource = groups[i];
+                        NoLinesInGeneral.Visibility = Visibility.Hidden;
+                        break;
+
+                    case Regions.Center:
+                        Center.ItemsSource = groups[i];
+                        NoLinesInCenter.Visibility = Visibility.Hidden;
+                        break;
+
+                    case Regions.South:
+                        South.ItemsSource = groups[i];
+                        NoLinesInSouth.Visibility = Visibility.Hidden;
+                        break;
+
+                    case Regions.North:
+                        North.ItemsSource = groups[i];
+                        NoLinesInNorth.Visibility = Visibility.Hidden;
+                        break;
+
+                    case Regions.Jerusalem:
+                        Jerusalem.ItemsSource = groups[i];
+                        NoLinesInJerusalem.Visibility = Visibility.Hidden;
+                        break;
+                }
         }
 
-        private void Lines_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Lines_MouseDoubleClick(object sender, SelectionChangedEventArgs e)
         {
-            new LinesList(username, (Line)(SelectedItem).ThisSerial, administrativePrivileges).Show();
+            new LinesList(username, (int)(sender as ListBox).SelectedItem, administrativePrivileges).Show();
             Close();
         }
 
@@ -47,6 +70,6 @@ namespace PL
             else
                 new LinesList(username, -1, false).Show();
             Close();
-        }
+        }       
     }
 }

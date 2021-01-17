@@ -14,7 +14,6 @@
         <Grid Grid.Row="0" Background="#FFEEF5FF"/>
         <Image x:Name="Back" Source="BackButton.png" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="12,7,0,7.6"/>
         <Label Content="Lines By Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
-        <Label Content="No Lines!" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
         <Grid Grid.Row="1" Name="regions">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -28,45 +27,45 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="General" Content="General" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesInGeneral" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}"/>
-                <Label Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="General" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="General" HorizontalContentAlignment="Center" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="Lines_MouseDoubleClick"/>
+                <Label x:Name="NoLinesInGeneral" Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="North" Content="North" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesInNorth" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}"/>
-                <Label Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="North" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="North" HorizontalContentAlignment="Center" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="Lines_MouseDoubleClick"/>
+                <Label x:Name="NoLinesInNorth" Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="South" Content="South" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesInSouth" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}"/>
-                <Label Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="South" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="South" HorizontalContentAlignment="Center" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="Lines_MouseDoubleClick"/>
+                <Label x:Name="NoLinesInSouth" Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="Center" Content="Center" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesInCenter" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}"/>
-                <Label Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Center" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="Center" HorizontalContentAlignment="Center" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="Lines_MouseDoubleClick"/>
+                <Label x:Name="NoLinesInCenter" Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Column="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="Jerusalem" Content="Jerusalem" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesInJerusalem" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}"/>
-                <Label Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Jerusalem" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="Jerusalem" HorizontalContentAlignment="Center" Style="{StaticResource ListBoxStyle}" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="Lines_MouseDoubleClick"/>
+                <Label x:Name="NoLinesInJerusalem" Content="No Lines" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
     </Grid>
