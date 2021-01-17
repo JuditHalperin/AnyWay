@@ -72,18 +72,7 @@ namespace DLAPI
         IEnumerable<TwoFollowingStations> GetFollowingStations();
         IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition);
 
-        #endregion
-
-        //#region DrivingBuses
-
-        //void addDrivingBus(DrivingBus drivingBus);
-        //void removeDrivingBus(DrivingBus drivingBus);
-        //void updateDrivingBus(DrivingBus drivingBus);
-        //DrivingBus getDrivingBus(int thisSerial, string licensePlate, int line, DateTime start);
-        //IEnumerable<DrivingBus> GetDrivingBuses();
-        //IEnumerable<DrivingBus> GetDrivingBuses(Predicate<DrivingBus> condition);
-
-        //#endregion
+        #endregion       
 
         #region DrivingLines
 

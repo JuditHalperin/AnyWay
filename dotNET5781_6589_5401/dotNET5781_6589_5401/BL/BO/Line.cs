@@ -3,7 +3,7 @@
 namespace BO
 {
     /// <summary>
-    /// Bus line
+    /// Bus line, including its path of stations
     /// Identifier: Serial
     /// </summary>
     public class Line

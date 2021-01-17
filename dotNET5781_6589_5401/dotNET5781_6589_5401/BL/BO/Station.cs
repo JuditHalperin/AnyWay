@@ -3,7 +3,7 @@
 namespace BO
 {
     /// <summary>
-    /// Material station
+    /// Material station, including lines that stop at it
     /// Identifier: ID
     /// </summary>
     public class Station
