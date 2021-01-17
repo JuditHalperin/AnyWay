@@ -7,16 +7,14 @@
         mc:Ignorable="d"
         Title="GroupByRegions" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
-        <DataTemplate x:Key="Regions">
-            <Grid HorizontalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="5*"/>
-                </Grid.RowDefinitions>
-                <Label x:Name="NameOfRegion" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ListBox x:Name="LinesByRegion" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}"/>
-            </Grid>
-        </DataTemplate>
+        <Grid x:Key="Regions">            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="NameOfRegion" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ListBox x:Name="LinesByRegion" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}"/>
+        </Grid>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -35,8 +33,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
         </Grid>
-        
     </Grid>
 </Window>
