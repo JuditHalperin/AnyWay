@@ -97,7 +97,7 @@ namespace PL
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {
             new PassengerWindow(username).Show();
-            worker.CancelAsync();
+            //worker.CancelAsync();
             Close();
         }            
 
