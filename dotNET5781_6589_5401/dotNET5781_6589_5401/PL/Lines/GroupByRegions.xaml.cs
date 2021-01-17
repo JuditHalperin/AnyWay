@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-
+//General, North, South, Center, Jerusalem
 namespace PL
 {
     /// <summary>
@@ -30,8 +30,8 @@ namespace PL
             {
                 Title = groups[i].Key;
                 DataContext = groups[i];
+                NoLines.Visibility = not;
             }
-            for ()
         }
 
         private void Lines_MouseDoubleClick(object sender, MouseButtonEventArgs e)
