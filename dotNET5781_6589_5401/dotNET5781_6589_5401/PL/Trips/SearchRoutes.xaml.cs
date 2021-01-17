@@ -45,10 +45,10 @@ namespace PL
 
         private void CheckForUpdate(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            while (!worker.CancellationPending)
             {
                 worker.ReportProgress(0);
-                Thread.Sleep(1000); // second
+                Thread.Sleep(1000); // second              
             }
         }
 
@@ -97,8 +97,9 @@ namespace PL
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
         {
             new PassengerWindow(username).Show();
-            //worker.CancelAsync();
+            worker.CancelAsync();
             Close();
+            return;
         }            
 
         private void Trips_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -107,6 +108,8 @@ namespace PL
             {
                 new LinesList(username, (int)Trips.SelectedItem.GetType().GetProperty("Line").GetValue(Trips.SelectedItem, null), false).Show();
                 Close();
+                worker.CancelAsync();
+                return;
             }
         }
     }
