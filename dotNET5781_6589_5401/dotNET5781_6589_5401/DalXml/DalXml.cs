@@ -32,6 +32,7 @@ namespace DL
         string followingStationsPath = @"FollowingStationsXml.xml";
         string drivingLinesPath = @"DrivingLinesXml.xml";
         string managingCodePath = @"ManagingCodeXml.xml";
+        string serialPath = @"serialXml.xml";
 
         #endregion
 
@@ -176,13 +177,16 @@ namespace DL
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(linesPath);
 
+            int serial = getSerial();
+
             rootElem.Add(new XElement("Line",
-                                   new XElement("ThisSerial", line.ThisSerial),//serial?
+                                   new XElement("ThisSerial", serial),
                                    new XElement("NumberLine", line.NumberLine),
                                    new XElement("Region", line.Region)));
 
             XMLTools.SaveListToXMLElement(rootElem, linesPath);
-            return line.ThisSerial;//
+            
+            return serial;
         }
         public void removeLine(Line line)
         {
@@ -202,8 +206,16 @@ namespace DL
         }
         public void updateLine(Line line)
         {
-            removeLine(getLine(line.NumberLine));
-            addLine(line);
+            removeLine(getLine(line.ThisSerial));
+
+            XElement rootElem = XMLTools.LoadListFromXMLElement(linesPath);
+
+            rootElem.Add(new XElement("Line",
+                                   new XElement("ThisSerial", line.ThisSerial),
+                                   new XElement("NumberLine", line.NumberLine),
+                                   new XElement("Region", line.Region)));
+
+            XMLTools.SaveListToXMLElement(rootElem, linesPath);
         }
         public Line getLine(int serial)
         {
@@ -628,6 +640,19 @@ namespace DL
             XElement rootElem = XMLTools.LoadListFromXMLElement(managingCodePath);
             rootElem.Elements().Remove();
             rootElem.Add(code);
+        }
+
+        #endregion
+
+        #region Serial
+
+        public int getSerial()
+        {
+            XElement rootElem = XMLTools.LoadListFromXMLElement(serialPath);
+            int serial = Convert.ToInt32(rootElem.Elements());
+            rootElem.Elements().Remove();
+            rootElem.Add(++serial);
+            return serial - 1;
         }
 
         #endregion
