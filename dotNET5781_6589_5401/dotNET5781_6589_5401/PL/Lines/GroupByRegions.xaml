@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="GroupByRegions" Height="450" Width="800">
+        Title="GroupByRegions" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FFEEF5FF"/>
+        <Label Content="Lines By Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+        <Label Content="No Lines!" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
+        <Grid Grid.Row="1" Name="regions">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
         
     </Grid>
 </Window>
