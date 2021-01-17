@@ -63,6 +63,10 @@
       <Project>{fbd268a3-2950-425d-a32b-f03e25a970f3}</Project>
       <Name>DalObject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DalXml\DalXml.csproj">
+      <Project>{a61d515d-fa22-41dd-92c6-64a7fdf8f77f}</Project>
+      <Name>DalXml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DLAPI\DLAPI.csproj">
       <Project>{3385c162-7e75-4d37-b66b-61d35c2f42fb}</Project>
       <Name>DLAPI</Name>
