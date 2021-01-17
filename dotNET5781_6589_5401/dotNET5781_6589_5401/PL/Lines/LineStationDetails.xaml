@@ -33,8 +33,8 @@
             <Label Name="name" Content="{Binding Path=ID, Converter = {StaticResource IDToName_Station}}" Style="{StaticResource LabelDataStyle}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="ID:" Style="{StaticResource LabelTitleStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Name="id" Content="{Binding Path=ID}" Style="{StaticResource LabelDataStyle}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Content="Index in the Path:" Style="{StaticResource LabelTitleStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Name="index" Content="{Binding Path=PathIndex}" Style="{StaticResource LabelDataStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Index in the Path:" Style="{StaticResource LabelTitleStyle}" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Name="index" Content="{Binding Path=PathIndex}" Style="{StaticResource LabelDataStyle}" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="Location:" Style="{StaticResource LabelTitleStyle}" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Name="location" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
