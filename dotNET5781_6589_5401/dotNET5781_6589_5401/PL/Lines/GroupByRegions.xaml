@@ -6,12 +6,25 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="GroupByRegions" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate x:Key="Regions">
+            <Grid HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="NameOfRegion" Content="{Binding}" Style="{StaticResource LabelDataStyle}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ListBox x:Name="LinesByRegion" Style="{StaticResource ListBoxStyle}" ItemsSource="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#FFEEF5FF"/>
+        <Image x:Name="Back" Source="BackButton.png" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" MouseDown="Back_MouseDown" Margin="12,7,0,7.6"/>
         <Label Content="Lines By Regions:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
         <Label Content="No Lines!" Style="{StaticResource LabelTitleStyle}" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22"/>
         <Grid Grid.Row="1" Name="regions">
@@ -22,6 +35,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
         </Grid>
         
     </Grid>
