@@ -547,9 +547,13 @@ namespace DL
 
             rootElem.Add(new XElement("DrivingLine",
                                    new XElement("NumberLine", drivingLine.NumberLine),
-                                   new XElement("Start", drivingLine.Start),
+                                   new XElement("StartHours", drivingLine.Start.Hours),
+                                   new XElement("StartMinutes", drivingLine.Start.Minutes),
+                                   new XElement("StartSeconds", drivingLine.Start.Seconds),
                                    new XElement("Frequency", drivingLine.Frequency),
-                                   new XElement("End", drivingLine.End)));
+                                   new XElement("EndHours", drivingLine.End.Hours),
+                                   new XElement("EndMinutes", drivingLine.End.Minutes),
+                                   new XElement("EndSeconds", drivingLine.End.Seconds)));
 
             XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
         }
@@ -577,13 +581,13 @@ namespace DL
         public DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
             return (from i in XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements()
-                    where Convert.ToInt32(i.Element("NumberLine").Value) == numberLine && i.Element("Start").Value == start.ToString()
+                    where Convert.ToInt32(i.Element("NumberLine").Value) == numberLine && Convert.ToInt32(i.Element("StartHours").Value) == start.Hours && Convert.ToInt32(i.Element("StartMinutes").Value) == start.Minutes//if the hours and minutes of start is equal and the number line is same this the driving line that need.
                     select new DrivingLine()
                     {
                         NumberLine = numberLine,
                         Start = start,
                         Frequency = Convert.ToInt32(i.Element("Frequency").Value),
-                        End = TimeSpan.Parse(i.Element("End").Value)
+                        End = new TimeSpan(Convert.ToInt32(i.Element("EndHours").Value), Convert.ToInt32(i.Element("EndMinutes").Value), Convert.ToInt32(i.Element("EndSeconds").Value))
                     }).FirstOrDefault();
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
@@ -592,9 +596,9 @@ namespace DL
                     select new DrivingLine()
                     {
                         NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
-                        Start = TimeSpan.Parse(i.Element("Start").Value),
+                        Start = new TimeSpan(Convert.ToInt32(i.Element("StartHours").Value), Convert.ToInt32(i.Element("StartMinutes").Value), Convert.ToInt32(i.Element("StartSeconds").Value)),
                         Frequency = Convert.ToInt32(i.Element("Frequency").Value),
-                        End = TimeSpan.Parse(i.Element("End").Value)
+                        End = new TimeSpan(Convert.ToInt32(i.Element("EndHours").Value), Convert.ToInt32(i.Element("EndMinutes").Value), Convert.ToInt32(i.Element("EndSeconds").Value))
                     };
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
@@ -603,9 +607,9 @@ namespace DL
                    let item = new DrivingLine()
                    {
                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
-                       Start = TimeSpan.Parse(i.Element("Start").Value),
+                       Start = new TimeSpan(Convert.ToInt32(i.Element("StartHours").Value), Convert.ToInt32(i.Element("StartMinutes").Value), Convert.ToInt32(i.Element("StartSeconds").Value)),
                        Frequency = Convert.ToInt32(i.Element("Frequency").Value),
-                       End = TimeSpan.Parse(i.Element("End").Value)
+                       End = new TimeSpan(Convert.ToInt32(i.Element("EndHours").Value), Convert.ToInt32(i.Element("EndMinutes").Value), Convert.ToInt32(i.Element("EndSeconds").Value))
                    }
                    where condition(item)
                    select item;
