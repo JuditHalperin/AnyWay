@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Stations\IDToName_Station.cs" />
     <Compile Include="Stations\IntToString_StationID.cs" />
+    <Compile Include="Stations\LastStationInPath.cs" />
     <Compile Include="Stations\SetDistances.xaml.cs">
       <DependentUpon>SetDistances.xaml</DependentUpon>
     </Compile>

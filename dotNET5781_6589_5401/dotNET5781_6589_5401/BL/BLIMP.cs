@@ -505,6 +505,22 @@ namespace BL
             }
         }
         /// <summary>
+        /// get the last station in the line path
+        /// </summary>
+        /// <param name="serial"></param>
+        /// <returns></returns>
+        public int getLastStation(int serial)
+        {
+            try
+            {
+                return getLine(serial).Path.Last().ID;
+            }
+            catch (BO.LineException ex)
+            {
+                throw new BO.LineException(ex.Message, ex);
+            }
+        }
+        /// <summary>
         /// impossible to change a line if it is driving
         /// </summary>
         /// <param name="line"></param>

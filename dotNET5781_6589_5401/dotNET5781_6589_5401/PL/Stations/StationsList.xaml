@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Stations" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" d:DesignWidth="926.4">
+        Title="Stations" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <local:IntToString_StationID x:Key="IntToString_StationID"/>
+        <local:LastStationInPath x:Key="LastStationInPath"/>
         <DataTemplate x:Key="LineStations">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -15,11 +16,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="Line" Style="{StaticResource LabelDataStyle}" Grid.Column="0" Width="150" Content="{Binding Path=NumberLine}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="Index" Style="{StaticResource LabelDataStyle}" Grid.Column="1" Width="150" Content="{Binding Path=PathIndex}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="Previous" Style="{StaticResource LabelDataStyle}" Grid.Column="2" Width="150" Content="{Binding Path=PreviousStationID, Converter={StaticResource IntToString_StationID}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label x:Name="Next" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="150" Content="{Binding Path=NextStationID, Converter={StaticResource IntToString_StationID}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Line" Style="{StaticResource LabelDataStyle}" Grid.Column="0" Width="140" Content="{Binding Path=NumberLine}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Index" Style="{StaticResource LabelDataStyle}" Grid.Column="1" Width="140" Content="{Binding Path=PathIndex}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Previous" Style="{StaticResource LabelDataStyle}" Grid.Column="2" Width="140" Content="{Binding Path=PreviousStationID, Converter={StaticResource IntToString_StationID}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Next" Style="{StaticResource LabelDataStyle}" Grid.Column="3" Width="140" Content="{Binding Path=NextStationID, Converter={StaticResource IntToString_StationID}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label x:Name="Last" Style="{StaticResource LabelDataStyle}" Grid.Column="4" Width="140" Content="{Binding Path=NumberLine, Converter={StaticResource LastStationInPath}}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -42,7 +45,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.7*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
@@ -73,15 +76,17 @@
                 <Label Content="Lines:" Grid.Row="0" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="140"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Line Number" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Index in the Path" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Previous Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Content="Next Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Last Station" Style="{StaticResource LabelTitleStyle}" Foreground="#FF24249C" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>
                 <ListBox x:Name="LinesAtStation" Style="{StaticResource ListBoxStyle}" BorderThickness="0" Grid.Row="2" ItemsSource="{Binding}" ItemTemplate="{StaticResource LineStations}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseDoubleClick="LinesAtStation_MouseDoubleClick"/>
                 <Label x:Name="NoLines" Style="{StaticResource LabelDataStyle}" Content="No lines stop at this station." Grid.Row="2" Visibility="Hidden"/>

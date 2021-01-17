@@ -37,6 +37,7 @@ namespace BLAPI
         Line getLine(int serial);
         IEnumerable<Line> GetLines();
         IEnumerable<Line> GetLines(Predicate<Line> condition);
+        int getLastStation(int serial);
         bool canChangeLine(Line line);
         int countLines();
 
