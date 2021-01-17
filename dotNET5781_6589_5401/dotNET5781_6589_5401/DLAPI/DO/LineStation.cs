@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DO
+﻿namespace DO
 {
+    /// <summary>
+    /// Station in the path of a line
+    /// Identifier: NumberLine + ID
+    /// </summary>
     public class LineStation
     {
         public int NumberLine { get; set; }

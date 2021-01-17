@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BO
 {
+    /// <summary>
+    /// Material station
+    /// Identifier: ID
+    /// </summary>
     public class Station
     {
         public int ID { get; set; }

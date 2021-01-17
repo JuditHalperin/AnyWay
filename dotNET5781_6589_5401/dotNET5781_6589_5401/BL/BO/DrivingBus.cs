@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// Trip of a line
+    /// Identifier: NumberLine + Start
+    /// </summary>
     public class DrivingBus
     {
         public int NumberLine { get; set; }

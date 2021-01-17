@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
+    /// <summary>
+    /// User using the program: mannager or passenger
+    /// Identifier: Username
+    /// </summary>
     public class User
     {
         public string Username { get; set; }

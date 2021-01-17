@@ -2,6 +2,10 @@
 
 namespace BO
 {
+    /// <summary>
+    /// Schedule of a bus line
+    /// Identifier: NumberLine + Start
+    /// </summary>
     public class DrivingLine
     {
         public int NumberLine { get; set; }

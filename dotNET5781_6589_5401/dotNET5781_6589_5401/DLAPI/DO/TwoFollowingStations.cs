@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DO
+﻿namespace DO
 {
+    /// <summary>
+    /// Two following stations: the length and the time between them
+    /// Used when they follow in a line path
+    /// Identifier: FirstStationID + SecondStationID
+    /// </summary>
     public class TwoFollowingStations
     {
         public int FirstStationID { get; set; }

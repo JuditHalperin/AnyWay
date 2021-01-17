@@ -313,11 +313,11 @@ namespace DL
         {
 
             if (getLine(drivingLine.NumberLine) == null)// check if the line exists
-            {
                 throw new TripException("The line not exists.");
-            }
+
             if (DataSource.DrivingLines.Exists(item => item.NumberLine == drivingLine.NumberLine && item.Start == drivingLine.Start))
                 throw new TripException("The driving line already exists.");
+            
             DataSource.DrivingLines.Add(drivingLine.Clone());
         }
         public void removeDrivingLine(DrivingLine drivingLine)
