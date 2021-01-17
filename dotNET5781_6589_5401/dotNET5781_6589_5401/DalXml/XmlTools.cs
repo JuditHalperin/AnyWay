@@ -6,6 +6,9 @@ using System.Xml.Serialization;
 
 namespace DL
 {
+    /// <summary>
+    /// XML tools: save and load method with WElements or with XML serializer
+    /// </summary>
     class XMLTools
     {
         static string dir = @"xml\";
@@ -14,7 +17,9 @@ namespace DL
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
+
         #region SaveLoadWithXElement
+
         public static void SaveListToXMLElement(XElement rootElem, string filePath)
         {
             try
@@ -47,9 +52,11 @@ namespace DL
                 throw new DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
             }
         }
+        
         #endregion
 
         #region SaveLoadWithXMLSerializer
+
         public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
         {
             try
@@ -85,6 +92,7 @@ namespace DL
                 throw new DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
             }
         }
+        
         #endregion
     }
 }

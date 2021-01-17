@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// Trip of a line, containing details about its current station
+    /// Identifier: NumberLine + Start
+    /// </summary>
     public class DrivingBus
     {
         public int NumberLine { get; set; }

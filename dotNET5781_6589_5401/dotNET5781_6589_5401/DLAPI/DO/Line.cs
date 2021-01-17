@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DO
+﻿namespace DO
 {
+    /// <summary>
+    /// Bus line
+    /// Identifier: Serial
+    /// </summary>
     public class Line
     {
         public int ThisSerial { get; set; }

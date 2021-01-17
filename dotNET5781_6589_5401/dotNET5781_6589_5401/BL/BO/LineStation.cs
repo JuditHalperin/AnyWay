@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// Station in the path of a line
+    /// Identifier: NumberLine + ID
+    /// </summary>
     public class LineStation
     {
         public int NumberLine { get; set; }
@@ -12,7 +16,7 @@ namespace BO
         public int PathIndex { get; set; }
         public int PreviousStationID { get; set; }
         public int NextStationID { get; set; }
-        public int LengthFromPreviousStations { get; set; }
+        public int LengthFromPreviousStations { get; set; } // meters
         public int TimeFromPreviousStations { get; set; } // seconds
         public override string ToString() => ID.ToString();
     }

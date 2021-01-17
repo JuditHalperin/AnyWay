@@ -3,7 +3,7 @@
 namespace DL
 {
     /// <summary>
-    /// cloning of the objects
+    /// Cloning for all objects - using extension methods
     /// </summary>
     static class Cloning
     {     
