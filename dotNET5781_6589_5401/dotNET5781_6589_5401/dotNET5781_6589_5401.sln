@@ -34,6 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLAPI", "DLAPI\DLAPI.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{A61D515D-FA22-41DD-92C6-64A7FDF8F77F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xml", "Xml", "{8023EBFE-651B-493A-8C16-3CD8D2DB106B}"
+	ProjectSection(SolutionItems) = preProject
+		bin\xml\UsersXml.xml = bin\xml\UsersXml.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
