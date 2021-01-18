@@ -15,7 +15,7 @@ namespace PL
         {
             InitializeComponent();
             Massage.Content = "You have changed the location of the station. \n" +
-                "Enter the distance to the old location: \n" +
+                "Enter the distance (meters) to the old location: \n" +
                 "(use plus or minus for direction)";
         }
 

@@ -19,16 +19,16 @@ namespace PL
             DataContext = lineStation;
 
             Station station = bl.getStation(lineStation.ID);
-            location.DataContext = $"({station.Latitude}°N, {station.Longitude}°E)";
+            location.DataContext = $"{station.Latitude}°N, {station.Longitude}°E";
             
             if (lineStation.PreviousStationID != -1)
             {
                 Station preStation = bl.getStation(lineStation.PreviousStationID);
                 preName.DataContext = preStation.Name;
                 preID.DataContext = preStation.ID;
-                preDistance.DataContext = $"{lineStation.LengthFromPreviousStations / 1000.0}Km";
+                preDistance.DataContext = $"{lineStation.LengthFromPreviousStations / 1000.0} Km";
                 preTime.DataContext = $"{lineStation.TimeFromPreviousStations / 3600:00}:{lineStation.TimeFromPreviousStations % 3600 / 60:00}:{lineStation.TimeFromPreviousStations % 3600 % 60:00}";
-                preLocation.DataContext = $"({preStation.Latitude}°N, {preStation.Longitude}°E)";
+                preLocation.DataContext = $"{preStation.Latitude}°N, {preStation.Longitude}°E";
             }
 
             else // This is the first station in the path
@@ -46,9 +46,9 @@ namespace PL
                 LineStation nextLineStation = bl.getLineStation(lineStation.NumberLine, nextStation.ID);
                 nextName.DataContext = nextStation.Name;
                 nextID.DataContext = nextStation.ID;
-                nextDistance.DataContext = $"{nextLineStation.LengthFromPreviousStations / 1000.0}Km";
+                nextDistance.DataContext = $"{nextLineStation.LengthFromPreviousStations / 1000.0} Km";
                 nextTime.DataContext = $"{nextLineStation.TimeFromPreviousStations / 3600:00}:{nextLineStation.TimeFromPreviousStations % 3600 / 60:00}:{nextLineStation.TimeFromPreviousStations % 3600 % 60:00}";
-                nextLocation.DataContext = $"({nextStation.Latitude}°N, {nextStation.Longitude}°E)";
+                nextLocation.DataContext = $"{nextStation.Latitude}°N, {nextStation.Longitude}°E";
             }
 
             else // This is the last station in the path

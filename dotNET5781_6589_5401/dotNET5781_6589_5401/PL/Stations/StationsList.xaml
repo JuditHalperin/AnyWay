@@ -59,9 +59,9 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Latitude:" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="Latitude: (°N)" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Latitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Label Content="Longitude:" Grid.Row="2" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Content="Longitude: (°E)" Grid.Row="2" Style="{StaticResource LabelTitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                 <Label Content="{Binding Path=Longitude}" Style="{StaticResource LabelDataStyle}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Button x:Name="SetDistances" Content="Set Distances" Width="110" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource ButtonStyle}" Click="SetDistances_Click"/>
                 <Button x:Name="EditStation" Content="Edit" Style="{StaticResource ButtonStyle}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Click="EditStation_Click"/>

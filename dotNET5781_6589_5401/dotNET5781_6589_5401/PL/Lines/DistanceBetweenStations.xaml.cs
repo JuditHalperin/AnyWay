@@ -21,7 +21,7 @@ namespace PL
             bl = BlFactory.GetBl();
             firstStationID = previousStationID;
             secondStationID = thisStationID;
-            Massage.Content = $"Enter the distance between station {firstStationID} and station {secondStationID}:";
+            Massage.Content = $"Enter the distance between station {firstStationID} and station {secondStationID}: (meters)";
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
