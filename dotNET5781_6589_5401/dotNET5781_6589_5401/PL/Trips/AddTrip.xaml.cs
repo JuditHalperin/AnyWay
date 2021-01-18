@@ -8,6 +8,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for AddTrip.xaml
+    /// Add a trip to the selected line
     /// </summary>
     public partial class AddTrip : Window
     {

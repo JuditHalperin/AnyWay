@@ -9,6 +9,8 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for SetDistances.xaml
+    /// Set distance from the selected station to other stations location
+    /// Possible only when the distance is not defined - which means when there is no 'TwoFollowingStations' for these two stations
     /// </summary>
     public partial class SetDistances : Window
     {

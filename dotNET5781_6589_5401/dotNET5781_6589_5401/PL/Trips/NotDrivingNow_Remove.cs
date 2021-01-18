@@ -7,7 +7,7 @@ using System.Windows.Data;
 namespace PL
 {
     /// <summary>
-    /// do not allow to remove a trip if it is happrning now
+    /// Do not allow to remove a trip if it is happening right now
     /// </summary>
     class NotDrivingNow_Remove : IMultiValueConverter
     {

@@ -10,6 +10,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for StationsList.xaml
+    /// Stations window (for both manager and passenger)
     /// </summary>
     public partial class StationsList : Window
     {

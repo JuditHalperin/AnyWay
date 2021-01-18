@@ -10,6 +10,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for LinesList.xaml
+    /// Lines window (for both manager and passenger)
     /// </summary>
     public partial class LinesList : Window
     {

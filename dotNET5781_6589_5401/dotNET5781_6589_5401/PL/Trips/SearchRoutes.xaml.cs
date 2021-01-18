@@ -12,7 +12,8 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for SearchRoutes.xaml
-    /// 
+    /// Get source and target stations and show the best trips (sorted)
+    /// The window is updated every second (thread)
     /// </summary>
     public partial class SearchRoutes : Window
     {
