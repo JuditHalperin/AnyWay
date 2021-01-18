@@ -37,11 +37,13 @@ namespace PL
             try
             {
                 int line;
-                if (LineNumber.Text.Length == 0 || !int.TryParse(LineNumber.Text, out line))
+                if (LineNumber.Text.Length == 0 || !int.TryParse(LineNumber.Text, out line) || line <= 0)
                     throw new InvalidInputException("Invalid format of line number.");
+                
                 if (path.Count() < 2)
                     throw new InvalidInputException("A line path should contain at least 2 stations.");
-                bl.addLine(new BO.Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
+                
+                bl.addLine(new Line() { NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
                 Close();
             }
             catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }

@@ -47,6 +47,9 @@ namespace PL
                 TimeSpan end = new TimeSpan(Convert.ToInt32(EndHours.SelectedItem), Convert.ToInt32(EndMinutes.SelectedItem), 0);
                 int frequency = Convert.ToInt32(Frequency.Text);
 
+                if (frequency < 0)
+                    throw new InvalidInputException("Frequency should be positive.");
+
                 if (start > end)
                     throw new InvalidInputException("The start time should be before the end time.");
 
@@ -67,6 +70,6 @@ namespace PL
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }             
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace PL
 
         ObservableCollection<Station> path;
 
-        public EditLine(BO.Line line)
+        public EditLine(Line line)
         {
             InitializeComponent();
             bl = BlFactory.GetBl();
@@ -40,11 +40,11 @@ namespace PL
             try
             {
                 int line;
-                if (LineNumber.Text.Length == 0 || !int.TryParse(LineNumber.Text, out line))
+                if (LineNumber.Text.Length == 0 || !int.TryParse(LineNumber.Text, out line) || line <= 0)
                     throw new InvalidInputException("Invalid format of line number.");
                 if (path.Count() < 2)
                     throw new InvalidInputException("A line path should contain at least 2 stations.");
-                bl.updateLine(new BO.Line() { ThisSerial = ((BO.Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
+                bl.updateLine(new Line() { ThisSerial = ((Line)DataContext).ThisSerial, NumberLine = line, Region = (Regions)RegionsList.SelectedItem, Path = bl.convertToLineStationsList(path) });
                 Close();
             }
             catch (InvalidInputException ex) { MessageBox.Show(ex.Message); }

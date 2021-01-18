@@ -19,11 +19,6 @@ namespace PL
             bl = BlFactory.GetBl();
         }
 
-        /// <summary>
-        /// close the window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -39,7 +34,7 @@ namespace PL
             try
             {
                 int id;
-                if (!int.TryParse(IDTextBox.Text, out id) || IDTextBox.Text.Length != 5)
+                if (!int.TryParse(IDTextBox.Text, out id) || id < 10000 || id > 99999)
                     throw new InvalidInputException("Station ID should be consisted of 5 digits.");
 
                 double latitude = Convert.ToDouble(LatitudeTextBox.Text);

@@ -25,7 +25,6 @@ namespace PL
             Ok.IsEnabled = false;
         }
 
-
         private void Ok_IsEnabled()
         {
             if (Distance.Text.Length > 0 && Stations.SelectedItem != null)
@@ -43,6 +42,7 @@ namespace PL
                     throw new InvalidInputException("Invalid format of distance.");
                 if (distance <= 0 || distance > 240000) // outside of Israel
                     throw new InvalidInputException("Invalid distance.");
+                
                 bl.addTwoFollowingStations(((Station)Stations.SelectedItem).ID, current.ID, distance);
                 Close();
             }

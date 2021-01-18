@@ -33,6 +33,7 @@ namespace PL
                     throw new InvalidInputException("Invalid format of distance.");
                 if (distance <= 0 || distance > 240000) // outside of Israel
                     throw new InvalidInputException("Invalid distance.");
+                
                 bl.addTwoFollowingStations(firstStationID, secondStationID, distance);
                 validClosed = true;
                 Close();
