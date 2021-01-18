@@ -25,10 +25,21 @@ namespace BL
 
         #region Help functions
 
+        /// <summary>
+        /// Get time of trip that with the given distance
+        /// Choose the valocity randomaly
+        /// </summary>
+        /// <param name="distance">distance of trip = meters</param>
+        /// <returns>time of trip = minutes</returns>
         int calculateTime(int distance)
         {
             return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); // valocity of 30-60 km per hour
         }
+        /// <summary>
+        /// Add the given two following stations if it is not exist
+        /// Else - update it
+        /// </summary>
+        /// <param name="followingStations">two following stations</param>
         void addOrUpdateTwoFollowingStations(TwoFollowingStations followingStations)
         {
             try
@@ -40,15 +51,20 @@ namespace BL
                 dal.updateTwoFollowingStations(followingStations);
             }
         }
-        void addOrUpdateLineStation(BO.LineStation station)
+        /// <summary>
+        /// Add the given line station if it is not exist
+        /// Else - update it
+        /// </summary>
+        /// <param name="lineStation">line station</param>
+        void addOrUpdateLineStation(BO.LineStation lineStation)
         {
             try
             {
-                addLineStation(station);
+                addLineStation(lineStation);
             }
             catch (BO.StationException)
             {
-                updateLineStation(station);
+                updateLineStation(lineStation);
             }
         }
 
@@ -96,9 +112,9 @@ namespace BL
             }
         }
         /// <summary>
-        /// Remove user, accordingly the username.
+        /// Remove user
         /// </summary>
-        /// <param name="user">user for remove.</param>
+        /// <param name="user">user to remove</param>
         public void removeUser(BO.User user)
         {
             try
@@ -111,9 +127,9 @@ namespace BL
             }
         }
         /// <summary>
-        /// Update the password for user.Username (=const)
+        /// Update password of user (username is const)
         /// </summary>
-        /// <param name="user">user with update password.</param>
+        /// <param name="user">user with updated password</param>
         public void updateUser(BO.User user)
         {
             try
@@ -1256,6 +1272,11 @@ namespace BL
                 End = drivingLine.End
             };
         }
+        /// <summary>
+        /// Add a new drivingLine
+        /// Make sure its range of time does not overlap any other drivingLine of this line
+        /// </summary>
+        /// <param name="drivingLine"></param>
         public void addDrivingLine(BO.DrivingLine drivingLine)
         {
             try
@@ -1313,10 +1334,10 @@ namespace BL
                        select item).OrderBy(item => item.Start);
         }
         /// <summary>
-        /// for show start time of line
+        /// Get start times of the given line
         /// </summary>
-        /// <param name="numberLine">serial of line</param>
-        /// <returns>list of start time</returns>
+        /// <param name="numberLine">serial number of line</param>
+        /// <returns>list of start times</returns>
         public IEnumerable<TimeSpan> getTripsStart(int numberLine)
         {
             List<TimeSpan> tripsStart = new List<TimeSpan>();
