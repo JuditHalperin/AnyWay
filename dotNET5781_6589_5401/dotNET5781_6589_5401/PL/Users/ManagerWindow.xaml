@@ -18,9 +18,9 @@
         <Image Source="Logo.png" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="230" Margin="0,0,44.6,101.2" Grid.RowSpan="2"/>
         <Label x:Name="Username" Content="{Binding}" Style="{StaticResource LabelTitleStyle}" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20"/>
         <Button x:Name="ShowLines" Content="Lines" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="1" Height="60" Width="250" VerticalAlignment="Center" Click="ShowLines_Click"/>
-        <Button x:Name="AddFirstLine" Content="Add first line" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="1" Height="60" Width="250" VerticalAlignment="Center" Click="AddFirstLine_Click"/>
+        <Button x:Name="AddFirstLine" Content="Add First Line" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="1" Height="60" Width="250" VerticalAlignment="Center" Click="AddFirstLine_Click"/>
         <Button x:Name="ShowStations" Content="Stations" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="2" Height="60" Width="250" VerticalAlignment="Center" Click="ShowStations_Click"/>
-        <Button x:Name="AddFirstStation" Content="Add first station" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="2" Height="60" Width="250" VerticalAlignment="Center" Click="AddFirstStation_Click"/>
+        <Button x:Name="AddFirstStation" Content="Add First Station" Visibility="Hidden" Style="{StaticResource ButtonTitleStyle}" Grid.Row="2" Height="60" Width="250" VerticalAlignment="Center" Click="AddFirstStation_Click"/>
         <Button x:Name="LinesSchedule" Content="Schedule" Style="{StaticResource ButtonTitleStyle}" Grid.Row="3" Height="60" Width="250" VerticalAlignment="Center" Click="LinesSchedule_Click"/>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
