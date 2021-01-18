@@ -36,6 +36,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xml", "Xml", "{8023EBFE-651B-493A-8C16-3CD8D2DB106B}"
 	ProjectSection(SolutionItems) = preProject
+		bin\xml\DrivingLinesXml.xml = bin\xml\DrivingLinesXml.xml
+		bin\xml\FollowingStationsXml.xml = bin\xml\FollowingStationsXml.xml
+		bin\xml\LineStationsXml.xml = bin\xml\LineStationsXml.xml
+		bin\xml\LinesXml.xml = bin\xml\LinesXml.xml
+		bin\xml\ManagingCodeXml.xml = bin\xml\ManagingCodeXml.xml
+		bin\xml\SerialXml.xml = bin\xml\SerialXml.xml
+		bin\xml\StationsXml.xml = bin\xml\StationsXml.xml
 		bin\xml\UsersXml.xml = bin\xml\UsersXml.xml
 	EndProjectSection
 EndProject
