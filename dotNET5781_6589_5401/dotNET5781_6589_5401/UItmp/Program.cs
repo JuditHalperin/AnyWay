@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
+using DLAPI;
 using DO;
 
 namespace PlConsole
@@ -24,6 +25,8 @@ namespace PlConsole
 
         static void Main(string[] args)
         {
+
+            IDAL dal = DalFactory.GetDal();
             Users = new List<User>()
             {
                 new User()
@@ -657,37 +660,6 @@ namespace PlConsole
                     });
                 }
             } // line stations
-            Buses = new List<Bus>();
-            for (int i = 0; i < 10; i++)
-            {
-                string tmp = Convert.ToString(rand.Next(1000000, 10000000));
-                tmp = tmp.Insert(2, "-");
-                tmp = tmp.Insert(6, "-");
-                Buses.Add(new Bus()
-                {
-                    LicensePlate = tmp,
-                    StartOfWork = new DateTime(rand.Next(1990, 2017), rand.Next(1, 12), rand.Next(1, 28)),
-                    LastService = new DateTime(rand.Next(DateTime.Now.Year - 1, DateTime.Now.Year + 1), rand.Next(1, 13), rand.Next(1, 29)),
-                    TotalKms = rand.Next(20000, 50000),
-                    KmsSinceFuel = rand.Next(0, 1200),
-                    KmsSinceService = rand.Next(0, 20000)
-                });
-            } // 10 buses before 2018
-            for (int i = 0; i < 10; i++)
-            {
-                string tmp = Convert.ToString(rand.Next(10000000, 100000000));
-                tmp = tmp.Insert(3, "-");
-                tmp = tmp.Insert(6, "-");
-                Buses.Add(new Bus()
-                {
-                    LicensePlate = tmp,
-                    StartOfWork = new DateTime(rand.Next(2018, DateTime.Now.Year), rand.Next(1, 13), rand.Next(1, 29)),
-                    LastService = new DateTime(DateTime.Now.Year, rand.Next(1, DateTime.Now.Month), rand.Next(1, DateTime.Now.Day)),
-                    TotalKms = rand.Next(20000, 50000),
-                    KmsSinceFuel = rand.Next(0, 1200),
-                    KmsSinceService = rand.Next(0, 20000)
-                });
-            } //10 buses after 2018
             DrivingLines = new List<DrivingLine>();
             int dl = 0;
             foreach (Line line in Lines)
@@ -703,9 +675,19 @@ namespace PlConsole
             }
 
             foreach (User user in Users)
-            {
-                
-            }
+                dal.addUser(user);
+            foreach (Station item in Stations)
+                dal.addStation(item);
+            foreach (TwoFollowingStations item in FollowingStations)
+                dal.addTwoFollowingStations(item);
+            foreach (LineStation item in LineStations)
+                dal.addLineStation(item);
+            foreach (Line item in Lines)
+                dal.addLine(item);
+            
+            
+
+
         }
     }
 }
