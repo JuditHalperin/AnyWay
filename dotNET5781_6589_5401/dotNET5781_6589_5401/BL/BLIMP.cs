@@ -993,6 +993,12 @@ namespace BL
 
         #region DrivingBuses
 
+        /// <summary>
+        /// Get a spicific trip identified by its line serial number of the start time of the trip
+        /// </summary>
+        /// <param name="serial">line serial number</param>
+        /// <param name="start">start time of trip</param>
+        /// <returns>trip</returns>
         private DrivingBus getTrip(int serial, DateTime start)
         {
             try
@@ -1018,6 +1024,10 @@ namespace BL
             }
 
         }
+        /// <summary>
+        /// Get all existing trips
+        /// </summary>
+        /// <returns>trips</returns>
         private IEnumerable<DrivingBus> GetTrips()
         {
             try
@@ -1041,6 +1051,13 @@ namespace BL
                 throw new BO.TripException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Get all trips that a passenger mat use to arrive from souece station to a target station
+        /// Those trips may occur now or in the future
+        /// </summary>
+        /// <param name="source">source station ID</param>
+        /// <param name="target">target station ID</param>
+        /// <returns>possible trips for the passenger</returns>
         public IEnumerable<DrivingBus> getPassengerTrips(int source, int target)
         {
             List<BO.Line> lines = new List<BO.Line>();
@@ -1065,6 +1082,11 @@ namespace BL
 
             return allTrips;
         }
+        /// <summary>
+        /// Get all trips of the given line that occur at this moment
+        /// </summary>
+        /// <param name="serial">line serial number</param>
+        /// <returns>present trips</returns>
         private IEnumerable<DrivingBus> GetTripsOfLine_Present(int serial)
         {
             List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
@@ -1081,6 +1103,11 @@ namespace BL
                 }
             return trips;
         }
+        /// <summary>
+        /// Get all trips of the given line that will occur from the next closest trip till the end of the day
+        /// </summary>
+        /// <param name="serial">line serial number</param>
+        /// <returns>future trips</returns>
         private IEnumerable<DrivingBus> GetTripsOfLine_Future(int serial)
         {
             List<DO.DrivingLine> drivingLines = dal.GetDrivingLines(item => item.NumberLine == serial).ToList();
@@ -1100,6 +1127,13 @@ namespace BL
                     });
             return trips;
         }
+        /// <summary>
+        /// Calculate the time from this moment till the given line will arrive at the given station
+        /// The trip may already began or not
+        /// </summary>
+        /// <param name="trip">line trip</param>
+        /// <param name="source">source station</param>
+        /// <returns>time till arrival to source</returns>
         public TimeSpan timeTillArrivalToSource(DrivingBus trip, int source)
         {
             DO.LineStation sourceStation = dal.getLineStation(trip.NumberLine, source);
@@ -1121,6 +1155,13 @@ namespace BL
                 time += path[index].TimeFromPreviousStations.SecondsToTimeSpan();
             return time;
         }
+        /// <summary>
+        /// Calculate time of journey from one station to another
+        /// </summary>
+        /// <param name="serial">line serial number</param>
+        /// <param name="source">source station</param>
+        /// <param name="target">target station</param>
+        /// <returns>time of journey</returns>
         public TimeSpan durationTripBetweenStations(int serial, int source, int target)
         {
             int duration = 0;
@@ -1129,6 +1170,11 @@ namespace BL
                 duration += path[i].TimeFromPreviousStations;
             return duration.SecondsToTimeSpan();
         }
+        /// <summary>
+        /// Calculate time of journey of the given line path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>minutes of duration</returns>
         public int duration(IEnumerable<BO.LineStation> path)
         {
             int duration = 1; // because time to previous of the first is -1
@@ -1136,6 +1182,13 @@ namespace BL
                 duration += lineStation.TimeFromPreviousStations;
             return duration;
         }
+        /// <summary>
+        /// Get previous station index and time
+        /// </summary>
+        /// <param name="path">line path</param>
+        /// <param name="timeOfTrip">duration</param>
+        /// <param name="previousStationTime">out parameter calculated during the method</param>
+        /// <returns>previous station index</returns>
         private int getPreviousStationIndex(IEnumerable<BO.LineStation> path, TimeSpan timeOfTrip, out int previousStationTime)
         {
             previousStationTime = 0;
@@ -1149,11 +1202,18 @@ namespace BL
                 if (time >= secondsOfTrip)
                 {
                     previousStationTime = lineStation.TimeFromPreviousStations - (time - secondsOfTrip);
-                    return lineStation.PathIndex - 1;//this the path index (count from 1) of previous station.
+                    return lineStation.PathIndex - 1; // the path index (which starts at 1) of previous station
                 }
             }
             return 0; // not found
         }
+        /// <summary>
+        /// Get the next time some line will go for a trip
+        /// </summary>
+        /// <param name="start">start time of range</param>
+        /// <param name="end">end time of range</param>
+        /// <param name="frequency">frequency of trips</param>
+        /// <returns>next start time</returns>
         private TimeSpan getClosestStart(TimeSpan start, TimeSpan end, int frequency)
         {
             for (TimeSpan closestStart = start; closestStart <= end; closestStart += frequency.MinutesToTimeSpan())
