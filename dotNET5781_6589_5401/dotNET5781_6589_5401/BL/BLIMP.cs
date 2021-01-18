@@ -731,11 +731,10 @@ namespace BL
         /// <returns></returns>
         public bool canChangeStation(BO.Station station)
         {
-            foreach (DO.DrivingLine drivingLine in dal.GetDrivingLines())
-                if (GetTripsOfLine_Present(drivingLine.NumberLine) != null)
-                    if (dal.getLineStation(drivingLine.NumberLine, station.ID) != null)
-                        return false;
-            return true;
+            foreach(DO.LineStation lineStation in dal.GetLineStations(item => item.ID == station.ID))
+                if (GetTripsOfLine_Present(lineStation.NumberLine) != null)
+                    return false;
+            return true;            
         }
         public int countStations()
         {
