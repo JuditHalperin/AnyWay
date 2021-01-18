@@ -8,6 +8,8 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for EditStation.xaml
+    /// Edit station's name or location
+    /// If the location is changed, open another window (DistanceToOldStation) to get the length
     /// </summary>
     public partial class EditStation : Window
     {

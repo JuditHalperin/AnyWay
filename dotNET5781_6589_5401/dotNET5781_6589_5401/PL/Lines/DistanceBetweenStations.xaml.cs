@@ -7,6 +7,8 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for DistanceBetweenStations.xaml
+    /// Get distance between two line station
+    /// Used when add / edit a line and two following stations are added to the path, but there is no 'TwoFollowingStations' object for them
     /// </summary>
     public partial class DistanceBetweenStations : Window
     {

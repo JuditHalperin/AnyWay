@@ -4,6 +4,10 @@ using System.Windows.Data;
 
 namespace PL
 {
+    /// <summary>
+    /// Cannot remove a station from a line path when it is empty
+    /// (used in both AddLine and EditLine)
+    /// </summary>
     class PathIsNotEmpty_RemoveLineStations : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

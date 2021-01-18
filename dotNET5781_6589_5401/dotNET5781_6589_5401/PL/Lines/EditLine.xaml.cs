@@ -11,6 +11,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for EditLine.xaml
+    /// Edit a line - line number or path
     /// </summary>
     public partial class EditLine : Window
     {

@@ -10,6 +10,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for GroupByRegions.xaml
+    /// Group lines by their regions
     /// </summary>
     public partial class GroupByRegions : Window
     {

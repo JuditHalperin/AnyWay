@@ -10,6 +10,9 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for AddLineStation.xaml
+    /// Add a station to the line path
+    /// Constructor gets all stations in the path
+    /// (used in both AddLine and EditLine)
     /// </summary>
     public partial class AddLineStation : Window
     {

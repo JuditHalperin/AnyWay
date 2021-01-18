@@ -5,6 +5,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for DistanceToOldStation.xaml
+    /// When station's location is changed, get the distance between the old location and the current one, in order to update the following stations
     /// </summary>
     public partial class DistanceToOldStation : Window
     {

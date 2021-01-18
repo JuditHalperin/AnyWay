@@ -11,6 +11,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for AddLine.xaml
+    /// Add a line
     /// </summary>
     public partial class AddLine : Window
     {

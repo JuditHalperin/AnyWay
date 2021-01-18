@@ -8,6 +8,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for AddStation.xaml
+    /// Add a station
     /// </summary>
     public partial class AddStation : Window
     {

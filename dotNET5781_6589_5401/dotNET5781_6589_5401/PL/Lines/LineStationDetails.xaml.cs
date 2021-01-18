@@ -6,6 +6,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for LineStationDetails.xaml
+    /// Present line station details, including details of previous and next station in the path
     /// </summary>
     public partial class LineStationDetails : Window
     {

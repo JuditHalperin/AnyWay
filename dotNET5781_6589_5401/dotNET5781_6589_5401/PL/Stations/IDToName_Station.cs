@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace PL
 {
     /// <summary>
-    /// get the name of a line station by searching for the original station
+    /// Get the name of a line station by searching for the original station
     /// </summary>
     class IDToName_Station : IValueConverter
     {

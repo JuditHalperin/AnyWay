@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace PL
 {
     /// <summary>
-    /// get the last station in the line path
+    /// Get the last station in the line path
     /// </summary>
     class LastStationInPath : IValueConverter
     {
