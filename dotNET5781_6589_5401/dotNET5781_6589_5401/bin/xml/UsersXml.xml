@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Users>
+  <User>
+    <Username>Judit</Username>
+    <Password>123456</Password>
+    <IsManager>true</IsManager>
+  </User>
+  <User>
+    <Username>Asnat</Username>
+    <Password>123456</Password>
+    <IsManager>true</IsManager>
+  </User>
+  <User>
+    <Username>a</Username>
+    <Password>a</Password>
+    <IsManager>true</IsManager>
+  </User>
+  <User>
+    <Username>z</Username>
+    <Password>z</Password>
+    <IsManager>false</IsManager>
+  </User>
+</Users>
