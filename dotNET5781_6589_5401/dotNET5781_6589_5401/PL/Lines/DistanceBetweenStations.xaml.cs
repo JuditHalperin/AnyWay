@@ -11,7 +11,7 @@ namespace PL
     public partial class DistanceBetweenStations : Window
     {
         static IBL bl;
-        public bool validClosed = false;
+        public bool validClosed = false; // test if the window was closed by the 'ok' button - which means distance was written
         int firstStationID;
         int secondStationID;
 
@@ -24,6 +24,12 @@ namespace PL
             Massage.Content = $"Enter the distance between station {firstStationID} and station {secondStationID}: (meters)";
         }
 
+        /// <summary>
+        /// create two following stations
+        /// if the argument are invalid throw an exception
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             try

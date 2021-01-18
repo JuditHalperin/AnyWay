@@ -13,7 +13,6 @@ namespace PL
     public partial class SetDistances : Window
     {
         static IBL bl;
-
         Station current;
 
         public SetDistances(Station station, IEnumerable<Station> stations)
@@ -25,6 +24,9 @@ namespace PL
             Ok.IsEnabled = false;
         }
 
+        /// <summary>
+        /// enable the 'ok' when all fields are full
+        /// </summary>
         private void Ok_IsEnabled()
         {
             if (Distance.Text.Length > 0 && Stations.SelectedItem != null)
@@ -33,6 +35,12 @@ namespace PL
                 Ok.IsEnabled = false;
         }
 
+        /// <summary>
+        /// create two following stations
+        /// if the argument are invalid throw an exception
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             try

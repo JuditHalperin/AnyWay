@@ -18,13 +18,15 @@ namespace PL
             InitializeComponent();
             bl = BlFactory.GetBl();
             DataContext = station;
-        }
+        }       
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
+        /// <summary>
+        /// update the station
+        /// if the argument are invalid throw an exception
+        /// if the location has been change, open another window to get the distance between these two locations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -43,7 +45,7 @@ namespace PL
                     DistanceToOldStation window = new DistanceToOldStation();
                     window.ShowDialog();
                     if (!window.valid)
-                        return;
+                        return; // break out if distance was not written
                     distanceToPreviousLocation = window.Distance;
                 }
 
@@ -62,6 +64,11 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }            
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

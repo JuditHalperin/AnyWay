@@ -9,7 +9,7 @@ namespace PL
     public partial class DistanceToOldStation : Window
     {
         public int Distance = 0;
-        public bool valid = false;
+        public bool valid = false; // test if the window was closed by the 'ok' button - which means distance was written
 
         public DistanceToOldStation()
         {
@@ -19,6 +19,12 @@ namespace PL
                 "(use plus or minus for direction)";
         }
 
+        /// <summary>
+        /// if the argument are invalid throw an exception
+        /// otherwise, close the window and mark it as a valid close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             try
