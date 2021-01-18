@@ -8,6 +8,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for ChangePassword.xaml
+    /// Change user password or managing code
     /// </summary>
     public partial class ChangePassword : Window
     {

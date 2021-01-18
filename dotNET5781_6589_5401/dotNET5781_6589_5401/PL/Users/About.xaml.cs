@@ -4,6 +4,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for About.xaml
+    /// About AnyWay
     /// </summary>
     public partial class About : Window
     {

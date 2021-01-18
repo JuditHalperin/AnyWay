@@ -11,6 +11,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for TripsList_Manager.xaml
+    /// Trips window for a manager
     /// </summary>
     public partial class TripsList_Manager : Window
     {

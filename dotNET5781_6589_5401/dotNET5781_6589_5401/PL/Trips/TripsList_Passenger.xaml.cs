@@ -12,6 +12,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for TripsList_Passenger.xaml
+    /// Trips window for a passenger
     /// </summary>
     public partial class TripsList_Passenger : Window
     {

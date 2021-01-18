@@ -124,20 +124,21 @@ namespace PL
 
         /// <summary>
         /// double click on station:
-        /// left button - open line station details
-        /// right button - open station details
+        /// left double button - open line station details
+        /// right double button - open station details
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LineStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
-            else
-            {
-                new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
-                Close();
-            }
+            if(LineStations.SelectedItem != null)
+                if (e.ChangedButton == MouseButton.Left)
+                    new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
+                else // Rigth click
+                {
+                    new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
+                    Close();
+                }
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)

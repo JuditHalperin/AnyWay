@@ -8,6 +8,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for ManagerWindow.xaml
+    /// Main window for a manager
     /// </summary>
     public partial class ManagerWindow : Window
     {

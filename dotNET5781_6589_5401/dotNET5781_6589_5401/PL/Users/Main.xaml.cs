@@ -6,6 +6,8 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for Main.xaml
+    /// First window: sign in as manager / passenger
+    /// Press logo to open 'About'
     /// </summary>
     public partial class Main : Window
     {

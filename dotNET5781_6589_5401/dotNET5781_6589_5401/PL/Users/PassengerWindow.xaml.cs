@@ -8,6 +8,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for PassengerWindow.xaml
+    /// Main window for a passenger
     /// </summary>
     public partial class PassengerWindow : Window
     {
@@ -94,7 +95,6 @@ namespace PL
         {
             new ChangePassword("Password", tempUsername).ShowDialog();
         }
-
     }
 }
 

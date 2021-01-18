@@ -8,6 +8,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for SignIn.xaml
+    /// Get username and password and open the user account 
     /// </summary>
     public partial class SignIn : Window
     {

@@ -100,7 +100,6 @@
       <DependentUpon>RemoveLineStation.xaml</DependentUpon>
     </Compile>
     <Compile Include="PO\Exceptions.cs" />
-    <Compile Include="PO\GetRoutes.cs" />
     <Compile Include="PO\NotifyingDateTime.cs" />
     <Compile Include="Stations\AddStation.xaml.cs">
       <DependentUpon>AddStation.xaml</DependentUpon>

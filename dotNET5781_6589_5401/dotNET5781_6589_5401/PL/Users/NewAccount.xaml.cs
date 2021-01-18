@@ -9,6 +9,7 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for NewAccount.xaml
+    /// Create a new account
     /// </summary>
     public partial class NewAccount : Window
     {
