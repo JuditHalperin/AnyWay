@@ -32,7 +32,7 @@ namespace DL
         string followingStationsPath = @"FollowingStationsXml.xml";
         string drivingLinesPath = @"DrivingLinesXml.xml";
         string managingCodePath = @"ManagingCodeXml.xml";
-        string serialPath = @"serialXml.xml";
+        string serialPath = @"SerialXml.xml";
 
         #endregion
 
@@ -649,7 +649,7 @@ namespace DL
         public int getSerial()
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(serialPath);
-            int serial = Convert.ToInt32(rootElem.Elements());
+            int serial = Convert.ToInt32(rootElem.Elements().ToString());
             rootElem.Elements().Remove();
             rootElem.Add(++serial);
             return serial - 1;

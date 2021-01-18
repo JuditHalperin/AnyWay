@@ -674,20 +674,16 @@ namespace PlConsole
                 dl++;
             }
 
-            foreach (User user in Users)
-                dal.addUser(user);
-            foreach (Station item in Stations)
-                dal.addStation(item);
-            foreach (TwoFollowingStations item in FollowingStations)
-                dal.addTwoFollowingStations(item);
+            //foreach (User user in Users)
+            //    dal.addUser(user);
+            //foreach (Station item in Stations)
+            //    dal.addStation(item);
+            //foreach (TwoFollowingStations item in FollowingStations)
+            //    dal.addTwoFollowingStations(item);
             foreach (LineStation item in LineStations)
                 dal.addLineStation(item);
             foreach (Line item in Lines)
                 dal.addLine(item);
-            
-            
-
-
         }
     }
 }
