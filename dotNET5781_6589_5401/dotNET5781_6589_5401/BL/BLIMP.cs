@@ -609,7 +609,6 @@ namespace BL
             IEnumerable<BO.Station> stations = GetStations(item => item.ID != station.ID);
             if (stations != null)
                 foreach (BO.Station otherStation in stations)
-                {
                     try
                     {
                         TwoFollowingStations followingStations = dal.getTwoFollowingStations(station.ID, otherStation.ID);
@@ -618,7 +617,6 @@ namespace BL
                         dal.updateTwoFollowingStations(followingStations);
                     }
                     catch (DO.StationException) { }
-                }
         }
         /// <summary>
         /// Add station to the saved data.
