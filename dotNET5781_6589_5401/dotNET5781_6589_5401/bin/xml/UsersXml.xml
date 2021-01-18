@@ -2,15 +2,19 @@
 <Users>
   <User>
     <Username>Judit</Username>
-    <Password>123456</Password>
+    <Password>Jud!6589</Password>
     <IsManager>true</IsManager>
   </User>
   <User>
     <Username>Asnat</Username>
-    <Password>123456</Password>
+    <Password>Asn$5401</Password>
     <IsManager>true</IsManager>
   </User>
   <User>
+    <Username>Nurit</Username>
+    <Password>Nur#123</Password>
+    <IsManager>false</IsManager>
+  </User><User>
     <Username>a</Username>
     <Password>a</Password>
     <IsManager>true</IsManager>
