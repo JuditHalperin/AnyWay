@@ -100,4 +100,14 @@
     <EndMinutes>30</EndMinutes>
     <EndSeconds>0</EndSeconds>
   </DrivingLine>
+  <DrivingLine>
+    <NumberLine>10</NumberLine>
+    <StartHours>15</StartHours>
+    <StartMinutes>10</StartMinutes>
+    <StartSeconds>0</StartSeconds>
+    <Frequency>40</Frequency>
+    <EndHours>22</EndHours>
+    <EndMinutes>0</EndMinutes>
+    <EndSeconds>0</EndSeconds>
+  </DrivingLine>
 </DrivingLines>
