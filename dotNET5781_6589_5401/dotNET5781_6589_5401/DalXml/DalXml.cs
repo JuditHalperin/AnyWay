@@ -310,7 +310,7 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            List<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements().ToList();
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
             return (from i in list
                     where Convert.ToInt32(i.Element("ID").Value) == id
                     select new Station()
@@ -323,7 +323,7 @@ namespace DL
         }
         public IEnumerable<Station> GetStations()
         {
-            List<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements().ToList();
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
             return (from i in list
                     select new Station()
                     {
@@ -335,7 +335,7 @@ namespace DL
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
-            List<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements().ToList();
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
             return (from i in list
                     let item = new Station()
                     {
@@ -564,7 +564,7 @@ namespace DL
             rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
 
             item = (from i in rootElem.Elements()
-                    where Convert.ToInt32(i.Element("NumberLine").Value) == drivingLine.NumberLine && i.Element("Start").Value == drivingLine.Start.ToString()
+                    where Convert.ToInt32(i.Element("NumberLine").Value) == drivingLine.NumberLine && Convert.ToInt32(i.Element("StartHours").Value) == drivingLine.Start.Hours && Convert.ToInt32(i.Element("StartMinutes").Value) == drivingLine.Start.Minutes
                     select i).FirstOrDefault();
 
             if (item != null)
@@ -587,7 +587,7 @@ namespace DL
             XElement rootElem = XMLTools.LoadListFromXMLElement(drivingLinesPath);
 
             XElement item = (from i in rootElem.Elements()
-                             where int.Parse(i.Element("NumberLine").Value) == drivingLine.NumberLine && TimeSpan.Parse(i.Element("Start").Value) == drivingLine.Start
+                             where int.Parse(i.Element("NumberLine").Value) == drivingLine.NumberLine && Convert.ToInt32(i.Element("StartHours").Value) == drivingLine.Start.Hours && Convert.ToInt32(i.Element("StartMinutes").Value) == drivingLine.Start.Minutes
                              select i).FirstOrDefault();
 
             if (item != null)

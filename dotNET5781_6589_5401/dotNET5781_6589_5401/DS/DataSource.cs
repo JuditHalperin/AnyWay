@@ -691,18 +691,18 @@ namespace DS
                 });
             } //10 buses after 2018
             DrivingLines = new List<DrivingLine>();
-            //int dl = 0;
-            //foreach (Line line in Lines)
-            //{
-            //    DrivingLines.Add(new DrivingLine()
-            //    {
-            //        NumberLine = line.ThisSerial,
-            //        Start = new TimeSpan(7 + dl/2, (dl % 2) * 30, 0),
-            //        Frequency = (15 + (dl % 3) * 5),
-            //        End = new TimeSpan(23 - dl, (dl % 2) * 30, 0)
-            //    });
-            //    dl++;
-            //}
+            int dl = 0;
+            foreach (Line line in Lines)
+            {
+                DrivingLines.Add(new DrivingLine()
+                {
+                    NumberLine = line.ThisSerial,
+                    Start = new TimeSpan(7 + dl / 2, (dl % 2) * 30, 0),
+                    Frequency = (15 + (dl % 3) * 5),
+                    End = new TimeSpan(23 - dl, (dl % 2) * 30, 0)
+                });
+                dl++;
+            }
         }
 	}
 }
