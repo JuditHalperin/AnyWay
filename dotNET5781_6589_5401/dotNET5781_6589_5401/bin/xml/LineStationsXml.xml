@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DrivingLines>
   <DrivingLine>
-    <NumberLine>1</NumberLine>
-    <StartHours>7</StartHours>
-    <StartMinutes>0</StartMinutes>
+    <NumberLine>10</NumberLine>
+    <StartHours>11</StartHours>
+    <StartMinutes>30</StartMinutes>
     <StartSeconds>0</StartSeconds>
     <Frequency>15</Frequency>
-    <EndHours>23</EndHours>
-    <EndMinutes>0</EndMinutes>
+    <EndHours>14</EndHours>
+    <EndMinutes>30</EndMinutes>
     <EndSeconds>0</EndSeconds>
   </DrivingLine>
 </DrivingLines>

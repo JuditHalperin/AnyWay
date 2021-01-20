@@ -650,8 +650,9 @@ namespace DL
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(serialPath);
             int serial = Convert.ToInt32(rootElem.Elements().FirstOrDefault().Value);
-            rootElem.Elements().Remove();
-            rootElem.Add(++serial);
+            rootElem.Elements("LineSerial").FirstOrDefault().Remove();
+            rootElem.Add(new XElement("LineSerial",++serial));
+            XMLTools.SaveListToXMLElement(rootElem, serialPath);
             return serial - 1;
         }
 
