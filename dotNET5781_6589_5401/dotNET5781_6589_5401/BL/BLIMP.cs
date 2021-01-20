@@ -856,7 +856,7 @@ namespace BL
                     {
                         List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
                         if (station.PathIndex < lineStation.PathIndex) // need to increase the stations index that after the old station
-                            for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1; i++)
+                            for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1 && i < lineStations.Count(); i++)
                             {
                                 lineStations[i].PathIndex--;
                                 updateLineStation(lineStations[i]);
