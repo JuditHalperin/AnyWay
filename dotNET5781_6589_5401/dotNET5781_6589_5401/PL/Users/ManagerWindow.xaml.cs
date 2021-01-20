@@ -66,13 +66,7 @@ namespace PL
                 AddFirstStation.Visibility = Visibility.Hidden;
                 ShowStations.Visibility = Visibility.Visible;
             }
-        }
-
-        private void ShowBuses_Click(object sender, RoutedEventArgs e)
-        {
-            new BusesList(tempUsername).Show();
-            Close();
-        }
+        }        
 
         private void ShowLines_Click(object sender, RoutedEventArgs e)
         {
@@ -84,13 +78,7 @@ namespace PL
         {
             new StationsList(tempUsername).Show();
             Close();
-        }
-        
-        private void AddFirstBus_Click(object sender, RoutedEventArgs e)
-        {
-            new AddBus().ShowDialog();
-            enableButtons(); // refresh
-        }
+        }               
 
         private void AddFirstLine_Click(object sender, RoutedEventArgs e)
         {

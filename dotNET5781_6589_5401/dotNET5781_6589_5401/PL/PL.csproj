@@ -65,15 +65,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Buses\AddBus.xaml.cs">
-      <DependentUpon>AddBus.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buses\BusesList.xaml.cs">
-      <DependentUpon>BusesList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Buses\ShowBus.xaml.cs">
-      <DependentUpon>ShowBus.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Lines\AddLine.xaml.cs">
       <DependentUpon>AddLine.xaml</DependentUpon>
     </Compile>
@@ -187,18 +178,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Buses\AddBus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Buses\BusesList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Buses\ShowBus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Lines\AddLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
