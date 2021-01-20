@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DrivingLines>
-  <DrivingLine>
+  <!-- <DrivingLine>
     <NumberLine>1</NumberLine>
     <StartHours>7</StartHours>
     <StartMinutes>0</StartMinutes>
@@ -99,5 +99,5 @@
     <EndHours>14</EndHours>
     <EndMinutes>30</EndMinutes>
     <EndSeconds>0</EndSeconds>
-  </DrivingLine>
+  </DrivingLine>-->
 </DrivingLines>

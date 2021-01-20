@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Lines>
   <Line>
-    <ThisSerial>2</ThisSerial>
-    <NumberLine>18</NumberLine>
-    <Region>North</Region>
-  </Line>
-  <Line>
-    <ThisSerial>3</ThisSerial>
-    <NumberLine>23</NumberLine>
-    <Region>South</Region>
-  </Line>
-  <Line>
     <ThisSerial>5</ThisSerial>
     <NumberLine>33</NumberLine>
     <Region>Jerusalem</Region>
@@ -41,13 +31,23 @@
     <Region>General</Region>
   </Line>
   <Line>
-    <ThisSerial>6</ThisSerial>
-    <NumberLine>35</NumberLine>
-    <Region>North</Region>
+    <ThisSerial>2</ThisSerial>
+    <NumberLine>150</NumberLine>
+    <Region>General</Region>
+  </Line>
+  <Line>
+    <ThisSerial>3</ThisSerial>
+    <NumberLine>132</NumberLine>
+    <Region>South</Region>
   </Line>
   <Line>
     <ThisSerial>4</ThisSerial>
     <NumberLine>27</NumberLine>
     <Region>South</Region>
+  </Line>
+  <Line>
+    <ThisSerial>6</ThisSerial>
+    <NumberLine>35</NumberLine>
+    <Region>North</Region>
   </Line>
 </Lines>

@@ -3,14 +3,14 @@
   <TwoFollowingStations>
     <FirstStationID>38831</FirstStationID>
     <SecondStationID>38832</SecondStationID>
-    <LengthBetweenStations>54213</LengthBetweenStations>
-    <TimeBetweenStations>5914</TimeBetweenStations>
+    <LengthBetweenStations>36142</LengthBetweenStations>
+    <TimeBetweenStations>2169</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38831</FirstStationID>
     <SecondStationID>38833</SecondStationID>
-    <LengthBetweenStations>38368</LengthBetweenStations>
-    <TimeBetweenStations>4316</TimeBetweenStations>
+    <LengthBetweenStations>25585</LengthBetweenStations>
+    <TimeBetweenStations>1535</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38831</FirstStationID>
@@ -417,8 +417,8 @@
   <TwoFollowingStations>
     <FirstStationID>38832</FirstStationID>
     <SecondStationID>38833</SecondStationID>
-    <LengthBetweenStations>19812</LengthBetweenStations>
-    <TimeBetweenStations>1426</TimeBetweenStations>
+    <LengthBetweenStations>13208</LengthBetweenStations>
+    <TimeBetweenStations>795</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38832</FirstStationID>
@@ -501,8 +501,8 @@
   <TwoFollowingStations>
     <FirstStationID>38832</FirstStationID>
     <SecondStationID>38849</SecondStationID>
-    <LengthBetweenStations>73195</LengthBetweenStations>
-    <TimeBetweenStations>8234</TimeBetweenStations>
+    <LengthBetweenStations>48800</LengthBetweenStations>
+    <TimeBetweenStations>3507</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38832</FirstStationID>
@@ -825,8 +825,8 @@
   <TwoFollowingStations>
     <FirstStationID>38833</FirstStationID>
     <SecondStationID>38834</SecondStationID>
-    <LengthBetweenStations>16067</LengthBetweenStations>
-    <TimeBetweenStations>1446</TimeBetweenStations>
+    <LengthBetweenStations>10725</LengthBetweenStations>
+    <TimeBetweenStations>645</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38833</FirstStationID>
@@ -3543,14 +3543,14 @@
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
     <SecondStationID>38848</SecondStationID>
-    <LengthBetweenStations>73838</LengthBetweenStations>
-    <TimeBetweenStations>6483</TimeBetweenStations>
+    <LengthBetweenStations>49230</LengthBetweenStations>
+    <TimeBetweenStations>2954</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
     <SecondStationID>38849</SecondStationID>
-    <LengthBetweenStations>74000</LengthBetweenStations>
-    <TimeBetweenStations>6054</TimeBetweenStations>
+    <LengthBetweenStations>49505</LengthBetweenStations>
+    <TimeBetweenStations>3000</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
@@ -3579,26 +3579,26 @@
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
     <SecondStationID>38859</SecondStationID>
-    <LengthBetweenStations>73740</LengthBetweenStations>
-    <TimeBetweenStations>8295</TimeBetweenStations>
+    <LengthBetweenStations>50000</LengthBetweenStations>
+    <TimeBetweenStations>3050</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
     <SecondStationID>38860</SecondStationID>
-    <LengthBetweenStations>75709</LengthBetweenStations>
-    <TimeBetweenStations>5798</TimeBetweenStations>
+    <LengthBetweenStations>60890</LengthBetweenStations>
+    <TimeBetweenStations>4000</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
     <SecondStationID>38861</SecondStationID>
-    <LengthBetweenStations>75336</LengthBetweenStations>
-    <TimeBetweenStations>5534</TimeBetweenStations>
+    <LengthBetweenStations>70336</LengthBetweenStations>
+    <TimeBetweenStations>4557</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
     <SecondStationID>38862</SecondStationID>
-    <LengthBetweenStations>75069</LengthBetweenStations>
-    <TimeBetweenStations>5630</TimeBetweenStations>
+    <LengthBetweenStations>55069</LengthBetweenStations>
+    <TimeBetweenStations>3630</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38841</FirstStationID>
@@ -3903,8 +3903,8 @@
   <TwoFollowingStations>
     <FirstStationID>38842</FirstStationID>
     <SecondStationID>38849</SecondStationID>
-    <LengthBetweenStations>73624</LengthBetweenStations>
-    <TimeBetweenStations>8031</TimeBetweenStations>
+    <LengthBetweenStations>53624</LengthBetweenStations>
+    <TimeBetweenStations>5031</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38842</FirstStationID>
@@ -7467,14 +7467,14 @@
   <TwoFollowingStations>
     <FirstStationID>38859</FirstStationID>
     <SecondStationID>38865</SecondStationID>
-    <LengthBetweenStations>51643</LengthBetweenStations>
-    <TimeBetweenStations>5809</TimeBetweenStations>
+    <LengthBetweenStations>34430</LengthBetweenStations>
+    <TimeBetweenStations>1779</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38859</FirstStationID>
     <SecondStationID>38866</SecondStationID>
-    <LengthBetweenStations>50484</LengthBetweenStations>
-    <TimeBetweenStations>3563</TimeBetweenStations>
+    <LengthBetweenStations>33656</LengthBetweenStations>
+    <TimeBetweenStations>1889</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38859</FirstStationID>
@@ -7689,8 +7689,8 @@
   <TwoFollowingStations>
     <FirstStationID>38859</FirstStationID>
     <SecondStationID>38910</SecondStationID>
-    <LengthBetweenStations>81498</LengthBetweenStations>
-    <TimeBetweenStations>4972</TimeBetweenStations>
+    <LengthBetweenStations>54332</LengthBetweenStations>
+    <TimeBetweenStations>2800</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38859</FirstStationID>
@@ -8817,8 +8817,8 @@
   <TwoFollowingStations>
     <FirstStationID>38864</FirstStationID>
     <SecondStationID>38865</SecondStationID>
-    <LengthBetweenStations>51626</LengthBetweenStations>
-    <TimeBetweenStations>5023</TimeBetweenStations>
+    <LengthBetweenStations>32004</LengthBetweenStations>
+    <TimeBetweenStations>2600</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38864</FirstStationID>
@@ -9076,7 +9076,7 @@
     <FirstStationID>38865</FirstStationID>
     <SecondStationID>38866</SecondStationID>
     <LengthBetweenStations>2853</LengthBetweenStations>
-    <TimeBetweenStations>171</TimeBetweenStations>
+    <TimeBetweenStations>160</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38865</FirstStationID>
@@ -10047,14 +10047,14 @@
   <TwoFollowingStations>
     <FirstStationID>38870</FirstStationID>
     <SecondStationID>38872</SecondStationID>
-    <LengthBetweenStations>78073</LengthBetweenStations>
-    <TimeBetweenStations>5855</TimeBetweenStations>
+    <LengthBetweenStations>50008</LengthBetweenStations>
+    <TimeBetweenStations>3500</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38870</FirstStationID>
     <SecondStationID>38873</SecondStationID>
-    <LengthBetweenStations>79378</LengthBetweenStations>
-    <TimeBetweenStations>5391</TimeBetweenStations>
+    <LengthBetweenStations>63351</LengthBetweenStations>
+    <TimeBetweenStations>4260</TimeBetweenStations>
   </TwoFollowingStations>
   <TwoFollowingStations>
     <FirstStationID>38870</FirstStationID>

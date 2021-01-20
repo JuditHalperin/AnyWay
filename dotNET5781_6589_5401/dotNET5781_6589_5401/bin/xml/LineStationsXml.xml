@@ -1,166 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LineStations>
   <LineStation>
-    <ID>38838</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>1</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38839</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>2</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38840</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>3</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38841</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>4</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38842</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>5</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38844</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>6</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38845</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>7</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38846</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>8</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38847</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>9</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38848</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>10</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38849</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>11</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38852</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>12</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38854</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>13</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38855</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>14</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38856</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>15</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38859</ID>
-    <NumberLine>2</NumberLine>
-    <PathIndex>16</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38845</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>1</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38846</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>2</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38847</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>3</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38848</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>4</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38849</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>5</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38852</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>6</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38854</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>7</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38855</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>8</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38856</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>9</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38859</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>10</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38860</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>11</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38861</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>12</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38862</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>13</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38863</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>14</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38864</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>15</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38865</ID>
-    <NumberLine>3</NumberLine>
-    <PathIndex>16</PathIndex>
-  </LineStation>
-  <LineStation>
     <ID>38862</ID>
     <NumberLine>5</NumberLine>
     <PathIndex>1</PathIndex>
@@ -194,11 +34,6 @@
     <ID>38869</ID>
     <NumberLine>5</NumberLine>
     <PathIndex>7</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38870</ID>
-    <NumberLine>5</NumberLine>
-    <PathIndex>8</PathIndex>
   </LineStation>
   <LineStation>
     <ID>38872</ID>
@@ -636,107 +471,172 @@
     <PathIndex>15</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38869</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38838</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>1</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38870</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38839</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>2</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38872</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38840</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>3</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38873</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38841</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>4</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38875</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38842</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>5</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38876</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38844</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>6</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38877</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38845</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>7</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38878</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38846</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>8</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38879</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38847</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>9</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38880</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38911</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>10</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38881</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38852</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>11</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38883</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38854</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>12</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38884</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38855</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>13</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38885</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38856</ID>
+    <NumberLine>2</NumberLine>
     <PathIndex>14</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38886</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38865</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>1</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38845</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>2</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38846</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>3</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38847</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>4</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38852</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>5</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38854</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>6</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38855</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>7</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38856</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>8</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38909</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>9</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38910</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>10</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38859</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>11</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38860</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>12</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38861</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>13</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38862</ID>
+    <NumberLine>3</NumberLine>
+    <PathIndex>14</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38863</ID>
+    <NumberLine>3</NumberLine>
     <PathIndex>15</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38887</ID>
-    <NumberLine>6</NumberLine>
+    <ID>38864</ID>
+    <NumberLine>3</NumberLine>
     <PathIndex>16</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38831</ID>
-    <NumberLine>6</NumberLine>
-    <PathIndex>17</PathIndex>
+    <ID>38832</ID>
+    <NumberLine>4</NumberLine>
+    <PathIndex>1</PathIndex>
   </LineStation>
   <LineStation>
     <ID>38854</ID>
     <NumberLine>4</NumberLine>
-    <PathIndex>1</PathIndex>
+    <PathIndex>2</PathIndex>
   </LineStation>
   <LineStation>
     <ID>38855</ID>
     <NumberLine>4</NumberLine>
-    <PathIndex>2</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38856</ID>
-    <NumberLine>4</NumberLine>
     <PathIndex>3</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38859</ID>
+    <ID>38856</ID>
     <NumberLine>4</NumberLine>
     <PathIndex>4</PathIndex>
   </LineStation>
@@ -766,7 +666,7 @@
     <PathIndex>9</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38865</ID>
+    <ID>38859</ID>
     <NumberLine>4</NumberLine>
     <PathIndex>10</PathIndex>
   </LineStation>
@@ -776,7 +676,7 @@
     <PathIndex>11</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38867</ID>
+    <ID>38865</ID>
     <NumberLine>4</NumberLine>
     <PathIndex>12</PathIndex>
   </LineStation>
@@ -786,18 +686,93 @@
     <PathIndex>13</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38870</ID>
+    <ID>38872</ID>
     <NumberLine>4</NumberLine>
     <PathIndex>14</PathIndex>
   </LineStation>
   <LineStation>
-    <ID>38872</ID>
+    <ID>38873</ID>
     <NumberLine>4</NumberLine>
     <PathIndex>15</PathIndex>
   </LineStation>
   <LineStation>
+    <ID>38869</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>1</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38872</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>2</PathIndex>
+  </LineStation>
+  <LineStation>
     <ID>38873</ID>
-    <NumberLine>4</NumberLine>
+    <NumberLine>6</NumberLine>
+    <PathIndex>3</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38875</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>4</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38876</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>5</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38877</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>6</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38878</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>7</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38879</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>8</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38880</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>9</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38881</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>10</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38883</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>11</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38884</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>12</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38885</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>13</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38886</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>14</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38887</ID>
+    <NumberLine>6</NumberLine>
+    <PathIndex>15</PathIndex>
+  </LineStation>
+  <LineStation>
+    <ID>38831</ID>
+    <NumberLine>6</NumberLine>
     <PathIndex>16</PathIndex>
   </LineStation>
 </LineStations>
