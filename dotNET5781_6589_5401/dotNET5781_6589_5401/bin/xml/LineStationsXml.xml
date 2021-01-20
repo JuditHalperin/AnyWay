@@ -36,6 +36,10 @@
     <PathIndex>7</PathIndex>
   </LineStation>
   <LineStation>
+    <ID>38901</ID>
+    <NumberLine>5</NumberLine>
+    <PathIndex>8</PathIndex>
+  </LineStation><LineStation>
     <ID>38872</ID>
     <NumberLine>5</NumberLine>
     <PathIndex>9</PathIndex>
