@@ -834,7 +834,7 @@ namespace BL
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
                     lineStations[i].PathIndex--;
-                    updateLineStation(lineStations[i]);
+                    dal.updateLineStation(convertToLineStationDO(lineStations[i]));
                 }
             }
             catch (DO.StationException ex)
