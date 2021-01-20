@@ -219,8 +219,8 @@ namespace DL
         }
         public Line getLine(int serial)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(linesPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(linesPath).Elements();
+            return (from i in list
                     where Convert.ToInt32(i.Element("ThisSerial").Value) == serial
                     select new Line()
                     {
@@ -232,8 +232,8 @@ namespace DL
         }
         public IEnumerable<Line> GetLines()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(linesPath);
-            return from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(linesPath).Elements();
+            return from i in list
                    select new Line()
                    {
                        ThisSerial = Convert.ToInt32(i.Element("ThisSerial").Value),
@@ -243,8 +243,8 @@ namespace DL
         }
         public IEnumerable<Line> GetLines(Predicate<Line> condition)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(linesPath);
-            return from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(linesPath).Elements();
+            return from i in list
                    let item = new Line()
                    {
                        ThisSerial = Convert.ToInt32(i.Element("ThisSerial").Value),
@@ -256,8 +256,8 @@ namespace DL
         }
         public int countLines()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(linesPath);
-            IEnumerable<Line> lines = from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(linesPath).Elements();
+            IEnumerable<Line> lines = from i in list
                                       select new Line()
                                       {
                                           ThisSerial = Convert.ToInt32(i.Element("ThisSerial").Value)
@@ -311,8 +311,8 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(stationsPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            return (from i in list
                     where Convert.ToInt32(i.Element("ID").Value) == id
                     select new Station()
                     {
@@ -324,8 +324,8 @@ namespace DL
         }
         public IEnumerable<Station> GetStations()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(stationsPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            return (from i in list
                     select new Station()
                     {
                         ID = Convert.ToInt32(i.Element("ID").Value),
@@ -336,8 +336,8 @@ namespace DL
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(stationsPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            return (from i in list
                     let item = new Station()
                     {
                         ID = Convert.ToInt32(i.Element("ID").Value),
@@ -350,8 +350,8 @@ namespace DL
         }
         public int countStations()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(stationsPath);
-            IEnumerable<Station> stations = from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            IEnumerable<Station> stations = from i in list
                                             select new Station()
                                             {
                                                 ID = Convert.ToInt32(i.Element("ID").Value)
@@ -412,8 +412,8 @@ namespace DL
         }
         public LineStation getLineStation(int numberLine, int id)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(lineStationsPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(lineStationsPath).Elements();
+            return (from i in list
                     where int.Parse(i.Element("NumberLine").Value) == numberLine && int.Parse(i.Element("ID").Value) == id
                     select new LineStation()
                     {
@@ -424,8 +424,8 @@ namespace DL
         }
         public IEnumerable<LineStation> GetLineStations()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(lineStationsPath);
-            return from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(lineStationsPath).Elements();
+            return from i in list
                    select new LineStation()
                    {
                        ID = Convert.ToInt32(i.Element("ID").Value),
@@ -435,8 +435,8 @@ namespace DL
         }
         public IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(lineStationsPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(lineStationsPath).Elements();
+            return (from i in list
                     let item = new LineStation()
                     {
                         ID = Convert.ToInt32(i.Element("ID").Value),
@@ -509,8 +509,8 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(followingStationsPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(followingStationsPath).Elements();
+            return (from i in list
                     where (Convert.ToInt32(i.Element("FirstStationID").Value) == firstStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == secondStationID) || (Convert.ToInt32(i.Element("FirstStationID").Value) == secondStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == firstStationID)
                     select new TwoFollowingStations()
                     {
@@ -522,29 +522,29 @@ namespace DL
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(followingStationsPath);
-            return (from i in list.Elements()
-                    select new TwoFollowingStations()
-                    {
-                        FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
-                        SecondStationID = Convert.ToInt32(i.Element("SecondStationID").Value),
-                        LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
-                        TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
-                    }).OrderBy(item => item.TimeBetweenStations);
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(followingStationsPath).Elements();
+            return from i in list
+                   select new TwoFollowingStations()
+                   {
+                       FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
+                       SecondStationID = Convert.ToInt32(i.Element("SecondStationID").Value),
+                       LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
+                       TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
+                   };
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(followingStationsPath);
-            return (from i in list.Elements()
-                    let item = new TwoFollowingStations()
-                    {
-                        FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
-                        SecondStationID = Convert.ToInt32(i.Element("SecondStationID").Value),
-                        LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
-                        TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
-                    }
-                    where condition(item)
-                    select item).OrderBy(item => item.TimeBetweenStations);
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(followingStationsPath).Elements();
+            return from i in list
+                   let item = new TwoFollowingStations()
+                   {
+                       FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
+                       SecondStationID = Convert.ToInt32(i.Element("SecondStationID").Value),
+                       LengthBetweenStations = Convert.ToInt32(i.Element("LengthBetweenStations").Value),
+                       TimeBetweenStations = Convert.ToInt32(i.Element("TimeBetweenStations").Value)
+                   }
+                   where condition(item)
+                   select item;
         }
 
         #endregion      
@@ -606,8 +606,8 @@ namespace DL
         }
         public DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(drivingLinesPath);
-            return (from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements();
+            return (from i in list
                     where Convert.ToInt32(i.Element("NumberLine").Value) == numberLine && Convert.ToInt32(i.Element("StartHours").Value) == start.Hours && Convert.ToInt32(i.Element("StartMinutes").Value) == start.Minutes//if the hours and minutes of start is equal and the number line is same this the driving line that need.
                     select new DrivingLine()
                     {
@@ -619,8 +619,8 @@ namespace DL
         }
         public IEnumerable<DrivingLine> GetDrivingLines()
         {
-            XElement list = XMLTools.LoadListFromXMLElement(drivingLinesPath);
-            return from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements();
+            return from i in list
                    select new DrivingLine()
                    {
                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
@@ -631,8 +631,8 @@ namespace DL
         }
         public IEnumerable<DrivingLine> GetDrivingLines(Predicate<DrivingLine> condition)
         {
-            XElement list = XMLTools.LoadListFromXMLElement(drivingLinesPath);
-            return from i in list.Elements()
+            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(drivingLinesPath).Elements();
+            return from i in list
                    let item = new DrivingLine()
                    {
                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
