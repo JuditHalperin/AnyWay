@@ -26,11 +26,6 @@
     <Region>Jerusalem</Region>
   </Line>
   <Line>
-    <ThisSerial>6</ThisSerial>
-    <NumberLine>38</NumberLine>
-    <Region>General</Region>
-  </Line>
-  <Line>
     <ThisSerial>7</ThisSerial>
     <NumberLine>43</NumberLine>
     <Region>North</Region>
@@ -49,5 +44,10 @@
     <ThisSerial>10</ThisSerial>
     <NumberLine>64</NumberLine>
     <Region>Jerusalem</Region>
+  </Line>
+  <Line>
+    <ThisSerial>6</ThisSerial>
+    <NumberLine>152</NumberLine>
+    <Region>General</Region>
   </Line>
 </Lines>
