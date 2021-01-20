@@ -1,9 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FollowingStations>
-  <LineStation>
-    <FirstStationID>38833</FirstStationID>
-    <SecondStationID>38832</SecondStationID>
-    <LengthBetweenStations>111</LengthBetweenStations>
-    <TimeBetweenStations>10</TimeBetweenStations>
-  </LineStation>
 </FollowingStations>

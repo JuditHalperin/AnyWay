@@ -23,8 +23,6 @@ namespace BL
 
         #endregion
 
-        #region Help functions
-
         /// <summary>
         /// Get time of trip that with the given distance
         /// Choose the valocity randomaly
@@ -35,40 +33,6 @@ namespace BL
         {
             return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); // valocity of 30-60 km per hour
         }
-        /// <summary>
-        /// Add the given two following stations if it is not exist
-        /// Else - update it
-        /// </summary>
-        /// <param name="followingStations">two following stations</param>
-        void addOrUpdateTwoFollowingStations(TwoFollowingStations followingStations)
-        {
-            try
-            {
-                dal.addTwoFollowingStations(followingStations);
-            }
-            catch (DO.StationException)
-            {
-                dal.updateTwoFollowingStations(followingStations);
-            }
-        }
-        /// <summary>
-        /// Add the given line station if it is not exist
-        /// Else - update it
-        /// </summary>
-        /// <param name="lineStation">line station</param>
-        void addOrUpdateLineStation(BO.LineStation lineStation)
-        {
-            try
-            {
-                addLineStation(lineStation);
-            }
-            catch (BO.StationException)
-            {
-                updateLineStation(lineStation);
-            }
-        }
-
-        #endregion
 
         #region Users
 
@@ -142,7 +106,7 @@ namespace BL
             }
         }
         /// <summary>
-        /// Return user accordingly the username. if it is not exist, return null.
+        /// Return user accordingly the username. if it does not exist, return null.
         /// </summary>
         /// <param name="username">username of user that need return.</param>
         /// <returns>user or null (-defualt)</returns>
@@ -381,49 +345,24 @@ namespace BL
                 Region = (BO.Regions)lineD.Region,
                 Path = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex)
             };
-        }
+        }            
         /// <summary>
-        /// Take from the line data about following stations and enter this data.
+        /// Add line to the data.
         /// </summary>
-        /// <param name="line">Using in the path of line.</param>
-        void convertLineToFollowingStationDO(BO.Line line)
-        {
-            List<BO.LineStation> path = line.Path.ToList();
-            for (int i = 0; i < path.Count() - 1; i++)
-                addOrUpdateTwoFollowingStations(new TwoFollowingStations()
-                {
-                    FirstStationID = path[i].ID,
-                    SecondStationID = path[i + 1].ID,
-                    LengthBetweenStations = path[i + 1].LengthFromPreviousStations,
-                    TimeBetweenStations = path[i + 1].TimeFromPreviousStations
-                });
-        }
-        /// <summary>
-        /// Take from the path of line data about line stations.
-        /// </summary>
-        /// <param name="line">using path</param>
-        void convertLineToLineStationsDO(BO.Line line)
-        {
-            foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
-                dal.removeLineStation(lineStation);
-            foreach (BO.LineStation lineStation in line.Path)
-                addOrUpdateLineStation(lineStation);
-        }
-        /// <summary>
-        /// Add line from the data.
-        /// </summary>
-        /// <param name="line">line for add</param>
+        /// <param name="line">line to add</param>
         public void addLine(BO.Line line)
         {
             try
             {
                 if (line.Path.Count() < 2)
                     throw new BO.LineException("A line path should contain at least two stations.");
+                
                 int thisSerial = dal.addLine(convertToLineDO(line));
                 foreach (BO.LineStation lineStation in line.Path)
+                {
                     lineStation.NumberLine = thisSerial;
-                convertLineToFollowingStationDO(line);
-                convertLineToLineStationsDO(line);
+                    addLineStation(lineStation);
+                }
             }
             catch (BO.LineException ex)
             {
@@ -460,10 +399,13 @@ namespace BL
             try
             {
                 dal.updateLine(convertToLineDO(line));
-                convertLineToFollowingStationDO(line);
+                foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
+                    dal.removeLineStation(lineStation);
                 foreach (BO.LineStation lineStation in line.Path)
+                {
                     lineStation.NumberLine = line.ThisSerial;
-                convertLineToLineStationsDO(line);
+                    addLineStation(lineStation);
+                }
             }
             catch (DO.LineException ex)
             {
@@ -544,8 +486,8 @@ namespace BL
         /// <summary>
         /// impossible to change a line if it is driving
         /// </summary>
-        /// <param name="line"></param>
-        /// <returns></returns>
+        /// <param name="line">line serial number</param>
+        /// <returns>can or cannot</returns>
         public bool canChangeLine(int line)
         {
             IEnumerable<DrivingBus> drivingBuses = GetTripsOfLine_Present(line);
@@ -553,6 +495,10 @@ namespace BL
                 return true;
             return false;
         }
+        /// <summary>
+        /// Get number of lines in the data base
+        /// </summary>
+        /// <returns>count of lines</returns>
         public int countLines()
         {
             return dal.countLines();
