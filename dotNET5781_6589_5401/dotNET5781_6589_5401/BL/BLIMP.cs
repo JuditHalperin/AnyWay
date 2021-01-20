@@ -1022,9 +1022,14 @@ namespace BL
         public IEnumerable<DrivingBus> getPassengerTrips(int source, int target)
         {
             List<BO.Line> lines = new List<BO.Line>();
+
             foreach (DO.Line line in dal.GetLines().ToList())
-                if (dal.getLineStation(line.ThisSerial, source) != null && dal.getLineStation(line.ThisSerial, target) != null && dal.getLineStation(line.ThisSerial, target).PathIndex > dal.getLineStation(line.ThisSerial, source).PathIndex) 
+            {
+                DO.LineStation tSource = dal.getLineStation(line.ThisSerial, source);
+                DO.LineStation tTarget = dal.getLineStation(line.ThisSerial, target);
+                if (tSource != null && tTarget != null && tTarget.PathIndex > tSource.PathIndex)
                     lines.Add(getLine(line.ThisSerial));
+            }
 
             List<DrivingBus> allTrips = new List<DrivingBus>();
             foreach (BO.Line line in lines)
@@ -1036,7 +1041,7 @@ namespace BL
                             allTrips.Add(trip);
 
                 IEnumerable<DrivingBus> future = GetTripsOfLine_Future(line.ThisSerial);
-                if(future != null)
+                if (future != null)
                     foreach (DrivingBus trip in future)
                         allTrips.Add(trip);
             }
