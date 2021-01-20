@@ -122,9 +122,7 @@ namespace DL
 
         public void addBus(Bus bus)
         {
-            //if (DataSource.Buses.Exists(item => item.LicensePlate == bus.LicensePlate))
-            //    throw new BusException("The bus already exists.");
-            //DataSource.Buses.Add(bus.Clone());
+           
         }
         public void removeBus(Bus bus)
         {
@@ -148,24 +146,15 @@ namespace DL
             addBus(bus);
         }
         public Bus getBus(string licensePlate)
-        {
-            //Bus bus = DataSource.Buses.Find(item => item.LicensePlate == licensePlate);
-            //if (bus == null)
-            //    return null;
-            //return bus.Clone();
+        {            
             return null;
         }
         public IEnumerable<Bus> GetBuses()
-        {
-            //return from item in DataSource.Buses
-            //       select item.Clone();
+        {           
             return null;
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
-        {
-            //return from item in DataSource.Buses
-            //       where condition(item)
-            //       select item.Clone();
+        {            
             return null;
         }
 
