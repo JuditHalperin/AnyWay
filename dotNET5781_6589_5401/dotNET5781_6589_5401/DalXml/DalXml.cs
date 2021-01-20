@@ -567,7 +567,7 @@ namespace DL
                                    new XElement("EndMinutes", drivingLine.End.Minutes),
                                    new XElement("EndSeconds", drivingLine.End.Seconds)));
 
-            XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
+            XMLTools.SaveListToXMLElement(rootElem, drivingLinesPath);
         }
         public void removeDrivingLine(DrivingLine drivingLine)
         {
@@ -640,6 +640,7 @@ namespace DL
             XElement rootElem = XMLTools.LoadListFromXMLElement(managingCodePath);
             rootElem.Elements().Remove();
             rootElem.Add(code);
+            XMLTools.SaveListToXMLElement(rootElem, managingCodePath);
         }
 
         #endregion
