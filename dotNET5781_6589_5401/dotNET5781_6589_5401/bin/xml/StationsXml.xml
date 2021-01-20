@@ -330,4 +330,10 @@
     <Latitude>31.968049</Latitude>
     <Longitude>34.818099</Longitude>
   </Station>
+  <Station>
+    <ID>58894</ID>
+    <Name>Hayuvel</Name>
+    <Latitude>32.555</Latitude>
+    <Longitude>35.12</Longitude>
+  </Station>
 </Stations>

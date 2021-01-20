@@ -8910,4 +8910,10 @@
     <LengthBetweenStations>4034</LengthBetweenStations>
     <TimeBetweenStations>264</TimeBetweenStations>
   </TwoFollowingStations>
+  <TwoFollowingStations>
+    <FirstStationID>38852</FirstStationID>
+    <SecondStationID>58894</SecondStationID>
+    <LengthBetweenStations>10500</LengthBetweenStations>
+    <TimeBetweenStations>840</TimeBetweenStations>
+  </TwoFollowingStations>
 </FollowingStations>
