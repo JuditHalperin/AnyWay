@@ -436,8 +436,10 @@ namespace BL
         {
             try
             {
-                return (from line in dal.GetLines()
-                        select convertToLineBO(line)).OrderBy(item => item.ThisSerial);
+                List<DO.Line> list = dal.GetLines().ToList();
+                return from line in list
+                       orderby line.ThisSerial
+                       select convertToLineBO(line);
             }
             catch (DO.LineException ex)
             {
@@ -453,7 +455,8 @@ namespace BL
         {
             try
             {
-                return from item in GetLines()
+                List<BO.Line> list = GetLines().ToList();
+                return from item in list
                        where condition(item)
                        select item;
             }
@@ -644,7 +647,8 @@ namespace BL
         {
             try
             {
-                return from station in dal.GetStations()
+                List<DO.Station> list = dal.GetStations().ToList();
+                return from station in list
                        select convertToStationBO(station);
             }
             catch (DO.StationException ex)
@@ -661,7 +665,8 @@ namespace BL
         {
             try
             {
-                return from item in GetStations()
+                List<BO.Station> list = GetStations().ToList();
+                return from item in list
                        where condition(item)
                        select item;
             }
@@ -902,7 +907,8 @@ namespace BL
         {
             try
             {
-                return from lineStation in dal.GetLineStations().ToList()
+                List<DO.LineStation> list = dal.GetLineStations().ToList();
+                return from lineStation in list
                        select convertToLineStationBO(lineStation);
             }
             catch (DO.StationException ex)
@@ -914,7 +920,8 @@ namespace BL
         {
             try
             {
-                return from item in GetLineStations().ToList()
+                List<BO.LineStation> list = GetLineStations().ToList();
+                return from item in list
                        where condition(item)
                        select item;
             }
@@ -1270,14 +1277,17 @@ namespace BL
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines()
         {
-                return from drivingLine in dal.GetDrivingLines()
-                       select convertToDrivingLineBO(drivingLine);
+            List<DO.DrivingLine> list = dal.GetDrivingLines().ToList();
+            return from drivingLine in list
+                   select convertToDrivingLineBO(drivingLine);
         }
         public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
         {
-                return (from item in GetDrivingLines()
-                       where condition(item)
-                       select item).OrderBy(item => item.Start);
+            List<BO.DrivingLine> list = GetDrivingLines().ToList();
+            return from item in list
+                   where condition(item)
+                   orderby item.Start
+                   select item;
         }
         /// <summary>
         /// Get start times of the given line
