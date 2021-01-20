@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Stations>
   <Station>
-    <ID>38831</ID>
-    <Name>BarLev/BenYehudaSchool</Name>
-    <Latitude>32.183921</Latitude>
-    <Longitude>34.917806</Longitude>
-  </Station>
-  <Station>
     <ID>38832</ID>
     <Name>Herzl/BiluJunction</Name>
     <Latitude>31.870034</Latitude>
@@ -125,84 +119,6 @@
     <Name>Rotem/Deganiot</Name>
     <Latitude>31.874963</Latitude>
     <Longitude>34.81249</Longitude>
-  </Station>
-  <Station>
-    <ID>38859</ID>
-    <Name>Theprairie</Name>
-    <Latitude>32.300035</Latitude>
-    <Longitude>34.910842</Longitude>
-  </Station>
-  <Station>
-    <ID>38860</ID>
-    <Name>Introductiontothevine/Slopeofthefig</Name>
-    <Latitude>32.305234</Latitude>
-    <Longitude>34.948647</Longitude>
-  </Station>
-  <Station>
-    <ID>38861</ID>
-    <Name>Introductiontothevine/extension</Name>
-    <Latitude>32.304022</Latitude>
-    <Longitude>34.943393</Longitude>
-  </Station>
-  <Station>
-    <ID>38862</ID>
-    <Name>Theextensiona</Name>
-    <Latitude>32.302957</Latitude>
-    <Longitude>34.940529</Longitude>
-  </Station>
-  <Station>
-    <ID>38863</ID>
-    <Name>Theextensionb</Name>
-    <Latitude>32.300264</Latitude>
-    <Longitude>34.939512</Longitude>
-  </Station>
-  <Station>
-    <ID>38864</ID>
-    <Name>Theextension/veterans</Name>
-    <Latitude>32.298171</Latitude>
-    <Longitude>34.938705</Longitude>
-  </Station>
-  <Station>
-    <ID>38865</ID>
-    <Name>Airports/AliyahAuthority</Name>
-    <Latitude>31.990876</Latitude>
-    <Longitude>34.8976</Longitude>
-  </Station>
-  <Station>
-    <ID>38866</ID>
-    <Name>Wing/Cypress</Name>
-    <Latitude>31.998767</Latitude>
-    <Longitude>34.879725</Longitude>
-  </Station>
-  <Station>
-    <ID>38867</ID>
-    <Name>Thegang/DovHoz</Name>
-    <Latitude>31.883019</Latitude>
-    <Longitude>34.818708</Longitude>
-  </Station>
-  <Station>
-    <ID>38869</ID>
-    <Name>BeitHalevie</Name>
-    <Latitude>32.349776</Latitude>
-    <Longitude>34.926837</Longitude>
-  </Station>
-  <Station>
-    <ID>38872</ID>
-    <Name>ThegeniusBenIshChai/Ceylon</Name>
-    <Latitude>31.897286</Latitude>
-    <Longitude>34.775083</Longitude>
-  </Station>
-  <Station>
-    <ID>38873</ID>
-    <Name>Okashi/LeviEshkol</Name>
-    <Latitude>31.883941</Latitude>
-    <Longitude>34.807039</Longitude>
-  </Station>
-  <Station>
-    <ID>38875</ID>
-    <Name>Restandestate/YehudaGorodiski</Name>
-    <Latitude>31.896762</Latitude>
-    <Longitude>34.816752</Longitude>
   </Station>
   <Station>
     <ID>38876</ID>

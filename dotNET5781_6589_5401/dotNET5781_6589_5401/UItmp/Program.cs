@@ -29,14 +29,7 @@ namespace PlConsole
             IDAL dal = DalFactory.GetDal();
             Stations = new List<Station>()
             {
-                new Station
-                {
-                    ID = 38831,
-                    Name = "BarLev/BenYehudaSchool",
-                    Latitude = 32.183921,
-                    Longitude = 34.917806
-                },
-
+                
                 new Station
                 {
                     ID = 38832,
@@ -195,120 +188,9 @@ namespace PlConsole
                     Name = "Rotem/Deganiot",
                     Latitude = 31.874963,
                     Longitude = 34.81249
-                },
+                },               
 
-                new Station
-                {
-                    ID = 38859,
-                    Name = "Theprairie",
-                    Latitude = 32.300035,
-                    Longitude = 34.910842
-                },
-
-                new Station
-                {
-                    ID = 38860,
-                    Name = "Introductiontothevine/Slopeofthefig",
-                    Latitude = 32.305234,
-                    Longitude = 34.948647
-                },
-
-                new Station
-                {
-                    ID = 38861,
-                    Name = "Introductiontothevine/extension",
-                    Latitude = 32.304022,
-                    Longitude = 34.943393
-                },
-
-                new Station
-                {
-                    ID = 38862,
-                    Name = "Theextensiona",
-                    Latitude = 32.302957,
-                    Longitude = 34.940529
-                },
-
-                new Station
-                {
-                    ID = 38863,
-                    Name = "Theextensionb",
-                    Latitude = 32.300264,
-                    Longitude = 34.939512
-                },
-
-                new Station
-                {
-                    ID = 38864,
-                    Name = "Theextension/veterans",
-                    Latitude = 32.298171,
-                    Longitude = 34.938705
-                },
-
-                new Station
-                {
-                    ID = 38865,
-                    Name = "Airports/AliyahAuthority",
-                    Latitude = 31.990876,
-                    Longitude = 34.8976
-                },
-
-                new Station
-                {
-                    ID = 38866,
-                    Name = "Wing/Cypress",
-                    Latitude = 31.998767,
-                    Longitude = 34.879725
-                },
-
-                new Station
-                {
-                    ID = 38867,
-                    Name = "Thegang/DovHoz",
-                    Latitude = 31.883019,
-                    Longitude = 34.818708
-                },
-
-                new Station
-                {
-                    ID = 38869,
-                    Name = "BeitHalevie",
-                    Latitude = 32.349776,
-                    Longitude = 34.926837
-                },
-
-                new Station
-                {
-                    ID = 38870,
-                    Name = "First/Route5700",
-                    Latitude = 32.352953,
-                    Longitude = 34.899465
-                },
-
-                new Station
-                {
-                    ID = 38872,
-                    Name = "ThegeniusBenIshChai/Ceylon",
-                    Latitude = 31.897286,
-                    Longitude = 34.775083
-                },
-
-                new Station
-                {
-                    ID = 38873,
-                    Name = "Okashi/LeviEshkol",
-                    Latitude = 31.883941,
-                    Longitude = 34.807039
-                },
-
-                new Station
-                {
-                    ID = 38875,
-                    Name = "Restandestate/YehudaGorodiski",
-                    Latitude = 31.896762,
-                    Longitude = 34.816752
-                },
-
+                
                 new Station
                 {
                     ID = 38876,
@@ -605,8 +487,8 @@ namespace PlConsole
                             };
                             GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
                             GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
-                            twoFollowingStations.LengthBetweenStations = (int)(positionThisStation.GetDistanceTo(positionSecondStation) * 1.5);
-                            twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations / 1000.0 / rand.Next(30, 61) * 3600);
+                            twoFollowingStations.LengthBetweenStations = (int)(positionThisStation.GetDistanceTo(positionSecondStation) * 1.05);
+                            twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations / 1000.0 / rand.Next(55, 75) * 3600);
                             FollowingStations.Add(twoFollowingStations);
                         }
             } // following stations
@@ -621,7 +503,7 @@ namespace PlConsole
             } // 10 lines
             foreach (Line line in Lines)
             {
-                for (int i = (line.ThisSerial - 1) * 6, j = 1; i < Stations.Count() && i < (line.ThisSerial - 1) * 6 + 16; j++, i++)
+                for (int i = (line.ThisSerial - 1) * 5, j = 1; i < Stations.Count() && i < (line.ThisSerial - 1) * 5 + 10; j++, i++)
                 {
                     LineStations.Add(new LineStation()
                     {
