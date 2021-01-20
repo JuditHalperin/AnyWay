@@ -437,9 +437,8 @@ namespace BL
             try
             {
                 List<DO.Line> list = dal.GetLines().ToList();
-                return from line in list
-                       orderby line.ThisSerial
-                       select convertToLineBO(line);
+                return (from line in list
+                        select convertToLineBO(line)).OrderBy(item => item.ThisSerial);
             }
             catch (DO.LineException ex)
             {
