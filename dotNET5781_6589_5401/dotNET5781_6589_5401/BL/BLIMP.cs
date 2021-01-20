@@ -490,10 +490,10 @@ namespace BL
         /// <returns>can or cannot</returns>
         public bool canChangeLine(int line)
         {
-            IEnumerable<DrivingBus> drivingBuses = GetTripsOfLine_Present(line);
-            if (drivingBuses == null || drivingBuses.Count() == 0)
-                return true;
-            return false;
+            foreach (DO.DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == line))
+                if (drivingLine.Start <= DateTime.Now.TimeOfDay && drivingLine.End + duration(getLine(line).Path).SecondsToTimeSpan() >= DateTime.Now.TimeOfDay)
+                    return false;
+            return true;            
         }
         /// <summary>
         /// Get number of lines in the data base
@@ -677,8 +677,9 @@ namespace BL
         /// <returns></returns>
         public bool canChangeStation(BO.Station station)
         {
-            foreach(DO.LineStation lineStation in dal.GetLineStations(item => item.ID == station.ID))
-                if (GetTripsOfLine_Present(lineStation.NumberLine) != null)
+            foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.ID == station.ID))
+                foreach (DO.DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == lineStation.NumberLine))
+                if (drivingLine.Start <= DateTime.Now.TimeOfDay && drivingLine.End + duration(getLine(lineStation.NumberLine).Path).SecondsToTimeSpan() >= DateTime.Now.TimeOfDay)
                     return false;
             return true;            
         }
