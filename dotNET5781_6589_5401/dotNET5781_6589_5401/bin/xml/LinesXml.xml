@@ -36,11 +36,6 @@
     <Region>South</Region>
   </Line>
   <Line>
-    <ThisSerial>9</ThisSerial>
-    <NumberLine>53</NumberLine>
-    <Region>Center</Region>
-  </Line>
-  <Line>
     <ThisSerial>10</ThisSerial>
     <NumberLine>64</NumberLine>
     <Region>Jerusalem</Region>
@@ -49,5 +44,10 @@
     <ThisSerial>6</ThisSerial>
     <NumberLine>152</NumberLine>
     <Region>General</Region>
+  </Line>
+  <Line>
+    <ThisSerial>9</ThisSerial>
+    <NumberLine>327</NumberLine>
+    <Region>South</Region>
   </Line>
 </Lines>

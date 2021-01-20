@@ -1025,8 +1025,9 @@ namespace BL
 
             foreach (DO.Line line in dal.GetLines().ToList())
             {
-                List<DO.LineStation> stations = dal.GetLineStations(item => item.NumberLine == line.ThisSerial && (source == item.ID || target == item.ID)).OrderBy(item=>item.PathIndex).ToList();             
-                if (stations.Count()==2 && stations[1].ID==target)
+                DO.LineStation tSource = dal.getLineStation(line.ThisSerial, source);
+                DO.LineStation tTarget = dal.getLineStation(line.ThisSerial, target);
+                if (tSource != null && tTarget != null && tTarget.PathIndex > tSource.PathIndex)
                     lines.Add(getLine(line.ThisSerial));
             }
 
