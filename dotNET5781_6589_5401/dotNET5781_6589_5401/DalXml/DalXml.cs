@@ -467,7 +467,7 @@ namespace DL
             if (item != null)
                 throw new StationException("The following stations already exists.");
 
-            rootElem.Add(new XElement("LineStation",
+            rootElem.Add(new XElement("TwoFollowingStations",
                                    new XElement("FirstStationID", twoFollowingStations.FirstStationID),
                                    new XElement("SecondStationID", twoFollowingStations.SecondStationID),
                                    new XElement("LengthBetweenStations", twoFollowingStations.LengthBetweenStations),
@@ -649,7 +649,7 @@ namespace DL
         public int getSerial()
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(serialPath);
-            int serial = Convert.ToInt32(rootElem.Elements().ToString());
+            int serial = Convert.ToInt32(rootElem.Elements().FirstOrDefault().Value);
             rootElem.Elements().Remove();
             rootElem.Add(++serial);
             return serial - 1;
