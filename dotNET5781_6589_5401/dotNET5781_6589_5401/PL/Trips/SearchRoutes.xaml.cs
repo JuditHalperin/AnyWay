@@ -43,6 +43,8 @@ namespace PL
             IEnumerable<Station> stations = bl.GetStations();
             SourceStation.ItemsSource = stations;
             TargetStation.ItemsSource = stations;
+            SourceStation.SelectedItem = null;
+            TargetStation.SelectedItem = null;
         }
 
         private void CheckForUpdate(object sender, DoWorkEventArgs e)

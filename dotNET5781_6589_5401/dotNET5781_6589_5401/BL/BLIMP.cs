@@ -437,6 +437,7 @@ namespace BL
             try
             {
                 return from line in dal.GetLines()
+                       orderby line.ThisSerial
                        select convertToLineBO(line);
             }
             catch (DO.LineException ex)
