@@ -592,24 +592,24 @@ namespace PlConsole
             Lines = new List<Line>();
             LineStations = new List<LineStation>();
             FollowingStations = new List<TwoFollowingStations>();
-            //foreach (Station station1 in Stations)
-            //{
-            //    foreach (Station station2 in Stations)
-            //        if (station1 != station2)
-            //            if (!FollowingStations.Exists(item => (item.FirstStationID == station1.ID && item.SecondStationID == station2.ID) || (item.FirstStationID == station2.ID && item.SecondStationID == station1.ID)))
-            //            {
-            //                TwoFollowingStations twoFollowingStations = new TwoFollowingStations()
-            //                {
-            //                    FirstStationID = station1.ID,
-            //                    SecondStationID = station2.ID
-            //                };
-            //                GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
-            //                GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
-            //                twoFollowingStations.LengthBetweenStations = (int)(positionThisStation.GetDistanceTo(positionSecondStation) * 1.5);
-            //                twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations / 1000.0 / rand.Next(30, 61) * 3600);
-            //                FollowingStations.Add(twoFollowingStations);
-            //            }
-            //} // following stations
+            foreach (Station station1 in Stations)
+            {
+                foreach (Station station2 in Stations)
+                    if (station1 != station2)
+                        if (!FollowingStations.Exists(item => (item.FirstStationID == station1.ID && item.SecondStationID == station2.ID) || (item.FirstStationID == station2.ID && item.SecondStationID == station1.ID)))
+                        {
+                            TwoFollowingStations twoFollowingStations = new TwoFollowingStations()
+                            {
+                                FirstStationID = station1.ID,
+                                SecondStationID = station2.ID
+                            };
+                            GeoCoordinate positionThisStation = new GeoCoordinate(station1.Latitude, station1.Longitude);
+                            GeoCoordinate positionSecondStation = new GeoCoordinate(station2.Latitude, station2.Longitude);
+                            twoFollowingStations.LengthBetweenStations = (int)(positionThisStation.GetDistanceTo(positionSecondStation) * 1.5);
+                            twoFollowingStations.TimeBetweenStations = (int)(twoFollowingStations.LengthBetweenStations / 1000.0 / rand.Next(30, 61) * 3600);
+                            FollowingStations.Add(twoFollowingStations);
+                        }
+            } // following stations
             for (int i = 0; i < 10; i++)
             {
                 Lines.Add(new Line()
@@ -653,8 +653,8 @@ namespace PlConsole
             //    dal.addTwoFollowingStations(item);
             //foreach (LineStation item in LineStations)
             //    dal.addLineStation(item);
-            ////foreach (Line item in Lines)
-            ////    dal.addLine(item);
+            //foreach (Line item in Lines)
+            //    dal.addLine(item);
             //foreach (DrivingLine item in DrivingLines)
             //    dal.addDrivingLine(item);
         }
