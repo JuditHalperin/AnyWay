@@ -228,7 +228,6 @@ namespace DL
                         NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
                         Region = (Regions)Enum.Parse(typeof(Regions), i.Element("Region").Value)
                     }).FirstOrDefault();
-
         }
         public IEnumerable<Line> GetLines()
         {
