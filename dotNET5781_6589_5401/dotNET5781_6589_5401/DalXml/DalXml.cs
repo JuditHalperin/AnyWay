@@ -509,7 +509,8 @@ namespace DL
         }
         public TwoFollowingStations getTwoFollowingStations(int firstStationID, int secondStationID)
         {
-            return (from i in XMLTools.LoadListFromXMLElement(followingStationsPath).Elements()
+            XElement list = XMLTools.LoadListFromXMLElement(followingStationsPath);
+            return (from i in list.Elements()
                     where (Convert.ToInt32(i.Element("FirstStationID").Value) == firstStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == secondStationID) || (Convert.ToInt32(i.Element("FirstStationID").Value) == secondStationID && Convert.ToInt32(i.Element("SecondStationID").Value) == firstStationID)
                     select new TwoFollowingStations()
                     {
@@ -521,7 +522,8 @@ namespace DL
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations()
         {
-            return (from i in XMLTools.LoadListFromXMLElement(followingStationsPath).Elements()
+            XElement list = XMLTools.LoadListFromXMLElement(followingStationsPath);
+            return (from i in list.Elements()
                     select new TwoFollowingStations()
                     {
                         FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
@@ -532,7 +534,8 @@ namespace DL
         }
         public IEnumerable<TwoFollowingStations> GetFollowingStations(Predicate<TwoFollowingStations> condition)
         {
-            return (from i in XMLTools.LoadListFromXMLElement(followingStationsPath).Elements()
+            XElement list = XMLTools.LoadListFromXMLElement(followingStationsPath);
+            return (from i in list.Elements()
                     let item = new TwoFollowingStations()
                     {
                         FirstStationID = Convert.ToInt32(i.Element("FirstStationID").Value),
