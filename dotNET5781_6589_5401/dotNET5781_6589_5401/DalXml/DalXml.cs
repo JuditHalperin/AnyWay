@@ -650,13 +650,12 @@ namespace DL
 
         public string getManagingCode()
         {
-            return XMLTools.LoadListFromXMLElement(managingCodePath).Elements().ToString();
+            return XMLTools.LoadListFromXMLElement(managingCodePath).Elements("Code").FirstOrDefault().Value;
         }
         public void updateManagingCode(string code)
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(managingCodePath);
-            rootElem.Elements().Remove();
-            rootElem.Add(code);
+            rootElem.Elements("Code").FirstOrDefault().Value = code;
             XMLTools.SaveListToXMLElement(rootElem, managingCodePath);
         }
 
