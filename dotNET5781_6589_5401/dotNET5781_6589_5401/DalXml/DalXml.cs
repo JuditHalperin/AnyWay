@@ -311,7 +311,7 @@ namespace DL
         }
         public Station getStation(int id)
         {
-            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            List<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements().ToList();
             return (from i in list
                     where Convert.ToInt32(i.Element("ID").Value) == id
                     select new Station()
@@ -324,7 +324,7 @@ namespace DL
         }
         public IEnumerable<Station> GetStations()
         {
-            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            List<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements().ToList();
             return (from i in list
                     select new Station()
                     {
@@ -336,7 +336,7 @@ namespace DL
         }
         public IEnumerable<Station> GetStations(Predicate<Station> condition)
         {
-            IEnumerable<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements();
+            List<XElement> list = XMLTools.LoadListFromXMLElement(stationsPath).Elements().ToList();
             return (from i in list
                     let item = new Station()
                     {
