@@ -185,7 +185,7 @@ namespace DL
                                    new XElement("Region", line.Region)));
 
             XMLTools.SaveListToXMLElement(rootElem, linesPath);
-            
+
             return serial;
         }
         public void removeLine(Line line)
@@ -220,13 +220,13 @@ namespace DL
         public Line getLine(int serial)
         {
             return (from i in XMLTools.LoadListFromXMLElement(linesPath).Elements()
-                         where Convert.ToInt32(i.Element("ThisSerial").Value) == serial
-                         select new Line()
-                         {
-                             ThisSerial = serial,
-                             NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
-                             Region = (Regions)Enum.Parse(typeof(Regions),i.Element("Region").Value)
-                         }).FirstOrDefault();
+                    where Convert.ToInt32(i.Element("ThisSerial").Value) == serial
+                    select new Line()
+                    {
+                        ThisSerial = serial,
+                        NumberLine = Convert.ToInt32(i.Element("NumberLine").Value),
+                        Region = (Regions)Enum.Parse(typeof(Regions), i.Element("Region").Value)
+                    }).FirstOrDefault();
 
         }
         public IEnumerable<Line> GetLines()
@@ -649,9 +649,9 @@ namespace DL
         public int getSerial()
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(serialPath);
-            int serial = Convert.ToInt32(rootElem.Elements().FirstOrDefault().Value);
-            rootElem.Elements().Remove();
-            rootElem.Add(++serial);
+            int serial = Convert.ToInt32(rootElem.Elements("LineSerial").FirstOrDefault().Value);
+            rootElem.Elements("LineSerial").FirstOrDefault().Value = (++serial).ToString();
+            XMLTools.SaveListToXMLElement(rootElem, serialPath);
             return serial - 1;
         }
 
