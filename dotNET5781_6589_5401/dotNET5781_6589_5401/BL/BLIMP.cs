@@ -902,7 +902,7 @@ namespace BL
         {
             try
             {
-                return from lineStation in dal.GetLineStations()
+                return from lineStation in dal.GetLineStations().ToList()
                        select convertToLineStationBO(lineStation);
             }
             catch (DO.StationException ex)
@@ -914,7 +914,7 @@ namespace BL
         {
             try
             {
-                return from item in GetLineStations()
+                return from item in GetLineStations().ToList()
                        where condition(item)
                        select item;
             }
@@ -1107,13 +1107,14 @@ namespace BL
             }
 
             TimeSpan time = trip.NextStationTime;
+            int timeSec = 0;
             int index = 1;
             if (trip.PreviousStationID != -1)
                 index = previousStation.PathIndex + 1;
             List<BO.LineStation> path = getLine(trip.NumberLine).Path.ToList();
             for (int i = index; i < sourceStation.PathIndex; i++)
-                time += path[index].TimeFromPreviousStations.SecondsToTimeSpan();
-            return time;
+                timeSec += path[index].TimeFromPreviousStations;
+            return time + timeSec.SecondsToTimeSpan();
         }
         /// <summary>
         /// Calculate time of journey from one station to another
@@ -1126,7 +1127,8 @@ namespace BL
         {
             int duration = 0;
             List<BO.LineStation> path = getLine(serial).Path.ToList();
-            for (int i = dal.getLineStation(serial, source).PathIndex; i < dal.getLineStation(serial, target).PathIndex; i++) 
+            int finalIndex = dal.getLineStation(serial, target).PathIndex;
+            for (int i = dal.getLineStation(serial, source).PathIndex; i < finalIndex; i++) 
                 duration += path[i].TimeFromPreviousStations;
             return duration.SecondsToTimeSpan();
         }
