@@ -28,8 +28,10 @@ namespace PL
 
             username = name;
             administrativePrivileges = a;
+            
             List<Station> stations = bl.GetStations().ToList();
             ListOfStations.ItemsSource = stations; // it is possible to open this window only when there are stations
+            
             if (id == -1)
                 ListOfStations.SelectedIndex = 0;
             else

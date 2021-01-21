@@ -135,11 +135,11 @@ namespace PL
             if(LineStations.SelectedItem != null)
                 if (e.ChangedButton == MouseButton.Left)
                     new LineStationDetails((LineStation)LineStations.SelectedItem).ShowDialog();
-                else // Rigth click
-                {
-                    new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
-                    Close();
-                }
+                //else if (e.ChangedButton == MouseButton.Right)
+                //{
+                //    new StationsList(username, administrativePrivileges, ((LineStation)LineStations.SelectedItem).ID).Show();
+                //    Close();
+                //}
         }
 
         private void Back_MouseDown(object sender, MouseButtonEventArgs e)
