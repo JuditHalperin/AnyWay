@@ -59,6 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DalObject\DalObject.csproj">
+      <Project>{fbd268a3-2950-425d-a32b-f03e25a970f3}</Project>
+      <Name>DalObject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DalXml\DalXml.csproj">
       <Project>{a61d515d-fa22-41dd-92c6-64a7fdf8f77f}</Project>
       <Name>DalXml</Name>

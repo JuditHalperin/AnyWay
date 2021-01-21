@@ -559,6 +559,8 @@ namespace BL
                     try
                     {
                         TwoFollowingStations followingStations = dal.getTwoFollowingStations(station.ID, otherStation.ID);
+                        if (followingStations == null)
+                            break;
                         followingStations.LengthBetweenStations = Math.Abs(followingStations.LengthBetweenStations + distanceFromPreviousLocation); // avoid negetive length
                         followingStations.TimeBetweenStations = calculateTime(followingStations.LengthBetweenStations);
                         dal.updateTwoFollowingStations(followingStations);

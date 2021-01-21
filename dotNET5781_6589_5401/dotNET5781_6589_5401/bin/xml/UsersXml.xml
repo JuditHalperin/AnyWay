@@ -14,7 +14,8 @@
     <Username>Nurit</Username>
     <Password>Nur#123</Password>
     <IsManager>false</IsManager>
-  </User><User>
+  </User>
+  <User>
     <Username>a</Username>
     <Password>a</Password>
     <IsManager>true</IsManager>
@@ -22,6 +23,11 @@
   <User>
     <Username>z</Username>
     <Password>z</Password>
+    <IsManager>false</IsManager>
+  </User>
+  <User>
+    <Username>g</Username>
+    <Password>Gg!111</Password>
     <IsManager>false</IsManager>
   </User>
 </Users>
