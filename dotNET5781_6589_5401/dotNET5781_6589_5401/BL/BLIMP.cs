@@ -744,7 +744,7 @@ namespace BL
                 ID = lineStationD.ID,
                 PathIndex = lineStationD.PathIndex
             };
-            
+
             // previous:
             DO.LineStation lineStationP = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex - 1).FirstOrDefault();
             if (lineStationP != null)
@@ -767,7 +767,7 @@ namespace BL
                 lineStationB.NextStationID = lineStationN.ID;
             else // if it is the last line station
                 lineStationB.NextStationID = -1;
-            
+
             return lineStationB;
         }
         /// <summary>
@@ -840,10 +840,12 @@ namespace BL
                 BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
                 if (station == null)
                     throw new BO.StationException("The station does not exist.");
+                
                 List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
-                    lineStations[i].PathIndex++;
+                    // update index of the next stations:
+                    lineStations[i].PathIndex++; 
                     updateLineStation(lineStations[i]);
                 }
             }
@@ -869,14 +871,18 @@ namespace BL
             try
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
+                
                 List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex).ToList();
+                
                 if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
                 {
                     removeLine(getLine(lineStation.NumberLine));
                     return;
                 }
+                
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
+                    // update index of the next stations:
                     lineStations[i].PathIndex--;
                     dal.updateLineStation(convertToLineStationDO(lineStations[i]));
                 }
@@ -895,6 +901,7 @@ namespace BL
             try
             {
                 BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.ID); // if the line station exists
+                
                 try
                 {
                     if (lineStation.PathIndex != station.PathIndex) // if the index is updated

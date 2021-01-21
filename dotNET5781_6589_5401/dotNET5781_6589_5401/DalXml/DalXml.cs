@@ -54,7 +54,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(rootElem, usersPath);
         }
-        
+
         public void removeUser(User user)
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
@@ -116,7 +116,7 @@ namespace DL
 
         public void addBus(Bus bus)
         {
-           
+
         }
         public void removeBus(Bus bus)
         {
@@ -140,15 +140,15 @@ namespace DL
             addBus(bus);
         }
         public Bus getBus(string licensePlate)
-        {            
+        {
             return null;
         }
         public IEnumerable<Bus> GetBuses()
-        {           
+        {
             return null;
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
-        {            
+        {
             return null;
         }
 
