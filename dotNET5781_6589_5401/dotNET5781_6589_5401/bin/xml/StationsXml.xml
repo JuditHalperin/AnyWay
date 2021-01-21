@@ -336,10 +336,4 @@
     <Latitude>32.555</Latitude>
     <Longitude>35.12</Longitude>
   </Station>
-  <Station>
-    <ID>11111</ID>
-    <Name>AbaEven</Name>
-    <Latitude>33</Latitude>
-    <Longitude>35.3</Longitude>
-  </Station>
 </Stations>

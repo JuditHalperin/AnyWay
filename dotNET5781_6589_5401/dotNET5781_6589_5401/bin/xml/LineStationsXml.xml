@@ -530,19 +530,4 @@
     <NumberLine>9</NumberLine>
     <PathIndex>10</PathIndex>
   </LineStation>
-  <LineStation>
-    <ID>38834</ID>
-    <NumberLine>12</NumberLine>
-    <PathIndex>1</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>11111</ID>
-    <NumberLine>12</NumberLine>
-    <PathIndex>2</PathIndex>
-  </LineStation>
-  <LineStation>
-    <ID>38844</ID>
-    <NumberLine>12</NumberLine>
-    <PathIndex>3</PathIndex>
-  </LineStation>
 </LineStations>
