@@ -222,8 +222,10 @@ namespace DL
             {
                 throw new StationException(ex.Message);
             }
+
             if (DataSource.LineStations.Exists(item => item.NumberLine == lineStation.NumberLine && item.ID == lineStation.ID))
                 throw new StationException("The line station already exists.");
+            
             DataSource.LineStations.Add(lineStation.Clone());
         }
         public void removeLineStation(LineStation lineStation)

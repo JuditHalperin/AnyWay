@@ -354,7 +354,8 @@ namespace DL
                              select i).FirstOrDefault();
 
             if (item == null)
-                throw new StationException("The ID not exists.");
+                throw new StationException("The station does not exist.");
+
             rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
 
             item = (from i in rootElem.Elements()
@@ -371,6 +372,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
         }
+
         public void removeLineStation(LineStation lineStation)
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);

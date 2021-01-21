@@ -14,6 +14,14 @@ namespace BL
 
         private Random rand = new Random(DateTime.Now.Millisecond);
 
+        /// <summary>
+        /// Get time of trip that with the given distance
+        /// Choose the valocity randomaly
+        /// </summary>
+        /// <param name="distance">distance of trip = meters</param>
+        /// <returns>time of trip = minutes</returns>
+        int calculateTime(int distance) { return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); } // valocity of 30-60 km per hour
+
         #region Singelton
 
         static readonly BLIMP instance = new BLIMP();
@@ -22,17 +30,6 @@ namespace BL
         BLIMP() { }
 
         #endregion
-
-        /// <summary>
-        /// Get time of trip that with the given distance
-        /// Choose the valocity randomaly
-        /// </summary>
-        /// <param name="distance">distance of trip = meters</param>
-        /// <returns>time of trip = minutes</returns>
-        int calculateTime(int distance)
-        {
-            return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); // valocity of 30-60 km per hour
-        }
 
         #region Users
 
@@ -412,6 +409,7 @@ namespace BL
             try
             {
                 dal.updateLine(convertToLineDO(line));
+
                 // update line stations:
                 foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                     dal.removeLineStation(lineStation);
@@ -771,10 +769,10 @@ namespace BL
             return lineStationB;
         }
         /// <summary>
-        /// Get a line path and return a list of line stations of BO
+        /// Convert IEnumerable of Station to IEnumerable of LineStation in order to create a line path in PL from ObservableCollection of Station
         /// </summary>
-        /// <param name="path">path</param>
-        /// <returns>list of line stations of BO</returns>
+        /// <param name="path">ObservableCollection of Station</param>
+        /// <returns>ObservableCollection of Station</returns>
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
             List<BO.Station> pathTemp = path.ToList();
@@ -820,10 +818,10 @@ namespace BL
             return lineStations;
         }
         /// <summary>
-        /// Get a line path and return stations list of BO 
+        /// Convert IEnumerable of LineStation to IEnumerable of Station in order to copy the line path into ObservableCollection of Station in PL
         /// </summary>
-        /// <param name="path">path</param>
-        /// <returns>stations list</returns>
+        /// <param name="path">IEnumerable of LineStation</param>
+        /// <returns>IEnumerable of Station</returns>
         public IEnumerable<BO.Station> convertToStationsList(IEnumerable<BO.LineStation> path)
         {
             return from station in path
@@ -837,29 +835,19 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
-                if (station == null)
-                    throw new BO.StationException("The station does not exist.");
-                
-                List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
+                dal.addLineStation(convertToLineStationDO(lineStation));
+
+                // update index of the next stations in the path:
+                List<BO.LineStation> lineStations = GetLineStations(station => station.NumberLine == lineStation.NumberLine && station.ID != lineStation.ID).OrderBy(item => item.PathIndex).ToList(); // other stations in the path
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
-                    // update index of the next stations:
-                    lineStations[i].PathIndex++; 
-                    updateLineStation(lineStations[i]);
+                    lineStations[i].PathIndex++;
+                    dal.updateLineStation(convertToLineStationDO(lineStations[i]));
                 }
             }
-            catch (BO.StationException) { }
-            finally
+            catch (DO.StationException ex)
             {
-                try
-                {
-                    dal.addLineStation(convertToLineStationDO(lineStation));
-                }
-                catch (DO.StationException ex)
-                {
-                    throw new BO.StationException(ex.Message, ex);
-                }
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -871,18 +859,20 @@ namespace BL
             try
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
-                
+
                 List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex).ToList();
-                
-                if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
+
+                // if there is only one more line station in this line, delete the line:
+                if (lineStations.Count() == 1)
                 {
-                    removeLine(getLine(lineStation.NumberLine));
+                    dal.removeLine(dal.getLine(lineStation.NumberLine));
+                    dal.removeLineStation(convertToLineStationDO(lineStations[0]));
                     return;
                 }
-                
+
+                // update index of the next stations in the path:
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
-                    // update index of the next stations:
                     lineStations[i].PathIndex--;
                     dal.updateLineStation(convertToLineStationDO(lineStations[i]));
                 }
@@ -890,49 +880,6 @@ namespace BL
             catch (DO.StationException ex)
             {
                 throw new BO.StationException(ex.Message, ex);
-            }
-        }
-        /// <summary>
-        /// Update data of station in line
-        /// </summary>
-        /// <param name="lineStation">station in line</param>
-        public void updateLineStation(BO.LineStation lineStation)
-        {
-            try
-            {
-                BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.ID); // if the line station exists
-                
-                try
-                {
-                    if (lineStation.PathIndex != station.PathIndex) // if the index is updated
-                    {
-                        List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
-                        if (station.PathIndex < lineStation.PathIndex) // need to increase the stations index that after the old station
-                            for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1 && i < lineStations.Count(); i++)
-                            {
-                                lineStations[i].PathIndex--;
-                                updateLineStation(lineStations[i]);
-                            }
-                        for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
-                        {
-                            lineStations[i].PathIndex++;
-                            updateLineStation(lineStations[i]);
-                        }
-                    }
-                }
-                catch (BO.StationException) { }
-                finally
-                {
-                    dal.updateLineStation(convertToLineStationDO(lineStation));
-                }
-            }
-            catch (DO.StationException ex)
-            {
-                throw new BO.StationException(ex.Message, ex);
-            }
-            catch (BO.StationException ex)
-            {
-                throw new BO.StationException(ex.Message);
             }
         }
         /// <summary>

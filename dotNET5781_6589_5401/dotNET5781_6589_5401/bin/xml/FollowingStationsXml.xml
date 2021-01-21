@@ -8922,16 +8922,4 @@
     <LengthBetweenStations>200</LengthBetweenStations>
     <TimeBetweenStations>12</TimeBetweenStations>
   </TwoFollowingStations>
-  <TwoFollowingStations>
-    <FirstStationID>38836</FirstStationID>
-    <SecondStationID>11111</SecondStationID>
-    <LengthBetweenStations>200</LengthBetweenStations>
-    <TimeBetweenStations>15</TimeBetweenStations>
-  </TwoFollowingStations>
-  <TwoFollowingStations>
-    <FirstStationID>11111</FirstStationID>
-    <SecondStationID>38839</SecondStationID>
-    <LengthBetweenStations>100</LengthBetweenStations>
-    <TimeBetweenStations>11</TimeBetweenStations>
-  </TwoFollowingStations>
 </FollowingStations>
