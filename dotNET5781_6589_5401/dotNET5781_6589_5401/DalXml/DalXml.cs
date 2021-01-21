@@ -56,11 +56,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(rootElem, usersPath);
         }
-        private static string hashPassword(string password)
-        {
-            SHA512 shaM = new SHA512Managed();
-            return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(password)));
-        }
+        
         public void removeUser(User user)
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);

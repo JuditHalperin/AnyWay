@@ -52,7 +52,7 @@ namespace PL
             while (!worker.CancellationPending)
             {
                 worker.ReportProgress(0);
-                Thread.Sleep(60000);             
+                Thread.Sleep(1000);             
             }
         }
 

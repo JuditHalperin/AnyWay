@@ -25,4 +25,9 @@
     <Password>z</Password>
     <IsManager>false</IsManager>
   </User>
+  <User>
+    <Username>G</Username>
+    <Password>Gg$111</Password>
+    <IsManager>false</IsManager>
+  </User>
 </Users>
