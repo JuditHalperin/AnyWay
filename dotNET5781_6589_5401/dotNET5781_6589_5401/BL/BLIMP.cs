@@ -748,7 +748,8 @@ namespace BL
             List<BO.Station> pathTemp = path.ToList();
             List<BO.LineStation> lineStations = new List<BO.LineStation>();
             TwoFollowingStations followingStations;
-            lineStations.Add(new BO.LineStation()
+            
+            lineStations.Add(new BO.LineStation() // first station
             {
                 ID = pathTemp[0].ID,
                 PathIndex = 1,
@@ -757,6 +758,7 @@ namespace BL
                 LengthFromPreviousStations = -1,
                 TimeFromPreviousStations = -1
             });
+            
             for (int i = 1; i < pathTemp.Count() - 1; i++)
             {
                 followingStations = dal.getTwoFollowingStations(pathTemp[i].ID, pathTemp[i - 1].ID);
@@ -770,8 +772,9 @@ namespace BL
                     TimeFromPreviousStations = followingStations.TimeBetweenStations
                 });
             }
+            
             followingStations = dal.getTwoFollowingStations(pathTemp[pathTemp.Count() - 1].ID, pathTemp[path.Count() - 2].ID);
-            lineStations.Add(new BO.LineStation()
+            lineStations.Add(new BO.LineStation() // last station
             {
 
                 ID = pathTemp[pathTemp.Count() - 1].ID,
@@ -781,6 +784,7 @@ namespace BL
                 LengthFromPreviousStations = followingStations.LengthBetweenStations,
                 TimeFromPreviousStations = followingStations.TimeBetweenStations
             }); ;
+            
             return lineStations;
         }
         public IEnumerable<BO.Station> convertToStationsList(IEnumerable<BO.LineStation> path)
@@ -798,7 +802,7 @@ namespace BL
             {
                 BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
                 if (station == null)
-                    throw new BO.StationException("");
+                    throw new BO.StationException("The station does not exist.");
                 List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {

@@ -51,13 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DalXml\DalXml.csproj">
-      <Project>{a61d515d-fa22-41dd-92c6-64a7fdf8f77f}</Project>
-      <Name>DalXml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DLAPI\DLAPI.csproj">
-      <Project>{3385c162-7e75-4d37-b66b-61d35c2f42fb}</Project>
-      <Name>DLAPI</Name>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{8f1217f9-59a8-476f-b724-ae2d4a29eb52}</Project>
+      <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
