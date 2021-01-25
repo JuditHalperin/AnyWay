@@ -3,8 +3,6 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Xml.Linq;
 
 namespace DL
@@ -56,11 +54,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(rootElem, usersPath);
         }
-        private static string hashPassword(string password)
-        {
-            SHA512 shaM = new SHA512Managed();
-            return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(password)));
-        }
+
         public void removeUser(User user)
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(usersPath);
@@ -122,7 +116,7 @@ namespace DL
 
         public void addBus(Bus bus)
         {
-           
+
         }
         public void removeBus(Bus bus)
         {
@@ -146,15 +140,15 @@ namespace DL
             addBus(bus);
         }
         public Bus getBus(string licensePlate)
-        {            
+        {
             return null;
         }
         public IEnumerable<Bus> GetBuses()
-        {           
+        {
             return null;
         }
         public IEnumerable<Bus> GetBuses(Predicate<Bus> condition)
-        {            
+        {
             return null;
         }
 
@@ -360,7 +354,8 @@ namespace DL
                              select i).FirstOrDefault();
 
             if (item == null)
-                throw new StationException("The ID not exists.");
+                throw new StationException("The station does not exist.");
+
             rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);
 
             item = (from i in rootElem.Elements()
@@ -377,6 +372,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(rootElem, lineStationsPath);
         }
+
         public void removeLineStation(LineStation lineStation)
         {
             XElement rootElem = XMLTools.LoadListFromXMLElement(lineStationsPath);

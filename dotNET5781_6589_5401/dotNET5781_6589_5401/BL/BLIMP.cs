@@ -14,6 +14,14 @@ namespace BL
 
         private Random rand = new Random(DateTime.Now.Millisecond);
 
+        /// <summary>
+        /// Get time of trip that with the given distance
+        /// Choose the valocity randomaly
+        /// </summary>
+        /// <param name="distance">distance of trip = meters</param>
+        /// <returns>time of trip = minutes</returns>
+        int calculateTime(int distance) { return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); } // valocity of 30-60 km per hour
+
         #region Singelton
 
         static readonly BLIMP instance = new BLIMP();
@@ -22,17 +30,6 @@ namespace BL
         BLIMP() { }
 
         #endregion
-
-        /// <summary>
-        /// Get time of trip that with the given distance
-        /// Choose the valocity randomaly
-        /// </summary>
-        /// <param name="distance">distance of trip = meters</param>
-        /// <returns>time of trip = minutes</returns>
-        int calculateTime(int distance)
-        {
-            return (int)(distance / 1000.0 / rand.Next(30, 61) * 3600); // valocity of 30-60 km per hour
-        }
 
         #region Users
 
@@ -64,6 +61,10 @@ namespace BL
                 IsManager = user.IsManager
             };
         }
+        /// <summary>
+        /// add new user
+        /// </summary>
+        /// <param name="user">user to add</param>
         public void addUser(BO.User user)
         {
             try
@@ -117,11 +118,20 @@ namespace BL
                 return null;
             return convertToUserBO(user);
         }
+        /// <summary>
+        /// get all users
+        /// </summary>
+        /// <returns>users</returns>
         public IEnumerable<BO.User> GetUsers()
         {
             return from user in dal.GetUsers()
                    select convertToUserBO(user);
         }
+        /// <summary>
+        /// get all users by condition
+        /// </summary>
+        /// <param name="condition">condition - Predicate</param>
+        /// <returns>users</returns>
         public IEnumerable<BO.User> GetUsers(Predicate<BO.User> condition)
         {
             return from item in GetUsers()
@@ -345,7 +355,7 @@ namespace BL
                 Region = (BO.Regions)lineD.Region,
                 Path = GetLineStations(lineStation => lineStation.NumberLine == lineD.ThisSerial).OrderBy(station => station.PathIndex)
             };
-        }            
+        }
         /// <summary>
         /// Add line to the data.
         /// </summary>
@@ -356,7 +366,7 @@ namespace BL
             {
                 if (line.Path.Count() < 2)
                     throw new BO.LineException("A line path should contain at least two stations.");
-                
+
                 int thisSerial = dal.addLine(convertToLineDO(line));
                 foreach (BO.LineStation lineStation in line.Path)
                 {
@@ -399,6 +409,8 @@ namespace BL
             try
             {
                 dal.updateLine(convertToLineDO(line));
+
+                // update line stations:
                 foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.NumberLine == line.ThisSerial).ToList())
                     dal.removeLineStation(lineStation);
                 foreach (BO.LineStation lineStation in line.Path)
@@ -479,6 +491,10 @@ namespace BL
                 throw new BO.LineException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// group lines by region
+        /// </summary>
+        /// <returns>grouping</returns>
         public IEnumerable<IGrouping<BO.Regions, int>> GetLinesByRegion()
         {
             return from line in dal.GetLines()
@@ -494,7 +510,7 @@ namespace BL
             foreach (DO.DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == line))
                 if (drivingLine.Start <= DateTime.Now.TimeOfDay && drivingLine.End + duration(getLine(line).Path).SecondsToTimeSpan() >= DateTime.Now.TimeOfDay)
                     return false;
-            return true;            
+            return true;
         }
         /// <summary>
         /// Get number of lines in the data base
@@ -682,10 +698,14 @@ namespace BL
         {
             foreach (DO.LineStation lineStation in dal.GetLineStations(item => item.ID == station.ID))
                 foreach (DO.DrivingLine drivingLine in dal.GetDrivingLines(item => item.NumberLine == lineStation.NumberLine))
-                if (drivingLine.Start <= DateTime.Now.TimeOfDay && drivingLine.End + duration(getLine(lineStation.NumberLine).Path).SecondsToTimeSpan() >= DateTime.Now.TimeOfDay)
-                    return false;
-            return true;            
+                    if (drivingLine.Start <= DateTime.Now.TimeOfDay && drivingLine.End + duration(getLine(lineStation.NumberLine).Path).SecondsToTimeSpan() >= DateTime.Now.TimeOfDay)
+                        return false;
+            return true;
         }
+        /// <summary>
+        /// Get number of stations in the data base
+        /// </summary>
+        /// <returns>count</returns>
         public int countStations()
         {
             return dal.countStations();
@@ -722,6 +742,8 @@ namespace BL
                 ID = lineStationD.ID,
                 PathIndex = lineStationD.PathIndex
             };
+
+            // previous:
             DO.LineStation lineStationP = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex - 1).FirstOrDefault();
             if (lineStationP != null)
             {
@@ -736,19 +758,27 @@ namespace BL
                 lineStationB.LengthFromPreviousStations = -1;
                 lineStationB.TimeFromPreviousStations = -1;
             }
+
+            // next:
             DO.LineStation lineStationN = dal.GetLineStations(item => item.NumberLine == lineStationD.NumberLine && item.PathIndex == lineStationD.PathIndex + 1).FirstOrDefault();
             if (lineStationN != null)
                 lineStationB.NextStationID = lineStationN.ID;
             else // if it is the last line station
                 lineStationB.NextStationID = -1;
+
             return lineStationB;
         }
+        /// <summary>
+        /// Convert IEnumerable of Station to IEnumerable of LineStation in order to create a line path in PL from ObservableCollection of Station
+        /// </summary>
+        /// <param name="path">ObservableCollection of Station</param>
+        /// <returns>ObservableCollection of Station</returns>
         public IEnumerable<BO.LineStation> convertToLineStationsList(IEnumerable<BO.Station> path)
         {
             List<BO.Station> pathTemp = path.ToList();
             List<BO.LineStation> lineStations = new List<BO.LineStation>();
             TwoFollowingStations followingStations;
-            
+
             lineStations.Add(new BO.LineStation() // first station
             {
                 ID = pathTemp[0].ID,
@@ -758,7 +788,7 @@ namespace BL
                 LengthFromPreviousStations = -1,
                 TimeFromPreviousStations = -1
             });
-            
+
             for (int i = 1; i < pathTemp.Count() - 1; i++)
             {
                 followingStations = dal.getTwoFollowingStations(pathTemp[i].ID, pathTemp[i - 1].ID);
@@ -772,7 +802,7 @@ namespace BL
                     TimeFromPreviousStations = followingStations.TimeBetweenStations
                 });
             }
-            
+
             followingStations = dal.getTwoFollowingStations(pathTemp[pathTemp.Count() - 1].ID, pathTemp[path.Count() - 2].ID);
             lineStations.Add(new BO.LineStation() // last station
             {
@@ -784,9 +814,14 @@ namespace BL
                 LengthFromPreviousStations = followingStations.LengthBetweenStations,
                 TimeFromPreviousStations = followingStations.TimeBetweenStations
             }); ;
-            
+
             return lineStations;
         }
+        /// <summary>
+        /// Convert IEnumerable of LineStation to IEnumerable of Station in order to copy the line path into ObservableCollection of Station in PL
+        /// </summary>
+        /// <param name="path">IEnumerable of LineStation</param>
+        /// <returns>IEnumerable of Station</returns>
         public IEnumerable<BO.Station> convertToStationsList(IEnumerable<BO.LineStation> path)
         {
             return from station in path
@@ -800,27 +835,19 @@ namespace BL
         {
             try
             {
-                BO.LineStation station = GetLineStations(item => item.NumberLine == lineStation.NumberLine && item.PathIndex == lineStation.PathIndex).FirstOrDefault();
-                if (station == null)
-                    throw new BO.StationException("The station does not exist.");
-                List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
+                dal.addLineStation(convertToLineStationDO(lineStation));
+
+                // update index of the next stations in the path:
+                List<BO.LineStation> lineStations = GetLineStations(station => station.NumberLine == lineStation.NumberLine && station.ID != lineStation.ID).OrderBy(item => item.PathIndex).ToList(); // other stations in the path
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
                     lineStations[i].PathIndex++;
-                    updateLineStation(lineStations[i]);
+                    dal.updateLineStation(convertToLineStationDO(lineStations[i]));
                 }
             }
-            catch (BO.StationException) { }
-            finally
+            catch (DO.StationException ex)
             {
-                try
-                {
-                    dal.addLineStation(convertToLineStationDO(lineStation));
-                }
-                catch (DO.StationException ex)
-                {
-                    throw new BO.StationException(ex.Message, ex);
-                }
+                throw new BO.StationException(ex.Message, ex);
             }
         }
         /// <summary>
@@ -832,12 +859,18 @@ namespace BL
             try
             {
                 dal.removeLineStation(convertToLineStationDO(lineStation));
+
                 List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(station => station.PathIndex).ToList();
-                if (lineStations.Count() == 1) // if there is only one more line station in this line, delete the line
+
+                // if there is only one more line station in this line, delete the line:
+                if (lineStations.Count() == 1)
                 {
-                    removeLine(getLine(lineStation.NumberLine));
+                    dal.removeLine(dal.getLine(lineStation.NumberLine));
+                    dal.removeLineStation(convertToLineStationDO(lineStations[0]));
                     return;
                 }
+
+                // update index of the next stations in the path:
                 for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
                 {
                     lineStations[i].PathIndex--;
@@ -850,49 +883,7 @@ namespace BL
             }
         }
         /// <summary>
-        /// Update data of station in line
-        /// </summary>
-        /// <param name="lineStation">station in line</param>
-        public void updateLineStation(BO.LineStation lineStation)
-        {
-            try
-            {
-                BO.LineStation station = getLineStation(lineStation.NumberLine, lineStation.ID); // if the line station exists
-                try
-                {
-                    if (lineStation.PathIndex != station.PathIndex) // if the index is updated
-                    {
-                        List<BO.LineStation> lineStations = GetLineStations(Station => Station.NumberLine == lineStation.NumberLine).OrderBy(item => item.PathIndex).ToList();
-                        if (station.PathIndex < lineStation.PathIndex) // need to increase the stations index that after the old station
-                            for (int i = station.PathIndex - 1; i < lineStation.PathIndex - 1 && i < lineStations.Count(); i++)
-                            {
-                                lineStations[i].PathIndex--;
-                                updateLineStation(lineStations[i]);
-                            }
-                        for (int i = lineStation.PathIndex - 1; i < lineStations.Count(); i++)
-                        {
-                            lineStations[i].PathIndex++;
-                            updateLineStation(lineStations[i]);
-                        }
-                    }
-                }
-                catch (BO.StationException) { }
-                finally
-                {
-                    dal.updateLineStation(convertToLineStationDO(lineStation));
-                }
-            }
-            catch (DO.StationException ex)
-            {
-                throw new BO.StationException(ex.Message, ex);
-            }
-            catch (BO.StationException ex)
-            {
-                throw new BO.StationException(ex.Message);
-            }
-        }
-        /// <summary>
-        /// Return station in line with the keys: numberLine,id.
+        /// Return station in line with the keys: numberLine, id.
         /// </summary>
         /// <param name="numberLine">the line that the station in it path.</param>
         /// <param name="id">number of the station</param>
@@ -905,6 +896,10 @@ namespace BL
             return convertToLineStationBO(lineStation);
 
         }
+        /// <summary>
+        /// get all line stations
+        /// </summary>
+        /// <returns>line stations</returns>
         public IEnumerable<BO.LineStation> GetLineStations()
         {
             try
@@ -917,6 +912,11 @@ namespace BL
                 throw new BO.StationException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Get line stations by condition
+        /// </summary>
+        /// <param name="condition">condition</param>
+        /// <returns>line stations</returns>
         public IEnumerable<BO.LineStation> GetLineStations(Predicate<BO.LineStation> condition)
         {
             try
@@ -935,6 +935,12 @@ namespace BL
 
         #region TwoFollowingStations
 
+        /// <summary>
+        /// Add two following stations
+        /// </summary>
+        /// <param name="firstID">first station ID</param>
+        /// <param name="secondID">second station ID</param>
+        /// <param name="length">length</param>
         public void addTwoFollowingStations(int firstID, int secondID, int length)
         {
             try
@@ -949,6 +955,12 @@ namespace BL
             }
             catch (DO.StationException ex) { throw new BO.StationException(ex.Message, ex); }
         }
+        /// <summary>
+        /// Test if TwoFollowingStations exists for two stations
+        /// </summary>
+        /// <param name="firstID">first station ID</param>
+        /// <param name="secondID">second station ID</param>
+        /// <returns>exists or not</returns>
         public bool getTwoFollowingStations(int firstID, int secondID)
         {
             if (dal.getTwoFollowingStations(firstID, secondID) == null)
@@ -1019,8 +1031,9 @@ namespace BL
             }
         }
         /// <summary>
-        /// Get all trips that a passenger mat use to arrive from souece station to a target station
+        /// Get all trips that a passenger may use to arrive from souece station to a target station
         /// Those trips may occur now or in the future
+        /// If there are more than 10 present trips, do not search in the future
         /// </summary>
         /// <param name="source">source station ID</param>
         /// <param name="target">target station ID</param>
@@ -1045,12 +1058,16 @@ namespace BL
                     foreach (DrivingBus trip in present)
                         if (trip.PreviousStationID == -1 || dal.getLineStation(line.ThisSerial, trip.PreviousStationID).PathIndex < dal.getLineStation(line.ThisSerial, source).PathIndex)
                             allTrips.Add(trip);
-
-                IEnumerable<DrivingBus> future = GetTripsOfLine_Future(line.ThisSerial);
-                if (future != null)
-                    foreach (DrivingBus trip in future)
-                        allTrips.Add(trip);
             }
+
+            if (allTrips.Count() < 10)
+                foreach (BO.Line line in lines)
+                {
+                    IEnumerable<DrivingBus> future = GetTripsOfLine_Future(line.ThisSerial);
+                    if (future != null)
+                        foreach (DrivingBus trip in future)
+                            allTrips.Add(trip);
+                }
 
             return allTrips;
         }
@@ -1140,7 +1157,7 @@ namespace BL
             int duration = 0;
             List<BO.LineStation> path = getLine(serial).Path.ToList();
             int finalIndex = dal.getLineStation(serial, target).PathIndex;
-            for (int i = dal.getLineStation(serial, source).PathIndex; i < finalIndex; i++) 
+            for (int i = dal.getLineStation(serial, source).PathIndex; i < finalIndex; i++)
                 duration += path[i].TimeFromPreviousStations;
             return duration.SecondsToTimeSpan();
         }
@@ -1239,7 +1256,7 @@ namespace BL
         {
             try
             {
-                foreach(BO.DrivingLine dLine in GetDrivingLines(item => item.NumberLine == drivingLine.NumberLine))
+                foreach (BO.DrivingLine dLine in GetDrivingLines(item => item.NumberLine == drivingLine.NumberLine))
                     if ((drivingLine.Start >= dLine.Start && drivingLine.Start <= dLine.End) || (drivingLine.End > dLine.Start && drivingLine.End < dLine.End) || (drivingLine.Start <= dLine.Start && drivingLine.End >= dLine.End))
                         throw new BO.TripException("A trip cannot overlap another trip of the line.");
 
@@ -1250,6 +1267,10 @@ namespace BL
                 throw new BO.TripException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Remove a drivingLine
+        /// </summary>
+        /// <param name="drivingLine">drivingLine to remove</param>
         public void removeDrivingLine(BO.DrivingLine drivingLine)
         {
             try
@@ -1261,6 +1282,10 @@ namespace BL
                 throw new BO.TripException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Update a drivingLine
+        /// </summary>
+        /// <param name="drivingLine">drivingLine to update</param>
         public void updateDrivingLine(BO.DrivingLine drivingLine)
         {
             try
@@ -1272,19 +1297,34 @@ namespace BL
                 throw new BO.TripException(ex.Message, ex);
             }
         }
+        /// <summary>
+        /// Get specific drivingLine
+        /// </summary>
+        /// <param name="numberLine">line serial number</param>
+        /// <param name="start">time of start</param>
+        /// <returns>trip</returns>
         public BO.DrivingLine getDrivingLine(int numberLine, TimeSpan start)
         {
 
-            DO.DrivingLine drivingLine= dal.getDrivingLine(numberLine, start);
+            DO.DrivingLine drivingLine = dal.getDrivingLine(numberLine, start);
             if (drivingLine == null)
                 return null;
             return convertToDrivingLineBO(drivingLine);
         }
+        /// <summary>
+        /// Get all existing driving lines
+        /// </summary>
+        /// <returns>driving lines</returns>
         public IEnumerable<BO.DrivingLine> GetDrivingLines()
         {
             return from drivingLine in dal.GetDrivingLines()
                    select convertToDrivingLineBO(drivingLine);
         }
+        /// <summary>
+        /// Get driving lines by condition
+        /// </summary>
+        /// <param name="condition">condition</param>
+        /// <returns>driving lines</returns>
         public IEnumerable<BO.DrivingLine> GetDrivingLines(Predicate<BO.DrivingLine> condition)
         {
             return from item in GetDrivingLines()
@@ -1305,7 +1345,7 @@ namespace BL
                     tripsStart.Add(drivingLine.Start);
                 else // multiple trips
                     for (TimeSpan i = drivingLine.Start; i <= drivingLine.End; i += drivingLine.Frequency.MinutesToTimeSpan())
-                    tripsStart.Add(i);
+                        tripsStart.Add(i);
             return tripsStart;
         }
 
@@ -1313,10 +1353,18 @@ namespace BL
 
         #region ManagingCode
 
+        /// <summary>
+        /// Get managing code
+        /// </summary>
+        /// <returns>managing code</returns>
         public string getManagingCode()
         {
             return dal.getManagingCode();
         }
+        /// <summary>
+        /// Set managing code
+        /// </summary>
+        /// <param name="code">updated managing code</param>
         public void updateManagingCode(string code)
         {
             dal.updateManagingCode(code);

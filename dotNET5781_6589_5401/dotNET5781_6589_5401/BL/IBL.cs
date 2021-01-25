@@ -64,7 +64,6 @@ namespace BLAPI
         IEnumerable<Station> convertToStationsList(IEnumerable<LineStation> path);
         void addLineStation(LineStation lineStation);
         void removeLineStation(LineStation lineStation);
-        void updateLineStation(LineStation lineStation);
         LineStation getLineStation(int numberLine, int id);
         IEnumerable<LineStation> GetLineStations();
         IEnumerable<LineStation> GetLineStations(Predicate<LineStation> condition);

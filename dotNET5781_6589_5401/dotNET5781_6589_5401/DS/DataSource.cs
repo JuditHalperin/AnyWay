@@ -31,18 +31,25 @@ namespace DS
 				new User()
 				{
 					Username = "Judit",
-					Password = "123456",
+					Password = "Jud!6589",
 					IsManager = true
 				},
 
 				new User()
 				{
 					Username = "Asnat",
-					Password = "123456",
+					Password = "Asn$5401",
 					IsManager = true
 				},
 
-				new User()
+                new User()
+                {
+                    Username = "Nurit",
+                    Password = "Nur#123",
+                    IsManager = false
+                },
+
+                new User()
 				{
 					Username = "a",
 					Password = "a",
